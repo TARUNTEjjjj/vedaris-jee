@@ -37,7 +37,9 @@ Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, s
 
 - [x] Chapters, question studio, sessions, saved questions, review and browser-local progress.
 - [ ] Expand every chapter with independently audited multi-concept Advanced-level practice.
-- [ ] Add mistake classification, revision queue and topic connections grounded in attempts.
+- [x] Add learner-labelled mistake causes, revision notebook and exact-question retries.
+- [x] Preserve 50 completed test reports with active question timing and subject analysis.
+- [ ] Connect topic relationships and reviewed Advanced-level content to revision recommendations.
 - [ ] Render mathematics and chemical structures accessibly with reviewed diagrams.
 - [ ] Add comprehensive workspace backups and optional cross-device sync with explicit account design.
 - [ ] Establish accessibility, mobile, offline and large-corpus performance release gates.

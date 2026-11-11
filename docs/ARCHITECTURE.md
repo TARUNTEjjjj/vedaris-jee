@@ -73,3 +73,13 @@ Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an
 `src/learning/storage.js` holds an exclusive Web Lock for the editing tab. Other tabs can inspect the workspace and receive browser storage updates, but cannot overwrite saved state. If locks are unavailable, the app permits in-memory practice with an explicit export reminder. There is no cross-device account or server-side data store.
 
 All fonts, application code and archive metadata are self-hosted. External paper sources are navigation links, excluded from offline caching and load tests. CI runs state/content/build tests and rejects release hashes, payloads or static-only packaging that violate the release gate. See [capacity notes](CAPACITY.md) for the unverified 10,000-concurrent-user target and the test profile.
+
+## Study workflow (0.3)
+
+The dashboard, test centre, analysis, report and notebook are separate vanilla UI modules under assets/. Session state remains pure and deterministic. Every positional response/flag/timing/visit array follows the same identity permutation when a PCM set is grouped by subject.
+
+Active timing uses a monotonic browser interval and is bounded by session wall-clock timestamps, accumulated only while the practice screen is visible. Visibility changes, navigation, response entry and submission flush timing; an expiry transition records completed history immediately. Opening setup with an existing session does not count activity or replace its answers until the learner starts a new set.
+
+History is a versioned array of at most 50 completed sessions. Restore reconstructs questions and grades; no stored keys/totals are trusted. First saved session ID wins. Notebook annotations hold only original question identities, cause, bounded text and a resolution flag; first-attempt grades are recomputed. A failed persistence callback leaves the draft available. Neither manual resolution nor a successful retry changes the first attempt.
+
+The exclusive-writer rule applies to all new edits. Reader tabs can inspect historical reports and notebook filters without session timing events resetting their view. Storage remains local, with no runtime backend requests.

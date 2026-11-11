@@ -6,7 +6,7 @@ Vedaris carries the chapter → practice → timed session → review → progre
 
 **[Open Vedaris on Cloudflare](https://vedaris-jee.pages.dev)** · [Content pipeline](docs/CONTENT-PIPELINE.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
 
-## Current release: 0.2
+## Current release: 0.3
 
 | Capability | Shipped scope |
 | --- | --- |
@@ -15,7 +15,11 @@ Vedaris carries the chapter → practice → timed session → review → progre
 | Historical archive | 79 source records spanning every year **1978–2026** |
 | Official full papers | 40 English papers from **2007–2026**, with HTTP, content-type and PDF-signature checks |
 | Older source collections | 39 collections from **1978–2006**, explicitly labelled partial |
-| Timed practice | Custom subject/chapter sets, single/multiple/numerical responses, wall-clock deadlines, reload resume, flags, review and exact-question retry |
+| Study dashboard | Daily first-attempt goal, seven-day activity, subject progress, resume and chapter recommendations |
+| Test centre | 6/12/30-question original PCM sets plus custom chapter sessions; not calibrated full mock exams |
+| Exam workspace | Subject navigation, five palette states, per-question active time, submission summary, autosave and reload resume |
+| Performance analysis | Last 50 completed reports, score trends, subject breakdown, weak-chapter priorities and exact missed-question retry |
+| Revision notebook | First-attempt errors and saved questions, cause labels, 1,000-character notes, resolution state and exact revision sets |
 | Progress | First-attempt deduplication, 1,000-record bound, regraded JSON imports and exports |
 | Question studio | Reproducible seeds, worked reasoning and saved questions |
 | Paper workspace | External source link, independent study timer, saved working notes and notes export |
@@ -46,7 +50,7 @@ The build uses an explicit public-file list, validates the archive, checks JavaS
 assets/              Browser UI, responsive design, route controllers
 src/questions/       PCM taxonomy, seeded generators, exact answer grading
 src/practice/        Pure session state, deadlines, restore and review
-src/learning/        First-attempt history, backup validation and statistics
+src/learning/        First-attempt progress, session history, notebook and statistics
 src/archive/         Source catalog, coverage filters, import schemas
  data/archive.json   Historical source manifest (external links only)
 scripts/             Build, archive validation and reviewed PYQ staging
@@ -92,3 +96,9 @@ npm run check:live
 `npm run check:release` verifies hashes, static-only output and payload budgets. `npm run check:live` verifies production bytes, cache/security headers, 404 handling and a bounded 5-concurrent-request smoke probe. That probe is not a 10,000-user test. Use the staged k6 profile in [scripts/loadtest.js](scripts/loadtest.js) for a separately provisioned representative load run.
 
 For rollback, select an earlier successful deployment in the Cloudflare Pages dashboard. Keep source and generated build identities with the deployment. The service worker does not force an update into an active test; users close old tabs and reopen to activate a newly installed release.
+
+## Product direction
+
+The learner workflow is inspired by the capability split between MathonGo MARKS (chapter practice and revision) and Quizrr (tests and analysis), with original Vedaris branding and implementation. See [product scope](docs/PRODUCT.md) for the feature benchmark and remaining content gaps.
+
+Active question time counts only the visible practice screen, including its submit dialog. Elapsed session time includes time away. Legacy sessions without recorded timing remain unknown. Session history retains the latest 50 completed sessions and is separate from first-attempt progress; notebook resolution is a learner decision and never rewrites the original score. The existing progress export covers first-attempt answers only: session history, goals, bookmarks and notes currently remain browser-local.
