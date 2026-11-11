@@ -5,3 +5,8 @@ node_modules/
 !.openai/hosting.json
 work/
 *.log
+
+.wrangler/
+.env
+.env.*
+.dev.vars*

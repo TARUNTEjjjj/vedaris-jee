@@ -65,3 +65,11 @@ node scripts/validate-archive.mjs
 ```
 
 The tests verify implementation behavior, including no-write on rejected imports and distinct listed-year versus full-paper counts. They do not certify remote links, transcription accuracy, the legality of redistribution or the completeness of historical coverage. The content pipeline records which evidence is still needed.
+
+## Public Cloudflare release
+
+Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an immutable `releases/<content-hash>/` tree, a revalidated root document, and a scoped service worker. The worker verifies SHA-256 digests before caching a release; it requests the canonical release directory URL to avoid Pages' index.html redirects. It serves a consistent release shell and waits for old tabs to close before activating an update.
+
+`src/learning/storage.js` holds an exclusive Web Lock for the editing tab. Other tabs can inspect the workspace and receive browser storage updates, but cannot overwrite saved state. If locks are unavailable, the app permits in-memory practice with an explicit export reminder. There is no cross-device account or server-side data store.
+
+All fonts, application code and archive metadata are self-hosted. External paper sources are navigation links, excluded from offline caching and load tests. CI runs state/content/build tests and rejects release hashes, payloads or static-only packaging that violate the release gate. See [capacity notes](CAPACITY.md) for the unverified 10,000-concurrent-user target and the test profile.

@@ -1,0 +1,21 @@
+{
+  "downloadedAt": "2026-11-11",
+  "fonts": [
+    {
+      "family": "DM Sans",
+      "file": "dm-sans-latin.woff2",
+      "source": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmsans/OFL.txt",
+      "sha256": "468d56b6b25b05b70190b6c233d773f6f1770e8579827ce022a57f03fa8002fb",
+      "bytes": 36980
+    },
+    {
+      "family": "Manrope",
+      "file": "manrope-latin.woff2",
+      "source": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSvfedN4.woff2",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt",
+      "sha256": "8bd97e6bbbc1f602a8f791530eed1064c9a357d5731bbc76e3fc587fb068728f",
+      "bytes": 24436
+    }
+  ]
+}

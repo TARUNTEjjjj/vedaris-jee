@@ -4,9 +4,9 @@
 
 Vedaris carries the chapter → practice → timed session → review → progress structure of [Avenquellis](https://github.com/TARUNTEjjjj/avenquellis-web) and [Axiom SAT](https://github.com/TARUNTEjjjj/axiom-sat) into Physics, Chemistry and Mathematics. Indian-rooted branding, an uncluttered workspace, and explicit content provenance are central to the project.
 
-**[Open the private preview](https://vedaris-jee.taruntejavula-honeyb.chatgpt.site)** · [Content pipeline](docs/CONTENT-PIPELINE.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
+**[Open Vedaris on Cloudflare](https://vedaris-jee.pages.dev)** · [Content pipeline](docs/CONTENT-PIPELINE.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
 
-## Current release: 0.1
+## Current release: 0.2
 
 | Capability | Shipped scope |
 | --- | --- |
@@ -38,7 +38,7 @@ npm start
 
 Open `http://127.0.0.1:4173/`. For direct source development, use `npm run serve`. Serve over HTTP; ES modules do not work correctly from `file://`.
 
-The build uses an explicit public-file list, validates the archive, checks JavaScript syntax, and emits an asset-hashed offline cache. It does not publish documentation, tests, staged imports, credentials, or Git metadata. External papers and web fonts are not included in the offline cache. Existing app tabs must close before an installed update activates, so an active timed session is not interrupted.
+The build uses an explicit public-file list, validates the archive, checks JavaScript syntax, and emits an asset-hashed offline cache. It does not publish documentation, tests, staged imports, credentials, or Git metadata. Self-hosted fonts are included in the offline cache; external papers are not. Existing app tabs must close before an installed update activates, so an active timed session is not interrupted.
 
 ## Repository structure
 
@@ -64,10 +64,31 @@ Question papers and third-party questions retain their owners' rights. This proj
 
 ## Data and privacy
 
-This is a browser-local learning application with no account sync, student analytics or cloud assessment. Browser storage may be unavailable or evicted. Exported progress covers scored session attempts; paper notes have their own export, and saved-question bookmarks remain local. Corrupt saved data is preserved rather than silently replaced. Google Fonts supplies optional typography; ordinary hosting and external paper requests are handled by those providers.
+This is a browser-local learning application with no account sync, student analytics or cloud assessment. Browser storage may be unavailable or evicted. Exported progress covers scored session attempts; paper notes have their own export, and saved-question bookmarks remain local. Corrupt saved data is preserved rather than silently replaced. Fonts are self-hosted with the site. Ordinary Cloudflare hosting and external paper requests are handled by those providers.
 
 Answer keys ship in the source for learning and review. This is not a secure examination system. Backup validation protects data consistency, not against a user deliberately editing their own learning history.
 
 ## Ownership
 
-Created and maintained by **Tarun Tej**. Original project code is MIT licensed; external examination materials are not included in that licence. Vedaris is independent of the IITs, JEE Advanced and archive providers.
+Created and maintained by **Tarun Tej**. Original project code is MIT licensed. Bundled fonts use the SIL Open Font License, with notices in assets/fonts/. External examination materials are not included in the code licence. Vedaris is independent of the IITs, JEE Advanced and archive providers.
+
+## Cloudflare production and the 10,000-user target
+
+The public deployment is **https://vedaris-jee.pages.dev/**. The GitHub source remains private. The earlier ChatGPT Site is a separate private preview, not the production address; browser-local progress does not automatically move between domains.
+
+This release is designed for a target of 10,000 concurrent open study sessions: Cloudflare serves immutable static assets and the browser generates, scores and stores practice. It has no application server, database, per-user API or cloud grading call to saturate. **A 10,000-user production load test has not been completed.** See [capacity model and test protocol](docs/CAPACITY.md) for the distinction between open sessions, cold-launch bursts and measured capacity.
+
+Production hardening includes content-hashed releases, integrity-checked offline assets, immutable browser caching, revalidated entry points, self-hosted fonts, a complete compressed offline-bundle budget, and an exclusive browser writer guard. A second tab is read-only to prevent lost saved answers; browsers without Web Locks can practise in memory and export progress. Chapter setup disables question counts that exceed available distinct variants.
+
+Deploy from a tested checkout with the existing authenticated Cloudflare account:
+
+```sh
+npm run deploy
+npm run check:live
+```
+
+`wrangler.jsonc` names the existing direct-upload Pages project. Deployment runs the build and its checks before pinned Wrangler uploads `dist/`. No Functions or `_worker.js` are deployed. GitHub Actions validates each push and retains the build artifact; production publishing is an explicit command. No Cloudflare credential is stored in Git.
+
+`npm run check:release` verifies hashes, static-only output and payload budgets. `npm run check:live` verifies production bytes, cache/security headers, 404 handling and a bounded 5-concurrent-request smoke probe. That probe is not a 10,000-user test. Use the staged k6 profile in [scripts/loadtest.js](scripts/loadtest.js) for a separately provisioned representative load run.
+
+For rollback, select an earlier successful deployment in the Cloudflare Pages dashboard. Keep source and generated build identities with the deployment. The service worker does not force an update into an active test; users close old tabs and reopen to activate a newly installed release.
