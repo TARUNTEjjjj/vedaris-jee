@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-11",
+  "reviewer": "Codex independent final runtime audit",
+  "counts": {
+    "questions": 510,
+    "papers": 10,
+    "fullPapers": 10,
+    "years": 5,
+    "assets": 279
+  },
+  "renderedTextFields": 3937,
+  "goldChecks": 510,
+  "alternativeAndRangeBoundaryChecks": 197,
+  "bonusResponseChecks": 28,
+  "explicitOfficialExceptionCases": 35,
+  "uniqueCompleteQuestionFingerprints": 510,
+  "allTenPaperTotals180": true,
+  "bundleHashesVerified": true,
+  "compiledBytes": {
+    "data/content/2022-p1.json": 488254,
+    "data/content/2022-p2.json": 403642,
+    "data/content/2023-p1.json": 487063,
+    "data/content/2023-p2.json": 421102,
+    "data/content/2024-p1.json": 480564,
+    "data/content/2024-p2.json": 374980,
+    "data/content/2025-p1.json": 434316,
+    "data/content/2025-p2.json": 343961,
+    "data/content/2026-p1.json": 441823,
+    "data/content/2026-p2.json": 428530,
+    "data/content/catalog.json": 101901
+  }
+}

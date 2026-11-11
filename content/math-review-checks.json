@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-11",
+  "reviewer": "Codex",
+  "notes": "Supplemental independent enumeration and numerical checks. Does not assert human review or replace the separately recorded exact solutions and official key comparison.",
+  "checks": [
+    {
+      "id": "2024_P1_Mathematics_Q10",
+      "check": "Enumerated all32 binary-entry matrices",
+      "actual": 16,
+      "expected": 16,
+      "passed": true
+    },
+    {
+      "id": "2024_P1_Mathematics_Q14",
+      "check": "Enumerated all3^9 matrices for Latin row/column constraints",
+      "actual": 12,
+      "expected": 12,
+      "passed": true
+    },
+    {
+      "id": "2024_P1_Mathematics_Q14",
+      "check": "Counted symmetric valid matrices independently",
+      "actual": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "id": "2025_P1_Mathematics_Q10",
+      "check": "Enumerated all2187 seven-place ternary strings with leading restriction",
+      "actual": 762,
+      "expected": 762,
+      "passed": true
+    },
+    {
+      "id": "2025_P1_Mathematics_Q14",
+      "check": "Directly summed squared deviations of19 observations",
+      "actual": "146",
+      "expected": 146,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q10",
+      "check": "Enumerated all2520 injections",
+      "actual": 1860,
+      "expected": 1860,
+      "passed": true
+    },
+    {
+      "id": "2026_P1_Mathematics_Q11",
+      "check": "Enumerated all2401 bounded red-pen allocations",
+      "actual": 206,
+      "expected": 206,
+      "passed": true
+    },
+    {
+      "id": "2026_P1_Mathematics_Q09",
+      "check": "Enumerated all integer partitions of10",
+      "actual": [
+        [
+          1,
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "id": "2026_P1_Mathematics_Q09",
+      "check": "Counted labeled partitions with multiplicity denominators",
+      "actual": 2520,
+      "expected": 2520,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q11",
+      "check": "Exact hypergeometric expectation",
+      "actual": "100",
+      "expected": 100,
+      "passed": true
+    },
+    {
+      "id": "2026_P1_Mathematics_Q12",
+      "check": "Numerically evaluated original five-factor expression",
+      "actual": 3.9999999999999982,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q13",
+      "check": "Computed distance from actual first-quadrant intersections",
+      "actual": 5.055728090000842,
+      "expected": 5.055728090000841,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q04",
+      "check": "Quadrature of original exponential integral",
+      "actual": 0.3333333333333325,
+      "expected": 0.3333333333333333,
+      "passed": true
+    },
+    {
+      "id": "2025_P2_Mathematics_Q16",
+      "check": "Quadrature followed by original tangent expression",
+      "actual": 21.00000000000002,
+      "expected": 21,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q16",
+      "check": "Piecewise unsigned area quadrature",
+      "actual": 2.5000000000002944,
+      "expected": 2.5,
+      "passed": true
+    },
+    {
+      "id": "2026_P2_Mathematics_Q18",
+      "check": "Quadrature of actual common-region boundary",
+      "actual": 0.7500000043513307,
+      "expected": 0.75,
+      "passed": true
+    }
+  ]
+}

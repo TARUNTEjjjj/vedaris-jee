@@ -1,6 +1,6 @@
-# Vedaris architecture · 0.4
+# Vedaris architecture · 0.5
 
-Vedaris carries forward the study flow of Avenquellis and Axiom SAT: choose a subject or chapter, practise, review, and revisit mistakes. Release 0.4 adds a separate historical engine containing 102 reviewed JEE Advanced questions from the complete 2023 Paper 1 and Paper 2. The source-link archive, immutable historical questions and generated original practice retain distinct identities and provenance.
+Vedaris carries forward the study flow of Avenquellis and Axiom SAT: choose a subject or chapter, practise, review, and revisit mistakes. Release 0.5 contains a separate historical engine with 510 reviewed JEE Advanced questions from ten complete papers across 2022–2026, with 170 questions per subject and 279 unique local figures. The source-link archive, immutable historical questions and generated original practice retain distinct identities and provenance.
 
 ## Reference projects
 
@@ -46,15 +46,19 @@ Pure engines have no DOM, network or storage dependency. Files use ES modules an
 
 ## Historical content and scoring
 
-The reviewed bank contains 51 questions per paper, 180 marks per paper and a 180-minute duration per paper. Chapter filters can select questions across both papers. Full mocks retain the original question order, subject sections and marking; a custom set is not presented as a complete exam paper.
+The reviewed bank covers both papers in each year from 2022–2026. Every paper carries 180 marks and lasts 180 minutes; question counts vary: 54/54 in 2022, 51/51 in 2023 and 2024, 48/48 in 2025, and 48/54 in 2026. Year-by-subject coverage is derived from the registry; the five yearly totals are 108, 102, 102, 96 and 102. Chapter filters span the bank. Full mocks retain original order, subjects and sections; custom sets remain distinct.
 
-Normalized historical questions expose source provenance, chapter IDs, type, options, exact answer, optional accepted range or discrete values, explicit marks, solutions, matching lists and assets. Numeric parsing uses rational arithmetic. Multiple-correct partial scores are exact permitted subsets, not a global heuristic. Two dropped Paper 2 Physics questions award +3 unconditionally and are reported separately from correct or attempted questions.
+The requested 40+ year playable archive is unfinished: 1978–2021 are source-linked only and are not playable. Partial third-party collections and generated practice cannot fill historical gaps.
 
-The runtime refuses missing reviews, unsafe or unavailable assets, duplicate source identities and mismatched paper metadata. Full-paper readiness additionally requires exact counts, order, totals, duration, all PCM subjects and section-rule agreement. The separate [content pipeline](CONTENT-PIPELINE.md) describes evidence and review limitations.
+Normalized historical questions expose provenance, chapter IDs, type, options, an exact key, optional numerical ranges or discrete values, alternative option sets, explicit marks, solutions, matching lists and assets. Rational arithmetic preserves gaps between accepted numerical intervals. An exact accepted option set earns full credit before explicit proper-subset partial marks are considered.
+
+Marking belongs to the source section: the 2026 multiple-correct penalty is −1, whereas 2022–2025 use −2. Dropped questions award their published bonus marks unconditionally and are reported separately from correct or attempted questions. There is no universal penalty or bonus value inferred from question type.
+
+The runtime refuses missing reviews, unsafe or unavailable assets, duplicate source identities and mismatched paper metadata. Full-paper readiness additionally requires exact counts, order, totals, duration, all PCM subjects and section-rule agreement. The separate [content pipeline](CONTENT-PIPELINE.md) describes evidence and review limitations. Codex independently authored explanations and compared questions, diagrams and answers with official papers and final keys. These are explicitly AI-assisted reviews; they do not assert human certification. Unresolved source wording and unexplained official alternatives remain visible in the explanations and audit rather than being silently rewritten.
 
 ## Identity and persistence
 
-Content IDs such as `2023_P1_Chemistry_Q01-v1` identify a specific reviewed record, not an array position. `bankId` binds historical backups to a compatible bank. A historical session stores question IDs, responses, visits, flags and timing alongside its start/deadline/finish timestamps. Questions, answer keys and score totals are resolved from the registry when reporting or restoring.
+Content IDs such as `2023_P1_Chemistry_Q01-v1` identify a specific reviewed record, not an array position. `bankId` binds historical backups to a compatible bank; adding these papers preserves existing 2023 identities and the compatible bank ID. A historical session stores question IDs, responses, visits, flags and timing alongside its start/deadline/finish timestamps. Questions, answer keys and score totals are resolved from the registry when reporting or restoring.
 
 Responses at or after the deadline do not change the attempt; the session finishes at the deadline. Only explicit visible-screen timing calls add active time, each bounded to 60 seconds and to elapsed wall time. Time spent elsewhere still consumes a timed exam's wall-clock duration. A completed attempt leaves the active slot and is saved once by stable session ID. History keeps the latest 20 completed historical attempts; duplicate IDs, unfinished history, invalid arrays and impossible timing fail restore.
 
@@ -74,9 +78,11 @@ No rank, percentile, national comparison or difficulty calibration is derived fr
 
 ## Static release and delivery
 
-Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an immutable `releases/<content-hash>/` tree, a revalidated root document and a scoped service worker. Release-relative content bundles and 39 local diagram files are part of that release. The worker verifies SHA-256 digests before caching assets and waits for old tabs to close before activating an update.
+Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an immutable `releases/<content-hash>/` tree, a revalidated root document and a scoped service worker. Release-relative paper bundles and 279 unique local figures are part of that release. Installation precaches the shell, fonts and content index, excluding paper data and figures. Opening PYQ practice downloads the ten bounded bundles with no more than four concurrent requests; the loader verifies each digest and constructs the immutable registry. Figures load as their questions appear. Per-paper selection before download remains a future optimization.
 
-KaTeX is a build-time dependency vendored with its license. Published pages use native MathML; application code, fonts and content figures are self-hosted. External source PDFs remain navigation links, excluded from offline caching and load tests. No runtime database, model grading or account service is required.
+The worker verifies SHA-256 digests before caching successful on-demand content. A cache write failure does not turn an otherwise valid online download into a failure. Only content already fetched and successfully cached is available offline; linked external papers are excluded. The worker waits for old tabs to close before activating an update.
+
+KaTeX and its chemistry extension are build-time dependencies vendored with their licenses. Published pages use native MathML; application code, fonts and content figures are self-hosted. External source PDFs remain navigation links, excluded from offline caching and load tests. No runtime database, model grading or account service is required.
 
 This architecture does not establish capacity for 10,000 simultaneous learners. That target remains unmeasured until the separate bounded test and deployment acceptance criteria are met. See [capacity notes](CAPACITY.md) and the release checklist. Accounts and cross-device synchronization remain future work; learners can transfer a compatible PYQ backup manually.
 
@@ -89,3 +95,7 @@ npm run build
 ```
 
 Engine tests cover source identity and completeness, exact scoring, deadline boundaries, storage tampering, deduplication, bounded timing and regraded reports. UI-controller tests cover reader report/filter continuity, active-session updates and cleanup. Build tests cover native math compilation, hashes and release isolation. These verify software behavior; source inspection and mathematical review remain separate evidence requirements.
+
+## Release retention
+
+On-demand question bundles and figures require older immutable URLs to remain available after an update. `npm run deploy` runs `scripts/retain-releases.mjs` after the fresh build. It fetches only the owned production origin, validates manifest paths and SHA-256 hashes, stages at most four concurrent downloads, and preserves every previous immutable release in the upload. The current shell and service-worker precache remain unchanged. Failed downloads, hash mismatches, version collisions, more than 18,000 total deployment files, or more than 500 MiB of retained content stop publication without evicting a version. Rollbacks must also run retention against current production; selecting an older Pages deployment directly would break newer open tabs.

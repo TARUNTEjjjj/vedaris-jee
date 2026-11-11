@@ -1,6 +1,6 @@
 {
   "name": "vedaris-jee",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "description": "A JEE Advanced learning workspace and historical paper archive",
@@ -14,8 +14,9 @@
     "start": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
     "serve": "python3 -m http.server 4173 --bind 127.0.0.1",
     "import:pyq": "node scripts/import-pyq.mjs",
-    "deploy": "npm run build && npx --yes wrangler@4.156.2 pages deploy dist --project-name vedaris-jee --branch main",
+    "deploy": "npm run build && node scripts/retain-releases.mjs && node scripts/check-release.mjs && npx --yes wrangler@4.156.2 pages deploy dist --project-name vedaris-jee --branch main",
     "check:release": "node scripts/check-release.mjs",
-    "check:live": "node scripts/check-live.mjs"
+    "check:live": "node scripts/check-live.mjs",
+    "retain:releases": "node scripts/retain-releases.mjs"
   }
 }

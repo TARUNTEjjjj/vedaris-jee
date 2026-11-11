@@ -3,13 +3,759 @@
   "bankId": "vedaris-reviewed-jee-v1",
   "bundles": [
     {
+      "path": "content/2022-p1.json"
+    },
+    {
+      "path": "content/2022-p2.json"
+    },
+    {
       "path": "content/2023-p1.json"
     },
     {
       "path": "content/2023-p2.json"
+    },
+    {
+      "path": "content/2024-p1.json"
+    },
+    {
+      "path": "content/2024-p2.json"
+    },
+    {
+      "path": "content/2025-p1.json"
+    },
+    {
+      "path": "content/2025-p2.json"
+    },
+    {
+      "path": "content/2026-p1.json"
+    },
+    {
+      "path": "content/2026-p2.json"
     }
   ],
   "papers": [
+    {
+      "paperId": "official-2022-paper-1-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 54,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P1_Mathematics_Q01-v1",
+            "2022_P1_Mathematics_Q02-v1",
+            "2022_P1_Mathematics_Q03-v1",
+            "2022_P1_Mathematics_Q04-v1",
+            "2022_P1_Mathematics_Q05-v1",
+            "2022_P1_Mathematics_Q06-v1",
+            "2022_P1_Mathematics_Q07-v1",
+            "2022_P1_Mathematics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P1_Mathematics_Q09-v1",
+            "2022_P1_Mathematics_Q10-v1",
+            "2022_P1_Mathematics_Q11-v1",
+            "2022_P1_Mathematics_Q12-v1",
+            "2022_P1_Mathematics_Q13-v1",
+            "2022_P1_Mathematics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2022_P1_Mathematics_Q15-v1",
+            "2022_P1_Mathematics_Q16-v1",
+            "2022_P1_Mathematics_Q17-v1",
+            "2022_P1_Mathematics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 6
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P1_Physics_Q01-v1",
+            "2022_P1_Physics_Q02-v1",
+            "2022_P1_Physics_Q03-v1",
+            "2022_P1_Physics_Q04-v1",
+            "2022_P1_Physics_Q05-v1",
+            "2022_P1_Physics_Q06-v1",
+            "2022_P1_Physics_Q07-v1",
+            "2022_P1_Physics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 10
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P1_Physics_Q09-v1",
+            "2022_P1_Physics_Q10-v1",
+            "2022_P1_Physics_Q11-v1",
+            "2022_P1_Physics_Q12-v1",
+            "2022_P1_Physics_Q13-v1",
+            "2022_P1_Physics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 12
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2022_P1_Physics_Q15-v1",
+            "2022_P1_Physics_Q16-v1",
+            "2022_P1_Physics_Q17-v1",
+            "2022_P1_Physics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 17
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P1_Chemistry_Q01-v1",
+            "2022_P1_Chemistry_Q02-v1",
+            "2022_P1_Chemistry_Q03-v1",
+            "2022_P1_Chemistry_Q04-v1",
+            "2022_P1_Chemistry_Q05-v1",
+            "2022_P1_Chemistry_Q06-v1",
+            "2022_P1_Chemistry_Q07-v1",
+            "2022_P1_Chemistry_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 22
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P1_Chemistry_Q09-v1",
+            "2022_P1_Chemistry_Q10-v1",
+            "2022_P1_Chemistry_Q11-v1",
+            "2022_P1_Chemistry_Q12-v1",
+            "2022_P1_Chemistry_Q13-v1",
+            "2022_P1_Chemistry_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 25
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2022_P1_Chemistry_Q15-v1",
+            "2022_P1_Chemistry_Q16-v1",
+            "2022_P1_Chemistry_Q17-v1",
+            "2022_P1_Chemistry_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf",
+            "page": 29
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_1_English.pdf"
+      }
+    },
+    {
+      "paperId": "official-2022-paper-2-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 54,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P2_Mathematics_Q01-v1",
+            "2022_P2_Mathematics_Q02-v1",
+            "2022_P2_Mathematics_Q03-v1",
+            "2022_P2_Mathematics_Q04-v1",
+            "2022_P2_Mathematics_Q05-v1",
+            "2022_P2_Mathematics_Q06-v1",
+            "2022_P2_Mathematics_Q07-v1",
+            "2022_P2_Mathematics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P2_Mathematics_Q09-v1",
+            "2022_P2_Mathematics_Q10-v1",
+            "2022_P2_Mathematics_Q11-v1",
+            "2022_P2_Mathematics_Q12-v1",
+            "2022_P2_Mathematics_Q13-v1",
+            "2022_P2_Mathematics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2022_P2_Mathematics_Q15-v1",
+            "2022_P2_Mathematics_Q16-v1",
+            "2022_P2_Mathematics_Q17-v1",
+            "2022_P2_Mathematics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P2_Physics_Q01-v1",
+            "2022_P2_Physics_Q02-v1",
+            "2022_P2_Physics_Q03-v1",
+            "2022_P2_Physics_Q04-v1",
+            "2022_P2_Physics_Q05-v1",
+            "2022_P2_Physics_Q06-v1",
+            "2022_P2_Physics_Q07-v1",
+            "2022_P2_Physics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 9
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P2_Physics_Q09-v1",
+            "2022_P2_Physics_Q10-v1",
+            "2022_P2_Physics_Q11-v1",
+            "2022_P2_Physics_Q12-v1",
+            "2022_P2_Physics_Q13-v1",
+            "2022_P2_Physics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 12
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2022_P2_Physics_Q15-v1",
+            "2022_P2_Physics_Q16-v1",
+            "2022_P2_Physics_Q17-v1",
+            "2022_P2_Physics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 16
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2022_P2_Chemistry_Q01-v1",
+            "2022_P2_Chemistry_Q02-v1",
+            "2022_P2_Chemistry_Q03-v1",
+            "2022_P2_Chemistry_Q04-v1",
+            "2022_P2_Chemistry_Q05-v1",
+            "2022_P2_Chemistry_Q06-v1",
+            "2022_P2_Chemistry_Q07-v1",
+            "2022_P2_Chemistry_Q08-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 19
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2022_P2_Chemistry_Q09-v1",
+            "2022_P2_Chemistry_Q10-v1",
+            "2022_P2_Chemistry_Q11-v1",
+            "2022_P2_Chemistry_Q12-v1",
+            "2022_P2_Chemistry_Q13-v1",
+            "2022_P2_Chemistry_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 22
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2022_P2_Chemistry_Q15-v1",
+            "2022_P2_Chemistry_Q16-v1",
+            "2022_P2_Chemistry_Q17-v1",
+            "2022_P2_Chemistry_Q18-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf",
+            "page": 25
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2022_2_English.pdf"
+      }
+    },
     {
       "paperId": "official-2023-paper-1-en",
       "durationMinutes": 180,
@@ -857,36 +1603,2508 @@
         "reviewedAt": "2026-11-11",
         "sourceUrl": "https://jeeadv.ac.in/past_qps/2023_2_English.pdf"
       }
+    },
+    {
+      "paperId": "official-2024-paper-1-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 51,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Mathematics_Q01-v1",
+            "2024_P1_Mathematics_Q02-v1",
+            "2024_P1_Mathematics_Q03-v1",
+            "2024_P1_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P1_Mathematics_Q05-v1",
+            "2024_P1_Mathematics_Q06-v1",
+            "2024_P1_Mathematics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P1_Mathematics_Q08-v1",
+            "2024_P1_Mathematics_Q09-v1",
+            "2024_P1_Mathematics_Q10-v1",
+            "2024_P1_Mathematics_Q11-v1",
+            "2024_P1_Mathematics_Q12-v1",
+            "2024_P1_Mathematics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 5
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Mathematics · Section 4",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Mathematics_Q14-v1",
+            "2024_P1_Mathematics_Q15-v1",
+            "2024_P1_Mathematics_Q16-v1",
+            "2024_P1_Mathematics_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Physics_Q01-v1",
+            "2024_P1_Physics_Q02-v1",
+            "2024_P1_Physics_Q03-v1",
+            "2024_P1_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 11
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P1_Physics_Q05-v1",
+            "2024_P1_Physics_Q06-v1",
+            "2024_P1_Physics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 12
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P1_Physics_Q08-v1",
+            "2024_P1_Physics_Q09-v1",
+            "2024_P1_Physics_Q10-v1",
+            "2024_P1_Physics_Q11-v1",
+            "2024_P1_Physics_Q12-v1",
+            "2024_P1_Physics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 14
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Physics · Section 4",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Physics_Q14-v1",
+            "2024_P1_Physics_Q15-v1",
+            "2024_P1_Physics_Q16-v1",
+            "2024_P1_Physics_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 16
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Chemistry_Q01-v1",
+            "2024_P1_Chemistry_Q02-v1",
+            "2024_P1_Chemistry_Q03-v1",
+            "2024_P1_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 19
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P1_Chemistry_Q05-v1",
+            "2024_P1_Chemistry_Q06-v1",
+            "2024_P1_Chemistry_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 21
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P1_Chemistry_Q08-v1",
+            "2024_P1_Chemistry_Q09-v1",
+            "2024_P1_Chemistry_Q10-v1",
+            "2024_P1_Chemistry_Q11-v1",
+            "2024_P1_Chemistry_Q12-v1",
+            "2024_P1_Chemistry_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 23
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Chemistry · Section 4",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2024_P1_Chemistry_Q14-v1",
+            "2024_P1_Chemistry_Q15-v1",
+            "2024_P1_Chemistry_Q16-v1",
+            "2024_P1_Chemistry_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf",
+            "page": 26
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_1_English.pdf"
+      }
+    },
+    {
+      "paperId": "official-2024-paper-2-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 51,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2024_P2_Mathematics_Q01-v1",
+            "2024_P2_Mathematics_Q02-v1",
+            "2024_P2_Mathematics_Q03-v1",
+            "2024_P2_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P2_Mathematics_Q05-v1",
+            "2024_P2_Mathematics_Q06-v1",
+            "2024_P2_Mathematics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Mathematics_Q08-v1",
+            "2024_P2_Mathematics_Q09-v1",
+            "2024_P2_Mathematics_Q10-v1",
+            "2024_P2_Mathematics_Q11-v1",
+            "2024_P2_Mathematics_Q12-v1",
+            "2024_P2_Mathematics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 5
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Mathematics · Section 4",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Mathematics_Q14-v1",
+            "2024_P2_Mathematics_Q15-v1",
+            "2024_P2_Mathematics_Q16-v1",
+            "2024_P2_Mathematics_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2024_P2_Physics_Q01-v1",
+            "2024_P2_Physics_Q02-v1",
+            "2024_P2_Physics_Q03-v1",
+            "2024_P2_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 9
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P2_Physics_Q05-v1",
+            "2024_P2_Physics_Q06-v1",
+            "2024_P2_Physics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 11
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Physics_Q08-v1",
+            "2024_P2_Physics_Q09-v1",
+            "2024_P2_Physics_Q10-v1",
+            "2024_P2_Physics_Q11-v1",
+            "2024_P2_Physics_Q12-v1",
+            "2024_P2_Physics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 14
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Physics · Section 4",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Physics_Q14-v1",
+            "2024_P2_Physics_Q15-v1",
+            "2024_P2_Physics_Q16-v1",
+            "2024_P2_Physics_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 16
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2024_P2_Chemistry_Q01-v1",
+            "2024_P2_Chemistry_Q02-v1",
+            "2024_P2_Chemistry_Q03-v1",
+            "2024_P2_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 19
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2024_P2_Chemistry_Q05-v1",
+            "2024_P2_Chemistry_Q06-v1",
+            "2024_P2_Chemistry_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 21
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Chemistry_Q08-v1",
+            "2024_P2_Chemistry_Q09-v1",
+            "2024_P2_Chemistry_Q10-v1",
+            "2024_P2_Chemistry_Q11-v1",
+            "2024_P2_Chemistry_Q12-v1",
+            "2024_P2_Chemistry_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 23
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Chemistry · Section 4",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2024_P2_Chemistry_Q14-v1",
+            "2024_P2_Chemistry_Q15-v1",
+            "2024_P2_Chemistry_Q16-v1",
+            "2024_P2_Chemistry_Q17-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf",
+            "page": 25
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2024_2_English.pdf"
+      }
+    },
+    {
+      "paperId": "official-2025-paper-1-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 48,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Mathematics_Q01-v1",
+            "2025_P1_Mathematics_Q02-v1",
+            "2025_P1_Mathematics_Q03-v1",
+            "2025_P1_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P1_Mathematics_Q05-v1",
+            "2025_P1_Mathematics_Q06-v1",
+            "2025_P1_Mathematics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P1_Mathematics_Q08-v1",
+            "2025_P1_Mathematics_Q09-v1",
+            "2025_P1_Mathematics_Q10-v1",
+            "2025_P1_Mathematics_Q11-v1",
+            "2025_P1_Mathematics_Q12-v1",
+            "2025_P1_Mathematics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 5
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Mathematics · Section 4",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Mathematics_Q14-v1",
+            "2025_P1_Mathematics_Q15-v1",
+            "2025_P1_Mathematics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Physics_Q01-v1",
+            "2025_P1_Physics_Q02-v1",
+            "2025_P1_Physics_Q03-v1",
+            "2025_P1_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 10
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P1_Physics_Q05-v1",
+            "2025_P1_Physics_Q06-v1",
+            "2025_P1_Physics_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 13
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P1_Physics_Q08-v1",
+            "2025_P1_Physics_Q09-v1",
+            "2025_P1_Physics_Q10-v1",
+            "2025_P1_Physics_Q11-v1",
+            "2025_P1_Physics_Q12-v1",
+            "2025_P1_Physics_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 16
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Physics · Section 4",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Physics_Q14-v1",
+            "2025_P1_Physics_Q15-v1",
+            "2025_P1_Physics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 19
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Chemistry_Q01-v1",
+            "2025_P1_Chemistry_Q02-v1",
+            "2025_P1_Chemistry_Q03-v1",
+            "2025_P1_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 23
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P1_Chemistry_Q05-v1",
+            "2025_P1_Chemistry_Q06-v1",
+            "2025_P1_Chemistry_Q07-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 25
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P1_Chemistry_Q08-v1",
+            "2025_P1_Chemistry_Q09-v1",
+            "2025_P1_Chemistry_Q10-v1",
+            "2025_P1_Chemistry_Q11-v1",
+            "2025_P1_Chemistry_Q12-v1",
+            "2025_P1_Chemistry_Q13-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 27
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Chemistry · Section 4",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2025_P1_Chemistry_Q14-v1",
+            "2025_P1_Chemistry_Q15-v1",
+            "2025_P1_Chemistry_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf",
+            "page": 29
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_1_English.pdf"
+      }
+    },
+    {
+      "paperId": "official-2025-paper-2-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 48,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2025_P2_Mathematics_Q01-v1",
+            "2025_P2_Mathematics_Q02-v1",
+            "2025_P2_Mathematics_Q03-v1",
+            "2025_P2_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P2_Mathematics_Q05-v1",
+            "2025_P2_Mathematics_Q06-v1",
+            "2025_P2_Mathematics_Q07-v1",
+            "2025_P2_Mathematics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P2_Mathematics_Q09-v1",
+            "2025_P2_Mathematics_Q10-v1",
+            "2025_P2_Mathematics_Q11-v1",
+            "2025_P2_Mathematics_Q12-v1",
+            "2025_P2_Mathematics_Q13-v1",
+            "2025_P2_Mathematics_Q14-v1",
+            "2025_P2_Mathematics_Q15-v1",
+            "2025_P2_Mathematics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 5
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2025_P2_Physics_Q01-v1",
+            "2025_P2_Physics_Q02-v1",
+            "2025_P2_Physics_Q03-v1",
+            "2025_P2_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P2_Physics_Q05-v1",
+            "2025_P2_Physics_Q06-v1",
+            "2025_P2_Physics_Q07-v1",
+            "2025_P2_Physics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 10
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P2_Physics_Q09-v1",
+            "2025_P2_Physics_Q10-v1",
+            "2025_P2_Physics_Q11-v1",
+            "2025_P2_Physics_Q12-v1",
+            "2025_P2_Physics_Q13-v1",
+            "2025_P2_Physics_Q14-v1",
+            "2025_P2_Physics_Q15-v1",
+            "2025_P2_Physics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 13
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2025_P2_Chemistry_Q01-v1",
+            "2025_P2_Chemistry_Q02-v1",
+            "2025_P2_Chemistry_Q03-v1",
+            "2025_P2_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 16
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2025_P2_Chemistry_Q05-v1",
+            "2025_P2_Chemistry_Q06-v1",
+            "2025_P2_Chemistry_Q07-v1",
+            "2025_P2_Chemistry_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -2,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 18
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2025_P2_Chemistry_Q09-v1",
+            "2025_P2_Chemistry_Q10-v1",
+            "2025_P2_Chemistry_Q11-v1",
+            "2025_P2_Chemistry_Q12-v1",
+            "2025_P2_Chemistry_Q13-v1",
+            "2025_P2_Chemistry_Q14-v1",
+            "2025_P2_Chemistry_Q15-v1",
+            "2025_P2_Chemistry_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+            "page": 20
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      }
+    },
+    {
+      "paperId": "official-2026-paper-1-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 48,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Mathematics_Q01-v1",
+            "2026_P1_Mathematics_Q02-v1",
+            "2026_P1_Mathematics_Q03-v1",
+            "2026_P1_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P1_Mathematics_Q05-v1",
+            "2026_P1_Mathematics_Q06-v1",
+            "2026_P1_Mathematics_Q07-v1",
+            "2026_P1_Mathematics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P1_Mathematics_Q09-v1",
+            "2026_P1_Mathematics_Q10-v1",
+            "2026_P1_Mathematics_Q11-v1",
+            "2026_P1_Mathematics_Q12-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 6
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Mathematics · Section 4",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Mathematics_Q13-v1",
+            "2026_P1_Mathematics_Q14-v1",
+            "2026_P1_Mathematics_Q15-v1",
+            "2026_P1_Mathematics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 7
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Physics_Q01-v1",
+            "2026_P1_Physics_Q02-v1",
+            "2026_P1_Physics_Q03-v1",
+            "2026_P1_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 11
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P1_Physics_Q05-v1",
+            "2026_P1_Physics_Q06-v1",
+            "2026_P1_Physics_Q07-v1",
+            "2026_P1_Physics_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 14
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P1_Physics_Q09-v1",
+            "2026_P1_Physics_Q10-v1",
+            "2026_P1_Physics_Q11-v1",
+            "2026_P1_Physics_Q12-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 17
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Physics · Section 4",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Physics_Q13-v1",
+            "2026_P1_Physics_Q14-v1",
+            "2026_P1_Physics_Q15-v1",
+            "2026_P1_Physics_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 20
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Chemistry_Q01-v1",
+            "2026_P1_Chemistry_Q02-v1",
+            "2026_P1_Chemistry_Q03-v1",
+            "2026_P1_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 25
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P1_Chemistry_Q05-v1",
+            "2026_P1_Chemistry_Q06-v1",
+            "2026_P1_Chemistry_Q07-v1",
+            "2026_P1_Chemistry_Q08-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 27
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P1_Chemistry_Q09-v1",
+            "2026_P1_Chemistry_Q10-v1",
+            "2026_P1_Chemistry_Q11-v1",
+            "2026_P1_Chemistry_Q12-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 30
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Chemistry · Section 4",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2026_P1_Chemistry_Q13-v1",
+            "2026_P1_Chemistry_Q14-v1",
+            "2026_P1_Chemistry_Q15-v1",
+            "2026_P1_Chemistry_Q16-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p1_english.pdf",
+            "page": 31
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/documents/p1_english.pdf"
+      }
+    },
+    {
+      "paperId": "official-2026-paper-2-en",
+      "durationMinutes": 180,
+      "expectedQuestionCount": 54,
+      "maxMarks": 180,
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "Mathematics · Section 1",
+          "subject": "mathematics",
+          "type": "single",
+          "questionIds": [
+            "2026_P2_Mathematics_Q01-v1",
+            "2026_P2_Mathematics_Q02-v1",
+            "2026_P2_Mathematics_Q03-v1",
+            "2026_P2_Mathematics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 1
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Mathematics · Section 2",
+          "subject": "mathematics",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P2_Mathematics_Q05-v1",
+            "2026_P2_Mathematics_Q06-v1",
+            "2026_P2_Mathematics_Q07-v1",
+            "2026_P2_Mathematics_Q08-v1",
+            "2026_P2_Mathematics_Q09-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 3
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Mathematics · Section 3",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Mathematics_Q10-v1",
+            "2026_P2_Mathematics_Q11-v1",
+            "2026_P2_Mathematics_Q12-v1",
+            "2026_P2_Mathematics_Q13-v1",
+            "2026_P2_Mathematics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 6
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Mathematics · Section 4",
+          "subject": "mathematics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Mathematics_Q15-v1",
+            "2026_P2_Mathematics_Q16-v1",
+            "2026_P2_Mathematics_Q17-v1",
+            "2026_P2_Mathematics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 2,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 8
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Physics · Section 1",
+          "subject": "physics",
+          "type": "single",
+          "questionIds": [
+            "2026_P2_Physics_Q01-v1",
+            "2026_P2_Physics_Q02-v1",
+            "2026_P2_Physics_Q03-v1",
+            "2026_P2_Physics_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 10
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Physics · Section 2",
+          "subject": "physics",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P2_Physics_Q05-v1",
+            "2026_P2_Physics_Q06-v1",
+            "2026_P2_Physics_Q07-v1",
+            "2026_P2_Physics_Q08-v1",
+            "2026_P2_Physics_Q09-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 12
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Physics · Section 3",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Physics_Q10-v1",
+            "2026_P2_Physics_Q11-v1",
+            "2026_P2_Physics_Q12-v1",
+            "2026_P2_Physics_Q13-v1",
+            "2026_P2_Physics_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 15
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Physics · Section 4",
+          "subject": "physics",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Physics_Q15-v1",
+            "2026_P2_Physics_Q16-v1",
+            "2026_P2_Physics_Q17-v1",
+            "2026_P2_Physics_Q18-v1"
+          ],
+          "marking": {
+            "correct": 2,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 17
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-1",
+          "title": "Chemistry · Section 1",
+          "subject": "chemistry",
+          "type": "single",
+          "questionIds": [
+            "2026_P2_Chemistry_Q01-v1",
+            "2026_P2_Chemistry_Q02-v1",
+            "2026_P2_Chemistry_Q03-v1",
+            "2026_P2_Chemistry_Q04-v1"
+          ],
+          "marking": {
+            "correct": 3,
+            "incorrect": -1,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 20
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-2",
+          "title": "Chemistry · Section 2",
+          "subject": "chemistry",
+          "type": "multiple",
+          "questionIds": [
+            "2026_P2_Chemistry_Q05-v1",
+            "2026_P2_Chemistry_Q06-v1",
+            "2026_P2_Chemistry_Q07-v1",
+            "2026_P2_Chemistry_Q08-v1",
+            "2026_P2_Chemistry_Q09-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": -1,
+            "unanswered": 0,
+            "partialCreditRules": [
+              {
+                "totalCorrect": 2,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 3,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 1,
+                "marks": 1
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 2,
+                "marks": 2
+              },
+              {
+                "totalCorrect": 4,
+                "selectedCorrect": 3,
+                "marks": 3
+              }
+            ]
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 23
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-3",
+          "title": "Chemistry · Section 3",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Chemistry_Q10-v1",
+            "2026_P2_Chemistry_Q11-v1",
+            "2026_P2_Chemistry_Q12-v1",
+            "2026_P2_Chemistry_Q13-v1",
+            "2026_P2_Chemistry_Q14-v1"
+          ],
+          "marking": {
+            "correct": 4,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 26
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        },
+        {
+          "id": "section-4",
+          "title": "Chemistry · Section 4",
+          "subject": "chemistry",
+          "type": "numerical",
+          "questionIds": [
+            "2026_P2_Chemistry_Q15-v1",
+            "2026_P2_Chemistry_Q16-v1",
+            "2026_P2_Chemistry_Q17-v1",
+            "2026_P2_Chemistry_Q18-v1"
+          ],
+          "marking": {
+            "correct": 2,
+            "incorrect": 0,
+            "unanswered": 0
+          },
+          "source": {
+            "url": "https://jeeadv.ac.in/documents/p2_english.pdf",
+            "page": 28
+          },
+          "review": {
+            "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+            "reviewedAt": "2026-11-11",
+            "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+          }
+        }
+      ],
+      "review": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/documents/p2_english.pdf"
+      }
     }
   ],
   "attributions": [
     {
-      "id": "iit-jee-advanced-2023",
-      "title": "JEE (Advanced) 2023 — IIT Guwahati",
+      "id": "iit-jee-advanced",
+      "title": "JEE (Advanced) — organising IITs",
       "url": "https://jeeadv.ac.in/archive.html",
       "license": "Original examination questions, keys and figures remain the work of the organising IITs. No transfer of those rights is claimed.",
-      "notes": "Official English Paper1 and Paper2, official section marking and archived final answer keys. Figure crops retain source attribution; the dataset MIT grant expressly covers transcriptions, structure and annotations."
+      "notes": "Official papers, original section scoring, and recorded final-key evidence are identified for every question."
     },
     {
       "id": "propar2750-transcriptions",
       "title": "propar2750 / JEE Advanced 2022–2026",
       "url": "https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85",
-      "license": "MIT for dataset transcriptions, structure and annotations, as stated in the pinned dataset card.",
-      "notes": "Only the separately compared 2023 paper records are included. Pinned revision 2580e96f1e74343e1d478509187f16fe58dbab85. Figures are sourced paper crops and remain attributed to the organising IITs.",
-      "licenseNotice": "Source: propar2750 / JEE Advanced 2022–2026\nAuthor attribution: propar2750 (2026)\nPinned revision: 2580e96f1e74343e1d478509187f16fe58dbab85\nDataset card:\nhttps://huggingface.co/datasets/propar2750/jee-advanced/blob/2580e96f1e74343e1d478509187f16fe58dbab85/README.md\n\nThe pinned dataset card declares license: mit and states:\n\n\"The questions, answer keys and figures come from the official JEE Advanced\n2022–2026 papers and final answer keys, published by the IITs that organise the\nexam. They remain the work of those institutes.\n\nThe transcriptions, structure and annotations in this dataset are released\nunder the MIT license.\"\n\nThe repository does not include a separate LICENSE file at this revision.\nThe statement above is the upstream license grant and scope. Original 2023\nexamination material is attributed to JEE (Advanced), IIT Guwahati. The figure\nfiles are crops of that original material. Vedaris does not claim that the\ndataset's MIT statement transfers the institutes' underlying rights.\n\nMIT License terms\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+      "license": "MIT for dataset transcriptions, structure and annotations as stated in the pinned dataset card.",
+      "licenseNotice": "Source: propar2750 / JEE Advanced 2022–2026\nAuthor attribution: propar2750 (2026)\nPinned revision: 2580e96f1e74343e1d478509187f16fe58dbab85\nDataset card:\nhttps://huggingface.co/datasets/propar2750/jee-advanced/blob/2580e96f1e74343e1d478509187f16fe58dbab85/README.md\n\nThe pinned dataset card declares license: mit and states:\n\n\"The questions, answer keys and figures come from the official JEE Advanced\n2022–2026 papers and final answer keys, published by the IITs that organise the\nexam. They remain the work of those institutes.\n\nThe transcriptions, structure and annotations in this dataset are released\nunder the MIT license.\"\n\nThe repository does not include a separate LICENSE file at this revision.\nThe statement above is the upstream license grant and scope. Original 2023\nexamination material is attributed to JEE (Advanced), IIT Guwahati. The figure\nfiles are crops of that original material. Vedaris does not claim that the\ndataset's MIT statement transfers the institutes' underlying rights.\n\nMIT License terms\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "notes": "Only separately compared, solved and reviewed paper batches are included; figures remain attributed to the organising IITs."
     },
     {
       "id": "vedaris-solutions",
       "title": "Vedaris original worked explanations",
       "url": "https://vedaris-jee.pages.dev/#pyq",
       "license": "MIT — Vedaris project license.",
-      "notes": "New explanations authored by Codex and checked against original papers and official keys. Reviews are AI-assisted; no human editorial review or IIT endorsement is claimed."
+      "notes": "New explanations by Codex, checked against official papers and keys. Reviews are AI-assisted; no human editorial review or IIT endorsement is claimed."
     }
   ],
   "coverageNotes": [
-    "The playable bank currently covers only the complete 2023 paper(s) listed here; it is not a 40-year question bank.",
-    "The wider 1978–2026 archive contains source links. Source-linked years are not counted as playable questions or complete solved mocks.",
-    "Questions retain original section rules, numerical ranges and discrete alternative answers. Officially dropped questions receive full marks even when unanswered.",
-    "Original worked explanations and chapter assignments were produced and checked by Codex. They are not official IIT worked solutions or a claim of human editorial review."
+    "The playable bank currently covers the listed complete papers from 2022, 2023, 2024, 2025, 2026. It is not a forty-year playable question bank.",
+    "The wider historical archive contains source links; those linked years are not counted as playable questions or complete solved mocks.",
+    "Original section rules, discrete answer alternatives and official numerical ranges are retained. Dropped questions receive their official full marks even when unanswered.",
+    "Explanations and chapter assignments were authored and checked by Codex; they are not official IIT worked solutions or a claim of human editorial review."
   ]
 }

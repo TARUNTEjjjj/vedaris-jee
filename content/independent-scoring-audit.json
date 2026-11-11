@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "checkedDate": "2026-11-11",
+  "reviewer": "Codex (AI-assisted verification; not human editorial certification)",
+  "execution": "Completed as an inline Node.js module during the read-only final release review. The same checking algorithm was subsequently saved in final-independent-scoring-audit.mjs; saving the evidence did not rerun the unchanged checks.",
+  "source": {
+    "url": "https://huggingface.co/datasets/propar2750/jee-advanced",
+    "revision": "2580e96f1e74343e1d478509187f16fe58dbab85",
+    "file": "jsonl/questions.jsonl",
+    "sha256": "d5e8dd3a43544e36a4889035c032516f670cc02e768d3b9958e9e42e8c9900c9"
+  },
+  "questions": 510,
+  "checks": 2877,
+  "failures": 0,
+  "observedOutput": "Independent pinned-source key/complete-option-set checks: 2877 across 510 questions",
+  "method": "Enumerate every multiple-choice response set and each single-choice option, comparing full-credit status with all pinned source alternatives. Check every discrete numeric alternative and each inclusive interval endpoint. Verify blank responses receive official bonus status for dropped questions.",
+  "reproduce": "node work/corpus-research/final-independent-scoring-audit.mjs",
+  "workingDirectory": "/Users/ataruntej/Documents/Codex/2026-11-11/n",
+  "limits": "This compares the pinned source key transcription to runtime scoring. It does not independently certify all statements, mathematical derivations, partial-mark values, numerical gaps or human review; those have separate tests and source-review evidence.",
+  "reproductionScriptSha256": "ee450b9a5f477c17dd7827e186fd791543da0dc91d90e94d94d9134e920fdd7e"
+}

@@ -6,7 +6,7 @@ Vedaris carries the chapter → practice → timed session → review → progre
 
 **[Open Vedaris on Cloudflare](https://vedaris-jee.pages.dev)** · [Content pipeline](docs/CONTENT-PIPELINE.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
 
-## Current release: 0.4
+## Current release: 0.5
 
 | Capability | Shipped scope |
 | --- | --- |
@@ -16,25 +16,36 @@ Vedaris carries the chapter → practice → timed session → review → progre
 | Official full papers | 40 English papers from **2007–2026**, with HTTP, content-type and PDF-signature checks |
 | Older source collections | 39 collections from **1978–2006**, explicitly labelled partial |
 | Study dashboard | Daily first-attempt goal, seven-day activity, subject progress, resume and chapter recommendations |
-| Reviewed PYQ bank | 102 actual questions from both 2023 papers, original Vedaris solutions, 39 source diagrams and chapter tags |
-| Full historical mocks | 2023 Paper 1 and Paper 2, each 51 questions, 180 marks and 180 minutes, preserving section marking and final-key exceptions |
+| Reviewed PYQ bank | 510 actual questions across 2022–2026, 170 per subject, original Vedaris explanations, 279 unique figures and chapter tags |
+| Full historical mocks | Both papers for every year from 2022–2026; ten complete papers, each 180 marks and 180 minutes, preserving order, section marking and final-key exceptions |
 | PYQ practice | Chapter, subject, year and response-type filters; custom sets; exact missed-question retry; last 20 reports and JSON backup/restore |
 | Concept test centre | 6/12/30-question original PCM sets plus custom chapter sessions; separate from historical mocks |
 | Exam workspace | Subject navigation, five palette states, per-question active time, submission summary, autosave and reload resume |
-| Performance analysis | Last 50 completed reports, score trends, subject breakdown, weak-chapter priorities and exact missed-question retry |
+| Original-practice analysis | Last 50 completed concept reports, score trends, subject breakdown, weak-chapter priorities and exact missed-question retry |
 | Revision notebook | First-attempt errors and saved questions, cause labels, 1,000-character notes, resolution state and exact revision sets |
 | Progress | First-attempt deduplication, 1,000-record bound, regraded JSON imports and exports |
 | Question studio | Reproducible seeds, worked reasoning and saved questions |
 | Paper workspace | External source link, independent study timer, saved working notes and notes export |
 | Content ingestion | Strict reviewed-question schema, source and marking evidence, atomic staging, no silent publication |
 
-**The 40+ year complete playable PYQ bank is not finished.** This release provides 49 years of linked sources, not 49 years of fully digitised papers. It currently includes **102 reviewed questions from 2023**, with full Paper 1 and Paper 2 mocks. The remaining years still need reliable transcription, diagrams, final-key review and independently authored explanations. The older collections are incomplete; a 1978 source, for example, lists only two Physics questions. No claim of complete legacy coverage is made.
+**The 40+ year complete playable PYQ bank is not finished.** The playable bank covers five years, **2022–2026**. Years **1978–2021 are not playable**; their source links are not counted as solved questions or full mocks. Older collections are explicitly partial.
+
+| Year | Paper 1 | Paper 2 | Physics | Chemistry | Mathematics | Total |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2022 | 54 | 54 | 36 | 36 | 36 | 108 |
+| 2023 | 51 | 51 | 34 | 34 | 34 | 102 |
+| 2024 | 51 | 51 | 34 | 34 | 34 | 102 |
+| 2025 | 48 | 48 | 32 | 32 | 32 | 96 |
+| 2026 | 48 | 54 | 34 | 34 | 34 | 102 |
+| **Total** | **252** | **258** | **170** | **170** | **170** | **510** |
+
+Every listed paper carries 180 marks and lasts 180 minutes; question counts and section rules vary by year. The PYQ workspace exposes year-by-subject coverage as well as chapter filters.
 
 Original practice is distinct from PYQs. The present families are concept practice, not calibrated JEE Advanced mocks or a complete chapter curriculum. Vedaris does not predict a rank or admission outcome.
 
 ## Run locally
 
-Node.js 22 or newer and Python 3 are sufficient. There are no npm runtime dependencies or install step. Pinned MIT-licensed KaTeX 0.19.1 is vendored for build-time MathML compilation; the browser loads no external mathematics library.
+Node.js 22 or newer and Python 3 are sufficient. There are no npm runtime dependencies or install step. Pinned MIT-licensed KaTeX 0.19.1 and its chemistry extension are vendored for build-time MathML compilation; the browser loads no external mathematics library.
 
 ```sh
 npm test
@@ -45,7 +56,7 @@ npm start
 
 Open `http://127.0.0.1:4173/`. Rebuild after changing reviewed content. `npm run serve` is available for source UI development, but the playable PYQ bank is generated by the build and should be tested with `npm start`. Serve over HTTP; ES modules do not work correctly from `file://`.
 
-The build uses an explicit public-file list, validates the archive, checks JavaScript syntax, and emits an asset-hashed offline cache. It does not publish documentation, tests, staged imports, credentials, or Git metadata. Self-hosted fonts are included in the offline cache; external papers are not. Existing app tabs must close before an installed update activates, so an active timed session is not interrupted.
+The build uses an explicit public-file list, validates the archive, checks JavaScript syntax, and emits an integrity-checked application cache. It does not publish documentation, tests, staged imports, credentials, or Git metadata. The application shell, fonts and content index are precached. Opening PYQ practice downloads the ten paper bundles with at most four requests at once; figures load as their questions appear. Successfully verified content is cached on demand. External papers are not cached. Existing app tabs must close before an installed update activates, so an active timed session is not interrupted.
 
 ## Repository structure
 
@@ -57,19 +68,21 @@ src/learning/        First-attempt progress, session history, notebook and stati
 src/archive/         Source catalog, coverage filters, import schemas
 src/content/         Reviewed question registry, grading and historical sessions
 content/             Curated paper bundles, marking configurations and review audit
- data/archive.json   Historical source manifest (external links only)
+data/archive.json    Historical source manifest (external links only)
 scripts/             Build, archive validation and reviewed PYQ staging
- tests/              Content, generation, grading and state regressions
+tests/               Content, generation, grading and state regressions
 docs/                Architecture, content pipeline and release roadmap
 ```
 
-The first release keeps these components in one repository, matching SAT's small dependency footprint while preserving the separation of responsibilities used by the CMI project. It does not pretend to ship Avenquellis's C++/Wasm engines, proof grading, or cloud model services.
+The application keeps these components in one repository, matching SAT's small dependency footprint while preserving the separation of responsibilities used by the CMI project. It does not pretend to ship Avenquellis's C++/Wasm engines, proof grading, or cloud model services.
 
 ## Archive provenance
 
 The [official JEE Advanced archive](https://jeeadv.ac.in/archive.html) supplies papers through 2025; the [official homepage](https://jeeadv.ac.in/) supplied 2026 papers when checked on 11 November 2026. Older [ExamGOAL year collections](https://pdf.questions.examgoal.com/past-years/year-wise/jee/jee-advanced) are third-party and partial. Source dates and delivery checks are recorded separately from content completeness.
 
-Question papers and third-party questions retain their owners' rights. The reviewed 2023 bank uses MIT-licensed transcriptions from [propar2750/jee-advanced](https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85), pinned to that revision. Its license covers transcriptions, structure and annotations; the dataset expressly attributes original questions, keys and figures to the organising IITs. Full official PDFs and MARKS content are not bundled. New Vedaris worked explanations were derived and checked using Codex, with source-page and archived final-key evidence recorded in `content/review-audit.json`; this is not a claim of human editorial certification. See `content/UPSTREAM-LICENSE.txt` for the upstream scope and notice. See [content pipeline](docs/CONTENT-PIPELINE.md).
+Question papers and third-party questions retain their owners' rights. The reviewed 2022–2026 bank uses transcriptions from [propar2750/jee-advanced](https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85), pinned to that revision. Its license covers transcriptions, structure and annotations; the dataset expressly attributes original questions, keys and figures to the organising IITs. Full official PDFs and MARKS content are not bundled. New Vedaris worked explanations were independently derived and checked using Codex against official papers and final keys, including archived official-origin keys. Source pages, hashes and review qualifications are recorded in `content/review-audit.json`. Reviews are explicitly AI-assisted, not human editorial certification. Unresolved source wording and unexplained official alternatives remain disclosed in the affected explanations. See `content/UPSTREAM-LICENSE.txt` for the upstream scope and notice. See [content pipeline](docs/CONTENT-PIPELINE.md).
+
+The bounded older-source audit found partial commercial year indexes, publisher reprints without an established redistribution grant, inaccessible scan links, and candidate datasets that were selected recent questions or statistics rather than the advertised historical question bank. These findings describe the sources inspected; they do not establish that no usable legacy corpus exists.
 
 ## Data and privacy
 
@@ -87,7 +100,7 @@ The public deployment is **https://vedaris-jee.pages.dev/**. The GitHub source r
 
 This release is designed for a target of 10,000 concurrent open study sessions: Cloudflare serves immutable static assets and the browser generates, scores and stores practice. It has no application server, database, per-user API or cloud grading call to saturate. **A 10,000-user production load test has not been completed.** See [capacity model and test protocol](docs/CAPACITY.md) for the distinction between open sessions, cold-launch bursts and measured capacity.
 
-Production hardening includes content-hashed releases, integrity-checked offline assets, immutable browser caching, revalidated entry points, self-hosted fonts, a complete compressed offline-bundle budget, and an exclusive browser writer guard. A second tab is read-only to prevent lost saved answers; browsers without Web Locks can practise in memory and export progress. Chapter setup disables question counts that exceed available distinct variants.
+Production hardening includes content-hashed releases, integrity-checked offline assets, immutable browser caching, revalidated entry points, self-hosted fonts, a compressed application-cache budget, and an exclusive browser writer guard. A second tab is read-only to prevent lost saved answers; browsers without Web Locks can practise in memory and export progress. Chapter setup disables question counts that exceed available distinct variants.
 
 Deploy from a tested checkout with the existing authenticated Cloudflare account:
 
@@ -96,16 +109,16 @@ npm run deploy
 npm run check:live
 ```
 
-`wrangler.jsonc` names the existing direct-upload Pages project. Deployment runs the build and its checks before pinned Wrangler uploads `dist/`. No Functions or `_worker.js` are deployed. GitHub Actions validates each push and retains the build artifact; production publishing is an explicit command. No Cloudflare credential is stored in Git.
+`wrangler.jsonc` names the existing direct-upload Pages project. Deployment builds the current release, fetches and hash-checks all earlier immutable releases from production, then checks the combined artifact before pinned Wrangler uploads `dist/`. This keeps uncached paper bundles and figures available to students with an older tab open. Retention fails closed on corrupt assets or the 18,000-file / 500 MiB retained-content limits; it never silently removes old versions. No Functions or `_worker.js` are deployed. GitHub Actions validates each push and retains the build artifact; production publishing is an explicit command. No Cloudflare credential is stored in Git.
 
 `npm run check:release` verifies hashes, static-only output and payload budgets. `npm run check:live` verifies production bytes, cache/security headers, 404 handling and a bounded 5-concurrent-request smoke probe. That probe is not a 10,000-user test. Use the staged k6 profile in [scripts/loadtest.js](scripts/loadtest.js) for a separately provisioned representative load run.
 
-For rollback, select an earlier successful deployment in the Cloudflare Pages dashboard. Keep source and generated build identities with the deployment. The service worker does not force an update into an active test; users close old tabs and reopen to activate a newly installed release.
+For rollback, build the desired source revision using the current release-retention tooling, retain the immutable files from current production, and deploy the checked combined artifact. Do not select an old deployment directly in the Pages dashboard: that would remove newer asset URLs still used by open tabs. Keep source and generated build identities with the deployment. The service worker does not force an update into an active test; users close old tabs and reopen to activate a newly installed release.
 
 ## Product direction
 
 The learner workflow is inspired by the capability split between MathonGo MARKS (chapter practice and revision) and Quizrr (tests and analysis), with original Vedaris branding and implementation. See [product scope](docs/PRODUCT.md) for the feature benchmark and remaining content gaps.
 
-Active question time counts only the visible practice screen, including its submit dialog. Elapsed session time includes time away. Legacy sessions without recorded timing remain unknown. Session history retains the latest 50 completed sessions and is separate from first-attempt progress; notebook resolution is a learner decision and never rewrites the original score. The existing progress export covers first-attempt answers only: session history, goals, bookmarks and notes currently remain browser-local.
+Active question time counts only the visible practice screen, including its submit dialog. Elapsed session time includes time away. Legacy sessions without recorded timing remain unknown. Session history retains the latest 50 completed sessions and is separate from first-attempt progress; notebook resolution is a learner decision and never rewrites the original score. The original-practice progress export covers first-attempt answers only: its session history, goals, bookmarks and notebook notes remain browser-local. PYQ backup separately includes the active historical attempt and latest 20 reports.
 
-The 0.4 PYQ workspace uses stable, revisioned question IDs and a separate saved-work key, so adding another reviewed paper does not erase earlier attempts. Numerical alternatives and accepted ranges are exact; P1 Physics Q9 accepts 80, 150 or 220 only. The two officially dropped P2 Physics questions award three bonus marks each, including when blank. Bonus marks are excluded from accuracy. Matching lists, shared paragraphs and diagram labels are preserved.
+The 0.5 PYQ workspace retains stable, revisioned question IDs and the compatible bank identity so earlier attempts survive this expansion. It grades exact numbers, discrete alternatives, inclusive ranges, disjoint accepted intervals and official alternative option sets. Section-specific partial marks and penalties are preserved, including the 2026 multiple-correct penalty of −1. Officially dropped questions receive their published bonus marks even when blank; bonuses are excluded from accuracy. Matching lists, shared passages and diagram labels are preserved.

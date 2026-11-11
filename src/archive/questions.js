@@ -59,12 +59,19 @@ export function validateQuestionImport(bundle) {
     }
     if (!object(q.answer)) errors.push(`${path}.answer: required answer record`);
     else {
-      keys(q.answer, ['type', 'value', 'acceptedRange'], ['type', 'value'], `${path}.answer`, errors);
+      keys(q.answer, ['type', 'value', 'acceptedRange', 'acceptedOptionSets'], ['type', 'value'], `${path}.answer`, errors);
       if (!['single-choice', 'multiple-choice', 'numeric'].includes(q.answer.type)) errors.push(`${path}.answer.type: unsupported type; do not guess how to grade it`);
       if (q.answer.type === 'single-choice' && (!text(q.answer.value) || !optionIds.has(q.answer.value))) errors.push(`${path}.answer.value: must identify an option`);
       if (q.answer.type === 'multiple-choice') {
         const value = q.answer.value;
         if (!Array.isArray(value) || value.length === 0 || new Set(value).size !== value.length || value.some(id => !optionIds.has(id))) errors.push(`${path}.answer.value: expected distinct correct option IDs`);
+      }
+      if (q.answer.acceptedOptionSets !== undefined) {
+        const sets = q.answer.acceptedOptionSets;
+        const primary = q.answer.type === 'single-choice' ? [q.answer.value] : q.answer.value;
+        const key = set => JSON.stringify([...set].sort());
+        const valid = ['single-choice', 'multiple-choice'].includes(q.answer.type) && Array.isArray(sets) && sets.length >= 2 && sets.length <= 20 && sets.every(set => Array.isArray(set) && set.length > 0 && (q.answer.type !== 'single-choice' || set.length === 1) && new Set(set).size === set.length && set.every(id => optionIds.has(id)));
+        if (!valid || !Array.isArray(primary) || !sets.some(set => key(set) === key(primary)) || new Set(sets.map(key)).size !== sets.length) errors.push(`${path}.answer.acceptedOptionSets: expected distinct valid full-credit option sets containing the primary key`);
       }
       if (q.answer.type === 'numeric') {
         if (!decimal(q.answer.value)) errors.push(`${path}.answer.value: expected an exact decimal string`);
@@ -90,7 +97,9 @@ export function validateQuestionImport(bundle) {
             if (!object(rule)) { errors.push(`${rulePath}: expected an object`); return; }
             keys(rule, ['selected', 'marks'], ['selected', 'marks'], rulePath, errors);
             const selected = rule.selected;
-            if (!Array.isArray(selected) || !selected.length || new Set(selected).size !== selected.length || selected.some(id => !optionIds.has(id) || !Array.isArray(q.answer?.value) || !q.answer.value.includes(id)) || selected.length >= (q.answer?.value?.length ?? 0)) errors.push(`${rulePath}.selected: expected a nonempty proper subset of correct options`);
+            const correctSets = Array.isArray(q.answer?.acceptedOptionSets) ? q.answer.acceptedOptionSets : [q.answer?.value];
+            const properSubset = Array.isArray(selected) && selected.length > 0 && new Set(selected).size === selected.length && selected.every(id => optionIds.has(id)) && correctSets.some(set => Array.isArray(set) && selected.length < set.length && selected.every(id => set.includes(id))) && !correctSets.some(set => Array.isArray(set) && selected.length === set.length && selected.every(id => set.includes(id)));
+            if (!properSubset) errors.push(`${rulePath}.selected: expected a nonempty proper subset of correct options, excluding every full-credit set`);
             if (!finite(rule.marks) || rule.marks <= 0 || rule.marks >= q.marking.correct) errors.push(`${rulePath}.marks: must be between zero and full credit`);
             if (Array.isArray(selected)) {
               const selection = JSON.stringify([...selected].sort());

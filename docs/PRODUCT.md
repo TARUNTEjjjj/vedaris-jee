@@ -1,30 +1,37 @@
-# Vedaris study product · 0.4
+# Vedaris study product · 0.5
 
-Vedaris now includes **102 actual JEE Advanced questions with worked explanations**, covering both complete 2023 papers. Learners can practise by chapter, subject, year or question type, or attempt either full historical paper with its original order, 180-minute duration and 180-mark scheme.
+Vedaris includes **510 actual JEE Advanced questions with original worked explanations**, covering both complete papers for each year from 2022–2026. Learners can practise by chapter, subject, year or response type, inspect year-by-subject coverage, or attempt ten historical mocks with original order and section marking. Each paper lasts 180 minutes and carries 180 marks.
 
-The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/iit-jee-2027-ranker-kit-dropper/) and [Quizrr JEE Advanced](https://www.quizrr.in/jee-advanced-test-series/), whose public pages were observed on 11 November 2026. Vedaris has independent branding, content and code. These references imply neither affiliation nor feature parity.
+| Year | Paper 1 / Paper 2 questions | Physics | Chemistry | Mathematics | Total |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 2022 | 54 / 54 | 36 | 36 | 36 | 108 |
+| 2023 | 51 / 51 | 34 | 34 | 34 | 102 |
+| 2024 | 51 / 51 | 34 | 34 | 34 | 102 |
+| 2025 | 48 / 48 | 32 | 32 | 32 | 96 |
+| 2026 | 48 / 54 | 34 | 34 | 34 | 102 |
+| **Total** | **Ten papers** | **170** | **170** | **170** | **510** |
 
-## Delivered in 0.4
+The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/iit-jee-2027-ranker-kit-dropper/) and [Quizrr JEE Advanced](https://www.quizrr.in/jee-advanced-test-series/), whose public pages were observed on 11 November 2026. Vedaris has independent branding, content and code; these references imply neither affiliation nor feature parity.
 
-- Chapterwise practice with authentic historical questions, source pages, diagrams, matching lists and shared passages.
-- Separate full mocks for JEE Advanced 2023 Paper 1 and Paper 2: 51 questions and 180 marks each, preserving section-specific negative and partial marks.
-- Exact numerical keys, official acceptance ranges and discrete alternatives. Officially dropped questions receive their prescribed bonus marks, including when blank.
-- Original Vedaris worked explanations and chapter assignments checked against official papers and archived final keys, with inspectable source attribution.
-- Subject/section navigation, visited and answered states, review flags, saved responses, deadlines and submission confirmation.
-- Regraded historical reports with subject scores, negative marks, visible question time, elapsed time and filtered review. Retries use the exact missed source questions.
-- PYQ backup and restore for the active attempt and latest 20 completed historical reports. Compatible imports are validated before replacement; saved scores are recalculated from the reviewed bank.
-- Native mathematical notation compiled at publication time and 39 self-hosted diagram files; no external rendering service is needed while practising.
+## Delivered learner workflow
 
-The existing original-practice workspace remains available: 30 reproducible concept families, a study dashboard with daily goals and activity, a test centre, up to 50 validated original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Original practice is explicitly labelled and is not counted as PYQ coverage.
+- Chapterwise PYQ sets and complete historical mocks, with source pages, matching lists, shared passages and 279 unique local figures.
+- Exact numerical keys, discrete alternatives, inclusive ranges, disjoint intervals and official alternative option sets. Partial marks and negative marks follow the original section, including the 2026 multiple-correct penalty of −1. Dropped questions receive their published bonus marks, including when blank.
+- Subject and section navigation, visited and answered states, review flags, saved responses, deadlines and submission confirmation.
+- Regraded reports with subject scores, negative marks, visible question time, elapsed time and filtered review. Exact missed-question retries create separate reports.
+- PYQ backup and restore for the active attempt and latest 20 completed historical reports. Saved scores are recalculated from canonical question identities.
+- Build-time mathematics and chemistry rendering into native MathML. The shell is available offline after installation; paper content and figures become available offline after successful use and caching.
 
-Multiple browser tabs share one writer. Reader tabs can inspect historical reports and current questions without altering saved work. If coordinated storage is unavailable, practice can remain in memory and the learner is prompted to export before closing. There are no accounts or automatic cross-device synchronization.
+The original-practice workspace remains separate: 30 reproducible concept families, a dashboard with daily goals and activity, a test centre, up to 50 original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Generated practice is explicitly labelled and never counted as PYQs.
 
-## Coverage and next milestone
+Multiple browser tabs share one writer. Reader tabs can inspect reports and current questions without altering saved work. Where coordinated storage is unavailable, practice remains in memory with an export reminder. There are no accounts or automatic cross-device synchronization.
 
-The wider source archive spans 1978–2026, but **the playable solved bank currently covers 2023 only**. Source links are not counted as transcribed questions, complete solved years or playable mocks. The request for 40+ years of PYQs remains a content-expansion objective; this release does not claim it is complete.
+## Coverage and review limits
 
-Each additional paper requires reviewed statements and diagrams, stable identities, independently authored or appropriately sourced explanations, chapter assignments, final-key evidence and actual section marking. A full mock is unlocked only when all original questions, duration and marks pass the completeness gate. Neither generated questions nor partial collections are used to fill missing exam content.
+**The requested 40+ year playable bank is unfinished. Years 1978–2021 are not playable.** The wider source archive spans 1978–2026, but source links are not transcribed questions, complete solved years or playable mocks. Inspected older sources include partial question indexes and publisher reprints; some apparent datasets contain selected recent questions or historical statistics instead of a full question corpus. That audit does not establish that no other usable source exists.
 
-Reviews in this release were performed by Codex and are identified as AI-assisted. They are not official IIT worked solutions, human editorial certification or an IIT endorsement. Learners can inspect the linked source paper and final key when investigating a discrepancy.
+Every added paper needs complete statements and diagrams, stable identities, independently authored explanations, chapter assignments, final-key evidence and actual section marking. Full mocks unlock only after all questions, duration and marks pass the completeness gate. Generated questions and partial collections never fill missing exam content.
 
-No rank, percentile, national comparison, difficulty calibration or full-syllabus mock claim is invented from local attempts. Cloudflare serves the static application, but the 10,000-concurrent-learner target remains unmeasured. See [capacity notes](CAPACITY.md) and the [content pipeline](CONTENT-PIPELINE.md) for their separate acceptance criteria.
+Codex authored the explanations and performed source comparisons; review is explicitly **AI-assisted**. These are not official IIT worked solutions or human editorial certification. Unresolved source wording and unexplained official alternatives are disclosed in affected explanations, with the official accepted key retained. Learners can inspect the linked paper and final key.
+
+No rank, percentile, national comparison or difficulty calibration is inferred from local attempts. The 10,000-concurrent-learner target remains unmeasured; see [capacity notes](CAPACITY.md). The [content pipeline](CONTENT-PIPELINE.md) documents separate evidence and publication gates.

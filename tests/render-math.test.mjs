@@ -18,6 +18,13 @@ test('all supported delimiters render and invalid mathematical markup fails publ
  assert.throws(()=>renderStudyText('$\\notARealCommand{x}$'));
 });
 
+test('chemical formulae and reaction arrows compile locally to MathML',()=>{
+ const html=renderStudyText('$\\ce{NaOH}$ and $\\ce{SO4^2-}$ and $\\ce{A ->[heat] B}$');
+ assert.equal((html.match(/<math /g)||[]).length,3);
+ assert.match(html,/<msub/);assert.match(html,/<msup/);
+ assert.doesNotMatch(html,/<script|<img|katex-error/);
+});
+
 test('untrusted prose and TeX cannot introduce executable HTML or remote dependencies',()=>{
  const prose=renderStudyText('<img src=x onerror="alert(1)"><script>alert(2)</script>');
  assert.doesNotMatch(prose,/<img|<script/);

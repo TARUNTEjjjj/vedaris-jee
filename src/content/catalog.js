@@ -89,7 +89,7 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
     const base = { version: bundle.version, questions: bundle.questions.map(q => {
       if (!object(q)) return q;
       const result = Object.fromEntries(BASE_FIELDS.filter(key => Object.hasOwn(q, key)).map(key => [key, q[key]]));
-      if (object(result.answer)) result.answer = Object.fromEntries(Object.entries(result.answer).filter(([key]) => key !== 'acceptedValues'));
+      if (object(result.answer)) result.answer = Object.fromEntries(Object.entries(result.answer).filter(([key]) => !['acceptedValues', 'acceptedRanges'].includes(key)));
       return result;
     }) };
     const bonusExceptions = new Set();
@@ -115,7 +115,7 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
         catch { errors.push(`${path}.source.url: invalid catalog provenance`); }
       }
       if (!stableId(q.id)) errors.push(`${path}.id: expected stable content ID`);
-      if (object(q.answer)) keys(q.answer, ['type', 'value', 'acceptedRange', 'acceptedValues'], ['type', 'value'], `${path}.answer`, errors);
+      if (object(q.answer)) keys(q.answer, ['type', 'value', 'acceptedRange', 'acceptedValues', 'acceptedRanges', 'acceptedOptionSets'], ['type', 'value'], `${path}.answer`, errors);
       if (q.matchingLists !== undefined) {
         const lists = q.matchingLists;
         if (!object(lists)) errors.push(`${path}.matchingLists: expected labelled left and right lists`);
@@ -178,7 +178,15 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
           if (!Array.isArray(values) || values.length < 1 || values.length > 50 || parsed.some(value => !value) || !answer || !parsed.some(value => value && sameNumber(value, answer)) || q.answer.acceptedRange !== undefined) errors.push(`${path}.answer.acceptedValues: expected exact alternatives containing the key, without a continuous range`);
           if (parsed.some((value, index) => value && parsed.slice(0, index).some(previous => previous && sameNumber(previous, value)))) errors.push(`${path}.answer.acceptedValues: duplicate numerical alternative`);
         }
+        if (q.answer.acceptedRanges !== undefined) {
+          const ranges = q.answer.acceptedRanges;
+          const parsed = Array.isArray(ranges) ? ranges.map(range => Array.isArray(range) && range.length === 2 ? range.map(value => typeof value === 'string' && /^-?(?:0|[1-9]\d*)(?:\.\d+)?$/.test(value) ? parseNumber(value) : null) : [null,null]) : [];
+          const valid = Array.isArray(ranges) && ranges.length >= 2 && ranges.length <= 20 && parsed.every(([lo,hi]) => lo && hi && compareNumber(lo,hi) <= 0);
+          if (!valid || !answer || !parsed.some(([lo,hi]) => compareNumber(answer,lo) >= 0 && compareNumber(answer,hi) <= 0) || q.answer.acceptedRange !== undefined || q.answer.acceptedValues !== undefined) errors.push(`${path}.answer.acceptedRanges: expected separate exact intervals containing the key, without other numeric alternatives`);
+          if (valid && parsed.some(([lo,hi],i) => parsed.slice(0,i).some(([otherLo,otherHi]) => compareNumber(lo,otherHi) <= 0 && compareNumber(otherLo,hi) <= 0))) errors.push(`${path}.answer.acceptedRanges: intervals must be disjoint`);
+        }
       } else if (q.answer?.acceptedValues !== undefined) errors.push(`${path}.answer.acceptedValues: only numeric answers can specify exact alternatives`);
+      if (q.answer?.type !== 'numeric' && q.answer?.acceptedRanges !== undefined) errors.push(`${path}.answer.acceptedRanges: only numeric answers can specify intervals`);
       if (q.answer?.type === 'bonus') {
         if (q.answer.value !== null || q.answer.acceptedRange !== undefined) errors.push(`${path}.answer: bonus requires a null key and no range`);
         const m = q.marking;
@@ -204,7 +212,7 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
 
   const questions = freeze(rawQuestions.map(raw => {
     const q = copy(raw), paper = archiveMap.get(q.paperId);
-    return { id: q.id, contentId: q.id, origin: 'pyq', paperId: q.paperId, paper: paper.paper, year: q.year, exam: q.exam, subject: q.subject, chapter: q.chapters[0], chapters: q.chapters, section: q.section, questionNumber: q.questionNumber, title: `${q.year} · ${paper.label} · Q${q.questionNumber}`, stem: q.statement, type: TYPES[q.answer.type], options: q.options ?? [], answer: q.answer.value, acceptedRange: q.answer.acceptedRange ?? null, acceptedValues: q.answer.acceptedValues ?? null, answerSpec: q.answer, marking: q.marking, solution: q.solution.steps, matchingLists: q.matchingLists ?? null, assets: q.assets.map(asset => ({ ...asset, url: assetUrl(asset.url) })), source: q.source, solutionSourceUrl: q.solution.sourceUrl, review: q.review, chapterReview: q.chapterReview, solutionReview: q.solution.review, status: q.status };
+    return { id: q.id, contentId: q.id, origin: 'pyq', paperId: q.paperId, paper: paper.paper, year: q.year, exam: q.exam, subject: q.subject, chapter: q.chapters[0], chapters: q.chapters, section: q.section, questionNumber: q.questionNumber, title: `${q.year} · ${paper.label} · Q${q.questionNumber}`, stem: q.statement, type: TYPES[q.answer.type], options: q.options ?? [], answer: q.answer.value, acceptedRange: q.answer.acceptedRange ?? null, acceptedRanges: q.answer.acceptedRanges ?? null, acceptedValues: q.answer.acceptedValues ?? null, acceptedOptionSets: q.answer.acceptedOptionSets ?? null, answerSpec: q.answer, marking: q.marking, solution: q.solution.steps, matchingLists: q.matchingLists ?? null, assets: q.assets.map(asset => ({ ...asset, url: assetUrl(asset.url) })), source: q.source, solutionSourceUrl: q.solution.sourceUrl, review: q.review, chapterReview: q.chapterReview, solutionReview: q.solution.review, status: q.status };
   }));
   const questionMap = new Map(questions.map(q => [q.id, q]));
   const configurations = new Map();
@@ -286,7 +294,12 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
           if (q.marking.correct !== section.marking.correct || (q.type !== 'bonus' && (q.marking.incorrect !== section.marking.incorrect || q.marking.unanswered !== section.marking.unanswered))) reasons.push(`Question ${id}: marking differs from its source section.`);
           if (q.type === 'multiple') {
             const expected = new Map();
-            for (const rule of section.marking.partialCreditRules ?? []) if (rule.totalCorrect === q.answer.length) for (const subset of subsets(q.answer, rule.selectedCorrect)) expected.set(keyFor(subset), rule.marks);
+            const fullSets = q.acceptedOptionSets ?? [q.answer];
+            const fullKeys = new Set(fullSets.map(keyFor));
+            for (const answer of fullSets) for (const rule of section.marking.partialCreditRules ?? []) if (rule.totalCorrect === answer.length) for (const subset of subsets(answer, rule.selectedCorrect)) {
+              const key = keyFor(subset);
+              if (!fullKeys.has(key)) expected.set(key, Math.max(expected.get(key) ?? 0, rule.marks));
+            }
             const actual = new Map((q.marking.partialCredits ?? []).map(rule => [keyFor(rule.selected), rule.marks]));
             if (expected.size !== actual.size || [...expected].some(([key, marks]) => actual.get(key) !== marks)) reasons.push(`Question ${id}: explicit partial-credit selections do not match the section rules.`);
           }
@@ -306,6 +319,13 @@ export function createContentRegistry({ archive, bundles = [], papers = [], avai
       return freeze(questions.filter(q => (year == null || year === '' || q.year === Number(year)) && (fromYear == null || q.year >= Number(fromYear)) && (toYear == null || q.year <= Number(toYear)) && (subject === 'all' || q.subject === subject) && (chapter === 'all' || q.chapters.includes(chapter)) && (type === 'all' || q.type === type) && (paperId == null || q.paperId === paperId) && (paper == null || q.paper === Number(paper))));
     },
     listPapers() { return summaries; },
+    coverageByYear() {
+      return freeze([...new Set(archiveCopy.papers.map(paper => paper.year))].sort((a,b) => b-a).map(year => ({
+        year,
+        ...Object.fromEntries(['physics', 'chemistry', 'mathematics'].map(subject => [subject, questions.filter(q => q.year === year && q.subject === subject).length])),
+        fullPapers: summaries.filter(paper => paper.year === year && paper.complete).length,
+      })));
+    },
     getPaper(id) { if (!archiveMap.has(id)) throw new Error(`Unknown archive paper: ${id}`); return summaryMap.get(id) ?? summarizePaper(id); },
     getFullPaper(id) {
       if (!archiveMap.has(id)) throw new Error(`Unknown archive paper: ${id}`);
@@ -331,6 +351,11 @@ export function gradeContentQuestion(question, response) {
     const value = parseNumber(response), answer = parseNumber(q.answer);
     if (!answer) throw new Error('Invalid reviewed numerical key');
     if (!value) return result(m.incorrect, 'incorrect');
+    if (q.acceptedRanges) return q.acceptedRanges.some(range => {
+      const [lo,hi] = range.map(parseNumber);
+      if (!lo || !hi || compareNumber(lo,hi) > 0) throw new Error('Invalid reviewed alternative interval');
+      return compareNumber(value,lo) >= 0 && compareNumber(value,hi) <= 0;
+    }) ? result(m.correct,'correct') : result(m.incorrect,'incorrect');
     if (q.acceptedValues) return q.acceptedValues.some(candidate => { const alternative = parseNumber(candidate); if (!alternative) throw new Error('Invalid reviewed exact alternative'); return sameNumber(value, alternative); }) ? result(m.correct, 'correct') : result(m.incorrect, 'incorrect');
     if (q.acceptedRange) {
       const [lo, hi] = q.acceptedRange.map(parseNumber);
@@ -340,9 +365,9 @@ export function gradeContentQuestion(question, response) {
     return sameNumber(value, answer) ? result(m.correct, 'correct') : result(m.incorrect, 'incorrect');
   }
   const optionIds = new Set(q.options.map(option => option.id));
-  if (q.type === 'single') return typeof response === 'string' && response === q.answer ? result(m.correct, 'correct') : result(m.incorrect, 'incorrect');
+  if (q.type === 'single') return typeof response === 'string' && (q.acceptedOptionSets ?? [[q.answer]]).some(set => set[0] === response) ? result(m.correct, 'correct') : result(m.incorrect, 'incorrect');
   if (!Array.isArray(response) || new Set(response).size !== response.length || response.some(id => !optionIds.has(id))) return result(m.incorrect, 'incorrect');
-  if (keyFor(response) === keyFor(q.answer)) return result(m.correct, 'correct');
+  if ((q.acceptedOptionSets ?? [q.answer]).some(set => keyFor(response) === keyFor(set))) return result(m.correct, 'correct');
   const partial = (m.partialCredits ?? []).find(rule => keyFor(rule.selected) === keyFor(response));
   return partial ? result(partial.marks, 'partial') : result(m.incorrect, 'incorrect');
 }

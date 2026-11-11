@@ -1,36 +1,13 @@
-# Curated examination content
+# Curated examination content · 0.5
 
-`catalog.json` declares the published bundles, complete-paper configurations,
-attributions, and explicit coverage limits. Each paper JSON contains the source
-question, options, any matching lists, original scoring, chapter assignments,
-worked explanation, source page, and recorded reviews.
+The playable bank contains **510 JEE Advanced questions from ten complete papers, 2022–2026**: 170 questions per subject and 279 unique local figures. Every paper carries 180 marks and lasts 180 minutes. Question totals are 108 in 2022, 102 in 2023, 102 in 2024, 96 in 2025 and 102 in 2026.
 
-The playable collection is the 2023 JEE Advanced papers listed in the catalog.
-The separate historical archive is a collection of source links; it is not
-counted as forty years of playable questions.
+`catalog.json` explicitly lists the `YYYY-pN.json` bundles, ordered paper configurations, source attributions and coverage limits. Each question preserves its stable revisioned identity, statement, options, matching lists or shared passage, source page, chapter assignments, original marking and worked explanation. Years 1978–2021 are not playable. The separate historical link archive is not counted as forty years of solved questions.
 
-The transcripts come from `propar2750/jee-advanced`, pinned to revision
-`2580e96f1e74343e1d478509187f16fe58dbab85`. Codex compared the included records
-and figure crops against the official PDFs, independently authored explanations,
-and compared answers with the archived official final keys. This is AI-assisted
-review, not a claim of human editorial certification. `review-audit.json`
-records source hashes, original upstream review metadata, individual checks,
-normalizations, figure provenance, and any question-specific qualifications.
+Transcripts and figures come from `propar2750/jee-advanced`, pinned to revision `2580e96f1e74343e1d478509187f16fe58dbab85`. Codex compared records and figures with official PDFs, independently authored explanations, and checked answers against official final keys, including archived official-origin documents. This is **AI-assisted review**, not human editorial certification. `review-audit.json` records source hashes and pages, upstream review metadata, individual checks, normalizations, figure provenance and question-specific qualifications. Unresolved source wording or unexplained accepted alternatives are disclosed rather than silently rewritten.
 
-The source question text already includes shared passages. Matching-list text
-is preserved separately. An extra escaping layer in some upstream option/list
-fields was removed before compilation; legitimate LaTeX row breaks are retained.
-Numerical alternatives remain discrete alternatives, accepted ranges retain the
-official bounds, and officially dropped questions award their published marks
-even when unanswered.
+Numerical alternatives remain discrete values; disjoint accepted intervals retain their gaps. Exact matches to official alternative option sets earn full credit before explicit partial marks are evaluated. Penalties come from each section, including −1 for 2026 multiple-correct answers. Dropped questions award their published bonus marks even when blank. None of these rules is a default for other years.
 
-`scripts/build-content.mjs` validates these inputs and compiles mathematical
-expressions into native MathML at build time. It emits a digest-bearing public
-catalog and one `{bundle, markup}` JSON per paper, each below 1 MiB. It fetches
-no remote content and makes no review decisions. The normal release builder
-includes these outputs and local figures in the same immutable release.
+`scripts/build-content.mjs` validates every listed bundle and compiles mathematics and chemical notation into native MathML using vendored KaTeX and its chemistry extension. It emits an integrity-bearing catalog and one `{bundle, markup}` JSON per paper, each below 1 MiB. It fetches no remote content and makes no review decisions. The static release precaches its shell and content index; paper bundles and figures are verified and cached on demand.
 
-Question, key, and figure attribution stays with the organising IITs. The
-dataset's MIT statement covers its transcriptions, structure, and annotations;
-it does not state that IIT rights are transferred. See `UPSTREAM-LICENSE.txt`.
-The newly authored Vedaris explanations are covered by the project MIT license.
+Questions, keys and figures retain their organising IIT attribution. The upstream MIT statement covers dataset transcriptions, structure and annotations; it does not state that IIT rights are transferred. See `UPSTREAM-LICENSE.txt`. Newly authored Vedaris explanations are covered by the project MIT license. Publisher worked solutions and complete official PDFs are not bundled.

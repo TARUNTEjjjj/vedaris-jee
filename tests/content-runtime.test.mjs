@@ -101,6 +101,44 @@ test('numeric accepted ranges are inclusive exact rationals, not floating-point 
   assert.throws(()=>createContentRegistry(rounded),/exact bounds/);
 });
 
+test('alternative official option sets earn full credit before partial subsets', () => {
+  const f=fixture(), raw=f.bundles[0].questions[2];
+  raw.answer={type:'multiple-choice',value:['A','B','C'],acceptedOptionSets:[['A','B','C'],['B','C']]};
+  raw.marking.partialCredits=raw.marking.partialCredits.filter(rule=>JSON.stringify(rule.selected)!=='["B","C"]');
+  f.papers[0].sections[2].marking.partialCreditRules.push({totalCorrect:2,selectedCorrect:1,marks:1});
+  const registry=createContentRegistry(f),q=registry.getQuestion(raw.id);
+  assert.equal(registry.getFullPaper('fixture-paper').complete,true);
+  for(const response of [['A','B','C'],['C','B']])assert.equal(gradeContentQuestion(q,response).score,4);
+  assert.equal(gradeContentQuestion(q,['A','C']).score,2);
+  assert.equal(gradeContentQuestion(q,['B']).score,1);
+  assert.equal(gradeContentQuestion(q,['B','C','D']).score,-2);
+  assert.equal(gradeContentQuestion(q,[]).score,0);
+  for(const alternatives of [[['B','C']],[['B','C'],['C','B']],[['A','B','C'],['X']],[['A','B','C'],[]],[["A","A"],["B"]]]) {
+    const invalid=structuredClone(f);invalid.bundles[0].questions[2].answer.acceptedOptionSets=alternatives;
+    assert.throws(()=>createContentRegistry(invalid),/acceptedOptionSets/);
+  }
+  const overlap=structuredClone(f);overlap.bundles[0].questions[2].marking.partialCredits.push({selected:['B','C'],marks:2});
+  assert.throws(()=>createContentRegistry(overlap),/excluding every full-credit set/);
+  const single=fixture();single.bundles[0].questions[0].answer.acceptedOptionSets=[['A'],['B']];
+  assert.equal(gradeContentQuestion(createContentRegistry(single).getQuestion('fixture-q1'),'A').score,4);
+  const branching=fixture(),b=branching.bundles[0].questions[2];
+  b.answer={type:'multiple-choice',value:['A','B'],acceptedOptionSets:[['A','B'],['A','C']]};
+  b.marking.partialCredits=['A','B','C'].map(id=>({selected:[id],marks:1}));
+  branching.papers[0].sections[2].marking.partialCreditRules=[{totalCorrect:2,selectedCorrect:1,marks:1}];
+  const alternate=createContentRegistry(branching);
+  assert.equal(alternate.getFullPaper('fixture-paper').complete,true);
+  assert.equal(gradeContentQuestion(alternate.getQuestion(b.id),['C']).score,1);
+  assert.equal(gradeContentQuestion(alternate.getQuestion(b.id),['A','B','C']).score,-2);
+});
+
+test('coverage reports actual subject counts and never converts source links into solved years', () => {
+  const f=fixture();f.archive.papers.push({...f.archive.papers[0],id:'older-fixture',year:2014});
+  assert.deepEqual(createContentRegistry(f).coverageByYear(),[
+    {year:2015,physics:1,chemistry:1,mathematics:1,fullPapers:1},
+    {year:2014,physics:0,chemistry:0,mathematics:0,fullPapers:0},
+  ]);
+});
+
 test('discrete numerical alternatives never become a continuous accepted range', () => {
   const f=fixture();f.bundles[0].questions[1].answer={type:'numeric',value:'80',acceptedValues:['80','150','220']};
   const q=createContentRegistry(f).getQuestion('fixture-q2');
@@ -108,6 +146,22 @@ test('discrete numerical alternatives never become a continuous accepted range',
   for(const response of ['81','100','149.9999999999999','219','221'])assert.equal(gradeContentQuestion(q,response).status,'incorrect');
   const range=structuredClone(f);range.bundles[0].questions[1].answer.acceptedRange=['80','220'];assert.throws(()=>createContentRegistry(range),/without a continuous range/);
   const duplicate=structuredClone(f);duplicate.bundles[0].questions[1].answer.acceptedValues.push('80.0');assert.throws(()=>createContentRegistry(duplicate),/duplicate numerical alternative/);
+});
+
+test('disjoint official numerical intervals accept endpoints and reject the gap', () => {
+  const f=fixture();f.bundles[0].questions[1].answer={type:'numeric',value:'-29.9',acceptedRanges:[['-29.95','-29.8'],['29.8','29.95']]};
+  const q=createContentRegistry(f).getQuestion('fixture-q2');
+  for(const value of ['-29.95','-29.8','29.8','29.95','299/10'])assert.equal(gradeContentQuestion(q,value).score,4,value);
+  for(const value of ['-29.950001','-29.799999','0','29.799999','29.950001'])assert.equal(gradeContentQuestion(q,value).score,0,value);
+  for(const mutate of [
+    a=>{a.acceptedRanges=[['1','2'],['2','3']];},
+    a=>{a.acceptedRanges=[['-30','-29'],['-29.5','0']];},
+    a=>{a.acceptedRanges=[['bad','2'],['3','4']];},
+    a=>{a.acceptedRanges=[['-30','-29']];},
+    a=>{a.value='0';},
+    a=>{a.acceptedRange=['-30','30'];},
+    a=>{a.acceptedValues=['-29.9'];},
+  ]) {const invalid=structuredClone(f);mutate(invalid.bundles[0].questions[1].answer);assert.throws(()=>createContentRegistry(invalid),/acceptedRanges/);}
 });
 
 test('matching lists preserve labels, source order and LaTeX without destructive unescaping', () => {

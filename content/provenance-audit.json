@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-11",
+  "reviewer": "Codex independent import audit",
+  "questionCount": 510,
+  "subjectCounts": {
+    "mathematics": 170,
+    "physics": 170,
+    "chemistry": 170
+  },
+  "paperCount": 10,
+  "uniqueQuestionIds": 510,
+  "uniqueSourceIds": 510,
+  "exactSourceIdentityCoverage": true,
+  "sourceDatasetSha256": "d5e8dd3a43544e36a4889035c032516f670cc02e768d3b9958e9e42e8c9900c9",
+  "allKeyEvidenceAndPaperHashesVerified": true,
+  "allQuestionStatementsMatchPinnedSourceExceptAuditedTypography": true,
+  "auditedStatementNormalizations": [
+    "2024_P2_Physics_Q14-v1",
+    "2024_P2_Physics_Q15-v1"
+  ],
+  "allOptionAndMatchingListTranscriptsMatch": true,
+  "allScoringKeysMatchPinnedSourceFamilies": true,
+  "uniqueFigureCount": 279,
+  "allFigureFilesMatchAuditedHashes": true,
+  "sourceWordingExceptionsPreserved": [
+    "2022_P1_Physics_Q14-v1",
+    "2022_P1_Chemistry_Q18-v1"
+  ],
+  "root2025MathematicsDraftsMatchImportedStepsAndChapters": true,
+  "notes": "Checks imported identity, statements/options, key families, source hashes and recorded reviews. Does not claim human editorial verification. All mathematics pages and derivations were separately reviewed before import."
+}

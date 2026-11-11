@@ -4,12 +4,33 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { CHAPTERS, SUBJECTS } from '../src/questions/catalog.js';
 import * as sessionEngine from '../src/content/session.js';
+import { partialRuleText, historicalSectionNavigation } from '../assets/pyq.js';
 
-const source=(await readFile(new URL('../assets/pyq.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'').replace('export function mountPYQ','function mountPYQ').replaceAll('import.meta.url',JSON.stringify('http://localhost/assets/pyq.js'));
+const source=(await readFile(new URL('../assets/pyq.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'').replaceAll('export function ','function ').replaceAll('import.meta.url',JSON.stringify('http://localhost/assets/pyq.js'));
 const NOW=1_800_000_000_000,BANK='synthetic-ui-bank';
 const q=[{id:'q1',subject:'physics',chapter:'phy-kinematics',chapters:['phy-kinematics'],answer:'A'},{id:'q2',subject:'chemistry',chapter:'chem-mole',chapters:['chem-mole'],answer:'B'}].map((v,i)=>({...v,origin:'pyq',status:'practice-ready',type:'single',year:2023,paper:1,paperId:'fixture',section:'section-1',questionNumber:String(i+1),stem:`Synthetic test statement ${i+1}`,options:['A','B'].map(id=>({id,text:`Synthetic option ${id}`})),marking:{correct:3,incorrect:-1,unanswered:0},solution:['Synthetic test explanation.'],source:{url:'https://example.invalid/fixture.pdf',page:1},assets:[]}));
 const registry={getQuestion:id=>{const x=q.find(x=>x.id===id);if(!x)throw new Error('Unknown question');return x;},filterQuestions:()=>q,listPapers:()=>[]};
 const attempt=(seed=1)=>sessionEngine.createHistoricalSession(registry,{questionIds:q.map(x=>x.id),bankId:BANK,seed,timed:false,now:NOW});
+test('mixed-paper navigation keeps identically numbered source sections distinct',()=>{
+ const questions=[
+  {...q[0],paperId:'2022-p1',year:2022,paper:1},
+  {...q[0],paperId:'2022-p1',year:2022,paper:1},
+  {...q[1],paperId:'2022-p1',year:2022,paper:1},
+  {...q[0],paperId:'2026-p2',year:2026,paper:2},
+ ];
+ assert.deepEqual(historicalSectionNavigation(questions,'physics'),[
+  {key:'2022-p1:section-1',index:0,label:'2022 P1 · section-1'},
+  {key:'2026-p2:section-1',index:3,label:'2026 P2 · section-1'},
+ ]);
+ assert.equal(historicalSectionNavigation(questions.slice(0,2),'physics')[0].label,'section-1');
+});
+test('partial instructions come from reviewed section rules without exposing the current key',()=>{
+ const text=partialRuleText({partialCreditRules:[{totalCorrect:4,selectedCorrect:3,marks:3},{totalCorrect:2,selectedCorrect:1,marks:1}]});
+ assert.match(text,/\+3 when exactly 4 options are correct and you select only 3/);
+ assert.match(text,/\+1 when exactly 2 options are correct and you select only 1/);
+ assert.doesNotMatch(text,/2023|option [ABCD]|−2/);
+ assert.equal(partialRuleText({}),'No partial-credit rule is declared for this section.');
+});
 function harness(workspace,{readOnly=true}={}){
  const rootEvents=new Map(),docEvents=new Map(),windowEvents=new Map(),timers=new Map();let commits=0,writes=0;
  const root={_html:'',set innerHTML(value){this._html=value;writes++;},get innerHTML(){return this._html;},querySelector:()=>null,querySelectorAll:()=>[],contains:()=>true,addEventListener:(k,v)=>rootEvents.set(k,v),removeEventListener:(k,v)=>{if(rootEvents.get(k)===v)rootEvents.delete(k);}};

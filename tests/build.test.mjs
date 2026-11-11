@@ -78,7 +78,7 @@ test('oversized public assets fail before replacing the last valid build', async
   } finally { await rm(root, {recursive: true, force: true}); }
 });
 
-function workerHarness({scope = 'https://example.org/app/', version = 'release-a', networkFailure = null, sourceCode, contents} = {}) {
+function workerHarness({scope = 'https://example.org/app/', version = 'release-a', networkFailure = null, sourceCode, contents, precache} = {}) {
   const shell = `releases/${version}/`;
   contents ??= new Map([
     [`${shell}index.html`, '<html>release A</html>'],
@@ -120,7 +120,7 @@ function workerHarness({scope = 'https://example.org/app/', version = 'release-a
       return new Response(network.get(physicalUrl));
     },
   };
-  vm.runInNewContext(sourceCode ?? serviceWorkerSource({version, files, shell}), context);
+  vm.runInNewContext(sourceCode ?? serviceWorkerSource({version, files, shell, precache}), context);
   async function lifecycle(type) { let promise; handlers[type]({waitUntil(value) { promise = value; }}); return promise; }
   function request(path, {mode = 'cors', method = 'GET'} = {}) {
     let response;
@@ -129,6 +129,22 @@ function workerHarness({scope = 'https://example.org/app/', version = 'release-a
   }
   return {stores, controls, fetches, lifecycle, request, cacheName: `vedaris-static:${scope}:${version}`, shellUrl: new URL(shell, scope).href, scope, version};
 }
+
+test('large paper assets are fetched on demand, verified, then available offline', async () => {
+  const shell='releases/release-a/', paper=shell+'data/content/2022-p1.json';
+  const worker=workerHarness({contents:new Map([[shell+'index.html','<html>app</html>'],[paper,'{"reviewed":true}']]),precache:[shell]});
+  await worker.lifecycle('install');
+  assert.equal(worker.fetches.length,1);
+  assert.equal(worker.stores.get(worker.cacheName).size,1);
+  worker.controls.networkFailure='mismatch';
+  await assert.rejects(worker.request(paper),/digest mismatch/);
+  assert.equal(worker.stores.get(worker.cacheName).size,1);
+  worker.controls.networkFailure=null;
+  assert.equal(await (await worker.request(paper)).text(),'{"reviewed":true}');
+  worker.controls.networkFailure='offline';
+  assert.equal(await (await worker.request(paper)).text(),'{"reviewed":true}');
+  assert.equal(worker.stores.get(worker.cacheName).size,2);
+});
 
 test('SW verifies an entire release, uses only its own cache and leaves active tabs alone', async () => {
   const worker = workerHarness();

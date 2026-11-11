@@ -1,0 +1,3961 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "2025_P2_Mathematics_Q01-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-1",
+      "questionNumber": "1",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 1
+      },
+      "statement": "Let $x_0$ be the real number such that $e^{x_0} + x_0 = 0$. For a given real number $\\alpha$, define\n$$\ng(x) = \\frac{3xe^x + 3x - \\alpha e^x - \\alpha x}{3(e^x + 1)}\n$$\nfor all real numbers $x$.\n\nThen which one of the following statements is TRUE?",
+      "answer": {
+        "type": "single-choice",
+        "value": "C"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-derivatives",
+        "math-limits"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Put $F(x)=e^x+x$. Then $F\\prime(x)=e^x+1>0$ and $g(x)=x-\\frac{\\alpha}{3}F(x)/F\\prime(x)$. At the specified root, $g(x_0)=x_0=-e^{x_0}$.",
+          "The required limit is therefore $|g\\prime(x_0)|$. Differentiating the quotient and using $F(x_0)=0$ gives $g\\prime(x_0)=1-\\alpha/3$.",
+          "For $\\alpha=2$ the limit is $1/3$; for $\\alpha=3$ it is zero. Exactly C is correct."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "For $\\alpha = 2$, $\\lim_{x \\to x_0} \\left| \\frac{g(x) + e^{x_0}}{x - x_0} \\right| = 0$"
+        },
+        {
+          "id": "B",
+          "text": "For $\\alpha = 2$, $\\lim_{x \\to x_0} \\left| \\frac{g(x) + e^{x_0}}{x - x_0} \\right| = 1$"
+        },
+        {
+          "id": "C",
+          "text": "For $\\alpha = 3$, $\\lim_{x \\to x_0} \\left| \\frac{g(x) + e^{x_0}}{x - x_0} \\right| = 0$"
+        },
+        {
+          "id": "D",
+          "text": "For $\\alpha = 3$, $\\lim_{x \\to x_0} \\left| \\frac{g(x) + e^{x_0}}{x - x_0} \\right| = \\frac{2}{3}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q02-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-1",
+      "questionNumber": "2",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 1
+      },
+      "statement": "Let $\\mathbb{R}$ denote the set of all real numbers. Then the area of the region\n$$\n\\left\\{ (x, y) \\in \\mathbb{R} \\times \\mathbb{R} : x > 0, y > \\frac{1}{x}, 5x - 4y - 1 > 0, 4x + 4y - 17 < 0 \\right\\}\n$$\nis",
+      "answer": {
+        "type": "single-choice",
+        "value": "B"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-integrals",
+        "math-lines"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The region is above $y=1/x$ and below both lines $y=(5x-1)/4$ and $y=17/4-x$. The lines meet at $(2,9/4)$.",
+          "The positive intersection of the first line with the hyperbola is $x=1$, from $5x^2-x-4=0$. The second line meets it at $x=1/4,4$; the relevant right endpoint is $4$.",
+          "Thus the area is $\\int_1^2[(5x-1)/4-1/x]\\,dx+\\int_2^4[17/4-x-1/x]\\,dx$. The line contributions are $13/8$ and $5/2$, while the hyperbola contribution is $\\log4$.",
+          "The area is $33/8-\\log4$, so B is correct. Strict boundary inequalities do not alter the area."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$\\frac{17}{16} - \\log_e 4$"
+        },
+        {
+          "id": "B",
+          "text": "$\\frac{33}{8} - \\log_e 4$"
+        },
+        {
+          "id": "C",
+          "text": "$\\frac{57}{8} - \\log_e 4$"
+        },
+        {
+          "id": "D",
+          "text": "$\\frac{17}{2} - \\log_e 4$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q03-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-1",
+      "questionNumber": "3",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 2
+      },
+      "statement": "The total number of real solutions of the equation\n$$\n\\theta = \\tan^{-1}(2 \\tan \\theta) - \\frac{1}{2} \\sin^{-1}\\left(\\frac{6 \\tan \\theta}{9 + \\tan^2 \\theta}\\right)\n$$\nis\n(Here, the inverse trigonometric functions $\\sin^{-1} x$ and $\\tan^{-1} x$ assume values in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ and $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$, respectively.)",
+      "answer": {
+        "type": "single-choice",
+        "value": "C"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-trigonometry"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Write $t=\\tan\\theta$. The equation is odd in $\\theta$, so first take $t\\ge0$. With $u=\\tan^{-1}(t/3)$, the inverse-sine argument is $\\sin2u$. Hence half its principal inverse sine is $u$ for $0\\le t\\le3$, and $\\pi/2-u$ for $t\\ge3$.",
+          "In both cases the right side lies in $[0,\\pi/2)$: for $t\\le3$ it is $\\tan^{-1}(2t)-u$, and for $t\\ge3$ it is $\\tan^{-1}(2t)+u-\\pi/2$. Therefore any nonnegative solution must satisfy $\\theta=\\tan^{-1}t$; extra tangent periods cannot be added.",
+          "For $0\\le t\\le3$, taking tangents gives $t=5t/(3+2t^2)$, whose solutions are $t=0,1$. Both satisfy the principal-value equation.",
+          "For $t\\ge3$, taking tangents gives $t=(2t^2-3)/(7t)$, which would require $5t^2=-3$ and has no real solution. Odd symmetry supplies $t=-1$. Thus the three angles are $0,\\pi/4,-\\pi/4$, giving C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "1"
+        },
+        {
+          "id": "B",
+          "text": "2"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        },
+        {
+          "id": "D",
+          "text": "5"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q04-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-1",
+      "questionNumber": "4",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 2
+      },
+      "statement": "Let $S$ denote the locus of the point of intersection of the pair of lines\n$$\n\\begin{aligned}\n4x - 3y &= 12\\alpha \\, , \\\\\n4\\alpha x + 3\\alpha y &= 12 \\, ,\n\\end{aligned}\n$$\nwhere $\\alpha$ varies over the set of non-zero real numbers. Let $T$ be the tangent to $S$ passing through the points $(p, 0)$ and $(0, q)$, $q > 0$, and parallel to the line $4x - \\frac{3}{\\sqrt{2}} y = 0$.\n\nThen the value of $pq$ is",
+      "answer": {
+        "type": "single-choice",
+        "value": "A"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-conics",
+        "math-lines"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Because $\\alpha\\ne0$, the equations imply $(4x-3y)(4x+3y)=144$. The locus is $x^2/9-y^2/16=1$. Conversely every point of this hyperbola supplies a nonzero $\\alpha=(4x-3y)/12$.",
+          "The required tangent has slope $m=4\\sqrt2/3$, and equation $y=mx+q$. Substitution into the hyperbola, or the zero-discriminant condition, gives $q^2=9m^2-16=16$.",
+          "Since $q>0$, $q=4$ and $p=-q/m=-3/\\sqrt2$. Consequently $pq=-6\\sqrt2$, so choose A."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$-6\\sqrt{2}$"
+        },
+        {
+          "id": "B",
+          "text": "$-3\\sqrt{2}$"
+        },
+        {
+          "id": "C",
+          "text": "$-9\\sqrt{2}$"
+        },
+        {
+          "id": "D",
+          "text": "$-12\\sqrt{2}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q05-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-2",
+      "questionNumber": "5",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 3
+      },
+      "statement": "Let $I = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$ and $P = \\begin{pmatrix} 2 & 0 \\\\ 0 & 3 \\end{pmatrix}$. Let $Q = \\begin{pmatrix} x & y \\\\ z & 4 \\end{pmatrix}$ for some non-zero real numbers $x$, $y$, and $z$, for which there is a $2 \\times 2$ matrix $R$ with all entries being non-zero real numbers, such that $QR = RP$.\n\nThen which of the following statements is (are) TRUE?",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "B"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-matrices"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Let the columns of $R$ be $r_1,r_2$. From $QR=RP$, they satisfy $Qr_1=2r_1$ and $Qr_2=3r_2$. Both vectors are nonzero, and eigenvectors with distinct eigenvalues are independent; thus $R$ is invertible.",
+          "The eigenvalues of $Q$ are $2,3$. Therefore $\\det(Q-2I)=0$, $\\det(Q-3I)=0$, and $\\det(Q-6I)=(2-6)(3-6)=12$.",
+          "Its trace gives $x+4=5$, so $x=1$. Its determinant gives $4x-yz=6$, hence $yz=-2$, not $2$. Exactly A and B are true."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "The determinant of $Q - 2I$ is zero"
+        },
+        {
+          "id": "B",
+          "text": "The determinant of $Q - 6I$ is 12"
+        },
+        {
+          "id": "C",
+          "text": "The determinant of $Q - 3I$ is 15"
+        },
+        {
+          "id": "D",
+          "text": "$yz = 2$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q06-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-2",
+      "questionNumber": "6",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 4
+      },
+      "statement": "Let $S$ denote the locus of the mid-points of those chords of the parabola $y^2 = x$, such that the area of the region enclosed between the parabola and the chord is $\\frac{4}{3}$. Let $\\mathcal{R}$ denote the region lying in the first quadrant, enclosed by the parabola $y^2 = x$, the curve $S$, and the lines $x = 1$ and $x = 4$. Then which of the following statements is (are) TRUE?",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-conics",
+        "math-integrals"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Parameterize the chord endpoints by $((m-h)^2,m-h)$ and $((m+h)^2,m+h)$, with $h>0$. The chord is $x=2my-m^2+h^2$, so its horizontal separation from $x=y^2$ is $h^2-(y-m)^2$.",
+          "The enclosed area is $\\int_{m-h}^{m+h}[h^2-(y-m)^2]\\,dy=4h^3/3$. The specified value gives $h=1$. The midpoint is $(m^2+1,m)$, so $S$ is $x=y^2+1$.",
+          "Therefore $(4,\\sqrt3)$ lies on $S$, while $(5,\\sqrt2)$ does not. In the first quadrant and for $1\\le x\\le4$, the region lies between $y=\\sqrt{x-1}$ and $y=\\sqrt x$.",
+          "Its area is $\\int_1^4[\\sqrt x-\\sqrt{x-1}]\\,dx=14/3-2\\sqrt3$. Thus A and C are true."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$(4, \\sqrt{3}) \\in S$"
+        },
+        {
+          "id": "B",
+          "text": "$(5, \\sqrt{2}) \\in S$"
+        },
+        {
+          "id": "C",
+          "text": "Area of $\\mathcal{R}$ is $\\frac{14}{3} - 2\\sqrt{3}$"
+        },
+        {
+          "id": "D",
+          "text": "Area of $\\mathcal{R}$ is $\\frac{14}{3} - \\sqrt{3}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q07-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-2",
+      "questionNumber": "7",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 4
+      },
+      "statement": "Let $P(x_1, y_1)$ and $Q(x_2, y_2)$ be two distinct points on the ellipse $$\\frac{x^2}{9} + \\frac{y^2}{4} = 1$$ such that $y_1 > 0$, and $y_2 > 0$. Let $C$ denote the circle $x^2 + y^2 = 9$, and $M$ be the point $(3,0)$. Suppose the line $x = x_1$ intersects $C$ at $R$, and the line $x = x_2$ intersects $C$ at $S$, such that the $y$-coordinates of $R$ and $S$ are positive. Let $\\angle ROM = \\frac{\\pi}{6}$ and $\\angle SOM = \\frac{\\pi}{3}$, where $O$ denotes the origin $(0,0)$. Let $|XY|$ denote the length of the line segment $XY$. Then which of the following statements is (are) TRUE?",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-conics",
+        "math-trigonometry"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The circle points are $R=(3\\sqrt3/2,3/2)$ and $S=(3/2,3\\sqrt3/2)$. At each fixed $x$, the positive ellipse ordinate is $2/3$ of the circle ordinate.",
+          "Hence $P=(3\\sqrt3/2,1)$ and $Q=(3/2,\\sqrt3)$. Both satisfy $2x+3y=3(1+\\sqrt3)$, establishing A.",
+          "The ordinate ratio yields $3|N_2Q|=2|N_2S|$, establishing C. At $N_1$, the same ratio gives $9|N_1P|=6|N_1R|$, not the relation in D. B also fails by direct substitution. The correct set is A,C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "The equation of the line joining $P$ and $Q$ is $2x + 3y = 3(1 + \\sqrt{3})$"
+        },
+        {
+          "id": "B",
+          "text": "The equation of the line joining $P$ and $Q$ is $2x + y = 3(1 + \\sqrt{3})$"
+        },
+        {
+          "id": "C",
+          "text": "If $N_2 = (x_2, 0)$, then $3\\,|N_2Q| = 2\\,|N_2S|$"
+        },
+        {
+          "id": "D",
+          "text": "If $N_1 = (x_1, 0)$, then $9\\,|N_1P| = 4\\,|N_1R|$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q08-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-2",
+      "questionNumber": "8",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 4
+      },
+      "statement": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $f: \\mathbb{R} \\to \\mathbb{R}$ be defined by $$f(x) = \\begin{cases} \\frac{6x + \\sin x}{2x + \\sin x} & \\text{if } x \\ne 0, \\\\ \\frac{7}{3} & \\text{if } x = 0. \\end{cases}$$ Then which of the following statements is (are) TRUE?",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "B",
+              "C"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "B",
+              "D"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "C",
+              "D"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "D"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-derivatives",
+        "math-limits"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Near zero, writing $s=\\sin x/x$ gives $f=1+4/(2+s)=7/3+2x^2/27+O(x^4)$. Thus zero is a strict local minimum, giving B and excluding A.",
+          "For $x\\ne0$, $f\\prime(x)=4(\\sin x-x\\cos x)/(2x+\\sin x)^2$. For positive $x$, put $H(x)=\\sin x-x\\cos x$, so $H\\prime(x)=x\\sin x$.",
+          "On each interval $(k\\pi,(k+1)\\pi)$ with positive integer $k$, $H$ is strictly monotone and its endpoint signs are opposite: $H(k\\pi)=(-1)^{k+1}k\\pi$. There is exactly one critical point in each such interval.",
+          "For odd $k$, the derivative changes from positive to negative, giving a maximum; for even $k$, it changes from negative to positive, giving a minimum. The three maxima in $[\\pi,6\\pi]$ occur for $k=1,3,5$, while the single minimum in $[2\\pi,4\\pi]$ occurs for $k=2$. Hence C and D are also true."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "The point $x = 0$ is a point of local maxima of $f$"
+        },
+        {
+          "id": "B",
+          "text": "The point $x = 0$ is a point of local minima of $f$"
+        },
+        {
+          "id": "C",
+          "text": "Number of points of local maxima of $f$ in the interval $[\\pi, 6\\pi]$ is 3"
+        },
+        {
+          "id": "D",
+          "text": "Number of points of local minima of $f$ in the interval $[2\\pi, 4\\pi]$ is 1"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Mathematics_Q09-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "9",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 5
+      },
+      "statement": "Let $y(x)$ be the solution of the differential equation\n$$\nx^2 \\frac{dy}{dx} + xy = x^2 + y^2, \\quad x > \\frac{1}{e} \\, ,\n$$\nsatisfying $y(1) = 0$. Then the value of $2 \\frac{(y(e))^2}{y(e^2)}$ is ____________.",
+      "answer": {
+        "type": "numeric",
+        "value": "0.75",
+        "acceptedRange": [
+          "0.7",
+          "0.8"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-differential"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Set $u=y/x$, so $y\\prime=u+xu\\prime$. Substituting and dividing by $x^2$ reduces the equation to $xu\\prime=(u-1)^2$. The initial condition is $u(1)=0$.",
+          "Integration gives $-1/(u-1)=\\log x+C$, with $C=1$. Therefore $u=\\log x/(1+\\log x)$ and $y=x\\log x/(1+\\log x)$ on the stated domain.",
+          "Now $y(e)=e/2$ and $y(e^2)=2e^2/3$. The requested expression is $2(e^2/4)/(2e^2/3)=3/4=0.75$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q10-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "10",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 5
+      },
+      "statement": "Let $a_0, a_1, \\ldots, a_{23}$ be real numbers such that\n$$\n\\left(1 + \\frac{2}{5}x\\right)^{23} = \\sum_{i=0}^{23} a_i x^i\n$$\nfor every real number $x$. Let $a_r$ be the largest among the numbers $a_j$ for $0 \\le j \\le 23$. Then the value of $r$ is ____________.",
+      "answer": {
+        "type": "numeric",
+        "value": "6"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-binomial"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The coefficients are $a_j=\\binom{23}{j}(2/5)^j>0$. Successive coefficients satisfy $a_{j+1}/a_j=2(23-j)/(5(j+1))$.",
+          "This ratio is greater than one exactly when $j<41/7$. Thus the coefficients rise through $a_6$ and then decrease, with no tie. The required index is $r=6$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q11-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "11",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 5
+      },
+      "statement": "A factory has a total of three manufacturing units, $M_1, M_2$, and $M_3$, which produce bulbs independent of each other. The units $M_1, M_2$, and $M_3$ produce bulbs in the proportions of $2:2:1$, respectively. It is known that $20\\%$ of the bulbs produced in the factory are defective. It is also known that, of all the bulbs produced by $M_1$, $15\\%$ are defective. Suppose that, if a randomly chosen bulb produced in the factory is found to be defective, the probability that it was produced by $M_2$ is $\\frac{2}{5}$.\n\nIf a bulb is chosen randomly from the bulbs produced by $M_3$, then the probability that it is defective is ____________.",
+      "answer": {
+        "type": "numeric",
+        "value": "0.3",
+        "acceptedRange": [
+          "0.27",
+          "0.33"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-probability"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The production probabilities are $P(M_1)=P(M_2)=2/5$ and $P(M_3)=1/5$. Let $D$ mean defective; $P(D)=1/5$.",
+          "The first unit contributes $P(M_1\\cap D)=(2/5)(0.15)=0.06$. The given posterior gives $P(M_2\\cap D)=P(M_2\\mid D)P(D)=(2/5)(1/5)=0.08$.",
+          "The remaining defective fraction is $P(M_3\\cap D)=0.20-0.06-0.08=0.06$. Thus $P(D\\mid M_3)=0.06/0.20=0.30$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q12-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "12",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 5
+      },
+      "statement": "Consider the vectors\n$$\n\\vec{x} = \\hat{i} + 2\\hat{j} + 3\\hat{k} \\, , \\quad \\vec{y} = 2\\hat{i} + 3\\hat{j} + \\hat{k} \\, , \\quad \\text{and} \\quad \\vec{z} = 3\\hat{i} + \\hat{j} + 2\\hat{k} \\, .\n$$\nFor two distinct positive real numbers $\\alpha$ and $\\beta$, define\n$$\n\\vec{X} = \\alpha \\vec{x} + \\beta \\vec{y} - \\vec{z} \\, , \\quad \\vec{Y} = \\alpha \\vec{y} + \\beta \\vec{z} - \\vec{x} \\, , \\quad \\text{and} \\quad \\vec{Z} = \\alpha \\vec{z} + \\beta \\vec{x} - \\vec{y} \\, .\n$$\nIf the vectors $\\vec{X}, \\vec{Y}$, and $\\vec{Z}$ lie in a plane, then the value of $\\alpha + \\beta - 3$ is ____________.",
+      "answer": {
+        "type": "numeric",
+        "value": "-2"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-vectors",
+        "math-matrices"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The determinant formed by the given vectors $x,y,z$ is $-18$, so they are linearly independent. Coplanarity of $X,Y,Z$ is therefore equivalent to the vanishing of the coefficient determinant $\\det\\begin{pmatrix}\\alpha&\\beta&-1\\\\-1&\\alpha&\\beta\\\\\\beta&-1&\\alpha\\end{pmatrix}$.",
+          "This determinant is $\\alpha^3+\\beta^3-1+3\\alpha\\beta=(\\alpha+\\beta-1)(\\alpha^2+\\beta^2+1-\\alpha\\beta+\\alpha+\\beta)$.",
+          "The second factor equals $[(\\alpha-\\beta)^2+(\\beta+1)^2+(\\alpha+1)^2]/2$ and is positive for positive $\\alpha,\\beta$. Hence $\\alpha+\\beta=1$, and the requested value is $-2$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q13-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "13",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 6
+      },
+      "statement": "For a non-zero complex number $z$, let $\\arg(z)$ denote the principal argument of $z$, with $-\\pi < \\arg(z) \\leq \\pi$. Let $\\omega$ be the cube root of unity for which $0 < \\arg(\\omega) < \\pi$. Let\n$$\n\\alpha = \\arg\\left(\\sum_{n=1}^{2025} (-\\omega)^n\\right).\n$$\nThen the value of $\\frac{3\\alpha}{\\pi}$ is ______________.",
+      "answer": {
+        "type": "numeric",
+        "value": "-2"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-complex",
+        "math-sequences"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The selected cube root is $\\omega=e^{2\\pi i/3}$. The number $-\\omega$ has order six, and the sum of each block of six successive powers is zero.",
+          "Since $2025=6\\cdot337+3$, the sum reduces to $-\\omega+\\omega^2-1=2\\omega^2$, using $1+\\omega+\\omega^2=0$.",
+          "The principal argument of $2\\omega^2$ is $-2\\pi/3$, rather than $4\\pi/3$. Consequently $3\\alpha/\\pi=-2$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q14-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "14",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 6
+      },
+      "statement": "Let $\\mathbb{R}$ denote the set of all real numbers. Let $f \\colon \\mathbb{R} \\to \\mathbb{R}$ and $g \\colon \\mathbb{R} \\to (0,4)$ be functions defined by\n$$\nf(x) = \\log_e(x^2 + 2x + 4), \\quad \\text{and} \\quad g(x) = \\frac{4}{1 + e^{-2x}}.\n$$\nDefine the composite function $f \\circ g^{-1}$ by $(f \\circ g^{-1})(x) = f(g^{-1}(x))$, where $g^{-1}$ is the inverse of the function $g$.\n\nThen the value of the derivative of the composite function $f \\circ g^{-1}$ at $x = 2$ is ______________.",
+      "answer": {
+        "type": "numeric",
+        "value": "0.25",
+        "acceptedRange": [
+          "0.2",
+          "0.3"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-derivatives",
+        "math-sets"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The logistic function is strictly increasing, and $g(0)=2$, so $g^{-1}(2)=0$. Differentiating gives $g\\prime(0)=2$.",
+          "Also $f\\prime(x)=(2x+2)/(x^2+2x+4)$, hence $f\\prime(0)=1/2$. The inverse and chain rules yield $(f\\circ g^{-1})\\prime(2)=f\\prime(0)/g\\prime(0)=1/4=0.25$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q15-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "15",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 6
+      },
+      "statement": "Let\n$$\n\\alpha = \\frac{1}{\\sin 60^\\circ \\sin 61^\\circ} + \\frac{1}{\\sin 62^\\circ \\sin 63^\\circ} + \\cdots + \\frac{1}{\\sin 118^\\circ \\sin 119^\\circ}.\n$$\nThen the value of\n$$\n\\left(\\frac{\\cosec 1^\\circ}{\\alpha}\\right)^2\n$$\nis ______________.",
+      "answer": {
+        "type": "numeric",
+        "value": "3"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-trigonometry"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Using $\\cot a-\\cot b=\\sin(b-a)/(\\sin a\\sin b)$, multiply the given sum by $\\sin1^\\circ$ to obtain the sum of even-angle cotangents from $60^\\circ$ to $118^\\circ$, minus the sum of odd-angle cotangents from $61^\\circ$ to $119^\\circ$.",
+          "All terms in the odd-angle sum cancel in pairs because $\\cot(180^\\circ-\\theta)=-\\cot\\theta$. In the even-angle sum, $62^\\circ$ pairs with $118^\\circ$, and so on, while $\\cot90^\\circ=0$. Only $\\cot60^\\circ=1/\\sqrt3$ remains.",
+          "Thus $\\alpha\\sin1^\\circ=1/\\sqrt3$, and $(\\csc1^\\circ/\\alpha)^2=3$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Mathematics_Q16-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "mathematics",
+      "section": "section-3",
+      "questionNumber": "16",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 6
+      },
+      "statement": "If\n$$\n\\alpha = \\int_{\\frac{1}{2}}^{2} \\frac{\\tan^{-1} x}{2x^2 - 3x + 2} \\, dx,\n$$\nthen the value of $\\sqrt{7} \\tan \\left(\\frac{2\\alpha \\sqrt{7}}{\\pi}\\right)$ is ______________.\n\n(Here, the inverse trigonometric function $\\tan^{-1} x$ assumes values in $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$. )",
+      "answer": {
+        "type": "numeric",
+        "value": "21"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "math-integrals",
+        "math-trigonometry"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Let $D(x)=2x^2-3x+2$ and $J=\\int_{1/2}^{2}dx/D(x)$. The substitution $x=1/u$ preserves $dx/D(x)$ after reversing the limits. Since $\\tan^{-1}(1/u)=\\pi/2-\\tan^{-1}u$ for $u>0$, it gives $\\alpha=\\pi J/2-\\alpha$, hence $\\alpha=\\pi J/4$.",
+          "Completing the square gives $\\int dx/D(x)=\\frac2{\\sqrt7}\\tan^{-1}((4x-3)/\\sqrt7)$. Thus $J=\\frac2{\\sqrt7}[\\tan^{-1}(5/\\sqrt7)+\\tan^{-1}(1/\\sqrt7)]$.",
+          "Therefore $2\\alpha\\sqrt7/\\pi=\\tan^{-1}(5/\\sqrt7)+\\tan^{-1}(1/\\sqrt7)$. The tangent addition formula gives its tangent as $(6/\\sqrt7)/(1-5/7)=21/\\sqrt7$. Multiplication by $\\sqrt7$ yields $21$."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Physics_Q01-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-1",
+      "questionNumber": "1",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 8
+      },
+      "statement": "A temperature difference can generate e.m.f. in some materials. Let $S$ be the e.m.f. produced per unit temperature difference between the ends of a wire, $\\sigma$ the electrical conductivity and $\\kappa$ the thermal conductivity of the material of the wire. Taking $M, L, T, I$ and $K$ as dimensions of mass, length, time, current and temperature, respectively, the dimensional formula of the quantity $Z = \\frac{S^2 \\sigma}{\\kappa}$ is:",
+      "answer": {
+        "type": "single-choice",
+        "value": "B"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-units"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The Seebeck coefficient S has units V K⁻¹, electrical conductivity has units A V⁻¹ m⁻¹, and thermal conductivity has units W m⁻¹ K⁻¹.",
+          "Thus S²σ/κ has units (V² K⁻²)(A V⁻¹ m⁻¹)/(VA m⁻¹ K⁻¹) =K⁻¹.",
+          "All mass, length, time and current dimensions cancel. The answer is [M⁰L⁰T⁰I⁰K⁻¹], or B."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$[M^0 L^0 T^0 I^0 K^0]$"
+        },
+        {
+          "id": "B",
+          "text": "$[M^0 L^0 T^0 I^0 K^{-1}]$"
+        },
+        {
+          "id": "C",
+          "text": "$[M^1 L^2 T^{-2} I^{-1} K^{-1}]$"
+        },
+        {
+          "id": "D",
+          "text": "$[M^1 L^2 T^{-4} I^{-1} K^{-1}]$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q02-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-1",
+      "questionNumber": "2",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 8
+      },
+      "statement": "Two co-axial conducting cylinders of same length $\\ell$ with radii $\\sqrt{2}R$ and $2R$ are kept, as shown in Fig. 1. The charge on the inner cylinder is $Q$ and the outer cylinder is grounded. The annular region between the cylinders is filled with a material of dielectric constant $\\kappa = 5$. Consider an imaginary plane of the same length $\\ell$ at a distance $R$ from the common axis of the cylinders. This plane is parallel to the axis of the cylinders. The cross-sectional view of this arrangement is shown in Fig. 2. Ignoring edge effects, the flux of the electric field through the plane is ($\\varepsilon_0$ is the permittivity of free space):\n\n[FIG_1]",
+      "answer": {
+        "type": "single-choice",
+        "value": "C"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-electrostatics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Let λ =Q/ℓ. In the dielectric annulus the radial field is E =λ/(2πε₀κρ); it vanishes inside the inner conductor and outside the grounded outer cylinder in this ideal long-cylinder model.",
+          "The displaced plane intersects the annulus in two strips. In cross section, rays to each strip span angles from arccos(R/√2R) =π/4 to arccos(R/2R) =π/3, measured from the plane normal.",
+          "For a strip, E·dA integrates to Q dφ/(2πε₀κ). The total angle is2(π/3 −π/4) =π/6, so the flux is Q/(12κε₀) =Q/(60ε₀). This is C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q02_FIG_1.png",
+          "alt": "Two coaxial cylinders of lengthℓ have radii√2R and2R, with charge Q on the inner cylinder and the outer grounded. A plane parallel to their axis is offset by R and cuts through both sides of the dielectric annulus.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "$\\frac{Q}{30\\varepsilon_0}$"
+        },
+        {
+          "id": "B",
+          "text": "$\\frac{Q}{15\\varepsilon_0}$"
+        },
+        {
+          "id": "C",
+          "text": "$\\frac{Q}{60\\varepsilon_0}$"
+        },
+        {
+          "id": "D",
+          "text": "$\\frac{Q}{120\\varepsilon_0}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q03-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-1",
+      "questionNumber": "3",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 9
+      },
+      "statement": "As shown in the figures, a uniform rod $OO'$ of length $l$ is hinged at the point $O$ and held in place vertically between two walls using two massless springs of same spring constant. The springs are connected at the midpoint and at the top-end ($O'$) of the rod, as shown in Fig. 1 and the rod is made to oscillate by a small angular displacement. The frequency of oscillation of the rod is $f_1$. On the other hand, if both the springs are connected at the midpoint of the rod, as shown in Fig. 2 and the rod is made to oscillate by a small angular displacement, then the frequency of oscillation is $f_2$. Ignoring gravity and assuming motion only in the plane of the diagram, the value of $\\frac{f_1}{f_2}$ is:\n\n[FIG_1]\n\n[FIG_2]",
+      "answer": {
+        "type": "single-choice",
+        "value": "C"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-oscillations",
+        "phy-rotation"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "For a small rod rotation θ, a spring attached a distance a from the hinge extends by aθ and supplies restoring torque ka²θ.",
+          "The first arrangement has angular stiffness k[(ℓ/2)² +ℓ²] =5kℓ²/4. The second has stiffness2k(ℓ/2)² =kℓ²/2.",
+          "The rotational inertia is the same in both cases and gravity is excluded. Frequency is proportional to the square root of stiffness, so f₁/f₂ =√[(5/4)/(1/2)] =√(5/2), or C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q03_FIG_1.png",
+          "alt": "Fig.1: a vertical rod of lengthℓ is hinged at its bottom O. A spring joins its midpoint to the left wall, and an identical spring joins its top O′ to the right wall.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q03_FIG_2.png",
+          "alt": "Fig.2: both identical springs join the rod midpoint to the left and right walls; the bottom O remains hinged.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "$\\sqrt{2}$"
+        },
+        {
+          "id": "C",
+          "text": "$\\sqrt{\\frac{5}{2}}$"
+        },
+        {
+          "id": "D",
+          "text": "$\\sqrt{\\frac{2}{5}}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q04-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-1",
+      "questionNumber": "4",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 9
+      },
+      "statement": "Consider a star of mass $m_2$ kg revolving in a circular orbit around another star of mass $m_1$ kg with $m_1 \\gg m_2$. The heavier star slowly acquires mass from the lighter star at a constant rate of $\\gamma$ kg/s. In this transfer process, there is no other loss of mass. If the separation between the centers of the stars is $r$, then its relative rate of change $\\frac{1}{r}\\frac{dr}{dt}$ (in $\\mathrm{s^{-1}}$) is given by:",
+      "answer": {
+        "type": "bonus",
+        "value": null
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": 3,
+        "unanswered": 3
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-gravitation"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The official final answer states “MARKS TO ALL” for this question. It was withdrawn from normal answer discrimination.",
+          "The section’s full-credit value is3 marks. Those marks are awarded regardless of the chosen option or an unanswered response; no option is presented as a uniquely verified answer.",
+          "A physical mass-transfer model would also need information about how the transferred matter carries momentum and angular momentum. The released final key, rather than an invented transfer assumption, determines scoring here."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$-\\frac{3\\gamma}{2m_2}$"
+        },
+        {
+          "id": "B",
+          "text": "$-\\frac{2\\gamma}{m_2}$"
+        },
+        {
+          "id": "C",
+          "text": "$-\\frac{2\\gamma}{m_1}$"
+        },
+        {
+          "id": "D",
+          "text": "$-\\frac{3\\gamma}{2m_1}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q05-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-2",
+      "questionNumber": "5",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 10
+      },
+      "statement": "A positive point charge of $10^{-8}$ C is kept at a distance of 20 cm from the center of a neutral conducting sphere of radius 10 cm. The sphere is then grounded and the charge on the sphere is measured. The grounding is then removed and subsequently the point charge is moved by a distance of 10 cm further away from the center of the sphere along the radial direction. Taking $\\frac{1}{4\\pi\\epsilon_0} = 9 \\times 10^9$ Nm$^2$/C$^2$ (where $\\epsilon_0$ is the permittivity of free space), which of the following statements is/are correct:",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "A",
+              "B"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "A",
+              "C"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "B",
+              "C"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-electrostatics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "For an isolated conducting sphere of radius a and total charge Qs with an external point charge q at distance d, the constant sphere potential is k(Qs/a +q/d). Initially Qs =0, so V =kq/d =450 V, establishing A.",
+          "Grounding imposes V =0 and gives Qs =−qa/d =−5 ×10⁻⁹ C. Equivalently, positive conventional charge5 ×10⁻⁹ C flows from the sphere to ground; electrons flow in the opposite direction. Thus B is true.",
+          "After disconnection this total sphere charge is conserved, establishing C. Moving the point charge to d =0.30 m gives V =9 ×10⁹[−5 ×10⁻⁹/0.10 +10⁻⁸/0.30] =−150 V, so D is false."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "Before the grounding, the electrostatic potential of the sphere is 450 V."
+        },
+        {
+          "id": "B",
+          "text": "Charge flowing from the sphere to the ground because of grounding is $5 \\times 10^{-9}$ C."
+        },
+        {
+          "id": "C",
+          "text": "After the grounding is removed, the charge on the sphere is $-5 \\times 10^{-9}$ C."
+        },
+        {
+          "id": "D",
+          "text": "The final electrostatic potential of the sphere is 300 V."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q06-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-2",
+      "questionNumber": "6",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 11
+      },
+      "statement": "Two identical concave mirrors each of focal length $f$ are facing each other as shown in the schematic diagram. The focal length $f$ is much larger than the size of the mirrors. A glass slab of thickness $t$ and refractive index $n_0$ is kept equidistant from the mirrors and perpendicular to their common principal axis. A monochromatic point light source $S$ is embedded at the center of the slab on the principal axis, as shown in the schematic diagram. For the image to be formed on $S$ itself, which of the following distances between the two mirrors is/are correct:\n\n[FIG_1]",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "B"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-optics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "For paraxial rays, a thickness t of glass contributes effective propagation distance t/n₀. If the physical mirror separation is L, the effective source-to-mirror distance is a = [L −(1 −1/n₀)t]/2.",
+          "If a =2f, the source is at the effective centre of curvature of either mirror and is imaged back onto itself after one reflection. This gives L =4f +(1 −1/n₀)t, which is A.",
+          "If a =f, rays from the source reflect from one mirror into a parallel beam; the opposite mirror focuses that beam back onto the source. This gives L =2f +(1 −1/n₀)t, which is B. The slab correction in C and D is not the paraxial apparent-distance correction."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q06_FIG_1.png",
+          "alt": "Two concave mirrors of focal length f face each other along a horizontal principal axis. A centred slab of thickness t and index n₀ contains source S at its centre.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "$4f + \\left(1 - \\frac{1}{n_0}\\right)t$"
+        },
+        {
+          "id": "B",
+          "text": "$2f + \\left(1 - \\frac{1}{n_0}\\right)t$"
+        },
+        {
+          "id": "C",
+          "text": "$4f + (n_0 - 1)t$"
+        },
+        {
+          "id": "D",
+          "text": "$2f + (n_0 - 1)t$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q07-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-2",
+      "questionNumber": "7",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 11
+      },
+      "statement": "Six infinitely large and thin non-conducting sheets are fixed in configurations I and II. As shown in the figure, the sheets carry uniform surface charge densities which are indicated in terms of $\\sigma_0$. The separation between any two consecutive sheets is $1\\,\\mu\\mathrm{m}$. The various regions between the sheets are denoted as 1, 2, 3, 4 and 5. If $\\sigma_0 = 9\\,\\mu\\mathrm{C/m^2}$, then which of the following statements is/are correct: (Take permittivity of free space $\\varepsilon_0 = 9 \\times 10^{-12}\\,\\mathrm{F/m}$)\n\n[FIG_2]",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": []
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-electrostatics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The field of each infinite sheet is σ/(2ε₀), directed away from a positive sheet and toward a negative sheet. Since the total charge of each configuration is zero, the field between sheets equals the accumulated charge to the left divided by ε₀.",
+          "For configuration I, the five fields from left to right are (σ₀/ε₀)(1,0,1,0,1). Region4 therefore has zero field, so A is true. The potential difference magnitude across all five gaps is3σ₀(1 μm)/ε₀ =3 V, not5 V.",
+          "For configuration II, the fields are (σ₀/ε₀)(1/2,−1/2,1/2,−1/2,1/2). Region3 has magnitude σ₀/(2ε₀), so B is false. Summing the potential drops gives magnitude0.5 V, not zero, so D is false."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q07_FIG_2.png",
+          "alt": "Six sheets with equal gaps: configuration I has charges +σ₀,−σ₀,+σ₀,−σ₀,+σ₀,−σ₀ from left to right. Configuration II changes the first and last to +σ₀/2 and−σ₀/2. The five intervening regions are numbered1 to5.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "In region 4 of the configuration I, the magnitude of the electric field is zero."
+        },
+        {
+          "id": "B",
+          "text": "In region 3 of the configuration II, the magnitude of the electric field is $\\frac{\\sigma_0}{\\varepsilon_0}$."
+        },
+        {
+          "id": "C",
+          "text": "Potential difference between the first and the last sheets of the configuration I is 5 V."
+        },
+        {
+          "id": "D",
+          "text": "Potential difference between the first and the last sheets of the configuration II is zero."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q08-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-2",
+      "questionNumber": "8",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 12
+      },
+      "statement": "The efficiency of a Carnot engine operating with a hot reservoir kept at a temperature of $1000\\ \\mathrm{K}$ is $0.4$. It extracts $150\\ \\mathrm{J}$ of heat per cycle from the hot reservoir. The work extracted from this engine is being fully used to run a heat pump which has a coefficient of performance $10$. The hot reservoir of the heat pump is at a temperature of $300\\ \\mathrm{K}$. Which of the following statements is/are correct:",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "A",
+              "B"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "A",
+              "C"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "B",
+              "C"
+            ],
+            "marks": 2
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-thermal"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The Carnot engine produces work W =ηQH =0.4 ×150 =60 J per cycle. Its efficiency also gives0.4 =1 −TC/1000, so TC =600 K. A and B are true.",
+          "The heat pump’s coefficient of performance is Qhot/W =10, giving heat delivered to its hot reservoir of600 J. Thus D is false;540 J is instead the heat drawn from its cold reservoir.",
+          "Using the reversible heat-pump model implicit in the keyed C option, COP =TH/(TH −TC). Thus10 =300/(300 −TC), giving TC =270 K and C.",
+          "The paper does not explicitly call the heat pump reversible. The temperature conclusion uses that assumption; COP alone would not determine the cold-reservoir temperature for an arbitrary irreversible pump. The official ABC key is preserved with this caveat."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "Work extracted from the Carnot engine in one cycle is $60\\ \\mathrm{J}$."
+        },
+        {
+          "id": "B",
+          "text": "Temperature of the cold reservoir of the Carnot engine is $600\\ \\mathrm{K}$."
+        },
+        {
+          "id": "C",
+          "text": "Temperature of the cold reservoir of the heat pump is $270\\ \\mathrm{K}$."
+        },
+        {
+          "id": "D",
+          "text": "Heat supplied to the hot reservoir of the heat pump in one cycle is $540\\ \\mathrm{J}$."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q09-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "9",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 13
+      },
+      "statement": "A conducting solid sphere of radius $R$ and mass $M$ carries a charge $Q$. The sphere is rotating about an axis passing through its center with a uniform angular speed $\\omega$. The ratio of the magnitudes of the magnetic dipole moment to the angular momentum about the same axis is given as $\\alpha \\frac{Q}{2M}$. The value of $\\alpha$ is ___",
+      "answer": {
+        "type": "numeric",
+        "value": "1.6666666666666667",
+        "acceptedRange": [
+          "1.65",
+          "1.67"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-magnetism",
+        "phy-rotation"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Because the sphere conducts, the charge lies on its surface. A rotating uniformly charged spherical shell has magnetic moment μ =QωR²/3. This follows by summing rotating latitude rings, each contributing dμ =ωR²sin²θ dQ/2.",
+          "The mass belongs to a solid sphere, whose angular momentum is L =Iω =(2MR²/5)ω.",
+          "The ratio is μ/L =5Q/(6M) =(5/3)Q/(2M). Therefore α =5/3 ≈1.67."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Physics_Q10-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "10",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 13
+      },
+      "statement": "A hydrogen atom, initially at rest in its ground state, absorbs a photon of frequency $\\nu_1$ and ejects the electron with a kinetic energy of $10\\ \\mathrm{eV}$. The electron then combines with a positron at rest to form a positronium atom in its ground state and simultaneously emits a photon of frequency $\\nu_2$. The center of mass of the resulting positronium atom moves with a kinetic energy of $5\\ \\mathrm{eV}$. It is given that positron has the same mass as that of electron and the positronium atom can be considered as a Bohr atom, in which the electron and the positron orbit around their center of mass. Considering no other energy loss during the whole process, the difference between the two photon energies (in eV) is ___",
+      "answer": {
+        "type": "numeric",
+        "value": "11.8",
+        "acceptedRange": [
+          "11.7",
+          "11.9"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-modern"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Ionizing ground-state hydrogen requires13.6 eV. To leave the electron with10 eV kinetic energy, the absorbed photon has energy hν₁ =23.6 eV in the stated energy accounting.",
+          "The reduced mass of positronium is half the electron mass, so its Bohr ground-state binding energy is6.8 eV. During formation, energy conservation gives10 =5 −6.8 +hν₂, hence hν₂ =11.8 eV.",
+          "The difference between photon energies is23.6 −11.8 =11.8 eV."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Physics_Q11-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "11",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 14
+      },
+      "statement": "An ideal monatomic gas of $n$ moles is taken through a cycle $WXYZW$ consisting of consecutive adiabatic and isobaric quasi-static processes, as shown in the schematic $V$-$T$ diagram. The volume of the gas at $W, X$ and $Y$ points are, $64\\ \\mathrm{cm^3}$, $125\\ \\mathrm{cm^3}$ and $250\\ \\mathrm{cm^3}$, respectively. If the absolute temperature of the gas $T_W$ at the point $W$ is such that $nRT_W = 1\\ \\mathrm{J}$ ($R$ is the universal gas constant), then the amount of heat absorbed (in $\\mathrm{J}$) by the gas along the path $XY$ is ___\n\n[FIG_1]",
+      "answer": {
+        "type": "numeric",
+        "value": "1.6"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-thermal"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "For a monatomic ideal gas, γ =5/3. The adiabatic path W →X obeys TV^(2/3) =constant, so TX/TW =(64/125)^(2/3) =16/25.",
+          "The isobaric path X →Y doubles the volume from125 to250 cm³, so TY =2TX and ΔT =TX.",
+          "The heat absorbed is nCpΔT =(5/2)nRTX =(5/2)(16/25)nRTW. Since nRTW =1 J, the result is1.6 J."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q11_FIG_1.png",
+          "alt": "A V–T cycle follows W →X along a decreasing-temperature adiabat, X →Y up a straight isobar through the origin, Y →Z along an adiabat, and Z →W down the other straight isobar.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q12-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "12",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 14
+      },
+      "statement": "A geostationary satellite above the equator is orbiting around the earth at a fixed distance $r_1$ from the center of the earth. A second satellite is orbiting in the equatorial plane in the opposite direction to the earth’s rotation, at a distance $r_2$ from the center of the earth, such that $r_1 = 1.21\\ r_2$. The time period of the second satellite as measured from the geostationary satellite is $\\frac{24}{p}$ hours. The value of $p$ is ___",
+      "answer": {
+        "type": "numeric",
+        "value": "2.331",
+        "acceptedRange": [
+          "2.3",
+          "2.4"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-gravitation"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "For circular orbits about the same planet, angular speed is proportional to r^(−3/2). Hence ω₂/ω₁ =(r₁/r₂)^(3/2) =1.21^(3/2) =1.331.",
+          "The satellites travel in opposite directions, so the relative angular speed is ω₁ +ω₂ =2.331ω₁.",
+          "The geostationary period is24 hours, making the relative period24/2.331 hours. Therefore p =2.331, or2.33 to two decimal places."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Physics_Q13-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "13",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 14
+      },
+      "statement": "The left and right compartments of a thermally isolated container of length $L$ are separated by a thermally conducting, movable piston of area $A$. The left and right compartments are filled with $\\frac{3}{2}$ and $1$ moles of an ideal gas, respectively. In the left compartment the piston is attached by a spring with spring constant $k$ and natural length $\\frac{2L}{5}$. In thermodynamic equilibrium, the piston is at a distance $\\frac{L}{2}$ from the left and right edges of the container as shown in the figure. Under the above conditions, if the pressure in the right compartment is $P = \\frac{kL}{A} \\alpha$, then the value of $\\alpha$ is ___\n\n[FIG_2]",
+      "answer": {
+        "type": "numeric",
+        "value": "0.2"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-thermal"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The conducting piston makes the equilibrium temperatures equal. Both compartments have volume AL/2, so the ideal-gas law gives Pleft/Pright =(3/2)/1 =3/2.",
+          "The spring is stretched by L/2 −2L/5 =L/10 and pulls the piston left with force kL/10. Force balance is (Pleft −Pright)A =kL/10.",
+          "With Pright =P, this becomes PA/2 =kL/10, or P =kL/(5A). Thus α =0.2."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q13_FIG_2.png",
+          "alt": "A container of total length L has its movable piston at the midpoint. A spring joins the left wall to the piston and spans L/2 at equilibrium.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q14-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "14",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 15
+      },
+      "statement": "In a Young’s double slit experiment, a combination of two glass wedges $A$ and $B$, having refractive indices $1.7$ and $1.5$, respectively, are placed in front of the slits, as shown in the figure. The separation between the slits is $d = 2\\ \\mathrm{mm}$ and the shortest distance between the slits and the screen is $D = 2\\ \\mathrm{m}$. Thickness of the combination of the wedges is $t = 12\\ \\mu\\mathrm{m}$. The value of $l$ as shown in the figure is $1\\ \\mathrm{mm}$. Neglect any refraction effect at the slanted interface of the wedges. Due to the combination of the wedges, the central maximum shifts (in mm) with respect to O by ____\n\n[FIG_1]",
+      "answer": {
+        "type": "numeric",
+        "value": "1.2"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-optics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The combined wedge height is d +2ℓ =4 mm. Across the slit separation d =2 mm, the thickness of material A changes by ΔtA =t d/(d +2ℓ) =6 μm; the thickness of B changes oppositely.",
+          "The optical-path difference added between the two slit beams is (nA −nB)ΔtA =(1.7 −1.5)(6 μm) =1.2 μm.",
+          "The fringe displacement magnitude is DΔ/d =(2 m)(1.2 ×10⁻⁶ m)/(2 ×10⁻³ m) =1.2 mm, using the specified neglect of refraction at the slanted interface."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q14_FIG_1.png",
+          "alt": "Two complementary glass wedges form a rectangular plate of thickness t in front of the double slits. Their slanted interface runs from top left to bottom right; A lies toward the upper-right portion and B lower-left. Each slit is a distanceℓ from the nearest top or bottom edge; their separation is d. The screen is distance D away with reference point O.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Physics_Q15-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "15",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 15
+      },
+      "statement": "A projectile of mass $200\\ \\mathrm{g}$ is launched in a viscous medium at an angle $60^\\circ$ with the horizontal, with an initial velocity of $270\\ \\mathrm{m/s}$. It experiences a viscous drag force $\\vec{F} = -c\\vec{v}$ where the drag coefficient $c = 0.1\\ \\mathrm{kg/s}$ and $\\vec{v}$ is the instantaneous velocity of the projectile. The projectile hits a vertical wall after $2\\ \\mathrm{s}$. Taking $e = 2.7$, the horizontal distance of the wall from the point of projection (in m) is ____",
+      "answer": {
+        "type": "numeric",
+        "value": "170",
+        "acceptedRange": [
+          "167",
+          "171"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-newton"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The initial horizontal velocity is270 cos60° =135 m s⁻¹. The drag equation is m dvx/dt =−cvx, giving vx =135e^(−ct/m).",
+          "Integrating gives horizontal distance x =(135m/c)[1 −e^(−ct/m)]. Here m/c =0.2/0.1 =2 s and t =2 s.",
+          "Using the supplied e =2.7, x =270(1 −1/2.7) =170 m, within the official interval167–171 m."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Physics_Q16-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "physics",
+      "section": "section-3",
+      "questionNumber": "16",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 15
+      },
+      "statement": "An audio transmitter (T) and a receiver (R) are hung vertically from two identical massless strings of length $8\\ \\mathrm{m}$ with their pivots well separated along the $X$ axis. They are pulled from the equilibrium position in opposite directions along the $X$ axis by a small angular amplitude $\\theta_0 = \\cos^{-1}(0.9)$ and released simultaneously. If the natural frequency of the transmitter is $660\\ \\mathrm{Hz}$ and the speed of sound in air is $330\\ \\mathrm{m/s}$, the maximum variation in the frequency (in Hz) as measured by the receiver (Take the acceleration due to gravity $g = 10\\ \\mathrm{m/s^2}$) is ____\n\n[FIG_2]",
+      "answer": {
+        "type": "numeric",
+        "value": "32.00470225193787",
+        "acceptedRange": [
+          "26",
+          "33"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "phy-waves",
+        "phy-oscillations"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Energy conservation gives each pendulum’s largest speed at its lowest point: vmax =√[2gℓ(1 −cosθ₀)] =√(2 ×10 ×8 ×0.1) =4 m s⁻¹.",
+          "In the question’s instantaneous Doppler approximation, the two move directly toward each other at these extrema, giving fmax =660(330 +4)/(330 −4). When moving apart, fmin =660(330 −4)/(330 +4).",
+          "The full variation is fmax −fmin =32.0047… Hz, approximately32.00 Hz and inside the official26–33 Hz interval. The calculation uses the textbook instantaneous source/receiver velocities; a finite signal-delay phase analysis would require their unspecified separation."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Physics_Q16_FIG_2.png",
+          "alt": "A transmitter T and receiver R hang from separate equal pendulums. They are displaced outward in opposite directions by angleθ₀ from their vertical equilibrium lines and released together.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q01-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-1",
+      "questionNumber": "1",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 16
+      },
+      "statement": "During sodium nitroprusside test of sulphide ion in an aqueous solution, one of the ligands coordinated to the metal ion is converted to",
+      "answer": {
+        "type": "single-choice",
+        "value": "A"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-coordination",
+        "chem-practical"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Nitroprusside is [Fe(CN)₅NO]²⁻. In the conventional test description, the coordinated nitrosyl ligand reacts with sulfide.",
+          "The resulting thionitroprusside complex is represented as [Fe(CN)₅NOS]⁴⁻: the ligand written NO⁺ has become NOS⁻ after addition of S²⁻.",
+          "Thus the transformed ligand is NOS⁻, optionA; the cyanide ligands are not converted into thiocyanate in this test."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$\\mathrm{NOS^-}$"
+        },
+        {
+          "id": "B",
+          "text": "$\\mathrm{SCN^-}$"
+        },
+        {
+          "id": "C",
+          "text": "$\\mathrm{SNO^-}$"
+        },
+        {
+          "id": "D",
+          "text": "$\\mathrm{NCS^-}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q02-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-1",
+      "questionNumber": "2",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 16
+      },
+      "statement": "The complete hydrolysis of $\\mathrm{ICl}$, $\\mathrm{ClF_3}$ and $\\mathrm{BrF_5}$, respectively, gives",
+      "answer": {
+        "type": "single-choice",
+        "value": "A"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-blocks",
+        "chem-redox"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "In these interhalogens, the less electronegative central halogen has oxidation states+1 in ICl,+3 in ClF₃, and+5 in BrF₅.",
+          "Hydrolysis replaces the central-halogen–halogen bonds by oxygen-containing groups without requiring a change in those central oxidation states. The corresponding oxyacids are HIO,HClO₂ and HBrO₃.",
+          "Their oxyanion forms are IO⁻,ClO₂⁻ and BrO₃⁻, respectively. Select A."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$\\mathrm{IO^-}$, $\\mathrm{ClO_2^-}$ and $\\mathrm{BrO_3^-}$"
+        },
+        {
+          "id": "B",
+          "text": "$\\mathrm{IO_3^-}$, $\\mathrm{ClO_2^-}$ and $\\mathrm{BrO_3^-}$"
+        },
+        {
+          "id": "C",
+          "text": "$\\mathrm{IO^-}$, $\\mathrm{ClO^-}$ and $\\mathrm{BrO_2^-}$"
+        },
+        {
+          "id": "D",
+          "text": "$\\mathrm{IO_3^-}$, $\\mathrm{ClO_4^-}$ and $\\mathrm{BrO_2^-}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q03-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-1",
+      "questionNumber": "3",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 17
+      },
+      "statement": "Monocyclic compounds P, Q, R and S are the major products formed in the reaction sequences given below.\n\n[FIG_1]\n\nThe product having the highest number of unsaturated carbon atom(s) is",
+      "answer": {
+        "type": "single-choice",
+        "value": "D"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-functional",
+        "chem-hydrocarbons"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Count carbon atoms participating in multiple bonds, including aromatic carbons and carbonyl carbons. P is an alpha-bromocarboxylic acid from the Hell–Volhard–Zelinsky reaction: its benzene ring contributes6 and COOH contributes1, totalling7.",
+          "The crossed aldol reaction gives Q with the benzene ring and an aldehyde carbonyl; the cold aldol-addition structure has7 unsaturated carbons. Even its dehydrated form would have9.",
+          "For R, acetylide alkylation adds the allyl group, then mercury-catalysed alkyne hydration gives a carbonyl. The aromatic ring, retained alkene and carbonyl contribute6+2+1=9.",
+          "For S, ozonolysis opens the non-aromatic ring to two carbonyl groups. Methyl Grignard addition and dehydration produce two side-chain double bonds on the benzene ring, for6+4=10 unsaturated carbons. S therefore has the highest count, optionD."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q03_FIG_1.png",
+          "alt": "Four sequences:3-phenylpropanoic acid with Br2/red phosphorus then water gives P; benzaldehyde plus acetaldehyde with aqueous NaOH at293 K gives Q; phenylacetylene with NaNH2/allyl bromide then Hg2+/H3O+ gives R;2-methylindene with O3/Zn–H2O, two equivalents CH3MgBr, then hot acid gives S.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "P"
+        },
+        {
+          "id": "B",
+          "text": "Q"
+        },
+        {
+          "id": "C",
+          "text": "R"
+        },
+        {
+          "id": "D",
+          "text": "S"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q04-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-1",
+      "questionNumber": "4",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 17
+      },
+      "statement": "The correct reaction/reaction sequence that would produce a dicarboxylic acid as the major product is",
+      "answer": {
+        "type": "single-choice",
+        "value": "C"
+      },
+      "marking": {
+        "correct": 3,
+        "incorrect": -1,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-functional",
+        "chem-hydrocarbons"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "In C, ethanolic KOH eliminates HBr from bromocyclohexane to form cyclohexene.",
+          "Hot acidic KMnO₄ cleaves the ring double bond. Each alkene carbon bears a hydrogen and is oxidised to COOH, opening the ring to HOOC(CH₂)₄COOH, adipic acid.",
+          "A gives a hydroxy monocarboxylic acid after nitrile formation and hydrolysis. Bromine water in B oxidises only the aldehyde end of the sugar, and D oxidises the displayed terminal alcohol. These do not supply the required dicarboxylic acid as the indicated major product. Select C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q04_FIG_2.png",
+          "alt": "OptionA:2-chloroethanol treated with NaCN, then aqueous hydroxide, then acid.",
+          "role": "option",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+          "optionId": "A"
+        },
+        {
+          "id": "FIG_3",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q04_FIG_3.png",
+          "alt": "OptionB: open-chain aldose CHO–(CHOH)4–CH2OH treated with bromine water.",
+          "role": "option",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+          "optionId": "B"
+        },
+        {
+          "id": "FIG_4",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q04_FIG_4.png",
+          "alt": "OptionC: bromocyclohexane treated with ethanolic KOH, then hot KMnO4/H2SO4.",
+          "role": "option",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+          "optionId": "C"
+        },
+        {
+          "id": "FIG_5",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q04_FIG_5.png",
+          "alt": "OptionD: HOCH2–CH(CH3)–CO–CH(CH3)2 treated with chromic acid.",
+          "role": "option",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+          "optionId": "D"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "[FIG_2]"
+        },
+        {
+          "id": "B",
+          "text": "[FIG_3]"
+        },
+        {
+          "id": "C",
+          "text": "[FIG_4]"
+        },
+        {
+          "id": "D",
+          "text": "[FIG_5]"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q05-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-2",
+      "questionNumber": "5",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 18
+      },
+      "statement": "The correct statement(s) about intermolecular forces is(are)",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "C",
+          "D"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "D"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-bonding"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Charge–charge potential energy varies as1/r, whereas a fixed charge–dipole interaction varies as1/r². The former approaches zero more slowly, so A is false.",
+          "Thermal orientational averaging of two rotating permanent dipoles gives a Keesom interaction proportional to−1/(T r⁶), not1/r³. B is false.",
+          "Dipole-induced-dipole attraction is governed by the permanent dipole and the other molecule’s polarizability; its standard averaged expression is temperature independent, so C is true.",
+          "Nonpolar molecules still attract through instantaneous correlated dipoles, the London dispersion force. D is true. Select C and D."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "The potential energy between two point charges approaches zero more rapidly than the potential energy between a point dipole and a point charge as the distance between them approaches infinity."
+        },
+        {
+          "id": "B",
+          "text": "The average potential energy of two rotating polar molecules that are separated by a distance $r$ has $1/r^3$ dependence."
+        },
+        {
+          "id": "C",
+          "text": "The dipole-induced dipole average interaction energy is independent of temperature."
+        },
+        {
+          "id": "D",
+          "text": "Nonpolar molecules attract one another even though neither has a permanent dipole moment."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q06-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-2",
+      "questionNumber": "6",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 18
+      },
+      "statement": "The compound(s) with P–H bond(s) is(are)",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "B",
+          "D"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "D"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-blocks",
+        "chem-bonding"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Phosphoric acid is O=P(OH)₃, with no P–H bond. Pyrophosphoric acid likewise has OH groups and a P–O–P bridge, but no P–H.",
+          "Phosphorous acid is HP(O)(OH)₂, containing one P–H bond. Hypophosphorous acid is H₂P(O)(OH), containing two.",
+          "The compounds with P–H bonds are H₃PO₃ and H₃PO₂, optionsB andD."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "$\\mathrm{H_3PO_4}$"
+        },
+        {
+          "id": "B",
+          "text": "$\\mathrm{H_3PO_3}$"
+        },
+        {
+          "id": "C",
+          "text": "$\\mathrm{H_4P_2O_7}$"
+        },
+        {
+          "id": "D",
+          "text": "$\\mathrm{H_3PO_2}$"
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q07-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-2",
+      "questionNumber": "7",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 19
+      },
+      "statement": "For the reaction sequence given below, the correct statement(s) is(are)\n\n[FIG_1]\n\n",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "A",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "A"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-functional",
+        "chem-practical"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Oxidation of the saturated ring of tetralin gives the ortho-dicarboxylic-acid framework. Ammonia treatment and heating lead through an oxygen-containing amide/imide intermediate X into the phthalimide system.",
+          "Deprotonation by ethanolic KOH and alkylation by R–Br give N-alkylphthalimide Y. Both X and Y retain carbonyl oxygen atoms, so A is true.",
+          "Alkaline hydrolysis is the Gabriel synthesis and releases the primary alkylamine Z=RNH₂. It reacts with Hinsberg’s reagent, validating C.",
+          "Y is an imide rather than a free primary amine and does not give the carbylamine reaction. The Gabriel route using alkyl halide gives an aliphatic primary amine, not the aromatic primary amine asserted in D. Select A and C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_1",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q07_FIG_1.png",
+          "alt": "Tetralin is oxidised with hot acidic KMnO4 and treated with NH3/heat, losing two waters, to X; strong heating, ethanolic KOH and R–Br give Y; NaOH hydrolysis gives an aromatic compound plus Z.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "Both X and Y are oxygen containing compounds."
+        },
+        {
+          "id": "B",
+          "text": "Y on heating with $\\mathrm{CHCl_3/KOH}$ forms isocyanide."
+        },
+        {
+          "id": "C",
+          "text": "Z reacts with Hinsberg’s reagent."
+        },
+        {
+          "id": "D",
+          "text": "Z is an aromatic primary amine."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q08-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-2",
+      "questionNumber": "8",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 19
+      },
+      "statement": "For the reaction sequence given below, the correct statement(s) is(are)\n\n[FIG_2]\n\n",
+      "answer": {
+        "type": "multiple-choice",
+        "value": [
+          "B",
+          "C"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": -2,
+        "unanswered": 0,
+        "partialCredits": [
+          {
+            "selected": [
+              "B"
+            ],
+            "marks": 1
+          },
+          {
+            "selected": [
+              "C"
+            ],
+            "marks": 1
+          }
+        ]
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-functional",
+        "chem-organic"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "LiAlH₄ opens the lactone to HOCH₂CH₂CH(CH₂Ph)CH₂CH₂OH. The two CH₂CH₂OH arms at its central carbon are identical, so P is achiral despite the original wedge bond. A is false.",
+          "Strong oxidation converts the two terminal primary alcohols into carboxyl groups. Q is a dicarboxylic acid and liberates CO₂ from NaHCO₃, so C is true.",
+          "Soda-lime decarboxylation of Q gives a saturated hydrocarbon R, not an alkyne. D is false.",
+          "Hot sulfuric acid dehydrates P to an unsaturated product S, which decolorises dilute alkaline permanganate in Baeyer’s test. B is true. Select B and C."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": [
+        {
+          "id": "FIG_2",
+          "url": "assets/content/2025-p2/2025_P2_Chemistry_Q08_FIG_2.png",
+          "alt": "A benzyl-substituted six-membered lactone with a wedge bond is reduced by LiAlH4 to P; P is oxidised by CrO3/H2SO4 to Q, then soda lime/heat gives R. A separate branch heats P with H2SO4 at443 K to S.",
+          "role": "statement",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "text": "P is optically active."
+        },
+        {
+          "id": "B",
+          "text": "S gives Bayer’s test."
+        },
+        {
+          "id": "C",
+          "text": "Q gives effervescence with aq. $\\mathrm{NaHCO_3}$."
+        },
+        {
+          "id": "D",
+          "text": "R is an alkyne."
+        }
+      ]
+    },
+    {
+      "id": "2025_P2_Chemistry_Q09-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "9",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 20
+      },
+      "statement": "The density (in $\\mathrm{g\\,cm^{-3}}$) of the metal which forms a cubic close packed (ccp) lattice with an axial distance (edge length) equal to 400 pm is _______.\n\nUse: Atomic mass of metal = 105.6 amu and Avogadro’s constant = $6 \\times 10^{23}\\,\\mathrm{mol^{-1}}$",
+      "answer": {
+        "type": "numeric",
+        "value": "11",
+        "acceptedRange": [
+          "10.85",
+          "11.1"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-gases"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "A cubic close-packed lattice is fcc and contains4 atoms per unit cell. The edge400 pm equals4.00×10⁻⁸ cm.",
+          "Unit-cell volume is(4.00×10⁻⁸)³=6.40×10⁻²³ cm³. Its mass is4(105.6)/(6×10²³) g.",
+          "Density=4(105.6)/[(6×10²³)(6.40×10⁻²³)]=11.0 g cm⁻³. The official interval is10.85–11.10."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q10-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "10",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 20
+      },
+      "statement": "The solubility of barium iodate in an aqueous solution prepared by mixing 200 mL of 0.010 M barium nitrate with 100 mL of 0.10 M sodium iodate is $X \\times 10^{-6}\\,\\mathrm{mol\\,dm^{-3}}$. The value of $X$ is _______.\n\nUse: Solubility product constant ($K_{\\mathrm{sp}}$) of barium iodate = $1.58 \\times 10^{-9}$",
+      "answer": {
+        "type": "numeric",
+        "value": "3.95",
+        "acceptedRange": [
+          "3.85",
+          "4.15"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-ionic",
+        "chem-mole"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Before precipitation, the mixture contains0.200×0.010=0.002 mol Ba²⁺ and0.100×0.10=0.010 mol IO₃⁻.",
+          "Ba(IO₃)₂ precipitation consumes approximately0.004 mol iodate with all the available barium, leaving0.006 mol iodate in0.300 L, or0.020 M.",
+          "At equilibrium, dissolved Ba²⁺ is s and iodate is approximately0.020 M. Thus Ksp=s(0.020)², giving s=1.58×10⁻⁹/(4×10⁻⁴)=3.95×10⁻⁶ M.",
+          "The small extra iodate from dissolution negligibly changes this result. X=3.95, within3.85–4.15."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q11-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "11",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 20
+      },
+      "statement": "Adsorption of phenol from its aqueous solution on to fly ash obeys Freundlich isotherm. At a given temperature, from 10 $\\mathrm{mg\\,g^{-1}}$ and 16 $\\mathrm{mg\\,g^{-1}}$ aqueous phenol solutions, the concentrations of adsorbed phenol are measured to be 4 $\\mathrm{mg\\,g^{-1}}$ and 10 $\\mathrm{mg\\,g^{-1}}$, respectively. At this temperature, the concentration (in $\\mathrm{mg\\,g^{-1}}$) of adsorbed phenol from 20 $\\mathrm{mg\\,g^{-1}}$ aqueous solution of phenol will be _______.\n\nUse: $\\log_{10} 2 = 0.3$",
+      "answer": {
+        "type": "numeric",
+        "value": "16",
+        "acceptedRange": [
+          "15.5",
+          "16.5"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-practical",
+        "chem-equilibrium"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Write the Freundlich relation as q=K Cᵃ for the stated solution concentrations. The two observations imply10/4=(16/10)ᵃ.",
+          "Using the supplied approximation log10(2)=0.3, log(2.5)=1−2(0.3)=0.4 and log(1.6)=4(0.3)−1=0.2. Hence a=0.4/0.2=2.",
+          "At C=20 rather than10, q=4(20/10)²=16 mg g⁻¹. The official interval is15.5–16.5.",
+          "This result uses the explicitly supplied rounded logarithm; extra-precision logarithms should not silently replace that instruction."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q12-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "12",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 20
+      },
+      "statement": "Consider a reaction $A + R \\to \\mathrm{Product}$. The rate of this reaction is measured to be $k[A][R]$. At the start of the reaction, the concentration of $R$, $[R]_0$, is 10-times the concentration of $A$, $[A]_0$. The reaction can be considered to be a pseudo first order reaction with assumption that $k[R] = k'$ is constant. Due to this assumption, the relative error (in %) in the rate when this reaction is 40 % complete, is _______.\n\n[$k$ and $k'$ represent corresponding rate constants]",
+      "answer": {
+        "type": "numeric",
+        "value": "4.17",
+        "acceptedRange": [
+          "4",
+          "4.25"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-kinetics"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Let [A]₀=a, so [R]₀=10a. At40% conversion of A, [A]=0.6a and [R]=9.6a.",
+          "The exact rate is k(0.6a)(9.6a), while the pseudo-first-order approximation fixes [R] at10a and predicts k(0.6a)(10a).",
+          "Relative error compared with the true rate is[(10−9.6)/9.6]×100=4.1667%.",
+          "Rounded, the answer is4.17%, within the official interval4.00–4.25."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q13-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "13",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 21
+      },
+      "statement": "At 300 K, an ideal dilute solution of a macromolecule exerts osmotic pressure that is expressed in terms of the height (h) of the solution (density = 1.00 g cm$^{-3}$) where h is equal to 2.00 cm. If the concentration of the dilute solution of the macromolecule is 2.00 g dm$^{-3}$, the molar mass of the macromolecule is calculated to be $X \\times 10^4$ g mol$^{-1}$. The value of $X$ is ______.\n\nUse: Universal gas constant (R) = 8.3 J K$^{-1}$ mol$^{-1}$ and acceleration due to gravity (g) = 10 m s$^{-2}$",
+      "answer": {
+        "type": "numeric",
+        "value": "2.49",
+        "acceptedRange": [
+          "2.4",
+          "2.55"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-solutions"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "The hydrostatic pressure is π=ρgh=(1000 kg m⁻³)(10 m s⁻²)(0.020 m)=200 Pa.",
+          "The mass concentration2.00 g dm⁻³ equals2000 g m⁻³. For molar mass M in g mol⁻¹, the molecular concentration is2000/M mol m⁻³.",
+          "Using π=cRT gives M=2000(8.3)(300)/200=24900 g mol⁻¹.",
+          "Thus M=2.49×10⁴ g mol⁻¹ and X=2.49, within2.40–2.55."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q14-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "14",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 21
+      },
+      "statement": "An electrochemical cell is fueled by the combustion of butane at 1 bar and 298 K. Its cell potential is $\\frac{X}{F} \\times 10^3$ volts, where $F$ is the Faraday constant. The value of $X$ is ______.\n\nUse: Standard Gibbs energies of formation at 298 K are: $\\Delta_f G^o_{CO_2} = -394$ kJ mol$^{-1}$; $\\Delta_f G^o_{\\text{water}} = -237$ kJ mol$^{-1}$; $\\Delta_f G^o_{\\text{butane}} = -18$ kJ mol$^{-1}$",
+      "answer": {
+        "type": "numeric",
+        "value": "105.5",
+        "acceptedRange": [
+          "105.4",
+          "105.6"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-electrochemistry",
+        "chem-thermo",
+        "chem-redox"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "Combustion is C₄H₁₀+(13/2)O₂ → 4CO₂+5H₂O. The Gibbs energy is4(−394)+5(−237)−(−18)=−2743 kJ mol⁻¹.",
+          "The carbon atoms collectively rise from total oxidation number−10 in butane to+16 in4CO₂, transferring26 electrons per butane molecule.",
+          "Therefore E=−ΔG/(nF)=2743×10³/(26F)=105.5×10³/F volts.",
+          "The requested X is105.5, within the official interval105.4–105.6."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q15-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "15",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 21
+      },
+      "statement": "The sum of the spin only magnetic moment values (in B.M.) of [Mn(Br)$_6$]$^{3-}$ and [Mn(CN)$_6$]$^{3-}$ is ______.",
+      "answer": {
+        "type": "numeric",
+        "value": "7.73",
+        "acceptedRange": [
+          "7.5",
+          "7.8"
+        ]
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-coordination"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "In both complexes manganese is+3, hence d⁴. Bromide is weak-field, giving high-spin d⁴ with4 unpaired electrons. Cyanide is strong-field, giving low-spin t₂g⁴ with2 unpaired electrons.",
+          "The spin-only moments are√[4(4+2)]=√24 and√[2(2+2)]=√8 B.M.",
+          "Their sum is approximately4.899+2.828=7.727 B.M., or7.73. The accepted interval is7.5–7.8."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    },
+    {
+      "id": "2025_P2_Chemistry_Q16-v1",
+      "paperId": "official-2025-paper-2-en",
+      "year": 2025,
+      "exam": "jee-advanced",
+      "subject": "chemistry",
+      "section": "section-3",
+      "questionNumber": "16",
+      "source": {
+        "url": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf",
+        "page": 21
+      },
+      "statement": "A linear octasaccharide (molar mass = 1024 g mol$^{-1}$) on complete hydrolysis produces three monosaccharides: ribose, 2-deoxyribose and glucose. The amount of 2-deoxyribose formed is 58.26 % (w/w) of the total amount of the monosaccharides produced in the hydrolyzed products. The number of ribose unit(s) present in one molecule of octasaccharide is ______.\n\nUse: Molar mass (in g mol$^{-1}$): ribose = 150, 2-deoxyribose = 134, glucose = 180; Atomic mass (in amu): H = 1, O = 16",
+      "answer": {
+        "type": "numeric",
+        "value": "2"
+      },
+      "marking": {
+        "correct": 4,
+        "incorrect": 0,
+        "unanswered": 0
+      },
+      "review": {
+        "transcript": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "answer": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        },
+        "marking": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "status": "practice-ready",
+      "chapters": [
+        "chem-practical",
+        "chem-mole"
+      ],
+      "chapterReview": {
+        "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+        "reviewedAt": "2026-11-11",
+        "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+      },
+      "solution": {
+        "steps": [
+          "A linear octasaccharide has7 glycosidic links. Hydrolysis adds7 waters, so the total monosaccharide mass per mole is1024+7(18)=1150 g.",
+          "The deoxyribose mass is approximately0.5826×1150=670 g, corresponding to5 mol at134 g mol⁻¹.",
+          "The remaining3 monosaccharide units are ribose and glucose. Let the ribose count be r; then150r+180(3−r)=1150−670=480.",
+          "Solving gives540−30r=480, hence r=2 ribose units."
+        ],
+        "sourceUrl": "https://vedaris-jee.pages.dev/#pyq",
+        "review": {
+          "reviewer": "Codex (AI-assisted source comparison and derivation; not human review)",
+          "reviewedAt": "2026-11-11",
+          "sourceUrl": "https://jeeadv.ac.in/past_qps/2025_2_English.pdf"
+        }
+      },
+      "assets": []
+    }
+  ]
+}

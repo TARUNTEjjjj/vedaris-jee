@@ -63,7 +63,9 @@ export async function prepareContent(root, archive, availableAssets = []) {
   const inventory = new Set(availableAssets);
   for (const path of usedAssets) if (!/^assets\/content\/[a-zA-Z0-9_/-]+\.(?:png|jpe?g|webp|gif|svg)$/i.test(path) || path.split('/').some(part => part === '.' || part === '..') || !inventory.has(path)) throw new Error(`Content image must be in the local build inventory: ${path}`);
   const registry = createContentRegistry({archive, bundles: sources.map(item => item.bundle), papers: catalog.papers, availableAssets: usedAssets});
-  const paperSummaries = registry.listPapers();
+  // Keep the full configuration once. Dashboard summaries do not need a
+  // second copy of section instructions, question IDs, and review evidence.
+  const paperSummaries = registry.listPapers().map(({sections,orderedQuestionIds,review,...summary}) => summary);
   if (catalog.papers.some(paper => !paperIds.has(paper.paperId))) throw new Error('A configured content paper has no source bundle');
   const inputs = new Map(), bundles = [];
   for (const {path, bundle} of sources) {
@@ -76,7 +78,7 @@ export async function prepareContent(root, archive, availableAssets = []) {
   const questions = registry.filterQuestions();
   const years = [...new Set(questions.map(question => question.year))].sort((a, b) => a - b);
   const chapterCounts = Object.fromEntries([...new Set(questions.flatMap(question => question.chapters))].sort().map(id => [id, questions.filter(question => question.chapters.includes(id)).length]));
-  const manifest = {version: 1, bankId: BANK_ID, questionCount: registry.size, years, papers: catalog.papers, paperSummaries, bundles, availableAssets: usedAssets, chapterCounts, attributions: catalog.attributions, coverageNotes: catalog.coverageNotes};
+  const manifest = {version: 1, bankId: BANK_ID, questionCount: registry.size, years, papers: catalog.papers, paperSummaries, bundles, availableAssets: usedAssets, chapterCounts, coverageByYear:registry.coverageByYear(), attributions: catalog.attributions, coverageNotes: catalog.coverageNotes};
   const manifestBytes = jsonBytes(manifest);
   if (manifestBytes.length > MAX_BYTES) throw new Error('Compiled content catalog exceeds the 1 MiB budget');
   inputs.set('data/content/catalog.json', manifestBytes);

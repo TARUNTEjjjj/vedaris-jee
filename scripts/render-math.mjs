@@ -1,4 +1,5 @@
 import katex from './vendor/katex.mjs';
+import './vendor/contrib/mhchem.mjs';
 
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /** Compile at publication time. Native MathML keeps the client dependency-free. */
