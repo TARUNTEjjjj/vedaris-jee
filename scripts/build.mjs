@@ -1,0 +1,22 @@
+import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { validateArchive, archiveStats } from '../src/archive/index.js';
+const root = new URL('../', import.meta.url);
+process.chdir(fileURLToPath(root));
+const manifest=JSON.parse(await readFile('data/archive.json','utf8'));
+const errors=validateArchive(manifest);
+if(errors.length)throw new Error(errors.join('\n'));
+async function walk(dir){const results=[];for(const item of await readdir(dir,{withFileTypes:true})){const path=`${dir}/${item.name}`;if(item.isDirectory())results.push(...await walk(path));else results.push(path)}return results}
+for(const path of [...await walk('src'),...await walk('assets')].filter(p=>p.endsWith('.js')))execFileSync(process.execPath,['--check',path]);
+await rm('dist',{recursive:true,force:true});await mkdir('dist');
+for(const file of ['index.html','manifest.webmanifest','assets','src','_headers','404.html'])await cp(file,`dist/${file}`,{recursive:true});
+await mkdir('dist/data');await cp('data/archive.json','dist/data/archive.json');
+const files=(await walk('dist')).filter(p=>!p.endsWith('_headers')).map(p=>p.slice(5)).sort();
+const hashes={};for(const path of files)hashes[path]=createHash('sha256').update(await readFile(`dist/${path}`)).digest('hex');
+const version=createHash('sha256').update(JSON.stringify(hashes)).digest('hex').slice(0,16);
+const sw=`const CACHE='vedaris-${version}';\nconst ASSETS=${JSON.stringify(files.map(p=>'./'+p))};\nself.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));\nself.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('vedaris-')&&k!==CACHE).map(k=>caches.delete(k))))));\nself.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).catch(error=>{if(event.request.mode==='navigate')return caches.match('./index.html');throw error})));});\n`;
+await writeFile('dist/sw.js',sw);
+await writeFile('dist/build-info.json',JSON.stringify({version,files:hashes,coverage:archiveStats(manifest)},null,2)+'\n');
+console.log(`Built Vedaris ${version}: ${files.length} assets; ${manifest.papers.length} source records. Offline cache excludes external PDFs and staged imports.`);
