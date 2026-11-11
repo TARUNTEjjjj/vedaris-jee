@@ -1,129 +1,106 @@
-# Vedaris content pipeline
+# Vedaris content pipeline · 0.4
 
-The historical archive and the playable question bank are separate collections. A paper link makes a source discoverable. It does not establish that every question has been transcribed, that an answer key is correct, or that the paper is ready for automatic marking.
+Release 0.4 includes **102 actual JEE Advanced questions**, covering the complete 2023 English Paper 1 and Paper 2. Each paper contains 51 questions, carries 180 marks and has a 180-minute timer. The bank includes chapter assignments, original worked explanations, 39 local diagram files, original section marking and final-key exceptions.
+
+The historical link archive remains a separate collection. Its 1978–2026 span is not a claim of 49 complete, transcribed or solved examination years. Only the two 2023 papers are currently playable as full historical mocks. Original generated practice is separately labelled and never fills gaps in a historical paper.
+
+## Evidence and review
+
+The transcription source is [propar2750/jee-advanced](https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85), pinned to revision `2580e96f1e74343e1d478509187f16fe58dbab85`. Its MIT notice covers the dataset's transcription, structure and annotations; the dataset attributes original examination questions, keys and figures to the organising IITs. `content/UPSTREAM-LICENSE.txt` preserves the upstream notice. Do not infer a transfer of rights to third-party books or worked solutions.
+
+The included questions were compared with the official [2023 Paper 1](https://jeeadv.ac.in/past_qps/2023_1_English.pdf) and [Paper 2](https://jeeadv.ac.in/past_qps/2023_2_English.pdf). Final keys were recovered from archived copies of the official documents: [Paper 1 final key](https://web.archive.org/web/20230618114607/https://jeeadv.ac.in/documents/Paper1_Final_Answer_Keys.pdf) and [Paper 2 final key](https://web.archive.org/web/20230618114609/https://jeeadv.ac.in/documents/Paper2_Final_Answer_Keys.pdf). These are archived official-origin documents, not claims that the old live URLs still work. The [official 2023 report](https://jeeadv.ac.in/reports/2023.pdf) also identifies the dropped Physics questions.
+
+`content/review-audit.json` records question-level source pages, answer checks, review notes, any escaping corrections, dataset revision, source-document hashes and diagram hashes. The worked explanations and chapter assignments were authored and checked by Codex against those sources. They are independent Vedaris explanations, not official IIT worked solutions or a claim of human editorial certification. Upstream automated review flags are retained as upstream metadata; they do not replace this source comparison.
+
+A review record is an assertion with a named reviewer, date and evidence URL. Schema validation cannot authenticate an editor, establish legal permissions, or prove a mathematically correct explanation. Source inspection and derivation remain necessary.
 
 ## Coverage vocabulary
 
-| Field or stage | Meaning | What it does not establish |
-| --- | --- | --- |
-| `link-observed` | The source listing exposed this link. | The destination was downloaded or inspected. |
-| `http-verified` | An HTTP check reached the document. | Its content, year, completeness or answer key was reviewed. |
-| `pdf-verified` | The PDF was opened and its identity inspected. | Every question or solution was editorially verified. |
-| `full-paper` | The source represents a complete paper. | A machine-readable reproduction is available. |
-| `partial-collection` | The source contains selected historical material. | Complete subject or year coverage. |
-| `unknown` coverage | Completeness has not been established. | A complete paper may be inferred from its label. |
-| `source-linked` | A source record exists in the archive. | Any playable PYQ exists. |
-| `transcript-reviewed` | An editor checked text, notation, diagrams and numbering against the source. | The answer or marking scheme was checked. |
-| `answer-verified` | An editor checked the answer against identified key evidence. | Every marking rule is encoded. |
-| `practice-ready` | Transcript, answer and marking reviews are recorded and the supported structured format validates. | This release has integrated the item into its practice engine. |
+| Stage | Meaning |
+| --- | --- |
+| `link-observed` | A listing exposed a link; its destination may not have been inspected. |
+| `http-verified` | A document was reached; content and completeness still require review. |
+| `pdf-verified` | The PDF identity was inspected; this does not imply question-level review. |
+| `full-paper` | The source represents a complete paper; this alone does not unlock a mock. |
+| `partial-collection` | Selected historical material, with no full-paper claim. |
+| `source-linked` | The source catalog has a record, without implying a playable question. |
+| `practice-ready` | A structured question carries the required reviews and passes the runtime schema. |
+| Complete playable paper | Every ordered source question, required asset, solution and section rule passes the completeness gate. |
 
-The middle editorial stages are a workflow, not fields accepted by the link catalog. The importer only accepts completed `practice-ready` records and places them in a staging directory. Earlier work should stay outside `data/imports/validated/`.
+The link catalog's `practiceReadyCount` remains zero because that catalog contains links, not questions. Playable counts come from the separate reviewed registry and compiled content manifest.
 
-The dashboard's **years listed** count is the number of distinct years represented by archive records. The span 1978–2026 contains 49 years, but a 49-year listing is not a claim of 49 complete, digitized examination years. Full-paper, partial-collection, official-source and PDF-inspection counts remain separate. `practiceReadyCount` from the link catalog is always zero.
+## Source catalog and stable identities
 
-## Source catalog
+`data/archive.json` is version 1 and contains `checkedAt`, `sources` and `papers`. Each paper records its year, exam era, subject, paper number, source identity, URLs, verification, coverage and nullable question count, duration and maximum marks. Unknown values stay `null`; they are not guessed from a label. Exam identity is `iit-jee` before 2013 and `jee-advanced` from 2013.
 
-`data/archive.json` uses version 1. It contains `checkedAt` as a real `YYYY-MM-DD` date, `sources`, and `papers`.
-
-Each source has `id`, `title`, `url`, `authority` (`official` or `third-party`) and `notes`.
-
-Each paper has:
-
-```json
-{
-  "id": "jee-2024-paper-1",
-  "year": 2024,
-  "exam": "jee-advanced",
-  "label": "JEE Advanced 2024 — Paper 1",
-  "subject": "all",
-  "paper": 1,
-  "sourceId": "official-archive",
-  "url": "https://example.org/paper.pdf",
-  "sourceUrl": "https://example.org/archive",
-  "verification": "link-observed",
-  "coverage": "unknown",
-  "questionCount": null,
-  "durationMinutes": null,
-  "maxMarks": null,
-  "transcriptionStatus": "source-linked"
-}
-```
-
-The example URL is deliberately illustrative and is not a source. All fields are required, including nullable ones. Unknown duration, marks, number of questions and paper number remain `null`. Subject is `all`, `physics`, `chemistry` or `mathematics`; paper number is `null`, `1` or `2`. Preserve historical exam identity: `iit-jee` before 2013 and `jee-advanced` from 2013. Use stable IDs and never silently repurpose them.
-
-Validate with:
+Paper IDs and content IDs are persistent identities. The current questions use IDs such as `2023_P1_Chemistry_Q01-v1`, retaining the original subject and printed question number. An incompatible correction requires an explicit content-version/migration decision; do not silently repurpose a saved identity. `bankId` binds saved historical attempts to the compatible bank. Stored attempts hold IDs and responses, never a trusted answer key or score.
 
 ```sh
 node scripts/validate-archive.mjs
 node scripts/validate-archive.mjs /path/to/candidate-archive.json
 ```
 
-Validation checks shape, URLs, identities, source relationships, dates, exam eras and enum values. It does not perform network checks or certify the evidence behind `coverage` and `verification`. Preserve inspection notes and source evidence during editorial review. Linking a publisher does not grant permission to redistribute its PDFs, solutions or illustrations.
+## Staging and runtime integration
 
-## Reviewed question staging
+The legacy staging CLI validates `{ "version": 1, "questions": [...] }` batches against a selected archive and writes them exclusively under `data/imports/validated/`. It neither overwrites an existing file nor publishes a partly valid batch. Run one importer at a time. Staging does not add content to the application.
 
-The import file is `{ "version": 1, "questions": [...] }`. Each question requires:
+```sh
+node scripts/import-pyq.mjs /path/to/reviewed-batch.json
+node scripts/import-pyq.mjs /path/to/reviewed-batch.json --catalog /path/to/archive.json
+```
 
-| Field | Contract |
+`src/archive/questions.js` supplies the base staging schema. `src/content/catalog.js` adds the richer integrated contract, including discrete numerical alternatives, official bonus questions, matching lists, chapter review, solutions and verified asset inventory. The staging CLI remains deliberately narrower; use the runtime gate for the additional supported formats rather than coercing them into a different question type.
+
+Integrated source files are `content/2023-p1.json` and `content/2023-p2.json`, explicitly listed by `content/catalog.json`. Each question requires:
+
+| Field group | Required evidence or content |
 | --- | --- |
-| `id`, `paperId` | Stable nonempty identifiers; `paperId` must exist in the selected source catalog. |
-| `year`, `exam`, `subject` | Historical year, era, and one PCM subject. |
-| `section`, `questionNumber` | Original nonempty printed identifiers, stored as strings. |
-| `source` | `{url, page}` with positive 1-based page; URL must match the catalog paper URL or its source listing URL. |
-| `statement` | Complete reviewed nonempty text; preserve shared setups and all information needed to answer. |
-| `options` | For choice questions, 2–20 `{id, text}` records with unique IDs. Omit for numeric questions. |
-| `answer` | One of the supported formats below. |
-| `marking` | Explicit correct, incorrect and unanswered marks; optional explicit partial-credit cases. |
-| `review` | Separate `transcript`, `answer` and `marking` records. Each is `{reviewer, reviewedAt, sourceUrl}`. |
-| `status` | Exactly `practice-ready`. |
+| Identity | Stable ID, known paper ID, year, exam, subject, original section and question number. |
+| Source | Original document URL and positive 1-based PDF page. |
+| Transcript | Complete statement, options, shared passage and any matching lists. |
+| Answer and marks | Explicit supported key and actual section-specific correct, wrong, blank and partial marks. |
+| Reviews | Separate transcript, answer and marking records with reviewer, date and evidence URL. |
+| Chapters | Existing chapter IDs for the question's subject and a chapter review. |
+| Solution | Nonempty newly authored steps, attribution URL and solution review. |
+| Assets | Safe local path, semantic alternative text, statement/option/solution role and source URL; present in the verified build inventory. |
 
-Supported answers:
+Diagram review compares labels, geometry, arrows, molecular bonds and graph values against the source. Matching lists preserve both columns and labels. Shared passages are included once per question. Alternative text must communicate the depicted information; generic labels such as “Figure 1” are insufficient.
+
+## Exact answers and marking
+
+Runtime answer records include:
 
 ```json
 {"type":"single-choice","value":"B"}
 {"type":"multiple-choice","value":["A","C"]}
-{"type":"numeric","value":"1.25","acceptedRange":["1.24","1.26"]}
+{"type":"numeric","value":"0.31","acceptedRange":["0.30","0.32"]}
+{"type":"numeric","value":"80","acceptedValues":["80","150","220"]}
+{"type":"bonus","value":null}
 ```
 
-Numeric values are decimal strings. An optional accepted range must be explicitly supported by key evidence, not inferred as a generic tolerance. Omit it for an exact answer. This version does not support radicals, fractions, matching matrices, written answers, withdrawn questions or special bonus policies; do not coerce them into supported formats.
+Numerical keys and bounds are decimal strings. Student decimal or fraction responses are parsed as exact rational values without `eval`; no generic floating-point tolerance is added. Ranges are inclusive and must be supported by the final key. Discrete alternatives are not expanded into a continuous interval: 2023 Paper 1 Physics Q9 accepts 80, 150 or 220, and does not accept a value merely between them.
 
-A marking example, solely to illustrate the schema:
+Multiple-correct partial credit is an explicit list of permitted selected subsets. For the included 2023 sections, choosing all correct options earns +4, an allowed proper subset of correct options earns its specified partial award, a wrong selection earns −2, and a blank earns zero. Single-choice/matching sections use +3/−1/0. Integer sections use +4/0/0, and Paper 2 paragraph numerical sections use +3/0/0. These are 2023 rules, not defaults for future years.
 
-```json
-{
-  "correct": 4,
-  "incorrect": -2,
-  "unanswered": 0,
-  "partialCredits": [
-    {"selected":["A"],"marks":1},
-    {"selected":["C"],"marks":1}
-  ]
-}
-```
+Paper 2 Physics Q16 and Q17 were officially dropped with marks for all. Their records give +3 for every response, including blank, and report status `bonus`. Bonus marks contribute to the score but not attempted-question accuracy. Do not invent a replacement key or fabricate a conventional solution for a dropped problem; the review explains its official disposition.
 
-This is **not** a default JEE marking scheme. Every item needs its actual section instructions and key evidence. Each partial-credit entry lists an exact nonempty proper subset of the correct options, with a positive award below full credit. Other selections receive the explicitly declared incorrect score; therefore enumerate every allowed partial-credit selection before approval. Automatic scoring of these staged records is not implemented in this release.
+Matching-list questions with an objective option key remain single/multiple choice and preserve `matchingLists`. Written proofs, arbitrary symbolic answers and unsupported historical matrix response formats remain outside this release's grading contract.
 
-Run:
+## Full-paper completeness gate
+
+A full mock must match the source catalog's question count, maximum marks and duration. Its reviewed section configuration supplies question order, subject, response format, source instruction page and marking. Every ordered question must exist exactly once, have its required reviews and solution, and agree with its section rules. Both 2023 papers have Mathematics, Physics and Chemistry in original source order.
+
+Missing questions, unknown source totals, missing subjects, duplicate IDs, absent assets or inconsistent marking keep the mock closed. Neither original generated questions nor a partial historical collection can complete a paper.
+
+## Build, delivery and verification
+
+`scripts/build-content.mjs` reads only explicitly listed reviewed bundles, validates the registry and compiles statements, options, matching lists and solutions. `scripts/render-math.mjs` uses vendored KaTeX at build time to emit native MathML with untrusted commands disabled. Unsupported notation fails the build; the browser does not fetch a math-rendering CDN or run KaTeX.
+
+Compiled paper bundles live under the immutable release's `data/content/` directory. Their manifest carries SHA-256 hashes, counts, paper configurations and the asset inventory. The browser downloads the bank when PYQ practice opens, verifies each bundle's hash and rebuilds the validated registry. The current bank loads both small paper bundles together; partitioned loading for a much larger corpus remains future work.
 
 ```sh
-node scripts/import-pyq.mjs /path/to/reviewed-2024-paper-1.json
-node scripts/import-pyq.mjs /path/to/reviewed-2024-paper-1.json --catalog /path/to/archive.json
+node --test tests/content-runtime.test.mjs tests/content-session.test.mjs tests/content-ui.test.mjs tests/render-math.test.mjs
+npm run build
 ```
 
-The importer loads `data/archive.json` by default, or the explicitly selected catalog. It validates the catalog and resolves each `paperId`, requiring the same year and exam era. The question's subject must match the paper's subject unless the paper covers `all` subjects. Source URLs must match the paper document or its source listing; answer-key and marking-review evidence may have independent URLs.
-
-The importer limits each input file to 20 MiB, validates the whole batch, rejects duplicate IDs and paper/subject/section/question identities, checks existing staged files against the selected catalog, and creates `data/imports/validated/<input-filename>.json` exclusively. It never overwrites an existing import. It does not write partial valid subsets when a batch fails. Run one import process at a time; concurrent imports to different filenames are not transactionally coordinated.
-
-Review identities and evidence URLs are recorded assertions, not authenticated editor credentials. Validation cannot detect a fabricated review or a mathematically wrong but well-formed key. The importer does not verify URLs remotely or inspect the printed page. Integration must add diagram asset validation and question rendering review before staged content becomes available to learners.
-
-## Route to a complete historical bank
-
-1. Establish a source inventory for each year, paper and subject; disclose gaps explicitly.
-2. Obtain an appropriate basis for hosting any reproduced content and record source provenance.
-3. Transcribe text and diagrams while preserving original numbering and shared passages.
-4. Check the transcript against the source, independently solve or check answers, and record the final key plus section instructions.
-5. Encode and test the actual marking policy, including partial credit and exceptions.
-6. Stage validated batches against the source catalog; resolve diagram assets during integration.
-7. Test rendering and scoring against representative official examples, then publish counts based on integrated records.
-
-Original generated practice must retain its own provenance and must never be relabeled as a historical question.
+Tests cover exact/range/discrete grading, subset partial credit, bonus rules, full-paper completeness, deadlines, corruption, bounded timing, immutable identities, report regrading, backup history and reader-tab lifecycle. Source and rendered-page inspection complement tests; automated tests alone do not certify a transcription. Expansion beyond 2023 follows the same evidence and completeness gates before increasing published playable counts.

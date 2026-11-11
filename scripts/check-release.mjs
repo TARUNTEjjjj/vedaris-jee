@@ -26,7 +26,7 @@ for(const [path,hash] of Object.entries(info.files)) {
   assert(bytes.length<1024*1024,`Single asset exceeds 1 MiB launch budget: ${path}`);
   if(path.startsWith(info.release+'/')) {raw+=bytes.length;encoded+=Math.min(bytes.length,gzipSync(bytes).length);}
 }
-assert(encoded<250*1024,'Compressed complete offline release exceeds 250 KiB launch budget');
+assert(encoded<2*1024*1024,'Compressed complete offline release exceeds 2 MiB reviewed-content budget');
 const html=await readFile(join(dist,'index.html'),'utf8');
 assert(!/https:\/\/(fonts\.googleapis|fonts\.gstatic)/.test(html),'External font dependency in shell');
 const css=await readFile(join(dist,info.release,'assets/style.css'),'utf8');

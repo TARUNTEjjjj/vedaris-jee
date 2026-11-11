@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { validateArchive, archiveStats } from '../src/archive/index.js';
+import { prepareContent } from './build-content.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -83,10 +84,13 @@ export async function buildSite(root = projectRoot) {
   const archive = JSON.parse(await readFile(join(root, 'data/archive.json'), 'utf8'));
   const errors = validateArchive(archive);
   if (errors.length) throw new Error(errors.join('\n'));
-  const publicInputs = [...await walk(root, 'src'), ...await walk(root, 'assets'), 'data/archive.json'].sort();
+  const assets = await walk(root, 'assets');
+  const content = await prepareContent(root, archive, assets);
+  const publicInputs = [...await walk(root, 'src'), ...assets, 'data/archive.json', ...content.inputs.keys()].sort();
+  if (new Set(publicInputs).size !== publicInputs.length) throw new Error('Duplicate release input path');
   const inputs = new Map();
   for (const path of [...publicInputs, 'index.html', 'manifest.webmanifest', '_headers', '404.html'].sort()) {
-    const bytes = await readFile(join(root, path));
+    const bytes = content.inputs.get(path) ?? await readFile(join(root, path));
     if (bytes.length > MAX_FILE_BYTES) throw new Error(`Release input exceeds 5 MiB budget: ${path}`);
     inputs.set(path, bytes);
   }
@@ -129,7 +133,7 @@ export async function buildSite(root = projectRoot) {
   const sw = serviceWorkerSource({version, files: precache, shell: `${prefix}/`});
   await emit('sw.js', sw);
   const bytes = [...inputs.values()].reduce((sum, buffer) => sum + buffer.length, 0);
-  const info = {version, release: prefix, sourceBytes: bytes, precacheFiles: Object.keys(precache).length, files: Object.fromEntries([...emitted].sort(([a], [b]) => a.localeCompare(b, 'en'))), coverage: archiveStats(archive)};
+  const info = {version, release: prefix, sourceBytes: bytes, precacheFiles: Object.keys(precache).length, files: Object.fromEntries([...emitted].sort(([a], [b]) => a.localeCompare(b, 'en'))), coverage: archiveStats(archive), playableContent: content.counts};
   await writeFile(join(output, 'build-info.json'), `${JSON.stringify(info, null, 2)}\n`);
   return info;
 }

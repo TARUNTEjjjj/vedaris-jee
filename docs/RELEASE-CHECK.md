@@ -38,3 +38,16 @@ The 10,000-concurrent-session target remains unmeasured. The k6 profile is suppl
 - Chapter links opened the selected chapter setup after a completed session. Dashboard and test workspace fit a 390×844 viewport without document horizontal overflow.
 - Cloudflare preview displayed the dashboard and test centre with no console warnings/errors. Its 96-request, concurrency-five HTTP smoke check passed; p50 39ms, p95 543ms from one developer machine. This is not a concurrency capacity measurement.
 - Complete offline build: 336,578 raw bytes, 138,871-byte gzip estimate, 29 immutable release assets, no runtime external dependencies or server functions.
+
+
+## Reviewed PYQ release 0.4
+
+- 108 automated tests pass. The complete corpus has 102 questions, 39 verified diagram files and two ready 2023 papers, each 51 questions / 180 marks / 180 minutes. All canonical keys grade for full credit; an additional 390 canonical/subset checks were run during review.
+- Original explanations, chapter assignments, source pages, final-key evidence and asset hashes are recorded in `content/review-audit.json`. These are Codex-assisted reviews, not human editorial certification.
+- Browser checked: full Paper 1 retained its numerical answer and review flag through reload. One correct numerical answer, one partial multiple-choice response and one incorrect matching answer scored 4/180 with subject totals 4, 1 and −1.
+- Paper 2 accepted the exact upper boundary 8.4 for Physics Q15 and awarded the two official three-mark bonuses even when blank: 9/180, one correct and two bonuses, with bonuses excluded from accuracy.
+- Matching-list diagrams and shared passages rendered; solutions remained hidden until submission. A reader tab kept its open solution and Correct filter during writer updates and could not retry or edit responses.
+- Chapter links selected the correct subject and chapter. A 390×844 mobile question screen displayed native MathML without horizontal document overflow. Browser console had no warnings/errors.
+- Cloudflare preview: a single actual chapter question scored 3/3; backup export and restore retained the report and recalculated scores. Preview asset/hash/header/404 checks passed: 143 requests, concurrency limited to five, p50 49 ms and p95 508 ms from one machine.
+- Release `13f305902dcad30826e6`: 76 immutable assets, 2,552,580 raw offline bytes, 1,378,271-byte gzip estimate. The offline budget is now 2 MiB compressed to include the checked figures; each file remains below 1 MiB. No external runtime dependencies or server functions.
+- Remaining content scope: 2023 is the only playable exam year. The 40+ year bank is not complete. No 10,000-user capacity result is asserted.

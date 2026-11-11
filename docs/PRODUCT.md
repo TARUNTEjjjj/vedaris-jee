@@ -1,22 +1,30 @@
-# Vedaris study product
+# Vedaris study product · 0.4
 
-The product benchmark is the study workflow offered by [MathonGo MARKS](https://www.mathongo.com/marks/iit-jee-2027-ranker-kit-dropper/) and [Quizrr JEE Advanced](https://www.quizrr.in/jee-advanced-test-series/), observed on 11 November 2026. Their public pages describe chapter/topic practice, custom tests, historical papers as mocks, detailed analysis and revision notebooks. Vedaris has independent branding, content and code. These references do not imply affiliation or feature parity.
+Vedaris now includes **102 actual JEE Advanced questions with worked explanations**, covering both complete 2023 papers. Learners can practise by chapter, subject, year or question type, or attempt either full historical paper with its original order, 180-minute duration and 180-mark scheme.
 
-## Delivered in 0.3
+The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/iit-jee-2027-ranker-kit-dropper/) and [Quizrr JEE Advanced](https://www.quizrr.in/jee-advanced-test-series/), whose public pages were observed on 11 November 2026. Vedaris has independent branding, content and code. These references imply neither affiliation nor feature parity.
 
-- A study dashboard with a daily first-attempt goal, seven-day activity, subject progress, a resume action and recent reports.
-- A test centre with short, medium and extended original concept sets and custom subject/chapter practice.
-- Subject navigation, visited/answered/review states, saved responses and a submission summary.
-- Visible-screen question timing, elapsed duration, subject scores, negative marks and filtered question review.
-- Up to 50 validated completed sessions, a last-ten score trend and chapter priorities with explicit sample counts.
-- A revision notebook from wrong/partial first attempts, bookmarks and saved annotations; cause labels, notes, resolved/reopen states and exact-question retries.
+## Delivered in 0.4
 
-No student ranks, percentiles, national comparisons, difficulty calibration or full-syllabus mock claims are fabricated from this local practice data.
+- Chapterwise practice with authentic historical questions, source pages, diagrams, matching lists and shared passages.
+- Separate full mocks for JEE Advanced 2023 Paper 1 and Paper 2: 51 questions and 180 marks each, preserving section-specific negative and partial marks.
+- Exact numerical keys, official acceptance ranges and discrete alternatives. Officially dropped questions receive their prescribed bonus marks, including when blank.
+- Original Vedaris worked explanations and chapter assignments checked against official papers and archived final keys, with inspectable source attribution.
+- Subject/section navigation, visited and answered states, review flags, saved responses, deadlines and submission confirmation.
+- Regraded historical reports with subject scores, negative marks, visible question time, elapsed time and filtered review. Retries use the exact missed source questions.
+- PYQ backup and restore for the active attempt and latest 20 completed historical reports. Compatible imports are validated before replacement; saved scores are recalculated from the reviewed bank.
+- Native mathematical notation compiled at publication time and 39 self-hosted diagram files; no external rendering service is needed while practising.
 
-## The content milestone still to deliver
+The existing original-practice workspace remains available: 30 reproducible concept families, a study dashboard with daily goals and activity, a test centre, up to 50 validated original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Original practice is explicitly labelled and is not counted as PYQ coverage.
 
-The currently published content is 30 original concept families plus 79 external source records spanning 1978–2026. There are zero integrated automatically scored historical questions. This does not yet match the playable question-bank experience in MARKS.
+Multiple browser tabs share one writer. Reader tabs can inspect historical reports and current questions without altering saved work. If coordinated storage is unavailable, practice can remain in memory and the learner is prompted to export before closing. There are no accounts or automatic cross-device synchronization.
 
-A complete JEE Advanced archive requires reviewed question-level statements, diagrams, provenance, chapter/topic tags, answer keys, section-specific marking and supported historical response types. The existing content staging gate enforces those review requirements. Full papers, year filters for playable questions, paired Paper 1/Paper 2 mocks and meaningful curriculum coverage depend on that corpus.
+## Coverage and next milestone
 
-Cloudflare serves the static application; the 10,000-concurrent-learner target remains unmeasured. Accounts and cross-device sync also remain future work. See CAPACITY.md and CONTENT-PIPELINE.md for their separate acceptance criteria.
+The wider source archive spans 1978–2026, but **the playable solved bank currently covers 2023 only**. Source links are not counted as transcribed questions, complete solved years or playable mocks. The request for 40+ years of PYQs remains a content-expansion objective; this release does not claim it is complete.
+
+Each additional paper requires reviewed statements and diagrams, stable identities, independently authored or appropriately sourced explanations, chapter assignments, final-key evidence and actual section marking. A full mock is unlocked only when all original questions, duration and marks pass the completeness gate. Neither generated questions nor partial collections are used to fill missing exam content.
+
+Reviews in this release were performed by Codex and are identified as AI-assisted. They are not official IIT worked solutions, human editorial certification or an IIT endorsement. Learners can inspect the linked source paper and final key when investigating a discrepancy.
+
+No rank, percentile, national comparison, difficulty calibration or full-syllabus mock claim is invented from local attempts. Cloudflare serves the static application, but the 10,000-concurrent-learner target remains unmeasured. See [capacity notes](CAPACITY.md) and the [content pipeline](CONTENT-PIPELINE.md) for their separate acceptance criteria.

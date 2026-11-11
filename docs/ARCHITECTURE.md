@@ -1,85 +1,91 @@
-# Vedaris architecture
+# Vedaris architecture · 0.4
 
-Vedaris carries forward the study flow of Avenquellis and Axiom SAT: choose a subject or chapter, practice, review answers, and revisit mistakes. Historical papers have an additional source and editorial pipeline. This document distinguishes the current archive tools from the larger system they support.
+Vedaris carries forward the study flow of Avenquellis and Axiom SAT: choose a subject or chapter, practise, review, and revisit mistakes. Release 0.4 adds a separate historical engine containing 102 reviewed JEE Advanced questions from the complete 2023 Paper 1 and Paper 2. The source-link archive, immutable historical questions and generated original practice retain distinct identities and provenance.
 
 ## Reference projects
 
-| Reference | Established structure | Adaptation for JEE |
+| Reference | Established structure | JEE adaptation |
 | --- | --- | --- |
-| [Avenquellis web](https://github.com/TARUNTEjjjj/avenquellis-web) | Overview, test arena, chapter library, problem collection, generator, progress and sources; local saved sessions; static JS UI and optional Pages Functions. | Preserve workspace and study flow across Physics, Chemistry and Mathematics. |
-| [Avenquellis question engine](https://github.com/TARUNTEjjjj/avenquellis-question-engine) | Reproducible original families, separate source metadata, C++20/JS interfaces, Wasm artifacts and parity checks. | Keep original generated practice separate from immutable historical questions. |
-| [Avenquellis proof grader](https://github.com/TARUNTEjjjj/avenquellis-proof-grader) | Separate assessments, evidence and provenance; explicit limits on model judgments. | Objective PYQs need source-specific marking rules rather than generic proof rubrics. |
-| [Axiom SAT](https://github.com/TARUNTEjjjj/axiom-sat) | Pure question/session/progress modules; stable identities; timed reload; retries; validated local backups. | Retain deterministic state, explicit deadlines and validated persistence. |
+| [Avenquellis web](https://github.com/TARUNTEjjjj/avenquellis-web) | Overview, test arena, chapters, problems, progress and sources. | A PCM workspace with local sessions and reports. |
+| [Avenquellis question engine](https://github.com/TARUNTEjjjj/avenquellis-question-engine) | Reproducible original families and separate source metadata. | Original families remain separate from historical PYQs. |
+| [Avenquellis proof grader](https://github.com/TARUNTEjjjj/avenquellis-proof-grader) | Assessments with evidence and explicit limits. | Objective historical questions use their actual source marking. |
+| [Axiom SAT](https://github.com/TARUNTEjjjj/axiom-sat) | Pure question/session/progress modules, reload and retries. | Stable identities, explicit deadlines and validated local persistence. |
 
-The existing CMI archive is a linked catalog, not a complete historical transcription. Its generated families and the SAT bank cannot substitute for JEE PYQs. Existing CMI mathematical proof marks and SAT-style correct/incorrect grading do not establish JEE marking policies.
+The reference projects' generated questions or historical links cannot substitute for authentic JEE content. No shared generic marking policy is assumed across examinations or years.
 
 ## Responsibilities
 
 ```text
 Browser workspace
-  ├── practice/session state → question and marking engines
-  ├── progress and revision → stable question identities
-  └── archive browsing → data/archive.json
-                         └── src/archive/index.js
+  ├── Original practice → src/questions + src/practice + src/learning
+  ├── PYQ practice → assets/content-loader.js → src/content/catalog.js
+  │                                            └── src/content/session.js
+  └── Source browsing → src/archive/index.js → data/archive.json
 
-Editorial input → src/archive/questions.js → scripts/import-pyq.mjs
-                 whole-batch validation      data/imports/validated/
-                                             (staged, not app-integrated)
+Reviewed content/ bundles + local diagrams
+  └── scripts/build-content.mjs → validated registry + build-time MathML
+                                  └── immutable data/content/ bundles + hashes
+
+Legacy staged imports → src/archive/questions.js → data/imports/validated/
+                                                    (not auto-published)
 ```
 
 | Module | Responsibility |
 | --- | --- |
-| `src/archive/index.js` | Pure archive validation, conjunctive filtering, honest coverage statistics. |
-| `src/archive/questions.js` | Strict reviewed-question batch schema, supported answer/marking validation and paper/source cross-references. |
-| `scripts/validate-archive.mjs` | Validate a catalog and print measurable coverage counts. |
-| `scripts/import-pyq.mjs` | Stage a fully valid local batch without overwriting or partially importing it. |
-| `data/archive.json` | Source-linked paper metadata. No question text or authoritative marks are inferred from this list. |
-| `data/imports/validated/` | Reviewed structured batches awaiting integration. Not consumed by the practice UI in this release. |
-| `tests/archive.test.mjs` | Coverage semantics, schema failures, combined filters, key constraints and import write behavior. |
+| `src/archive/index.js` | Archive validation, combined filters and honest source-coverage statistics. |
+| `src/archive/questions.js`, `scripts/import-pyq.mjs` | Base reviewed-batch validation and exclusive, whole-batch staging. |
+| `src/content/catalog.js` | Deeply immutable content registry, filters, exact marking, source identity and full-paper completeness gate. |
+| `src/content/session.js` | Historical attempts, deadlines, responses, visits, flags, bounded active timing, regraded reports and a 20-session workspace. |
+| `assets/content-loader.js` | Release-relative downloads, bounded paper bundles, SHA-256 checks and registry reconstruction. |
+| `assets/pyq.js` | Chapter sets, historical paper instructions, test navigation, review, exact-question retries and backup controls. |
+| `scripts/build-content.mjs`, `scripts/render-math.mjs` | Validate explicit content inputs and compile escaped prose/LaTeX into native MathML. |
+| `src/learning/storage.js` | One browser-wide workspace writer using an exclusive Web Lock. |
+| `content/review-audit.json` | Source pages, key checks, dataset revision, normalization notes and source/asset hashes. |
 
-The archive module has no dependency on the DOM, storage or network. It can be reused by the browser, Node scripts and future backend services. Files use ES modules. The first version keeps these boundaries inside one project; a future repository split can follow the three-repository Avenquellis convention without changing the data identities.
+Pure engines have no DOM, network or storage dependency. Files use ES modules and run in Node or the browser. The current repository keeps these boundaries together; a future repository split must preserve stable identities.
 
-## Contracts that must remain stable
+## Historical content and scoring
 
-- A year in the archive means a source is listed for that year. Completeness is a separate property.
-- Paper and question IDs are persistent identities, not positions in an array. Catalog additions must not change saved sessions.
-- Original generated practice, linked historical papers and reviewed transcriptions carry different provenance.
-- No common marking default is assumed across years or sections. Unknown metadata stays `null`.
-- Reviewing an answer in practice must not silently replace a learner's first-attempt history.
-- Import validation precedes persistence. Invalid batches preserve existing data.
-- Source and editor claims remain inspectable. Well-formed records alone do not prove mathematical correctness.
+The reviewed bank contains 51 questions per paper, 180 marks per paper and a 180-minute duration per paper. Chapter filters can select questions across both papers. Full mocks retain the original question order, subject sections and marking; a custom set is not presented as a complete exam paper.
 
-## Limits and next integration work
+Normalized historical questions expose source provenance, chapter IDs, type, options, exact answer, optional accepted range or discrete values, explicit marks, solutions, matching lists and assets. Numeric parsing uses rational arithmetic. Multiple-correct partial scores are exact permitted subsets, not a global heuristic. Two dropped Paper 2 Physics questions award +3 unconditionally and are reported separately from correct or attempted questions.
 
-The link catalog contains source metadata, not a full question database. The structured importer supports single-choice, multiple-choice and decimal numeric responses, with explicit subset partial-credit rules. It deliberately refuses unsupported written, matching and exceptional marking formats. The source-linked archive reports zero practice-ready items even if separate staged files exist.
+The runtime refuses missing reviews, unsafe or unavailable assets, duplicate source identities and mismatched paper metadata. Full-paper readiness additionally requires exact counts, order, totals, duration, all PCM subjects and section-rule agreement. The separate [content pipeline](CONTENT-PIPELINE.md) describes evidence and review limitations.
 
-The staging CLI already resolves paper IDs, year, era, subject and source URLs against the catalog. Before wiring staged PYQs into practice, preserve source and answer-key versions, validate diagrams and shared passages, add exact scoring tests for official section examples, and inspect question rendering. Practice content should be lazy-loaded by year or subject as the corpus grows. Large archives should not be stored as one synchronous `localStorage` payload; keep progress identifiers separate from immutable question data.
+## Identity and persistence
 
-The local-first study model does not supply cross-device accounts or authoritative proctored grading. Browser-delivered keys are inspectable. An eventual competitive mode would need server-held keys and authenticated attempts, whereas ordinary self-study can remain local.
+Content IDs such as `2023_P1_Chemistry_Q01-v1` identify a specific reviewed record, not an array position. `bankId` binds historical backups to a compatible bank. A historical session stores question IDs, responses, visits, flags and timing alongside its start/deadline/finish timestamps. Questions, answer keys and score totals are resolved from the registry when reporting or restoring.
 
-## Validation
+Responses at or after the deadline do not change the attempt; the session finishes at the deadline. Only explicit visible-screen timing calls add active time, each bounded to 60 seconds and to elapsed wall time. Time spent elsewhere still consumes a timed exam's wall-clock duration. A completed attempt leaves the active slot and is saved once by stable session ID. History keeps the latest 20 completed historical attempts; duplicate IDs, unfinished history, invalid arrays and impossible timing fail restore.
+
+PYQ backup exports the active attempt and those 20 reports. Import checks the version, bank identity and every session, recomputes reports, and asks before replacing existing local PYQ work. No stored total is authoritative. Original-practice first-attempt progress, its separate 50-session history and revision notebook remain distinct; the PYQ backup does not claim to include those stores.
+
+`src/learning/storage.js` holds the editing tab's exclusive Web Lock. A second tab can browse reports and active questions but cannot persist mutations. Reader snapshots update the mounted PYQ workspace without resetting the report filter or question position for timing-only changes. Unsupported lock APIs degrade to in-memory practice with an export reminder; no timestamp-based local-storage lease is used. Page hiding flushes timing and releases the lock, and a restored back/forward-cache page reloads to acquire a fresh role.
+
+Corrupt saved state is preserved rather than overwritten. A failed PYQ persistence callback leaves the accepted session intact. Route generation guards prevent an asynchronous content download from painting a route the learner has already left. Mount cleanup removes timers and document/window listeners.
+
+## Original practice and study analysis
+
+The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
+
+Original-practice completed history is limited to 50 validated sessions, with first-attempt grades protected from retries. Notebook annotations refer to original question identities and hold bounded cause labels, notes and resolution flags. Resolving an annotation or improving a retry does not rewrite the first attempt. Historical reports likewise distinguish a new exact-question retry from its source attempt.
+
+No rank, percentile, national comparison or difficulty calibration is derived from this local data. Browser-delivered answer keys are inspectable; this is a self-study workspace, not a proctored assessment system.
+
+## Static release and delivery
+
+Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an immutable `releases/<content-hash>/` tree, a revalidated root document and a scoped service worker. Release-relative content bundles and 39 local diagram files are part of that release. The worker verifies SHA-256 digests before caching assets and waits for old tabs to close before activating an update.
+
+KaTeX is a build-time dependency vendored with its license. Published pages use native MathML; application code, fonts and content figures are self-hosted. External source PDFs remain navigation links, excluded from offline caching and load tests. No runtime database, model grading or account service is required.
+
+This architecture does not establish capacity for 10,000 simultaneous learners. That target remains unmeasured until the separate bounded test and deployment acceptance criteria are met. See [capacity notes](CAPACITY.md) and the release checklist. Accounts and cross-device synchronization remain future work; learners can transfer a compatible PYQ backup manually.
+
+## Verification
 
 ```sh
-node --test tests/archive.test.mjs
+npm test
 node scripts/validate-archive.mjs
+npm run build
 ```
 
-The tests verify implementation behavior, including no-write on rejected imports and distinct listed-year versus full-paper counts. They do not certify remote links, transcription accuracy, the legality of redistribution or the completeness of historical coverage. The content pipeline records which evidence is still needed.
-
-## Public Cloudflare release
-
-Production is a static Cloudflare Pages deployment. `scripts/build.mjs` emits an immutable `releases/<content-hash>/` tree, a revalidated root document, and a scoped service worker. The worker verifies SHA-256 digests before caching a release; it requests the canonical release directory URL to avoid Pages' index.html redirects. It serves a consistent release shell and waits for old tabs to close before activating an update.
-
-`src/learning/storage.js` holds an exclusive Web Lock for the editing tab. Other tabs can inspect the workspace and receive browser storage updates, but cannot overwrite saved state. If locks are unavailable, the app permits in-memory practice with an explicit export reminder. There is no cross-device account or server-side data store.
-
-All fonts, application code and archive metadata are self-hosted. External paper sources are navigation links, excluded from offline caching and load tests. CI runs state/content/build tests and rejects release hashes, payloads or static-only packaging that violate the release gate. See [capacity notes](CAPACITY.md) for the unverified 10,000-concurrent-user target and the test profile.
-
-## Study workflow (0.3)
-
-The dashboard, test centre, analysis, report and notebook are separate vanilla UI modules under assets/. Session state remains pure and deterministic. Every positional response/flag/timing/visit array follows the same identity permutation when a PCM set is grouped by subject.
-
-Active timing uses a monotonic browser interval and is bounded by session wall-clock timestamps, accumulated only while the practice screen is visible. Visibility changes, navigation, response entry and submission flush timing; an expiry transition records completed history immediately. Opening setup with an existing session does not count activity or replace its answers until the learner starts a new set.
-
-History is a versioned array of at most 50 completed sessions. Restore reconstructs questions and grades; no stored keys/totals are trusted. First saved session ID wins. Notebook annotations hold only original question identities, cause, bounded text and a resolution flag; first-attempt grades are recomputed. A failed persistence callback leaves the draft available. Neither manual resolution nor a successful retry changes the first attempt.
-
-The exclusive-writer rule applies to all new edits. Reader tabs can inspect historical reports and notebook filters without session timing events resetting their view. Storage remains local, with no runtime backend requests.
+Engine tests cover source identity and completeness, exact scoring, deadline boundaries, storage tampering, deduplication, bounded timing and regraded reports. UI-controller tests cover reader report/filter continuity, active-session updates and cleanup. Build tests cover native math compilation, hashes and release isolation. These verify software behavior; source inspection and mathematical review remain separate evidence requirements.

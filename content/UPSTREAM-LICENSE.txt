@@ -1,0 +1,40 @@
+Source: propar2750 / JEE Advanced 2022–2026
+Author attribution: propar2750 (2026)
+Pinned revision: 2580e96f1e74343e1d478509187f16fe58dbab85
+Dataset card:
+https://huggingface.co/datasets/propar2750/jee-advanced/blob/2580e96f1e74343e1d478509187f16fe58dbab85/README.md
+
+The pinned dataset card declares license: mit and states:
+
+"The questions, answer keys and figures come from the official JEE Advanced
+2022–2026 papers and final answer keys, published by the IITs that organise the
+exam. They remain the work of those institutes.
+
+The transcriptions, structure and annotations in this dataset are released
+under the MIT license."
+
+The repository does not include a separate LICENSE file at this revision.
+The statement above is the upstream license grant and scope. Original 2023
+examination material is attributed to JEE (Advanced), IIT Guwahati. The figure
+files are crops of that original material. Vedaris does not claim that the
+dataset's MIT statement transfers the institutes' underlying rights.
+
+MIT License terms
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
