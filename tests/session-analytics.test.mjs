@@ -202,3 +202,32 @@ test('history keeps the latest fifty sessions and computes per-session subject a
   const oversized = { version: 1, sessions: [...history.sessions, history.sessions[0]] };
   assert.equal(restoreHistory(JSON.stringify(oversized), now + 60000), null);
 });
+
+
+test('CSV export recomputes scores, sorts sessions, and preserves unknown timing as blank', async () => {
+  const { historyCSV } = await import('../src/learning/history.js');
+  const older = legacy(correctSession(1, now));
+  const newer = correctSession(2, now + 100);
+  older.score = 99999;
+  const history = {version:1,sessions:[older,newer]};
+  const before = JSON.stringify(history);
+  const csv = historyCSV(history, now + 1000);
+  const lines = csv.trimEnd().split('\r\n');
+  assert.equal(lines.length,3);
+  assert.match(lines[1], new RegExp(newer.id));
+  assert.match(lines[2], new RegExp(older.id));
+  assert.doesNotMatch(csv,/99999/);
+  assert.equal(lines[2].split(',')[13],'');
+  assert.equal(lines[1].split(',')[13],'0');
+  assert.equal(lines[1].split(',')[6],'1');
+  assert.equal(JSON.stringify(history),before);
+  assert.equal(historyCSV({version:1,sessions:[]},now).trimEnd().split('\r\n').length,1);
+});
+
+test('CSV export refuses active or corrupted saved history rather than inventing scores', async () => {
+  const { historyCSV } = await import('../src/learning/history.js');
+  assert.throws(()=>historyCSV({version:1,sessions:[create()]},now+1000),/completed/);
+  const finished = correctSession(1,now);
+  finished.questions[0].templateId='unknown';
+  assert.throws(()=>historyCSV({version:1,sessions:[finished]},now+1000));
+});
