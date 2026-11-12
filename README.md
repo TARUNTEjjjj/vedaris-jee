@@ -122,3 +122,14 @@ The learner workflow is inspired by the capability split between MathonGo MARKS 
 Active question time counts only the visible practice screen, including its submit dialog. Elapsed session time includes time away. Legacy sessions without recorded timing remain unknown. Session history retains the latest 50 completed sessions and is separate from first-attempt progress; notebook resolution is a learner decision and never rewrites the original score. The original-practice progress export covers first-attempt answers only: its session history, goals, bookmarks and notebook notes remain browser-local. PYQ backup separately includes the active historical attempt and latest 20 reports.
 
 The 0.5 PYQ workspace retains stable, revisioned question IDs and the compatible bank identity so earlier attempts survive this expansion. It grades exact numbers, discrete alternatives, inclusive ranges, disjoint accepted intervals and official alternative option sets. Section-specific partial marks and penalties are preserved, including the 2026 multiple-correct penalty of −1. Officially dropped questions receive their published bonus marks even when blank; bonuses are excluded from accuracy. Matching lists, shared passages and diagram labels are preserved.
+
+
+### Export session analysis
+
+Analysis now exports validated completed-session summaries as CSV for personal
+spreadsheets. Scores are recalculated from question identities and responses;
+backup-supplied totals are ignored. The export includes UTC completion times,
+mode, subject, outcomes, marks, accuracy and timing. Blank timing means unknown,
+and blank accuracy means no answered questions. It does not include notes or
+individual answers and does not change saved history. These are original-practice
+session summaries, not PYQ attempts or exam-rank predictions.

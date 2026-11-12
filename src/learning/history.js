@@ -67,3 +67,27 @@ export function historyStats(history, now = Date.now()) {
   const correct = rows.filter(row => row.status === 'correct').length;
   return { sessionCount: sessions.length, questionCount: rows.length, attempted, correct, incorrect: rows.filter(row => row.status === 'incorrect').length, partial: rows.filter(row => row.status === 'partial').length, skipped: rows.filter(row => row.status === 'skipped').length, score: rows.reduce((sum, row) => sum + row.score, 0), maxScore: rows.reduce((sum, row) => sum + row.maxScore, 0), accuracy: attempted ? correct / attempted * 100 : null, activeTimeMs: sessions.some(entry => entry.activeTimeMs === null) ? null : sessions.reduce((sum, entry) => sum + entry.activeTimeMs, 0), knownTimingSessionCount: sessions.filter(entry => entry.activeTimeMs !== null).length, elapsedMs: sessions.reduce((sum, entry) => sum + entry.elapsedMs, 0), subjects: groups(rows, SUBJECTS, 'subject'), chapters: groups(rows, CHAPTERS, 'chapter'), sessions };
 }
+
+/** Spreadsheet-ready session summaries. Reconstruct scores from validated
+ * question identities and responses; never trust totals stored in a backup.
+ * Blank timing/accuracy means unknown or no attempts, not zero. */
+export function historyCSV(history, now = Date.now()) {
+  const stats = historyStats(history, now);
+  const fields = ['session_id', 'completed_at_utc', 'mode', 'subject', 'questions',
+    'attempted', 'correct', 'partial', 'incorrect', 'skipped', 'score', 'max_score',
+    'accuracy_percent', 'active_time_ms', 'elapsed_time_ms'];
+  const cell = value => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'number') return String(value);
+    // Quote every text field and neutralize spreadsheet formula prefixes.
+    let text = String(value);
+    if (/^[\s\u0000-\u001f]*[=+\-@]/u.test(text)) text = "'" + text;
+    return '"' + text.replaceAll('"', '""') + '"';
+  };
+  const rows = stats.sessions.map(entry => [entry.id,
+    new Date(entry.session.finishedAt).toISOString(), entry.session.mode, entry.session.subject,
+    entry.questionCount, entry.attempted, entry.report.correct, entry.report.partial,
+    entry.report.incorrect, entry.report.skipped, entry.report.score, entry.report.maxScore,
+    entry.accuracy, entry.activeTimeMs, entry.elapsedMs]);
+  return [fields, ...rows].map(row => row.map(cell).join(',')).join('\r\n') + '\r\n';
+}
