@@ -96,7 +96,7 @@ Created and maintained by **Tarun Tej**. Original project code is MIT licensed. 
 
 ## Cloudflare production and the 10,000-user target
 
-The public deployment is **https://vedaris-jee.pages.dev/**. The GitHub source remains private. The earlier ChatGPT Site is a separate private preview, not the production address; browser-local progress does not automatically move between domains.
+The public deployment is **https://vedaris-jee.pages.dev/**. The GitHub source is public. The earlier ChatGPT Site is a separate private preview, not the production address; browser-local progress does not automatically move between domains.
 
 This release is designed for a target of 10,000 concurrent open study sessions: Cloudflare serves immutable static assets and the browser generates, scores and stores practice. It has no application server, database, per-user API or cloud grading call to saturate. **A 10,000-user production load test has not been completed.** See [capacity model and test protocol](docs/CAPACITY.md) for the distinction between open sessions, cold-launch bursts and measured capacity.
 
