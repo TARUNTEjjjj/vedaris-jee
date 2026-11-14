@@ -6,6 +6,7 @@ import {join} from 'node:path';
 import vm from 'node:vm';
 import {createHash, webcrypto} from 'node:crypto';
 import {buildSite, serviceWorkerSource} from '../scripts/build.mjs';
+import {publicResourceFiles} from '../scripts/stage-resource-explorer.mjs';
 
 const hash = value => createHash('sha256').update(value).digest('hex');
 async function fixture() {
@@ -15,7 +16,7 @@ async function fixture() {
     'resources/index.html': '<h1>Resource library</h1>',
     'resources/explorer.css': 'body {color: green}',
     'resources/explorer.mjs': 'export const publicLibrary = true;',
-    'resources/catalog.json': JSON.stringify({schemaVersion: 1, items: []}),
+    'resources/catalog.json': JSON.stringify({schemaVersion: 1, project: 'fixture', items: []}),
     'resources/sources.json': 'PRIVATE CONFIG MUST NOT SHIP',
     'resources/.cache.json': 'PRIVATE CACHE MUST NOT SHIP',
     'src/core.js': 'export const answer = 42;\n',
@@ -31,6 +32,10 @@ async function fixture() {
     '_headers': '/*\n  X-Content-Type-Options: nosniff\n',
     '404.html': '<link rel="stylesheet" href="assets/style.css"><h1>Not found</h1><a href="./">Home</a>',
   };
+  for (const file of publicResourceFiles) if (!Object.hasOwn(files, 'resources/' + file)) {
+    files['resources/' + file] = file === 'offline-worker.js'
+      ? await readFile(new URL('../resources/offline-worker.js', import.meta.url), 'utf8') : 'export const fixture = true;';
+  }
   for (const [path, content] of Object.entries(files)) await writeFile(join(root, path), content);
   return root;
 }
@@ -47,7 +52,10 @@ test('build emits deterministic versioned assets and excludes unpublished input'
     assert.equal(await readFile(join(root, `dist/${first.release}/index.html`), 'utf8'), index);
     assert.deepEqual(await readdir(join(root, 'dist')), ['404.html', '_headers', 'build-info.json', 'index.html', 'manifest.webmanifest', 'releases', 'resources', 'sw.js']);
     assert.ok(Object.keys(first.files).every(path => !path.includes('imports/') && !path.includes('tests/') && !path.endsWith('sources.json') && !path.includes('.cache')));
-    assert.deepEqual(await readdir(join(root, 'dist/resources')), ['catalog.json', 'explorer.css', 'explorer.mjs', 'index.html']);
+    assert.deepEqual(await readdir(join(root, 'dist/resources')), [...publicResourceFiles].sort());
+    const libraryWorker = await readFile(join(root, 'dist/resources/offline-worker.js'), 'utf8');
+    assert.ok(!libraryWorker.includes('/* RESOURCE_SHELL_MANIFEST */ []'), 'The independent library worker receives its verified shell inventory');
+    assert.equal(await readFile(join(root, `dist/${first.release}/resources/offline-worker.js`), 'utf8'), libraryWorker);
     assert.ok(first.precachePaths.every(path => !path.includes('/resources/')), 'The optional library does not expand mandatory offline installation');
     assert.equal(await readFile(join(root, `dist/${first.release}/assets/fonts/LICENSE.txt`), 'utf8'), 'Test font notice');
     const appUrl = new URL(`${first.release}/assets/app.js`, 'https://example.org/app/');
@@ -157,6 +165,7 @@ test('large paper assets are fetched on demand, verified, then available offline
 test('SW verifies an entire release, uses only its own cache and leaves active tabs alone', async () => {
   const worker = workerHarness();
   worker.stores.set('another-app', new Map());
+  worker.stores.set('resource-library-shell:/resources/:current', new Map());
   worker.stores.set('vedaris-static:https://example.org/other/:old', new Map());
   worker.stores.set(`vedaris-static:${worker.scope}:old`, new Map());
   await worker.lifecycle('install');
@@ -165,6 +174,7 @@ test('SW verifies an entire release, uses only its own cache and leaves active t
   await worker.lifecycle('activate');
   assert.equal(worker.controls.claim, 0);
   assert.ok(worker.stores.has('another-app'));
+  assert.ok(worker.stores.has('resource-library-shell:/resources/:current'));
   assert.ok(worker.stores.has('vedaris-static:https://example.org/other/:old'));
   assert.ok(!worker.stores.has(`vedaris-static:${worker.scope}:old`));
   const before = worker.fetches.length;
@@ -177,6 +187,9 @@ test('SW verifies an entire release, uses only its own cache and leaves active t
   assert.equal(worker.request('https://external.example/paper.pdf'), undefined);
   assert.equal(worker.request('missing-page', {mode: 'navigate'}), undefined);
   assert.equal(worker.request('', {method: 'POST'}), undefined);
+  assert.equal(worker.request('resources/', {mode: 'navigate'}), undefined);
+  assert.equal(worker.request('resources/live.mjs'), undefined);
+  assert.equal(worker.request('resources/offline-worker.js'), undefined);
 });
 
 test('SW install rejects 404s and HTML deployment fallbacks without leaving a poisoned cache', async () => {

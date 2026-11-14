@@ -6,6 +6,7 @@ import {tmpdir} from 'node:os';
 import {dirname, join} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {retainReleases, canonicalReleasePath, PRODUCTION_ORIGIN, MAX_ASSET_BYTES} from '../scripts/retain-releases.mjs';
+import {publicResourceFiles} from '../scripts/stage-resource-explorer.mjs';
 
 const A='aaaaaaaaaaaaaaaaaaaa', B='bbbbbbbbbbbbbbbbbbbb', C='cccccccccccccccccccc', D='dddddddddddddddddddd';
 const hash = value => createHash('sha256').update(value).digest('hex');
@@ -89,6 +90,25 @@ test('retains every prior release, uses canonical shell URLs, and leaves current
       assert.deepEqual(following.retainedVersions,[A,B,C]);
       assert.equal(await readFile(join(next.dist,`releases/${A}/assets/content/diagram.png`),'utf8'),'figure bytes');
     }finally{await next.cleanup();}
+  }finally{await f.cleanup();}
+});
+
+test('retains the complete old library shell without replacing current mutable aliases',async()=>{
+  const f=await fixture();
+  try {
+    const contents={...releaseFiles(A)};
+    for(const file of publicResourceFiles) {
+      contents[`releases/${A}/resources/${file}`]='Old public resource '+file;
+      contents[`resources/${file}`]='Mutable alias must not be copied';
+    }
+    const net=network(manifest(A,contents),contents);
+    const result=await retainReleases({dist:f.dist,fetchImpl:net.fetchImpl});
+    assert.equal(result.downloadedFiles,3+publicResourceFiles.length);
+    for(const file of publicResourceFiles) {
+      assert.equal(await readFile(join(f.dist,`releases/${A}/resources/${file}`),'utf8'),'Old public resource '+file);
+      await assert.rejects(readFile(join(f.dist,'resources',file)),{code:'ENOENT'});
+    }
+    assert.ok(net.calls.every(call=>!new URL(call.url).pathname.startsWith('/resources/')));
   }finally{await f.cleanup();}
 });
 
