@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { validateArchive, archiveStats } from '../src/archive/index.js';
 import { prepareContent } from './build-content.mjs';
+import {publicResourceFiles} from './stage-resource-explorer.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -89,7 +90,8 @@ export async function buildSite(root = projectRoot) {
   if (errors.length) throw new Error(errors.join('\n'));
   const assets = await walk(root, 'assets');
   const content = await prepareContent(root, archive, assets);
-  const publicInputs = [...await walk(root, 'src'), ...assets, 'data/archive.json', ...content.inputs.keys()].sort();
+  const resourceInputs=publicResourceFiles.map(file=>'resources/'+file);
+  const publicInputs = [...resourceInputs, ...await walk(root, 'src'), ...assets, 'data/archive.json', ...content.inputs.keys()].sort();
   if (new Set(publicInputs).size !== publicInputs.length) throw new Error('Duplicate release input path');
   const inputs = new Map();
   for (const path of [...publicInputs, 'index.html', 'manifest.webmanifest', '_headers', '404.html'].sort()) {
@@ -114,6 +116,8 @@ export async function buildSite(root = projectRoot) {
     emitted.set(path, digest(bytes));
   }
   for (const path of publicInputs) await emit(`${prefix}/${path}`, inputs.get(path));
+  // Public aliases keep navigation stable; release copies retain snapshot integrity.
+  for (const path of resourceInputs) await emit(path, inputs.get(path));
   const html = versionHtml(inputs.get('index.html').toString('utf8'), prefix);
   await emit('index.html', html);
   // Served as the root response by the worker, so its relative asset URLs resolve at scope root.
@@ -133,7 +137,7 @@ export async function buildSite(root = projectRoot) {
   // Pages redirects index.html to its directory URL. Hash the emitted bytes but request
   // their canonical URL so redirect:error remains a valid integrity safeguard.
   const releaseFiles = Object.fromEntries([...emitted].filter(([path]) => path.startsWith(`${prefix}/`)).map(([path, hash]) => [path.endsWith('/index.html') ? path.slice(0, -'index.html'.length) : path, hash]).sort(([a], [b]) => a.localeCompare(b, 'en')));
-  const precache = Object.keys(releaseFiles).filter(path => !path.startsWith(`${prefix}/assets/content/`) && (!path.startsWith(`${prefix}/data/content/`) || path.endsWith('/catalog.json')));
+  const precache = Object.keys(releaseFiles).filter(path => !path.startsWith(`${prefix}/resources/`) && !path.startsWith(`${prefix}/assets/content/`) && (!path.startsWith(`${prefix}/data/content/`) || path.endsWith('/catalog.json')));
   const sw = serviceWorkerSource({version, files: releaseFiles, precache, shell: `${prefix}/`});
   await emit('sw.js', sw);
   const bytes = [...inputs.values()].reduce((sum, buffer) => sum + buffer.length, 0);

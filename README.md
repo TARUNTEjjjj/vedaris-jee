@@ -133,3 +133,7 @@ mode, subject, outcomes, marks, accuracy and timing. Blank timing means unknown,
 and blank accuracy means no answered questions. It does not include notes or
 individual answers and does not change saved history. These are original-practice
 session summaries, not PYQ attempts or exam-rank predictions.
+
+## GitHub resource collection
+
+Explore the project-specific [resource catalog](resources/README.md): curated references, star-ranked discovery, dated source metadata, cached failure recovery and an optional read-only server API. The repository includes a daily refresh workflow; hosted sites still follow their existing deployment process.

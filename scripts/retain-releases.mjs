@@ -10,7 +10,8 @@ export const MAX_ASSET_BYTES = 5 * 1024 * 1024;
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 const VERSION = /^[a-f0-9]{20}$/;
 const HASH = /^[a-f0-9]{64}$/;
-const MUTABLE_FILES = new Set(['index.html', '404.html', '_headers', 'manifest.webmanifest', 'sw.js']);
+const RESOURCE_FILES = new Set(['resources/index.html', 'resources/explorer.css', 'resources/explorer.mjs', 'resources/catalog.json']);
+const MUTABLE_FILES = new Set(['index.html', '404.html', '_headers', 'manifest.webmanifest', 'sw.js', ...RESOURCE_FILES]);
 const projectDist = fileURLToPath(new URL('../dist', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -27,7 +28,7 @@ export function validateReleaseInfo(info) {
     assert(match, `Unsafe release path: ${path}`);
     const relative = match[2], segments = relative.split('/');
     assert(segments.every(part => /^[a-zA-Z0-9_-][a-zA-Z0-9._-]*$/.test(part)) &&
-      (['index.html', 'manifest.webmanifest'].includes(relative) || /^(?:assets|src|data)\//.test(relative)), `Unsafe release path: ${path}`);
+      (['index.html', 'manifest.webmanifest'].includes(relative) || RESOURCE_FILES.has(relative) || /^(?:assets|src|data)\//.test(relative)), `Unsafe release path: ${path}`);
     assert(!segments.some(part => ['_worker.js', '_headers', '_redirects', 'functions'].includes(part)), `Unsafe release path: ${path}`);
     immutable.set(path, digest); versions.add(match[1]);
   }

@@ -10,8 +10,14 @@ import {buildSite, serviceWorkerSource} from '../scripts/build.mjs';
 const hash = value => createHash('sha256').update(value).digest('hex');
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'vedaris-build-'));
-  for (const path of ['src', 'assets/fonts', 'data/imports/validated']) await mkdir(join(root, path), {recursive: true});
+  for (const path of ['src', 'assets/fonts', 'data/imports/validated', 'resources']) await mkdir(join(root, path), {recursive: true});
   const files = {
+    'resources/index.html': '<h1>Resource library</h1>',
+    'resources/explorer.css': 'body {color: green}',
+    'resources/explorer.mjs': 'export const publicLibrary = true;',
+    'resources/catalog.json': JSON.stringify({schemaVersion: 1, items: []}),
+    'resources/sources.json': 'PRIVATE CONFIG MUST NOT SHIP',
+    'resources/.cache.json': 'PRIVATE CACHE MUST NOT SHIP',
     'src/core.js': 'export const answer = 42;\n',
     'assets/app.js': "import {answer} from '../src/core.js'; export const archiveUrl = new URL('../data/archive.json', import.meta.url); console.log(answer);\n",
     'assets/style.css': '@font-face {font-family: Demo;src:url(./fonts/demo.woff2)}\n',
@@ -39,8 +45,10 @@ test('build emits deterministic versioned assets and excludes unpublished input'
     assert.match(index, new RegExp(`src="${first.release}/assets/app.js"`));
     assert.match(index, new RegExp(`href="${first.release}/manifest.webmanifest"`));
     assert.equal(await readFile(join(root, `dist/${first.release}/index.html`), 'utf8'), index);
-    assert.deepEqual(await readdir(join(root, 'dist')), ['404.html', '_headers', 'build-info.json', 'index.html', 'manifest.webmanifest', 'releases', 'sw.js']);
-    assert.ok(Object.keys(first.files).every(path => !path.includes('imports/') && !path.includes('tests/')));
+    assert.deepEqual(await readdir(join(root, 'dist')), ['404.html', '_headers', 'build-info.json', 'index.html', 'manifest.webmanifest', 'releases', 'resources', 'sw.js']);
+    assert.ok(Object.keys(first.files).every(path => !path.includes('imports/') && !path.includes('tests/') && !path.endsWith('sources.json') && !path.includes('.cache')));
+    assert.deepEqual(await readdir(join(root, 'dist/resources')), ['catalog.json', 'explorer.css', 'explorer.mjs', 'index.html']);
+    assert.ok(first.precachePaths.every(path => !path.includes('/resources/')), 'The optional library does not expand mandatory offline installation');
     assert.equal(await readFile(join(root, `dist/${first.release}/assets/fonts/LICENSE.txt`), 'utf8'), 'Test font notice');
     const appUrl = new URL(`${first.release}/assets/app.js`, 'https://example.org/app/');
     assert.equal(new URL('../data/archive.json', appUrl).pathname, `/app/${first.release}/data/archive.json`);
