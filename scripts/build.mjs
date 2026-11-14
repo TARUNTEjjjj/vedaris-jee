@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { validateArchive, archiveStats } from '../src/archive/index.js';
 import { prepareContent } from './build-content.mjs';
-import {publicResourceFiles} from './stage-resource-explorer.mjs';
+import {publicResourceFiles, readResourceExplorerInputs} from './stage-resource-explorer.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -91,11 +91,12 @@ export async function buildSite(root = projectRoot) {
   const assets = await walk(root, 'assets');
   const content = await prepareContent(root, archive, assets);
   const resourceInputs=publicResourceFiles.map(file=>'resources/'+file);
+  const resourceBytes=new Map([...await readResourceExplorerInputs(root)].map(([file,bytes])=>['resources/'+file,bytes]));
   const publicInputs = [...resourceInputs, ...await walk(root, 'src'), ...assets, 'data/archive.json', ...content.inputs.keys()].sort();
   if (new Set(publicInputs).size !== publicInputs.length) throw new Error('Duplicate release input path');
   const inputs = new Map();
   for (const path of [...publicInputs, 'index.html', 'manifest.webmanifest', '_headers', '404.html'].sort()) {
-    const bytes = content.inputs.get(path) ?? await readFile(join(root, path));
+    const bytes = content.inputs.get(path) ?? resourceBytes.get(path) ?? await readFile(join(root, path));
     if (bytes.length > MAX_FILE_BYTES) throw new Error(`Release input exceeds 5 MiB budget: ${path}`);
     inputs.set(path, bytes);
   }

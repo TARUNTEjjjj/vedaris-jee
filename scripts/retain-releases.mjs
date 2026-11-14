@@ -10,7 +10,8 @@ export const MAX_ASSET_BYTES = 5 * 1024 * 1024;
 const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 const VERSION = /^[a-f0-9]{20}$/;
 const HASH = /^[a-f0-9]{64}$/;
-const RESOURCE_FILES = new Set(['resources/index.html', 'resources/explorer.css', 'resources/explorer.mjs', 'resources/catalog.json']);
+const RESOURCE_FILES = new Set(['resources/index.html', 'resources/explorer.css', 'resources/explorer.mjs', 'resources/catalog.json',
+  'resources/catalog.mjs', 'resources/storage.mjs', 'resources/live.mjs', 'resources/background.mjs', 'resources/offline.mjs', 'resources/offline-worker.js']);
 const MUTABLE_FILES = new Set(['index.html', '404.html', '_headers', 'manifest.webmanifest', 'sw.js', ...RESOURCE_FILES]);
 const projectDist = fileURLToPath(new URL('../dist', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
