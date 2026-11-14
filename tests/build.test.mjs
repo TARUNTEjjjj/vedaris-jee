@@ -13,7 +13,7 @@ async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'vedaris-build-'));
   for (const path of ['src', 'assets/fonts', 'data/imports/validated', 'resources']) await mkdir(join(root, path), {recursive: true});
   const files = {
-    'resources/index.html': '<h1>Resource library</h1>',
+    'resources/index.html': '<html><head><title>Resource library</title></head><body><h1>Resource library</h1></body></html>',
     'resources/explorer.css': 'body {color: green}',
     'resources/explorer.mjs': 'export const publicLibrary = true;',
     'resources/catalog.json': JSON.stringify({schemaVersion: 1, project: 'fixture', items: []}),
@@ -27,10 +27,10 @@ async function fixture() {
     'assets/fonts/LICENSE.txt': 'Test font notice',
     'data/archive.json': JSON.stringify({version: 1, checkedAt: '2026-11-11', sources: [], papers: []}),
     'data/imports/validated/unpublished.json': 'THIS MUST NOT SHIP',
-    'index.html': '<!doctype html><link rel="icon" href="assets/icon.svg"><link rel="stylesheet" href="assets/style.css"><link rel="manifest" href="manifest.webmanifest"><script type="module" src="assets/app.js"></script>',
+    'index.html': '<!doctype html><html><head><link rel="icon" href="assets/icon.svg"><link rel="stylesheet" href="assets/style.css"><link rel="manifest" href="manifest.webmanifest"><script type="module" src="assets/app.js"></script></head><body></body></html>',
     'manifest.webmanifest': JSON.stringify({name: 'Vedaris', start_url: './', icons: [{src: 'assets/icon.svg', type: 'image/svg+xml', sizes: 'any'}]}),
     '_headers': '/*\n  X-Content-Type-Options: nosniff\n',
-    '404.html': '<link rel="stylesheet" href="assets/style.css"><h1>Not found</h1><a href="./">Home</a>',
+    '404.html': '<html><head><link rel="stylesheet" href="assets/style.css"></head><body><h1>Not found</h1><a href="./">Home</a></body></html>',
   };
   for (const file of publicResourceFiles) if (!Object.hasOwn(files, 'resources/' + file)) {
     files['resources/' + file] = file === 'offline-worker.js'
@@ -50,7 +50,7 @@ test('build emits deterministic versioned assets and excludes unpublished input'
     assert.match(index, new RegExp(`src="${first.release}/assets/app.js"`));
     assert.match(index, new RegExp(`href="${first.release}/manifest.webmanifest"`));
     assert.equal(await readFile(join(root, `dist/${first.release}/index.html`), 'utf8'), index);
-    assert.deepEqual(await readdir(join(root, 'dist')), ['404.html', '_headers', 'build-info.json', 'index.html', 'manifest.webmanifest', 'releases', 'resources', 'sw.js']);
+    assert.deepEqual(await readdir(join(root, 'dist')), ['404.html', '_headers', 'app-version.json', 'build-info.json', 'index.html', 'manifest.webmanifest', 'releases', 'resources', 'sw.js']);
     assert.ok(Object.keys(first.files).every(path => !path.includes('imports/') && !path.includes('tests/') && !path.endsWith('sources.json') && !path.includes('.cache')));
     assert.deepEqual(await readdir(join(root, 'dist/resources')), [...publicResourceFiles].sort());
     const libraryWorker = await readFile(join(root, 'dist/resources/offline-worker.js'), 'utf8');
@@ -107,6 +107,8 @@ function workerHarness({scope = 'https://example.org/app/', version = 'release-a
   const handlers = {};
   const fetches = [];
   const controls = {networkFailure, skipWaiting: 0, claim: 0};
+  let safe=true;
+  const client={id:'window-1',url:scope,postMessage(data,ports){ports[0].postMessage({type:'APP_UPDATE_SAFETY',nonce:data.nonce,safe});}};
   const caches = {
     async open(name) {
       if (!stores.has(name)) stores.set(name, new Map());
@@ -117,8 +119,8 @@ function workerHarness({scope = 'https://example.org/app/', version = 'release-a
     async delete(name) { return stores.delete(name); },
   };
   const context = {
-    self: {registration: {scope}, addEventListener(type, callback) { handlers[type] = callback; }, skipWaiting() { controls.skipWaiting++; }, clients: {claim() { controls.claim++; }}},
-    caches, URL, Request, Response, crypto: webcrypto,
+    self: {registration: {scope}, addEventListener(type, callback) {const previous=handlers[type];handlers[type]=event=>{previous?.(event);callback(event);}; }, skipWaiting() { controls.skipWaiting++; }, clients: {claim() { controls.claim++; },async matchAll(){return [client];}}},
+    caches, URL, Request, Response, MessageChannel, setTimeout, clearTimeout, crypto: webcrypto,
     async fetch(request) {
       fetches.push(request);
       if (controls.networkFailure === 'offline') throw new Error('offline');
@@ -143,8 +145,20 @@ function workerHarness({scope = 'https://example.org/app/', version = 'release-a
     handlers.fetch({request: {url: new URL(path, scope).href, method, mode}, respondWith(value) { response = value; }});
     return response;
   }
-  return {stores, controls, fetches, lifecycle, request, cacheName: `vedaris-static:${scope}:${version}`, shellUrl: new URL(shell, scope).href, scope, version};
+  async function message(data){let reply;const pending=[];handlers.message({source:client,data,ports:[{postMessage(value){reply=value;}}],waitUntil(value){pending.push(value);}});await Promise.all(pending);return reply;}
+  return {stores, controls, fetches, lifecycle, request, message,setSafe(value){safe=value;}, cacheName: `vedaris-static:${scope}:${version}`, shellUrl: new URL(shell, scope).href, scope, version};
 }
+
+test('Vedaris activates only a fully cached matching release after all clients are safe',async()=>{
+ const worker=workerHarness(),command={type:'ACTIVATE_APP_UPDATE',version:'release-a',nonce:'a'.repeat(32)};
+ assert.equal((await worker.message({type:'GET_APP_UPDATE_STATUS'})).ready,false);
+ assert.equal((await worker.message(command)).accepted,false);
+ await worker.lifecycle('install');worker.setSafe(false);
+ assert.equal((await worker.message(command)).accepted,false);assert.equal(worker.controls.skipWaiting,0);
+ worker.setSafe(true);assert.equal(await worker.message({...command,version:'release-b'}),undefined);
+ assert.equal((await worker.message(command)).accepted,true);assert.equal(worker.controls.skipWaiting,1);
+ assert.equal(worker.request('app-version.json'),undefined);
+});
 
 test('large paper assets are fetched on demand, verified, then available offline', async () => {
   const shell='releases/release-a/', paper=shell+'data/content/2022-p1.json';
@@ -176,7 +190,7 @@ test('SW verifies an entire release, uses only its own cache and leaves active t
   assert.ok(worker.stores.has('another-app'));
   assert.ok(worker.stores.has('resource-library-shell:/resources/:current'));
   assert.ok(worker.stores.has('vedaris-static:https://example.org/other/:old'));
-  assert.ok(!worker.stores.has(`vedaris-static:${worker.scope}:old`));
+  assert.ok(worker.stores.has(`vedaris-static:${worker.scope}:old`));
   const before = worker.fetches.length;
   worker.controls.networkFailure = 'offline';
   const response = await worker.request('', {mode: 'navigate'});

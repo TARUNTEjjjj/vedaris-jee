@@ -40,6 +40,11 @@ assert(offlineEncoded<2*1024*1024,'Compressed application offline cache exceeds 
 assert(retainedBytes<=MAX_RETAINED_BYTES,'Retained release byte budget exceeded');
 assert([...precache].every(path=>Object.hasOwn(info.files,path) && !path.includes('/assets/content/') && (!path.includes('/data/content/') || path.endsWith('/catalog.json'))),'Paper content must load on demand');
 const html=await readFile(join(dist,'index.html'),'utf8');
+const appRelease=JSON.parse(await readFile(join(dist,'app-version.json'),'utf8'));
+assert(appRelease.project==='vedaris-jee'&&/^[a-f0-9]{64}$/.test(appRelease.version),'Application version invalid');
+for(const path of ['index.html','resources/index.html','404.html'])
+  assert((await readFile(join(dist,path),'utf8')).includes(`name="app-version" content="${appRelease.version}"`),`Application baseline mismatch: ${path}`);
+assert(!info.precachePaths.some(path=>path.endsWith('/app-version.json')),'Version checks must bypass offline assets');
 assert(!/https:\/\/(fonts\.googleapis|fonts\.gstatic)/.test(html),'External font dependency in shell');
 const css=await readFile(join(dist,info.release,'assets/style.css'),'utf8');
 assert(!/@import\s+url|https:\/\//.test(css),'Styles must be self-hosted');
@@ -48,5 +53,6 @@ assert(app.includes("new URL('../data/archive.json',import.meta.url)"),'Archive 
 const headers=await readFile(join(dist,'_headers'),'utf8');
 assert(headers.includes('Cache-Control: public, max-age=31536000, immutable'),'Immutable release headers missing');
 assert(headers.includes("script-src 'self'"),'Script security policy missing');
+assert(headers.includes('/app-version.json\n  Cache-Control: no-store'),'Version metadata must bypass HTTP caches');
 assert(!paths.some(p=>/\/(?:tests|docs|\.git|\.openai|imports)\//.test(p.slice(dist.length))), 'Private source or staged content leaked into release');
 console.log(JSON.stringify({status:'pass',version:info.version,files:paths.length,totalReleaseBytes:raw,totalGzipEstimateBytes:encoded,offlineShellBytes:offlineRaw,offlineShellGzipEstimateBytes:offlineEncoded,retainedVersions:info.retainedVersions??[],retainedBytes,externalRuntimeDependencies:0,serverFunctions:0,note:'The app shell is precached; reviewed papers and figures are integrity-checked and cached on use. Retained releases preserve older open tabs without expanding the current offline cache. This is not a concurrency load test.'},null,2));

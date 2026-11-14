@@ -13,11 +13,15 @@ import { loadContentManifest, loadContentBank } from './content-loader.js';
 import { emptyHistoricalWorkspace, restoreHistoricalWorkspace } from '../src/content/session.js';
 import { acquireWorkspaceWriter } from '../src/learning/storage.js';
 import { archiveStats, filterPapers, validateArchive } from '../src/archive/index.js';
+import { canApplyAppUpdate } from './app-update-guard.js';
+
+window.appUpdateCanReload = () => false;
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const key = name => `vedaris.${name}.v1`;
 const blocked = new Set();
+let saveFailed = false;
 const main = $('#main');
 let archive = {version:1,checkedAt:'2026-11-11',sources:[],papers:[]};
 let archiveError = '';
@@ -55,7 +59,7 @@ function saveLocal(name, value) {
   if(writer.mode!=='writer')return false;
   if (blocked.has(name)) { notify(`Saved ${name} is unreadable. It has been preserved instead of overwritten.`, true); return false; }
   try { localStorage.setItem(key(name), JSON.stringify(value)); return true; }
-  catch { notify('This browser could not save your work. Keep this tab open and export your progress when possible.', true); return false; }
+  catch { saveFailed = true; notify('This browser could not save your work. Keep this tab open and export your progress when possible.', true); return false; }
 }
 function download(name, content) { const a=document.createElement('a');const url=URL.createObjectURL(new Blob([content],{type:'application/json'}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000); }
 function intro(title, subtitle, action='') { return `<div class="page-intro"><div><h1>${title}</h1><p>${subtitle}</p></div>${action}</div>`; }
@@ -243,13 +247,14 @@ async function init() {
  window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
  try {const response=await fetch(new URL('../data/archive.json',import.meta.url),{signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error('Archive download failed');const data=await response.json();const errors=validateArchive(data);if(errors.length)throw new Error('Archive metadata failed validation');archive=data;}catch(error){archiveError='The paper catalog could not load. Original practice is still available; reconnect and reload to try the archive again.';notify(archiveError,true)}
  try{contentManifest=await loadContentManifest();}catch(error){contentError=error.message;}
- try {const raw=localStorage.getItem(key('session'));if(raw){session=restoreSession(raw);if(!session){blocked.add('session');notify('The saved session could not be restored. It has been preserved. Start a new session in a different browser profile or clear that saved entry after backing it up.',true)}}}catch{notify('Browser storage is unavailable. Work in this tab may not persist.',true)}
+ try {const raw=localStorage.getItem(key('session'));if(raw){session=restoreSession(raw);if(!session){blocked.add('session');notify('The saved session could not be restored. It has been preserved. Start a new session in a different browser profile or clear that saved entry after backing it up.',true)}}}catch{saveFailed=true;notify('Browser storage is unavailable. Work in this tab may not persist.',true)}
  try {const raw=localStorage.getItem(key('progress'));if(raw)progress=importProgress(raw,emptyProgress());}catch{blocked.add('progress');notify('Saved progress could not be validated and has been preserved. New records will not overwrite it.',true)}
  loadLearningState();
  bookmarks=readLocal('bookmarks',[],value=>Array.isArray(value)&&value.length<=500&&value.every(b=>{try{generate(b.templateId,b.seed);return true}catch{return false}}));
  paperNotes=readLocal('paper-notes',{},v=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(n=>n&&typeof n==='object'&&(n.text===undefined||typeof n.text==='string'&&n.text.length<=50000)&&(n.deadline==null||Number.isFinite(n.deadline))));
  if(session?.finishedAt&&writer.mode!=='reader'){persistSession();recordCompleted();}
  render();window.addEventListener('hashchange',()=>{archiveLimit=30;render();window.scrollTo(0,0)});
+ window.appUpdateCanReload=()=>canApplyAppUpdate({ready:true,writerMode:writer.mode,blockedCount:blocked.size,saveFailed,session,historicalWorkspace,historicalMemory,route:route()});
  timerHandle=setInterval(()=>{flushTime();if(writer.mode!=='reader'&&session&&!session.finishedAt&&session.deadline){if(remainingMs(session)<=0){session=finishSession(session);persistSession();recordCompleted();if(route()==='practice')showReport();else notify('Your practice timer finished. Your saved answers are ready for review.')}else if($('#session-timer'))$('#session-timer').textContent=timerLabel()}if(route()==='practice'&&!!$('#response-area')&&session?.finishedAt&&!$('#report-questions'))showReport();if(route()==='paper'){const id=decodeURIComponent(location.hash.split('?')[0].slice('#paper/'.length));if($('#paper-clock'))$('#paper-clock').textContent=paperClock(paperNotes[id]?.deadline)}},1000);
  if('serviceWorker' in navigator && !['localhost','127.0.0.1'].includes(location.hostname))navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(()=>{});
 }

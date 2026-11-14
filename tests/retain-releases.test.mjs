@@ -23,12 +23,15 @@ function manifest(version, contents, retainedVersions) {
 }
 async function fixture(version=C) {
   const root=await mkdtemp(join(tmpdir(),'vedaris-retention-')), dist=join(root,'dist');
+  const appVersion=hash('application-'+version),meta=`<meta name="app-version" content="${appVersion}">`;
   const contents={...releaseFiles(version),
-    'index.html':`<html>releases/${version}/assets/app.js</html>`,
+    'index.html':`<html>${meta}releases/${version}/assets/app.js</html>`,
+    'resources/index.html':`<html>${meta}Saved library</html>`,
+    'app-version.json':json({schemaVersion:1,project:'vedaris-jee',version:appVersion}),
     'sw.js':'// The new worker must remain untouched.\n',
-    '404.html':'<h1>Not found</h1>',
+    '404.html':meta+'<h1>Not found</h1>',
     'manifest.webmanifest':'{}',
-    '_headers':"/*\n  Content-Security-Policy: script-src 'self'\n/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n"};
+    '_headers':"/*\n  Content-Security-Policy: script-src 'self'\n/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n/app-version.json\n  Cache-Control: no-store\n"};
   const info=manifest(version,contents);
   for(const [path,body] of Object.entries({...contents,'build-info.json':json(info)})){
     await mkdir(dirname(join(dist,path)),{recursive:true});await writeFile(join(dist,path),body);
@@ -106,7 +109,8 @@ test('retains the complete old library shell without replacing current mutable a
     assert.equal(result.downloadedFiles,3+publicResourceFiles.length);
     for(const file of publicResourceFiles) {
       assert.equal(await readFile(join(f.dist,`releases/${A}/resources/${file}`),'utf8'),'Old public resource '+file);
-      await assert.rejects(readFile(join(f.dist,'resources',file)),{code:'ENOENT'});
+      if(file==='index.html') assert.equal(await readFile(join(f.dist,'resources',file),'utf8'),f.contents['resources/index.html']);
+      else await assert.rejects(readFile(join(f.dist,'resources',file)),{code:'ENOENT'});
     }
     assert.ok(net.calls.every(call=>!new URL(call.url).pathname.startsWith('/resources/')));
   }finally{await f.cleanup();}

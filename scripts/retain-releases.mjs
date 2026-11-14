@@ -11,8 +11,8 @@ const MAX_MANIFEST_BYTES = 8 * 1024 * 1024;
 const VERSION = /^[a-f0-9]{20}$/;
 const HASH = /^[a-f0-9]{64}$/;
 const RESOURCE_FILES = new Set(['resources/index.html', 'resources/explorer.css', 'resources/explorer.mjs', 'resources/catalog.json',
-  'resources/catalog.mjs', 'resources/storage.mjs', 'resources/live.mjs', 'resources/background.mjs', 'resources/offline.mjs', 'resources/offline-worker.js']);
-const MUTABLE_FILES = new Set(['index.html', '404.html', '_headers', 'manifest.webmanifest', 'sw.js', ...RESOURCE_FILES]);
+  'resources/catalog.mjs', 'resources/storage.mjs', 'resources/live.mjs', 'resources/background.mjs', 'resources/offline.mjs', 'resources/app-updates.mjs', 'resources/offline-worker.js']);
+const MUTABLE_FILES = new Set(['index.html', '404.html', '_headers', 'manifest.webmanifest', 'sw.js', 'app-version.json', ...RESOURCE_FILES]);
 const projectDist = fileURLToPath(new URL('../dist', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
