@@ -16,7 +16,7 @@ const source=(await readFile(new URL('../assets/app.js',import.meta.url),'utf8')
 function controller(hash='') {
  const stored=new Map();
  const context=vm.createContext({...questions,...sessions,...progress,...history,...notebook,...historical,Date,Math,JSON,URLSearchParams,Intl,performance,crypto:webcrypto,console,
-  location:{hash},confirm:()=>true,
+  location:{hash},confirm:()=>true,window:{},
   document:{querySelector:()=>({innerHTML:'',querySelectorAll:()=>[]}),querySelectorAll:()=>[],hidden:false},
   localStorage:{setItem:(key,value)=>stored.set(key,value),removeItem:key=>stored.delete(key)},
  });
