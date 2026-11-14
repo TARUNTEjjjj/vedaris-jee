@@ -17,6 +17,10 @@
     "deploy": "npm run build && node scripts/retain-releases.mjs && node scripts/check-release.mjs && npx --yes wrangler@4.156.2 pages deploy dist --project-name vedaris-jee --branch main",
     "check:release": "node scripts/check-release.mjs",
     "check:live": "node scripts/check-live.mjs",
-    "retain:releases": "node scripts/retain-releases.mjs"
+    "retain:releases": "node scripts/retain-releases.mjs",
+    "test:resources:ui": "node --test scripts/resource-explorer.test.mjs",
+    "resources:refresh": "node scripts/resources/resource-server.mjs refresh --config resources/sources.json --output resources/catalog.json",
+    "resources:serve": "node scripts/resources/resource-server.mjs serve --config resources/sources.json --snapshot resources/catalog.json",
+    "test:resources": "node --test scripts/resources/resource-catalog.test.mjs && node scripts/resources/check-catalog.mjs"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "project": "vedaris-jee",
+  "title": "Vedaris PCM resource library",
+  "minStars": 500,
+  "maxPerCategory": 12,
+  "categories": [
+    {
+      "id": "mathematics",
+      "title": "Mathematics and visualization",
+      "queries": [
+        "topic:mathematics"
+      ],
+      "seeds": [
+        "sympy/sympy",
+        "3b1b/manim"
+      ]
+    },
+    {
+      "id": "science",
+      "title": "Scientific exploration",
+      "queries": [
+        "topic:scientific-computing"
+      ],
+      "seeds": [
+        "scipy/scipy",
+        "numpy/numpy",
+        "3b1b/manim"
+      ]
+    }
+  ]
+}
