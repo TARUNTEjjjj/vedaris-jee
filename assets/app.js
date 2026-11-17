@@ -167,7 +167,18 @@ function recordCompleted() { if(!session?.finishedAt||writer.mode==='reader')ret
 function showReport() {
  trackingActive=false;recordCompleted();const shown=route()==='report'?history.sessions.find(s=>s.id===params().get('attempt')):session;
  if(!shown?.finishedAt){main.innerHTML=empty('Session report not found.','Choose a completed session from Performance analysis.');return;}
- mountReport(main,{session:shown,bookmarks,readOnly:writer.mode==='reader',onRetry(source){if(writer.mode==='reader'||!canReplaceSession())return;try{session=createRetrySession(source);persistSession();location.hash='practice';showQuestion();}catch(error){notify(error.message,true)}},onNew(){location.hash='tests'},onBookmark(identity){const exists=bookmarks.some(b=>b.templateId===identity.templateId&&b.seed===identity.seed);bookmarks=exists?bookmarks.filter(b=>b.templateId!==identity.templateId||b.seed!==identity.seed):[...bookmarks,identity].slice(-500);saveLocal('bookmarks',bookmarks);return bookmarks;},onNotebook(identity){try{notebook=updateNotebook(notebook,identity,{});saveLocal('notebook',notebook);location.hash='mistakes';}catch(error){notify(error.message,true)}}});
+ mountReport(main,{session:shown,bookmarks,readOnly:writer.mode==='reader',onRetry(source){if(writer.mode==='reader'||!canReplaceSession())return;try{session=createRetrySession(source);persistSession();location.hash='practice';showQuestion();}catch(error){notify(error.message,true)}},onNew(){location.hash='tests'},onBookmark(identity){const exists=bookmarks.some(b=>b.templateId===identity.templateId&&b.seed===identity.seed);bookmarks=exists?bookmarks.filter(b=>b.templateId!==identity.templateId||b.seed!==identity.seed):[...bookmarks,identity].slice(-500);saveLocal('bookmarks',bookmarks);return bookmarks;},onNotebook(identity){
+  if(writer.mode==='reader')return;
+  try{
+   const existing=notebook.entries.some(entry=>entry.templateId===identity.templateId&&entry.seed===identity.seed);
+   if(!existing){
+    const next=updateNotebook(notebook,identity,{cause:'unclassified'});
+    if(writer.mode==='writer'&&!saveLocal('notebook',next))return;
+    notebook=next;
+   }
+   location.hash='mistakes';
+  }catch(error){notify(error.message,true)}
+ }});
  updateWriterUI();
 }
 function showBank() {
