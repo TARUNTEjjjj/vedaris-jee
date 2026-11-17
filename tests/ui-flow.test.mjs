@@ -82,3 +82,35 @@ test('corrupt PYQ storage remains exportable and read-only instead of becoming m
  assert.equal(mounted.backupRaw,raw);assert.equal(reads,1);
  assert.equal(mounted.onChange(mounted.workspace),false);assert.equal(c.stored.size,0);
 });
+
+test('report revision notes create a notebook entry and preserve existing annotations',()=>{
+ const c=controller('#practice');let mounted;
+ c.context.mountReport=(_root,options)=>{mounted=options;};
+ // The real browser has one realm; normalize a VM-created patch for this adapter.
+ c.context.updateNotebook=(book,identity,patch)=>notebook.updateNotebook(book,identity,JSON.parse(JSON.stringify(patch)));
+ c.run('session=finishSession(createSession({seed:7,count:1}));showReport();');
+ const identity=mounted.session.questions[0];
+ mounted.onNotebook(identity);
+ assert.equal(c.context.location.hash,'mistakes');
+ const saved=JSON.parse(c.stored.get('vedaris.notebook.v1'));
+ assert.deepEqual(saved.entries,[{...identity,cause:'unclassified',note:'',resolved:false}]);
+ c.context.edited=notebook.updateNotebook(saved,identity,{cause:'calculation',note:'Keep this explanation',resolved:true});
+ c.run("notebook=edited;location.hash='#practice';showReport();");
+ mounted.onNotebook(identity);
+ assert.deepEqual(JSON.parse(c.run('JSON.stringify(notebook)')),c.context.edited);
+ assert.equal(c.context.location.hash,'mistakes');
+});
+
+test('report revision notes respect failed saves, memory mode and read-only tabs',()=>{
+ for(const mode of ['writer','memory','reader']){
+  const c=controller('#practice');let mounted;
+  c.context.mountReport=(_root,options)=>{mounted=options;};
+  c.context.updateNotebook=(book,identity,patch)=>notebook.updateNotebook(book,identity,JSON.parse(JSON.stringify(patch)));
+  c.run('session=finishSession(createSession({seed:8,count:1}));showReport();');
+  c.run(`writer={mode:'${mode}'};`);
+  c.context.localStorage.setItem=()=>{throw new Error('Storage full');};
+  mounted.onNotebook(mounted.session.questions[0]);
+  assert.equal(c.run('notebook.entries.length'),mode==='memory'?1:0);
+  assert.equal(c.context.location.hash,mode==='memory'?'mistakes':'#practice');
+ }
+});
