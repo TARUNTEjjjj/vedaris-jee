@@ -1,4 +1,4 @@
-import { BACKUP_STORES, countRecords } from '../src/learning/backup.js';
+import { BACKUP_STORES, BACKUP_VERSION, countRecords } from '../src/learning/backup.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const when = iso => { const time = Date.parse(iso); return Number.isFinite(time) ? new Intl.DateTimeFormat('en-IN', {dateStyle:'medium', timeStyle:'short'}).format(time) : 'an unknown date'; };
@@ -15,6 +15,7 @@ export function heldIdentity(item) {
   if (['progress', 'bookmarks', 'notebook'].includes(item.store)) return `${r.templateId} · seed ${r.seed}`;
   if (item.store === 'pyq-workspace') return `PYQ workspace for bank ${r.bankId}`;
   if (item.store === 'pyq-session') return `PYQ attempt ${r.id}`;
+  if (item.store === 'pyq-exam') return `Two-paper exam ${r.id}`;
   return `Report ${r.id}`;
 }
 
@@ -42,12 +43,13 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
     if (r.unlinkedPaperNotes.length) items.push(`<li>${plural(r.unlinkedPaperNotes.length, 'paper note')} ${r.unlinkedPaperNotes.length === 1 ? 'refers' : 'refer'} to paper records not in the current source archive (<code>${r.unlinkedPaperNotes.slice(0, 10).map(esc).join('</code>, <code>')}</code>). The notes are kept unchanged.</li>`);
     for (const [name, entry] of Object.entries(plan.preserved)) items.push(`<li>The ${esc(BACKUP_STORES.find(s => s.name === name)?.label || name)} section was saved as unverified text (${esc(entry.reason)}). It is not restored; that store on this browser is left unchanged.</li>`);
     for (const note of r.notes) items.push(`<li>${esc(note)}</li>`);
+    if (plan.stores.pyq?.exam) items.push(`<li>A two-paper exam is in progress (${plan.stores.pyq.exam.phase === 'break' ? 'on the inter-paper break' : `Paper ${plan.stores.pyq.exam.phase === 'paper1' ? 1 : 2}`}). It resumes exactly where it stands: a paper keeps its own deadline, the break is never charged to a paper, and Paper 2’s clock starts only when you begin it.</li>`);
     if (plan.stores.session?.deadline || plan.stores.pyq?.active?.deadline) items.push('<li>Timed attempts keep their original deadlines. Restoring never adds time; an attempt whose deadline has passed is submitted at its deadline.</li>');
     return items.length ? `<h4>What this backup contains that needs your attention</h4><ul class="backup-disclosures">${items.join('')}</ul>` : '<p class="small-text muted">Every record resolved against the installed questions. No duplicates or unresolved references were found.</p>';
   }
   function previewHTML() {
     const partial = plan.source !== 'workspace';
-    return `<section class="backup-preview" aria-labelledby="backup-preview-title"><span class="eyebrow">CHECKED · NOTHING HAS CHANGED YET</span><h3 id="backup-preview-title" tabindex="-1">${esc(SOURCE[plan.source])}${plan.kind === 'pre-restore' ? ' (pre-restore copy)' : ''}</h3><p class="small-text muted">${plan.exportedAt ? `Exported ${esc(when(plan.exportedAt))}. ` : ''}${partial ? 'This older format holds only one store. Stores it does not include are left exactly as they are.' : 'Format version 1. Scores, keys and totals are recalculated from exact question identities; none are taken from the file.'}</p>${inventory()}${disclosures()}
+    return `<section class="backup-preview" aria-labelledby="backup-preview-title"><span class="eyebrow">CHECKED · NOTHING HAS CHANGED YET</span><h3 id="backup-preview-title" tabindex="-1">${esc(SOURCE[plan.source])}${plan.kind === 'pre-restore' ? ' (pre-restore copy)' : ''}</h3><p class="small-text muted">${plan.exportedAt ? `Exported ${esc(when(plan.exportedAt))}. ` : ''}${partial ? 'This older format holds only one store. Stores it does not include are left exactly as they are.' : `Format version ${plan.version}. Scores, keys and totals are recalculated from exact question identities; none are taken from the file.`}</p>${inventory()}${disclosures()}
       <fieldset class="backup-mode"><legend>How should this backup be applied?</legend>
       <label><input type="radio" name="backup-mode" value="merge" ${choice === 'merge' ? 'checked' : ''}> <span><strong>Merge</strong> — add records this browser does not have. Existing records are never edited: for the same question or report, this browser’s version is kept, and the earlier first attempt stays the first attempt. Your active sessions and daily goal are kept. Size limits keep the newest 50 concept reports and 20 PYQ reports.</span></label>
       <label><input type="radio" name="backup-mode" value="replace" ${choice === 'replace' ? 'checked' : ''}> <span><strong>Replace</strong> — make ${partial ? 'the included store' : 'every included store'} match the backup exactly. Current records in ${partial ? 'that store' : 'those stores'} that the backup lacks are removed from this browser.</span></label></fieldset>
@@ -60,7 +62,7 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
     if (!root.querySelector('[data-backup-body]')) {
       // The heading, live region and body are created once. Only the body is
       // re-rendered, so the status region persists and announces each change.
-      root.innerHTML = `<section class="panel backup-panel" aria-labelledby="backup-title"><div class="panel-head"><h3 id="backup-title">Complete workspace backup</h3><span class="small-text muted">Format version 1</span></div>
+      root.innerHTML = `<section class="panel backup-panel" aria-labelledby="backup-title"><div class="panel-head"><h3 id="backup-title">Complete workspace backup</h3><span class="small-text muted">Format version ${BACKUP_VERSION}</span></div>
       <p class="small-text muted">One file for everything this browser keeps for you: concept-practice progress and reports, the active session, saved questions, revision notes, paper notes and timers, your daily goal, and PYQ attempts and reports. No account or cloud service is involved.</p>
       <div class="backup-message" role="status" aria-live="polite" tabindex="-1"></div><div data-backup-body></div></section>`;
     }

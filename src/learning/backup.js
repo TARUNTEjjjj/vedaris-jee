@@ -3,7 +3,8 @@ import { restoreSession } from '../practice/session.js';
 import { importProgress, emptyProgress, MAX_RECORDS } from './progress.js';
 import { restoreHistory, emptyHistory, MAX_HISTORY_SESSIONS } from './history.js';
 import { restoreNotebook, emptyNotebook, MAX_NOTEBOOK_ENTRIES, MAX_NOTE_LENGTH } from './notebook.js';
-import { restoreHistoricalSession, restoreHistoricalWorkspace } from '../content/session.js';
+import { restoreHistoricalSession } from '../content/session.js';
+import { restoreExamWorkspace, getExamConfig, resolveExamConfig, MAX_EXAM_HISTORY } from '../content/exam.js';
 
 /**
  * Complete browser-workspace backups.
@@ -15,8 +16,9 @@ import { restoreHistoricalSession, restoreHistoricalWorkspace } from '../content
  * verbatim, disclosed, re-exported, and re-checked on every later restore.
  */
 export const BACKUP_FORMAT = 'vedaris-workspace-backup';
-export const BACKUP_VERSION = 1;
-export const SUPPORTED_BACKUP_VERSIONS = Object.freeze([1]);
+// Version 2 carries a version 2 PYQ workspace (two-paper exam state). Version 1 files remain readable.
+export const BACKUP_VERSION = 2;
+export const SUPPORTED_BACKUP_VERSIONS = Object.freeze([1, 2]);
 export const MAX_BACKUP_BYTES = 12_000_000;
 export const MAX_UNRESOLVED_ITEMS = 2000;
 export const MAX_BOOKMARKS = 500;
@@ -32,7 +34,7 @@ export const BACKUP_STORES = Object.freeze([
   { name: 'notebook', slot: 'notebook', label: 'Revision notebook' },
   { name: 'goal', slot: 'goal', label: 'Daily goal preference' },
   { name: 'paperNotes', slot: 'paper-notes', label: 'Paper notes and paper timers' },
-  { name: 'pyq', slot: 'pyq-workspace', label: 'PYQ active attempt and reports (latest 20)' },
+  { name: 'pyq', slot: 'pyq-workspace', label: 'PYQ active attempt, reports (latest 20) and two-paper exams (latest 10)' },
   { name: 'unresolved', slot: 'unresolved', label: 'Held records that no longer resolve' },
 ].map(Object.freeze));
 export const PRE_RESTORE_SLOT = 'pre-restore';
@@ -64,7 +66,13 @@ export function validPaperNotes(value) {
     && (note.text === undefined || (typeof note.text === 'string' && note.text.length <= 50000))
     && (note.deadline == null || Number.isFinite(note.deadline)));
 }
-const HELD_STORES = ['progress', 'history', 'session', 'bookmarks', 'notebook', 'pyq-session', 'pyq-workspace'];
+const HELD_STORES = ['progress', 'history', 'session', 'bookmarks', 'notebook', 'pyq-session', 'pyq-workspace', 'pyq-exam'];
+/** A version 1 PYQ workspace keeps exactly the version 1 shape (no empty exam fields). */
+const compactPYQ = value => { if (!value || value.version !== 1) return value; const { exam, exams, ...rest } = value; return rest; };
+/** A PYQ workspace: version 1, or version 2 with exam state. Version 1 never carries exam data. */
+const pyqShape = value => object(value) && [1, 2].includes(value.version) && typeof value.bankId === 'string' && Array.isArray(value.history) && own(value, 'active')
+  && (value.exams === undefined || (Array.isArray(value.exams) && value.exams.length <= MAX_EXAM_HISTORY)) && (value.exam === undefined || value.exam === null || object(value.exam))
+  && (value.version === 2 || ((value.exam ?? null) === null && !(value.exams ?? []).length));
 
 /**
  * Build a versioned export. `stores` must be the already-validated in-memory
@@ -102,8 +110,8 @@ export function parseBackup(raw) {
   // Older supported formats: the single-store exports earlier releases offered.
   if (value.version === 1 && Array.isArray(value.records) && !own(value, 'bankId') && (value.app === undefined || value.app === 'vedaris'))
     return { source: LEGACY_PROGRESS, version: 1, kind: 'export', exportedAt: typeof value.exportedAt === 'string' ? value.exportedAt : null, stores: { progress: { version: 1, records: value.records } }, included: ['progress'], preserved: {} };
-  if (value.version === 1 && typeof value.bankId === 'string' && Array.isArray(value.history) && own(value, 'active'))
-    return { source: LEGACY_PYQ, version: 1, kind: 'export', exportedAt: null, stores: { pyq: value }, included: ['pyq'], preserved: {} };
+  if ([1, 2].includes(value.version) && typeof value.bankId === 'string' && Array.isArray(value.history) && own(value, 'active'))
+    return { source: LEGACY_PYQ, version: value.version, kind: 'export', exportedAt: null, stores: { pyq: value }, included: ['pyq'], preserved: {} };
   fail('This file is not a recognised Vedaris backup version. Your current workspace was not changed.');
 }
 
@@ -145,7 +153,7 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
   const incoming = parsed.stores;
   const included = new Set(parsed.included);
   // Previously held records are re-checked; any that now resolve rejoin their store.
-  const reentry = { progress: [], history: [], session: [], bookmarks: [], notebook: [], 'pyq-session': [], 'pyq-workspace': [] };
+  const reentry = { progress: [], history: [], session: [], bookmarks: [], notebook: [], 'pyq-session': [], 'pyq-workspace': [], 'pyq-exam': [] };
   if (included.has('unresolved')) {
     const clean = restoreUnresolved(incoming.unresolved);
     if (!clean) fail('The held unresolved records in this backup are malformed.');
@@ -220,8 +228,8 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
     // Notes are the learner's own text: they are kept even when a paper record moved.
     if (archivePaperIds) report.unlinkedPaperNotes = Object.keys(stores.paperNotes).filter(id => !archivePaperIds.has(id));
   }
-  if (included.has('pyq') || reentry['pyq-session'].length || reentry['pyq-workspace'].length) {
-    const hasPYQ = (included.has('pyq') && incoming.pyq !== null) || reentry['pyq-session'].length || reentry['pyq-workspace'].length;
+  if (included.has('pyq') || reentry['pyq-session'].length || reentry['pyq-workspace'].length || reentry['pyq-exam'].length) {
+    const hasPYQ = (included.has('pyq') && incoming.pyq !== null) || reentry['pyq-session'].length || reentry['pyq-workspace'].length || reentry['pyq-exam'].length;
     if (hasPYQ && (!registry || typeof bankId !== 'string')) {
       const error = new Error('PYQ reports in this backup can only be checked after the reviewed question bank loads. Reconnect and try again; nothing was changed.');
       error.code = 'content-unavailable';
@@ -229,45 +237,80 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
     }
     const sessions = [];
     const workspaces = [];
+    const examRecords = [];
+    let examCandidate = null;
     if (included.has('pyq') && incoming.pyq !== null) {
       const value = incoming.pyq;
-      if (!object(value) || value.version !== 1 || typeof value.bankId !== 'string' || !Array.isArray(value.history) || !own(value, 'active')) fail('PYQ data in this backup is malformed.');
-      workspaces.push(value);
+      if (!pyqShape(value)) fail('PYQ data in this backup is malformed.');
+      workspaces.push({ workspace: value, primary: true });
     }
-    for (const item of reentry['pyq-workspace']) workspaces.push(item.record);
-    for (const workspace of workspaces) {
+    for (const item of reentry['pyq-workspace']) workspaces.push({ workspace: item.record, primary: false });
+    for (const { workspace, primary } of workspaces) {
       if (workspace.bankId !== bankId) { hold('pyq-workspace', `Recorded for reviewed bank ${String(workspace.bankId).slice(0, 100)}, not the installed bank`, workspace); continue; }
-      if (!Array.isArray(workspace.history) || !own(workspace, 'active')) fail('PYQ data in this backup is malformed.');
+      if (!pyqShape(workspace)) fail('PYQ data in this backup is malformed.');
       if (workspace.active !== null) sessions.push(workspace.active);
       sessions.push(...workspace.history);
+      examRecords.push(...(workspace.exams ?? []));
+      // Only the backup's own workspace may resume an exam; one from an older held workspace stays held.
+      if ((workspace.exam ?? null) !== null) primary ? examCandidate = workspace.exam : hold('pyq-exam', 'An unfinished two-paper exam from a previously held workspace', workspace.exam);
     }
     for (const item of reentry['pyq-session']) sessions.push(item.record);
+    for (const item of reentry['pyq-exam']) object(item.record) && ['complete', 'cancelled'].includes(item.record.phase) ? examRecords.push(item.record) : held.push(item);
+    const resolvesQuestion = id => { try { registry.getQuestion(id); return true; } catch { return false; } };
+    const examId = e => object(e) && typeof e.id === 'string' ? e.id : fail('A saved two-paper exam has no identity.');
+    const examResolves = e => {
+      try { resolveExamConfig(getExamConfig(e.configId), registry); } catch { return false; }
+      return !Array.isArray(e.papers) || e.papers.every(p => !object(p) || !Array.isArray(p.questionIds) || p.questionIds.every(resolvesQuestion));
+    };
+    let exam = null;
+    if (examCandidate !== null) {
+      examId(examCandidate);
+      if (examResolves(examCandidate)) exam = examCandidate;
+      else hold('pyq-exam', 'This exam’s schedule or papers are not in the installed release', examCandidate);
+    }
     const unique = dedupe(sessions, s => object(s) && typeof s.id === 'string' ? s.id : fail('A saved PYQ attempt has no identity.'), 'PYQ attempts', report);
-    let active = null; const history = [];
+    const unfinished = [], history = [];
     for (const session of unique) {
       if (!Array.isArray(session.questionIds)) fail('A saved PYQ attempt is malformed.');
-      const resolves = session.questionIds.every(id => { try { registry.getQuestion(id); return true; } catch { return false; } })
+      const resolves = session.questionIds.every(resolvesQuestion)
         && (session.mode !== 'paper' || (() => { try { registry.getFullPaper(session.paperId); return true; } catch { return false; } })());
       if (!resolves) { hold('pyq-session', 'A question or paper in this attempt is not in the installed reviewed bank', session); continue; }
       const clean = restoreHistoricalSession(session, registry, bankId, now);
       if (!clean) fail('A saved PYQ attempt failed validation (responses, timing or identity are inconsistent).');
       // Keep the validated form: a timed attempt whose deadline passed after the
       // export is submitted at its own deadline and becomes a report.
-      if (clean.finishedAt === null) {
-        if (active) { report.notes.push('Two unfinished PYQ attempts were found; the later one is held, not discarded.'); hold('pyq-session', 'A second unfinished attempt', session); }
-        else active = clean;
-      } else {
+      if (clean.finishedAt === null) unfinished.push({ session, clean });
+      else {
         if (session.finishedAt === null) report.notes.push('An unfinished timed PYQ attempt reached its deadline after this backup was made; it is restored as submitted at that deadline.');
         history.push(clean);
       }
     }
+    // During an exam only that exam's current paper may be the active attempt.
+    let active = null;
+    const chosen = exam ? unfinished.find(u => u.session.id === exam.activeSessionId) : unfinished[0];
+    for (const entry of unfinished) {
+      if (entry === chosen) { active = entry.clean; continue; }
+      report.notes.push(exam ? 'An unfinished PYQ attempt outside the two-paper exam in progress is held, not discarded.' : 'Two unfinished PYQ attempts were found; the later one is held, not discarded.');
+      hold('pyq-session', exam ? 'Unfinished while a two-paper exam was in progress' : 'A second unfinished attempt', entry.session);
+    }
     history.sort((a, b) => b.finishedAt - a.finishedAt);
     if (history.length > 20) fail('PYQ reports exceed the 20-report limit.');
-    if (!workspaces.length && !sessions.length) stores.pyq = null;
+    const exams = [];
+    for (const record of dedupe(examRecords, examId, 'Two-paper exams', report)) {
+      if (!examResolves(record)) { hold('pyq-exam', 'This exam’s schedule or papers are not in the installed release', record); continue; }
+      // Each finished exam is checked on its own by the same validator the workspace uses on load.
+      const clean = restoreExamWorkspace(JSON.stringify({ version: 2, bankId, active: null, history: [], exam: null, exams: [record] }), registry, bankId, now);
+      if (!clean) fail('A saved two-paper exam failed validation (papers, timing or schedule are inconsistent).');
+      exams.push(clean.exams[0]);
+    }
+    exams.sort((a, b) => b.finishedAt - a.finishedAt);
+    if (exams.length > MAX_EXAM_HISTORY) fail(`Two-paper exam reports exceed the ${MAX_EXAM_HISTORY}-exam limit.`);
+    if (!workspaces.length && !sessions.length && !exams.length) stores.pyq = null;
     else {
-      const clean = restoreHistoricalWorkspace(JSON.stringify({ version: 1, bankId, active, history }), registry, bankId, now);
-      if (!clean) fail('PYQ data in this backup failed validation.');
-      stores.pyq = clean;
+      const clean = restoreExamWorkspace(JSON.stringify({ version: 2, bankId, active, history, exam, exams }), registry, bankId, now);
+      if (!clean) fail('PYQ data in this backup failed validation (an attempt or the two-paper exam state is inconsistent).');
+      if (exam && clean.exam?.phase !== exam.phase) report.notes.push(clean.exam ? 'Paper 1 of the two-paper exam reached its deadline after this backup was made; it is submitted at that deadline and the break started then.' : 'The two-paper exam’s Paper 2 reached its deadline after this backup was made; the exam is restored as completed at that deadline.');
+      stores.pyq = compactPYQ(clean);
     }
     if (!included.has('pyq')) delete stores.pyq;
   }
@@ -279,7 +322,7 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
   }
   report.unresolved = stores.unresolved?.items ?? [];
   for (const [name, value] of Object.entries(stores)) report.counts[name] = countRecords(name, value);
-  return { source: parsed.source, kind: parsed.kind, exportedAt: parsed.exportedAt, included: Object.keys(stores), stores, preserved: parsed.preserved, report };
+  return { source: parsed.source, version: parsed.version, kind: parsed.kind, exportedAt: parsed.exportedAt, included: Object.keys(stores), stores, preserved: parsed.preserved, report };
 }
 
 /** Records in one store, for previews and disclosures. */
@@ -292,7 +335,7 @@ export function countRecords(name, value) {
   if (name === 'notebook') return value.entries.length;
   if (name === 'goal') return 1;
   if (name === 'paperNotes') return Object.keys(value).length;
-  if (name === 'pyq') return value.history.length + (value.active ? 1 : 0);
+  if (name === 'pyq') return value.history.length + (value.active ? 1 : 0) + (value.exams?.length ?? 0) + (value.exam && !value.active ? 1 : 0);
   if (name === 'unresolved') return value.items.length;
   return 0;
 }
@@ -352,11 +395,18 @@ export function mergeWorkspace(current, incoming, { registry = null, bankId = nu
     else {
       const ids = new Set(current.pyq.history.map(s => s.id));
       const all = [...current.pyq.history, ...incoming.pyq.history.filter(s => !ids.has(s.id) && s.id !== current.pyq.active?.id)].sort((a, b) => b.finishedAt - a.finishedAt);
-      let active = current.pyq.active;
-      if (!active && incoming.pyq.active && !ids.has(incoming.pyq.active.id)) active = incoming.pyq.active;
-      else if (incoming.pyq.active && incoming.pyq.active.id !== current.pyq.active?.id) notes.push('This browser already has an unfinished PYQ attempt, so the backup’s unfinished attempt is not merged.');
-      const candidate = { version: 1, bankId: current.pyq.bankId, active, history: all.slice(0, 20) };
-      out.pyq = registry ? restoreHistoricalWorkspace(JSON.stringify(candidate), registry, bankId, now) ?? fail('Merged PYQ data failed validation.') : candidate;
+      // Unfinished work on this browser (an attempt or a two-paper exam) always wins.
+      let active = current.pyq.active, exam = current.pyq.exam ?? null;
+      const busy = !!(active || exam), takeable = session => session && !ids.has(session.id);
+      if (!busy && incoming.pyq.exam) { exam = incoming.pyq.exam; active = incoming.pyq.active; }
+      else if (!busy && takeable(incoming.pyq.active)) active = incoming.pyq.active;
+      else if (busy && ((takeable(incoming.pyq.active) && incoming.pyq.active.id !== active?.id) || (incoming.pyq.exam && incoming.pyq.exam.id !== exam?.id)))
+        notes.push('This browser already has an unfinished PYQ attempt or two-paper exam, so the backup’s unfinished work is not merged.');
+      const examIds = new Set((current.pyq.exams ?? []).map(e => e.id));
+      const finishedExams = [...(current.pyq.exams ?? []), ...(incoming.pyq.exams ?? []).filter(e => !examIds.has(e.id) && e.id !== exam?.id)].sort((a, b) => b.finishedAt - a.finishedAt);
+      const candidate = { version: 2, bankId: current.pyq.bankId, active, history: all.slice(0, 20), exam, exams: finishedExams.slice(0, MAX_EXAM_HISTORY) };
+      out.pyq = compactPYQ(registry ? restoreExamWorkspace(JSON.stringify(candidate), registry, bankId, now) ?? fail('Merged PYQ data failed validation.') : { ...candidate, version: exam || candidate.exams.length ? 2 : 1 });
+      if (finishedExams.length > MAX_EXAM_HISTORY) notes.push(`${finishedExams.length - MAX_EXAM_HISTORY} oldest two-paper exam reports exceed the ${MAX_EXAM_HISTORY}-exam limit and are not kept.`);
       if (all.length > 20) notes.push(`${all.length - 20} oldest PYQ reports exceed the 20-report limit and are not kept.`);
     }
   }

@@ -38,7 +38,7 @@ test('inventory covers every persistent store and a full export round-trips exac
   assert.deepEqual(BACKUP_STORES.map(s => s.slot), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paper-notes', 'pyq-workspace', 'unresolved']);
   const stores = workspace();
   const file = createWorkspaceBackup({ stores, contentBankId: BANK });
-  assert.equal(file.format, 'vedaris-workspace-backup'); assert.equal(file.version, 1);
+  assert.equal(file.format, 'vedaris-workspace-backup'); assert.equal(file.version, 2);
   const plan = analyze(file);
   for (const name of ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paperNotes', 'pyq']) assert.deepEqual(plan.stores[name], JSON.parse(JSON.stringify(stores[name])), name);
   assert.equal(plan.report.unresolved.length, 0);
@@ -48,7 +48,8 @@ test('inventory covers every persistent store and a full export round-trips exac
 test('malformed, partial, unknown-version and foreign files are rejected with explanations', () => {
   const good = createWorkspaceBackup({ stores: workspace(), contentBankId: BANK });
   assert.throws(() => parseBackup(JSON.stringify(good).slice(0, -20)), /not complete JSON/);
-  assert.throws(() => parseBackup(JSON.stringify({ ...good, version: 2 })), /version 2.*not changed/);
+  assert.throws(() => parseBackup(JSON.stringify({ ...good, version: 3 })), /version 3.*not changed/);
+  assert.equal(parseBackup(JSON.stringify({ ...good, version: 1 })).version, 1, 'version 1 files remain readable');
   const partial = structuredClone(good); delete partial.stores.notebook;
   assert.throws(() => parseBackup(JSON.stringify(partial)), /incomplete.*notebook/);
   assert.throws(() => parseBackup(JSON.stringify({ ...good, stores: { ...good.stores, extra: [] } })), /unknown stores/);

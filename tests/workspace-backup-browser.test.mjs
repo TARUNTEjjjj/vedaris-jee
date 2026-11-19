@@ -10,6 +10,7 @@ import { emptyHistory, recordHistory } from '../src/learning/history.js';
 import { emptyNotebook, updateNotebook } from '../src/learning/notebook.js';
 import { createContentRegistry } from '../src/content/catalog.js';
 import { createHistoricalSession, answerHistorical, finishHistorical, saveHistoricalSession, emptyHistoricalWorkspace } from '../src/content/session.js';
+import { startExam, advanceExam, startSecondPaper } from '../src/content/exam.js';
 
 // These tests drive the real page in headless Chrome: export and restore go
 // through the Saved & backups screen, file chooser and buttons. Only the
@@ -94,7 +95,7 @@ test('complete export → replace restore round trip reproduces every store, wit
   await open(seedWorkspace());
   const original = await storage();
   const backup = await exportBackup();
-  assert.equal(backup.format, 'vedaris-workspace-backup'); assert.equal(backup.version, 1);
+  assert.equal(backup.format, 'vedaris-workspace-backup'); assert.equal(backup.version, 2);
   assert.deepEqual(Object.keys(backup.stores), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paperNotes', 'pyq', 'unresolved']);
   assert.equal(backup.stores.pyq.history.length, 1); assert.ok(backup.stores.pyq.active);
   // A different workspace on this browser is then replaced by the backup.
@@ -242,5 +243,59 @@ test('the restore flow is keyboard reachable, keeps focus across re-renders and 
   await previewed();
   await applyAndWait(/Backup merged/);
   assert.equal(await page.evaluate('document.activeElement.classList.contains("backup-message")'), true);
+  assert.deepEqual(page.errors, []);
+});
+
+// Two-paper exam state (PYQ workspace version 2) must survive a complete backup.
+function examWorkspace(stage) {
+  const MIN = 60000, t0 = Date.now() - 400 * MIN;
+  const answer = (s, at) => { const q = registry.getQuestion(s.questionIds[0]); return answerHistorical(s, 0, q.type === 'multiple' ? [q.options[0].id] : q.type === 'numerical' ? '1' : q.options[0].id, registry, at); };
+  const save = (w, s) => advanceExam(saveHistoricalSession(w, s));
+  if (stage === 'paper1') { const w = startExam(emptyHistoricalWorkspace(bankId), registry, 'jee-advanced-2023-two-paper-v1', { seed: 31, now: Date.now() - 10 * MIN }); return save(w, answer(w.active, Date.now() - 9 * MIN)); }
+  let w = startExam(emptyHistoricalWorkspace(bankId), registry, 'jee-advanced-2023-two-paper-v1', { seed: 32, now: t0 });
+  w = save(w, finishHistorical(answer(w.active, t0 + MIN), t0 + 40 * MIN));
+  w = startSecondPaper(w, registry, { seed: 33, now: t0 + 100 * MIN });
+  return save(w, finishHistorical(answer(w.active, t0 + 101 * MIN), t0 + 200 * MIN));
+}
+
+test('a backup made mid-exam restores the exam in progress through the UI, with the same deadline', { skip }, async () => {
+  const pyq = examWorkspace('paper1');
+  await open({ [key('pyq-workspace')]: pyq });
+  const backup = await exportBackup();
+  assert.equal(backup.version, 2);
+  assert.equal(backup.stores.pyq.version, 2); assert.equal(backup.stores.pyq.exam.phase, 'paper1');
+  await open({ [key('goal')]: 5 });
+  await choose('mid-exam.json', backup);
+  assert.match(await previewed(), /two-paper exam is in progress \(Paper 1\)/);
+  await page.check('input[name="backup-mode"][value="replace"]');
+  await page.check('[data-backup-confirm]');
+  await applyAndWait(/Backup restored/);
+  const restored = JSON.parse((await storage())[key('pyq-workspace')]);
+  assert.equal(restored.version, 2); assert.equal(restored.exam.id, pyq.exam.id); assert.equal(restored.exam.phase, 'paper1');
+  assert.equal(restored.active.id, pyq.active.id); assert.equal(restored.active.deadline, pyq.active.deadline, 'restore never adds time');
+  assert.deepEqual(restored.active.responses, pyq.active.responses);
+  // The PYQ workspace loads it as the exam in progress.
+  await page.goto(`${server.origin}/?load=${++loads}#pyq`);
+  await page.waitFor('/TWO-PAPER EXAM IN PROGRESS/.test(document.querySelector("#main").innerText)', { message: 'exam resume card', timeout: 30000 });
+  assert.match(await page.text(), /Continue Paper 1/);
+  assert.deepEqual(page.errors, []);
+});
+
+test('a backup made after an exam merges its two-paper report into another browser', { skip }, async () => {
+  const pyq = examWorkspace('complete');
+  await open({ [key('pyq-workspace')]: pyq });
+  const backup = await exportBackup();
+  assert.equal(backup.stores.pyq.exams.length, 1); assert.equal(backup.stores.pyq.exams[0].phase, 'complete');
+  await open({ [key('goal')]: 30 });
+  await choose('after-exam.json', backup);
+  await previewed();
+  await applyAndWait(/Backup merged/);
+  const restored = JSON.parse((await storage())[key('pyq-workspace')]);
+  assert.deepEqual(restored.exams, pyq.exams);
+  await page.goto(`${server.origin}/?load=${++loads}#pyq`);
+  await page.waitFor('!!document.querySelector(\'[data-pyq-action="exam-history"]\')', { message: 'exam history entry', timeout: 30000 });
+  await page.click(`[data-pyq-action="exam-history"][data-value="${pyq.exams[0].id}"]`);
+  await page.waitFor('/YOUR TWO-PAPER EXAM/.test(document.querySelector("#main").innerText)', { message: 'exam report' });
+  assert.match(await page.text(), /both papers completed/);
   assert.deepEqual(page.errors, []);
 });
