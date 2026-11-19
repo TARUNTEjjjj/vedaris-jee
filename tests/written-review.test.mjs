@@ -172,3 +172,23 @@ test('export carries identity, rubric provenance, reviewer kinds and statuses wi
   const fresh = JSON.parse(exportWrittenReview(emptyWrittenWorkspace('fixture-written-paper'), paper(), archive(), now));
   assert.equal(fresh.questions[0].status, 'unreviewed'); assert.equal(fresh.questions[0].work, null);
 });
+
+test('a review that records no marks is refused, and an unreviewed question has no recorded sum', () => {
+  let w = emptyWrittenWorkspace('fixture-written-paper');
+  assert.equal(writtenQuestionReport(w, paper(), archive(), q, now).recordedMarks, null, 'blank is not zero');
+  const blank = [{ criterionId: 'setup', marks: null }, { criterionId: 'method', marks: null }, { criterionId: 'conclusion', marks: null }];
+  assert.throws(() => addWrittenReview(w, paper(), archive(), q, { kind: 'self', criteria: blank }, now), /at least one criterion/);
+  w = addWrittenReview(w, paper(), archive(), q, { kind: 'self', criteria: marks(1, 3, 2) }, now + 1);
+  // An all-unknown expert record must not replace recorded self marks with "expert-reviewed" and nothing.
+  assert.throws(() => addWrittenReview(w, paper(), archive(), q, expert({ criteria: blank }), now + 2), /at least one criterion/);
+  const report = writtenQuestionReport(w, paper(), archive(), q, now + 2);
+  assert.equal(report.status, 'self-reviewed'); assert.equal(report.awardedMarks, 6);
+  // Zero is a recorded mark, distinct from unknown.
+  w = addWrittenReview(w, paper(), archive(), q, { kind: 'self', criteria: marks(0, 0, 0) }, now + 3);
+  const zero = writtenQuestionReport(w, paper(), archive(), q, now + 3);
+  assert.equal(zero.awardedMarks, 0); assert.equal(zero.recordedMarks, 0); assert.equal(zero.unknownCriteria, 0);
+  // Stored all-unknown reviews are treated as corrupt and preserved by the caller.
+  const raw = JSON.parse(JSON.stringify(w));
+  raw.entries[0].reviews.push({ kind: 'self', createdAt: now + 4, criteria: blank, comment: '' });
+  assert.equal(restoreWrittenWorkspace(JSON.stringify(raw), paper(), archive(), now + 5), null);
+});

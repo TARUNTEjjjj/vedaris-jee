@@ -38,10 +38,10 @@ If a historical paper publishes only total marks per question, its rubric is one
 1. **Record work.** The learner types or pastes their working (up to 20,000 characters). Saving work changes nothing about reviews.
 2. **See the worked explanation.** The explanation is shown with its author and review status, after the learner chooses to reveal it.
 3. **Record a review.** Reviews are appended, never edited in place:
-   - `self`: the learner records marks per rubric criterion. A criterion can be left unknown (`null`).
+   - `self`: the learner records marks per rubric criterion. A criterion can be left unknown (`null`), but a self or expert review must record marks for at least one criterion; a record that leaves every criterion unknown is rejected, so it cannot mark a question as reviewed or hide earlier marks.
    - `expert`: requires a named reviewer, an optional qualification, a real review date and a short description of how the review was carried out.
    - `automated-assist`: names its tool and version and may attach annotations only. Any attempt to include marks, criteria, a status or a correctness verdict is rejected.
-4. **Report.** Status is `expert-reviewed` (latest expert review), otherwise `self-reviewed` (latest self review), otherwise `unreviewed`. A total is reported only when every criterion has recorded marks; otherwise the total is `null` and the number of unknown criteria is shown. Unknown is never displayed as zero. Reports always carry `automaticCorrectnessJudgment: false`.
+4. **Report.** Status is `expert-reviewed` (latest expert review), otherwise `self-reviewed` (latest self review), otherwise `unreviewed`. A total is reported only when every criterion has recorded marks; otherwise the total is `null` and the number of unknown criteria is shown. The sum of recorded criteria is `null` for an unreviewed question. Unknown is never displayed as zero. Reports always carry `automaticCorrectnessJudgment: false`.
 
 The interface wording must say who awarded marks ("4 of 6, self-reviewed"), never "correct" or "incorrect".
 

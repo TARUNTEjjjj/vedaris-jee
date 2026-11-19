@@ -193,6 +193,10 @@ function cleanReview(question, value, now, path) {
     return { kind: 'automated-assist', createdAt: value.createdAt, tool: { name: value.tool.name, version: value.tool.version }, annotations: [...value.annotations] };
   }
   const criteria = cleanCriteria(question, value.criteria, path);
+  // A record with every criterion unknown is not a review: it would turn an
+  // unreviewed question into a reviewed one with no marks, and an all-unknown
+  // expert record would hide earlier recorded marks.
+  if (criteria.every(c => c.marks === null)) throw new Error(`${path}: record marks for at least one criterion; leave the question unreviewed otherwise`);
   const comment = own(value, 'comment') ? value.comment : '';
   if (typeof comment !== 'string' || comment.length > MAX_NOTE_LENGTH) throw new Error(`${path}: comment is too long`);
   if (value.kind === 'self') return { kind: 'self', createdAt: value.createdAt, criteria, comment };
@@ -283,7 +287,8 @@ export function writtenQuestionReport(workspace, paper, archive, questionId, now
     questionId, questionNumber: question.questionNumber, subject: question.subject, maxMarks: question.maxMarks,
     status, markedBy: basis ? basis.kind : null,
     awardedMarks: basis && unknownCriteria === 0 ? criteria.reduce((sum, c) => sum + c.marks, 0) : null,
-    recordedMarks: criteria.reduce((sum, c) => sum + (c.marks ?? 0), 0), unknownCriteria, criteria,
+    // Sum of the criteria that have recorded marks; null (not 0) when nothing is recorded.
+    recordedMarks: basis ? criteria.reduce((sum, c) => sum + (c.marks ?? 0), 0) : null, unknownCriteria, criteria,
     hasWork: Boolean(entry?.work.text.trim()),
     reviewKinds: { self: reviews.filter(r => r.kind === 'self').length, expert: reviews.filter(r => r.kind === 'expert').length, automatedAssist: reviews.filter(r => r.kind === 'automated-assist').length },
     automaticCorrectnessJudgment: false,
