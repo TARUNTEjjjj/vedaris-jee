@@ -68,6 +68,14 @@ PYQ backup exports the active attempt and those 20 reports. Import checks the ve
 
 Corrupt saved state is preserved rather than overwritten. A failed PYQ persistence callback leaves the accepted session intact. Route generation guards prevent an asynchronous content download from painting a route the learner has already left. Mount cleanup removes timers and document/window listeners.
 
+## Two-paper exam sessions
+
+`src/content/exam.js` holds versioned (v1) two-paper configurations for 2022–2026. Each names that year's two reviewed papers and the official same-day schedule recorded in the year's Joint Implementation Committee report (Paper 1 09:00–12:00 IST, Paper 2 14:30–17:30 IST in every configured year), with the report URL, PDF page, SHA-256 of the checked file and extraction method. The question papers themselves print no session times, so the schedule source is the JIC report, not the paper. The 2024 report prints its dates table as an image; it was read with on-device OCR. These source checks are AI-assisted (Claude), not human review. Paper durations and the 150-minute break are derived from the recorded clock times and must agree with each reviewed paper's duration, or the year is unavailable. A year without a configuration is shown as unavailable; no universal timetable is assumed. Instructions, sections and marking come from each paper's own reviewed configuration, so 2026's −1 multiple-correct penalty and 48/54 question counts stay distinct from earlier years.
+
+Each paper is an ordinary full-paper attempt with its own deadline. The exam record (`exam`, and up to 10 finished `exams`, in the PYQ workspace) links them and holds the break explicitly: it starts at Paper 1's own finish time (submission or deadline, even while the tab is closed) and ends when the learner begins Paper 2, whose full duration starts then. Reloading never extends a paper or charges the break to one. The scheduled break is shown as a countdown; the learner may begin Paper 2 earlier or later, and the report records the actual break. Paper 1's report stays sealed until the exam ends. Ending early submits the paper on screen; a paper never started is reported as not attempted, and the combined total covers completed papers only. Reports show each paper's marks, subject marks by paper, and the combined result.
+
+A workspace with exam data is saved as version 2 so older releases preserve it as unreadable rather than silently dropping the exam; workspaces without exam data stay version 1. Restore validates the exam's phase, timing links and paper identities against the stored attempts.
+
 ## Original practice and study analysis
 
 The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
