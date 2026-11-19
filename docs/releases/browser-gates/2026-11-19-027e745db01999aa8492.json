@@ -1,0 +1,969 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-19T12:44:53.690Z",
+  "release": {
+    "releaseVersion": "027e745db01999aa8492",
+    "appVersion": "1c343248091006fc0a552944b52d4a96a9378fada0b2252d4374ac3c31bcb3f8",
+    "packageVersion": "0.5.0",
+    "commit": "c5236c35d28c4d2f8bacbd41e78a417ae89c811b",
+    "workingTreeClean": true,
+    "ci": null
+  },
+  "environment": {
+    "profile": "desktop",
+    "cpuThrottle": 1,
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "isMobileEmulation": false,
+    "browser": "chromium 159.0.8154.6",
+    "os": "Darwin 27.2.0 arm64",
+    "cpu": "Apple M5",
+    "logicalCpus": 10,
+    "memoryGiB": 16,
+    "node": "v26.13.0",
+    "ci": false,
+    "network": "loopback, unthrottled (transfer cost not represented)"
+  },
+  "playwright": "1.65.1",
+  "automated": {
+    "total": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "checks": [
+      {
+        "id": "axe.spec.mjs › axe: #overview",
+        "status": "pass",
+        "durationMs": 409,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #chapters",
+        "status": "pass",
+        "durationMs": 381,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #tests",
+        "status": "pass",
+        "durationMs": 347,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #analysis",
+        "status": "pass",
+        "durationMs": 368,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #mistakes",
+        "status": "pass",
+        "durationMs": 364,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #bank",
+        "status": "pass",
+        "durationMs": 364,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #progress",
+        "status": "pass",
+        "durationMs": 343,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #archive",
+        "status": "pass",
+        "durationMs": 451,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: #sources",
+        "status": "pass",
+        "durationMs": 335,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: PYQ hub, instructions, question with figure, submit confirmation and report",
+        "status": "pass",
+        "durationMs": 2744,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: original-practice question and submit dialog",
+        "status": "pass",
+        "durationMs": 549,
+        "error": null
+      },
+      {
+        "id": "axe.spec.mjs › axe: not-found page and open-source library",
+        "status": "pass",
+        "durationMs": 594,
+        "error": null
+      },
+      {
+        "id": "keyboard.spec.mjs › skip link and main navigation work from the keyboard",
+        "status": "pass",
+        "durationMs": 285,
+        "error": null
+      },
+      {
+        "id": "keyboard.spec.mjs › PYQ setup, answering, flagging, submit confirmation and review by keyboard",
+        "status": "pass",
+        "durationMs": 1447,
+        "error": null
+      },
+      {
+        "id": "keyboard.spec.mjs › original-practice submit dialog traps focus, closes with Escape and restores focus",
+        "status": "pass",
+        "durationMs": 286,
+        "error": null
+      },
+      {
+        "id": "keyboard.spec.mjs › PYQ backup export and restore are keyboard operable",
+        "status": "pass",
+        "durationMs": 1246,
+        "error": null
+      },
+      {
+        "id": "keyboard.spec.mjs › original-practice progress restore control is keyboard reachable",
+        "status": "pass",
+        "durationMs": 165,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › no horizontal document overflow at 320px",
+        "status": "pass",
+        "durationMs": 720,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › no horizontal document overflow at 360px",
+        "status": "pass",
+        "durationMs": 738,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › no horizontal document overflow at 390px",
+        "status": "pass",
+        "durationMs": 774,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › mobile question screen keeps controls at a usable size",
+        "status": "pass",
+        "durationMs": 320,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › reduced motion disables transitions and smooth scrolling",
+        "status": "pass",
+        "durationMs": 362,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › equations render as native MathML and display maths never widens the page",
+        "status": "pass",
+        "durationMs": 2321,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › diagrams load with meaningful alternative text in full papers",
+        "status": "pass",
+        "durationMs": 417,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › every route has one level-one heading, one main landmark and labelled navigation",
+        "status": "pass",
+        "durationMs": 299,
+        "error": null
+      },
+      {
+        "id": "layout.spec.mjs › missing content states are explicit",
+        "status": "pass",
+        "durationMs": 443,
+        "error": null
+      },
+      {
+        "id": "performance.spec.mjs › full-corpus timing: desktop",
+        "status": "pass",
+        "durationMs": 1038,
+        "error": null
+      },
+      {
+        "id": "performance.spec.mjs › full-corpus timing: mobile-emulated",
+        "status": "pass",
+        "durationMs": 1963,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › a used paper and its figures work offline after reload",
+        "status": "pass",
+        "durationMs": 1056,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › an uncached paper offline shows an explicit, recoverable state",
+        "status": "pass",
+        "durationMs": 584,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › an uncached shell offline gets the worker's explicit offline message, not a browser error",
+        "status": "pass",
+        "durationMs": 283,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › a storage write failure keeps the saved attempt and says so",
+        "status": "pass",
+        "durationMs": 591,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › unavailable browser storage falls back to memory-only practice with an export reminder",
+        "status": "pass",
+        "durationMs": 380,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › without Web Locks the workspace runs in memory mode and says so",
+        "status": "pass",
+        "durationMs": 230,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › a second tab is a read-only reader that follows the writer and takes over after it closes",
+        "status": "pass",
+        "durationMs": 812,
+        "error": null
+      },
+      {
+        "id": "resilience.spec.mjs › a deployment during an active paper waits, keeps saving and resumes intact on the new release",
+        "status": "pass",
+        "durationMs": 5355,
+        "error": null
+      }
+    ]
+  },
+  "accessibility": {
+    "axeVersion": "4.14.1",
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22aa"
+    ],
+    "viewsAudited": [
+      "overview",
+      "chapters",
+      "tests",
+      "analysis",
+      "mistakes",
+      "bank",
+      "progress",
+      "archive",
+      "sources",
+      "pyq-hub",
+      "pyq-instructions",
+      "pyq-question-first",
+      "pyq-question-figure",
+      "pyq-submit-confirm",
+      "pyq-report",
+      "practice-question",
+      "practice-submit-dialog",
+      "not-found",
+      "resources"
+    ],
+    "regressions": [],
+    "knownFailures": {
+      "byRule": {
+        "color-contrast": 195
+      },
+      "patterns": 195,
+      "keys": [
+        "analysis|color-contrast|#687469 on #f5f4ee",
+        "analysis|color-contrast|#6e7972 on #f5f4ee",
+        "analysis|color-contrast|#6e7972 on #fafbf6",
+        "analysis|color-contrast|#6e7972 on #fffefa",
+        "analysis|color-contrast|#899188 on #f8f7f1",
+        "analysis|color-contrast|#8b9388 on #f5f4ee",
+        "analysis|color-contrast|#d9b484 on #3c5144",
+        "archive|color-contrast|#687469 on #f5f4ee",
+        "archive|color-contrast|#6e7972 on #f5f4ee",
+        "archive|color-contrast|#738462 on #edf0e6",
+        "archive|color-contrast|#7c8778 on #fffefa",
+        "archive|color-contrast|#7e8b73 on #f5f4ee",
+        "archive|color-contrast|#7f7f5b on #efefe1",
+        "archive|color-contrast|#899188 on #f8f7f1",
+        "archive|color-contrast|#8b9388 on #f5f4ee",
+        "archive|color-contrast|#8b9483 on #fffefa",
+        "archive|color-contrast|#d9b484 on #3c5144",
+        "bank|color-contrast|#687469 on #f5f4ee",
+        "bank|color-contrast|#6e7972 on #f5f4ee",
+        "bank|color-contrast|#758266 on #fffefa",
+        "bank|color-contrast|#7b749c on #e9e8f1",
+        "bank|color-contrast|#7f7f5b on #efefe1",
+        "bank|color-contrast|#899188 on #f8f7f1",
+        "bank|color-contrast|#8b9388 on #f5f4ee",
+        "bank|color-contrast|#8d977f on #fffefa",
+        "bank|color-contrast|#d9b484 on #3c5144",
+        "chapters|color-contrast|#687469 on #f5f4ee",
+        "chapters|color-contrast|#6e7972 on #f5f4ee",
+        "chapters|color-contrast|#7a8b67 on #fffefa",
+        "chapters|color-contrast|#7c8876 on #fffefa",
+        "chapters|color-contrast|#7f7f5b on #efefe1",
+        "chapters|color-contrast|#899188 on #f8f7f1",
+        "chapters|color-contrast|#89927f on #fffefa",
+        "chapters|color-contrast|#8b9388 on #f5f4ee",
+        "chapters|color-contrast|#9aa38e on #fffefa",
+        "chapters|color-contrast|#d9b484 on #3c5144",
+        "mistakes|color-contrast|#617557 on #eaf0e3",
+        "mistakes|color-contrast|#65775a on #eaf0e3",
+        "mistakes|color-contrast|#67785c on #f5f4ee",
+        "mistakes|color-contrast|#687469 on #f5f4ee",
+        "mistakes|color-contrast|#687663 on #f5f4ee",
+        "mistakes|color-contrast|#899188 on #f8f7f1",
+        "mistakes|color-contrast|#8b9388 on #f5f4ee",
+        "mistakes|color-contrast|#d9b484 on #3c5144",
+        "overview|color-contrast|#687469 on #f5f4ee",
+        "overview|color-contrast|#6b7863 on #f5f4ee",
+        "overview|color-contrast|#6e7972 on #f5f4ee",
+        "overview|color-contrast|#6e7972 on #fffefa",
+        "overview|color-contrast|#738462 on #edf0e6",
+        "overview|color-contrast|#75846b on #fffefa",
+        "overview|color-contrast|#75866a on #fffefa",
+        "overview|color-contrast|#77866e on #fffefa",
+        "overview|color-contrast|#778c67 on #f5f4ee",
+        "overview|color-contrast|#7a866c on #fffefa",
+        "overview|color-contrast|#7c8579 on #fffefa",
+        "overview|color-contrast|#7e8a76 on #fffefa",
+        "overview|color-contrast|#819071 on #f1f1e7",
+        "overview|color-contrast|#899188 on #f8f7f1",
+        "overview|color-contrast|#8a957f on #fffefa",
+        "overview|color-contrast|#8a9681 on #fffefa",
+        "overview|color-contrast|#8b9388 on #f5f4ee",
+        "overview|color-contrast|#8b9681 on #fffefa",
+        "overview|color-contrast|#95a18c on #fffefa",
+        "overview|color-contrast|#9aa091 on #fffefa",
+        "overview|color-contrast|#d9b484 on #3c5144",
+        "practice-question|color-contrast|#687469 on #f5f4ee",
+        "practice-question|color-contrast|#6e7972 on #f5f4ee",
+        "practice-question|color-contrast|#6e7972 on #fffefa",
+        "practice-question|color-contrast|#758266 on #fffefa",
+        "practice-question|color-contrast|#778c67 on #f5f4ee",
+        "practice-question|color-contrast|#7b749c on #e9e8f1",
+        "practice-question|color-contrast|#7b8a6e on #fffefa",
+        "practice-question|color-contrast|#7c8876 on #fffefa",
+        "practice-question|color-contrast|#829175 on #fffefa",
+        "practice-question|color-contrast|#899188 on #f8f7f1",
+        "practice-question|color-contrast|#89957e on #fffefa",
+        "practice-question|color-contrast|#8b9388 on #f5f4ee",
+        "practice-question|color-contrast|#8b987f on #fffefa",
+        "practice-question|color-contrast|#8d977f on #fffefa",
+        "practice-question|color-contrast|#a3ab9e on #fffefa",
+        "practice-question|color-contrast|#d9b484 on #3c5144",
+        "practice-submit-dialog|color-contrast|#79876f on #fafbf5",
+        "practice-submit-dialog|color-contrast|#7a876e on #fafbf5",
+        "progress|color-contrast|#687469 on #f5f4ee",
+        "progress|color-contrast|#6e7972 on #f5f4ee",
+        "progress|color-contrast|#6e7972 on #fffefa",
+        "progress|color-contrast|#7c8579 on #fffefa",
+        "progress|color-contrast|#7c8778 on #fffefa",
+        "progress|color-contrast|#7f7f5b on #efefe1",
+        "progress|color-contrast|#899188 on #f8f7f1",
+        "progress|color-contrast|#8b9388 on #f5f4ee",
+        "progress|color-contrast|#d9b484 on #3c5144",
+        "pyq-hub|color-contrast|#63735d on #eaf0e0",
+        "pyq-hub|color-contrast|#637458 on #edf1e4",
+        "pyq-hub|color-contrast|#65765a on #edf1e4",
+        "pyq-hub|color-contrast|#687469 on #f5f4ee",
+        "pyq-hub|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-hub|color-contrast|#6d7d5d on #fffef9",
+        "pyq-hub|color-contrast|#718168 on #fffef9",
+        "pyq-hub|color-contrast|#75836c on #fffef9",
+        "pyq-hub|color-contrast|#77876d on #fffef9",
+        "pyq-hub|color-contrast|#899188 on #f8f7f1",
+        "pyq-hub|color-contrast|#8a977b on #fffef9",
+        "pyq-hub|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-hub|color-contrast|#d9b484 on #3c5144",
+        "pyq-instructions|color-contrast|#687469 on #f5f4ee",
+        "pyq-instructions|color-contrast|#697b5c on #f3f6eb",
+        "pyq-instructions|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-instructions|color-contrast|#728267 on #fffef9",
+        "pyq-instructions|color-contrast|#899188 on #f8f7f1",
+        "pyq-instructions|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-instructions|color-contrast|#d9b484 on #3c5144",
+        "pyq-question-figure|color-contrast|#647759 on #e9e6dc",
+        "pyq-question-figure|color-contrast|#647959 on #e8efdd",
+        "pyq-question-figure|color-contrast|#687469 on #f5f4ee",
+        "pyq-question-figure|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-question-figure|color-contrast|#6e805f on #e8efdd",
+        "pyq-question-figure|color-contrast|#718168 on #fffef9",
+        "pyq-question-figure|color-contrast|#728063 on #f5f7ef",
+        "pyq-question-figure|color-contrast|#748569 on #fffef9",
+        "pyq-question-figure|color-contrast|#7a896e on #fffef9",
+        "pyq-question-figure|color-contrast|#7b896e on #fffef9",
+        "pyq-question-figure|color-contrast|#849177 on #fffef9",
+        "pyq-question-figure|color-contrast|#899188 on #f8f7f1",
+        "pyq-question-figure|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-question-figure|color-contrast|#d9b484 on #3c5144",
+        "pyq-question-first|color-contrast|#647959 on #e8efdd",
+        "pyq-question-first|color-contrast|#687469 on #f5f4ee",
+        "pyq-question-first|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-question-first|color-contrast|#6e805f on #e8efdd",
+        "pyq-question-first|color-contrast|#718168 on #fffef9",
+        "pyq-question-first|color-contrast|#728063 on #f5f7ef",
+        "pyq-question-first|color-contrast|#748569 on #fffef9",
+        "pyq-question-first|color-contrast|#7a896e on #fffef9",
+        "pyq-question-first|color-contrast|#7b896e on #fffef9",
+        "pyq-question-first|color-contrast|#899188 on #f8f7f1",
+        "pyq-question-first|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-question-first|color-contrast|#d9b484 on #3c5144",
+        "pyq-report|color-contrast|#687469 on #f5f4ee",
+        "pyq-report|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-report|color-contrast|#6d7d5d on #fffef9",
+        "pyq-report|color-contrast|#718168 on #f1f5e9",
+        "pyq-report|color-contrast|#718168 on #f5f4ee",
+        "pyq-report|color-contrast|#718464 on #f5f7ed",
+        "pyq-report|color-contrast|#738369 on #fffef9",
+        "pyq-report|color-contrast|#79896c on #fffef9",
+        "pyq-report|color-contrast|#7a896d on #fffef9",
+        "pyq-report|color-contrast|#7e8e71 on #fffef9",
+        "pyq-report|color-contrast|#7f8d70 on #eef2e5",
+        "pyq-report|color-contrast|#829273 on #fffef9",
+        "pyq-report|color-contrast|#87947b on #fffef9",
+        "pyq-report|color-contrast|#899188 on #f8f7f1",
+        "pyq-report|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-report|color-contrast|#95a188 on #fffef9",
+        "pyq-report|color-contrast|#d9b484 on #3c5144",
+        "pyq-submit-confirm|color-contrast|#647759 on #e9e6dc",
+        "pyq-submit-confirm|color-contrast|#647959 on #e8efdd",
+        "pyq-submit-confirm|color-contrast|#687469 on #f5f4ee",
+        "pyq-submit-confirm|color-contrast|#6d7d5d on #f5f4ee",
+        "pyq-submit-confirm|color-contrast|#6e805f on #e8efdd",
+        "pyq-submit-confirm|color-contrast|#718168 on #fffef9",
+        "pyq-submit-confirm|color-contrast|#728063 on #f5f7ef",
+        "pyq-submit-confirm|color-contrast|#748569 on #fffef9",
+        "pyq-submit-confirm|color-contrast|#7a896e on #fffef9",
+        "pyq-submit-confirm|color-contrast|#7b896e on #fffef9",
+        "pyq-submit-confirm|color-contrast|#849177 on #fffef9",
+        "pyq-submit-confirm|color-contrast|#899188 on #f8f7f1",
+        "pyq-submit-confirm|color-contrast|#8b9388 on #f5f4ee",
+        "pyq-submit-confirm|color-contrast|#d9b484 on #3c5144",
+        "sources|color-contrast|#64814d on #fffefa",
+        "sources|color-contrast|#687469 on #f5f4ee",
+        "sources|color-contrast|#6e7972 on #f5f4ee",
+        "sources|color-contrast|#738462 on #edf0e6",
+        "sources|color-contrast|#748365 on #fffefa",
+        "sources|color-contrast|#7e8c70 on #fffefa",
+        "sources|color-contrast|#899188 on #f8f7f1",
+        "sources|color-contrast|#8b9388 on #f5f4ee",
+        "sources|color-contrast|#9a744e on #f3eadd",
+        "sources|color-contrast|#d9b484 on #3c5144",
+        "tests|color-contrast|#687469 on #f5f4ee",
+        "tests|color-contrast|#6e7972 on #f5f4ee",
+        "tests|color-contrast|#738462 on #edf0e6",
+        "tests|color-contrast|#748365 on #fffefa",
+        "tests|color-contrast|#778c67 on #f5f4ee",
+        "tests|color-contrast|#7b749c on #e9e8f1",
+        "tests|color-contrast|#7c8876 on #fffefa",
+        "tests|color-contrast|#7d8b71 on #fffefa",
+        "tests|color-contrast|#7d8c70 on #fffefa",
+        "tests|color-contrast|#7e8d70 on #fffefa",
+        "tests|color-contrast|#819071 on #f1f1e7",
+        "tests|color-contrast|#899188 on #f8f7f1",
+        "tests|color-contrast|#8b9388 on #f5f4ee",
+        "tests|color-contrast|#9b9e78 on #fffefa",
+        "tests|color-contrast|#a08a67 on #fffefa",
+        "tests|color-contrast|#d9b484 on #3c5144"
+      ]
+    }
+  },
+  "performance": {
+    "thresholdStatus": "proposed",
+    "profiles": {
+      "desktop": {
+        "device": {
+          "profile": "desktop",
+          "cpuThrottle": 1,
+          "viewport": {
+            "width": 1366,
+            "height": 900
+          },
+          "deviceScaleFactor": 1,
+          "isMobileEmulation": false,
+          "browser": "chromium 159.0.8154.6",
+          "os": "Darwin 27.2.0 arm64",
+          "cpu": "Apple M5",
+          "logicalCpus": 10,
+          "memoryGiB": 16,
+          "node": "v26.13.0",
+          "ci": false,
+          "network": "loopback, unthrottled (transfer cost not represented)"
+        },
+        "corpus": {
+          "questions": 510,
+          "papers": 10,
+          "heapBytes": 23100000,
+          "contentBytes": 4406136,
+          "longTaskBlockingMs": 0
+        },
+        "metrics": {
+          "domContentLoadedMs": 40,
+          "dashboardReadyMs": 47,
+          "corpusReadyMs": 81,
+          "corpusLongTaskBlockingMs": 0,
+          "fullPaperRenderMs": 40,
+          "questionNavigationMedianMs": 37,
+          "interactionLatencyMaxMs": 40
+        },
+        "thresholds": {
+          "dashboardReadyMs": 2500,
+          "corpusReadyMs": 3000,
+          "corpusLongTaskBlockingMs": 200,
+          "fullPaperRenderMs": 500,
+          "questionNavigationMedianMs": 200,
+          "interactionLatencyMaxMs": 200
+        },
+        "checks": {
+          "dashboardReadyMs": {
+            "value": 47,
+            "limit": 2500,
+            "pass": true
+          },
+          "corpusReadyMs": {
+            "value": 81,
+            "limit": 3000,
+            "pass": true
+          },
+          "corpusLongTaskBlockingMs": {
+            "value": 0,
+            "limit": 200,
+            "pass": true
+          },
+          "fullPaperRenderMs": {
+            "value": 40,
+            "limit": 500,
+            "pass": true
+          },
+          "questionNavigationMedianMs": {
+            "value": 37,
+            "limit": 200,
+            "pass": true
+          },
+          "interactionLatencyMaxMs": {
+            "value": 40,
+            "limit": 200,
+            "pass": true
+          }
+        },
+        "samples": {
+          "navigations": [
+            43.09999996423721,
+            37.80000001192093,
+            36.60000002384186,
+            38.30000001192093,
+            36.799999952316284,
+            35.30000001192093,
+            37.39999997615814,
+            38.40000003576279,
+            36.19999998807907,
+            26.200000047683716,
+            28.30000001192093
+          ],
+          "interactions": [
+            40,
+            40,
+            40,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            16,
+            16,
+            16,
+            24,
+            24,
+            24,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            16,
+            16,
+            16,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ]
+        }
+      },
+      "mobile-emulated": {
+        "device": {
+          "profile": "mobile-emulated",
+          "cpuThrottle": 4,
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "deviceScaleFactor": 3,
+          "isMobileEmulation": true,
+          "browser": "chromium 159.0.8154.6",
+          "os": "Darwin 27.2.0 arm64",
+          "cpu": "Apple M5",
+          "logicalCpus": 10,
+          "memoryGiB": 16,
+          "node": "v26.13.0",
+          "ci": false,
+          "network": "loopback, unthrottled (transfer cost not represented)"
+        },
+        "corpus": {
+          "questions": 510,
+          "papers": 10,
+          "heapBytes": 23100000,
+          "contentBytes": 4406136,
+          "longTaskBlockingMs": 37
+        },
+        "metrics": {
+          "domContentLoadedMs": 104,
+          "dashboardReadyMs": 153,
+          "corpusReadyMs": 325,
+          "corpusLongTaskBlockingMs": 37,
+          "fullPaperRenderMs": 88,
+          "questionNavigationMedianMs": 50,
+          "interactionLatencyMaxMs": 32
+        },
+        "thresholds": {
+          "dashboardReadyMs": 2500,
+          "corpusReadyMs": 6000,
+          "corpusLongTaskBlockingMs": 600,
+          "fullPaperRenderMs": 1000,
+          "questionNavigationMedianMs": 500,
+          "interactionLatencyMaxMs": 500
+        },
+        "checks": {
+          "dashboardReadyMs": {
+            "value": 153,
+            "limit": 2500,
+            "pass": true
+          },
+          "corpusReadyMs": {
+            "value": 325,
+            "limit": 6000,
+            "pass": true
+          },
+          "corpusLongTaskBlockingMs": {
+            "value": 37,
+            "limit": 600,
+            "pass": true
+          },
+          "fullPaperRenderMs": {
+            "value": 88,
+            "limit": 1000,
+            "pass": true
+          },
+          "questionNavigationMedianMs": {
+            "value": 50,
+            "limit": 500,
+            "pass": true
+          },
+          "interactionLatencyMaxMs": {
+            "value": 32,
+            "limit": 500,
+            "pass": true
+          }
+        },
+        "samples": {
+          "navigations": [
+            55.30000001192093,
+            48.700000047683716,
+            42.39999997615814,
+            50.30000001192093,
+            63.10000002384186,
+            51.299999952316284,
+            65,
+            49.09999996423721,
+            46.60000002384186,
+            41.10000002384186,
+            51.30000001192093
+          ],
+          "interactions": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            24,
+            24,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  },
+  "offline": {
+    "offline-cached": {
+      "figure": "http://vedaris.localhost:65247/releases/027e745db01999aa8492/assets/content/2023-p1/2023_P1_Physics_Q01_FIG_1.png",
+      "offlineReload": "pass"
+    },
+    "upgrade-while-active": {
+      "from": "027e745db01999aa8492",
+      "to": "b4e6565e844de8d8d458",
+      "waitingWhileActive": true,
+      "resumedIntact": true
+    }
+  },
+  "manual": [
+    {
+      "id": "sr-voiceover-macos-safari",
+      "kind": "screen-reader",
+      "platform": "macOS, Safari",
+      "assistiveTechnology": "VoiceOver",
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": null
+    },
+    {
+      "id": "sr-voiceover-ios-safari",
+      "kind": "screen-reader",
+      "platform": "iPhone, Safari",
+      "assistiveTechnology": "VoiceOver",
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": null
+    },
+    {
+      "id": "sr-nvda-windows-firefox",
+      "kind": "screen-reader",
+      "platform": "Windows, Firefox",
+      "assistiveTechnology": "NVDA",
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": null
+    },
+    {
+      "id": "sr-nvda-windows-chrome",
+      "kind": "screen-reader",
+      "platform": "Windows, Chrome",
+      "assistiveTechnology": "NVDA",
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": null
+    },
+    {
+      "id": "sr-talkback-android-chrome",
+      "kind": "screen-reader",
+      "platform": "Android, Chrome",
+      "assistiveTechnology": "TalkBack",
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": null
+    },
+    {
+      "id": "device-ios-safari-offline",
+      "kind": "real-device",
+      "platform": "iPhone, Safari",
+      "assistiveTechnology": null,
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": "Install, open one paper online, then airplane mode: reload, resume, figures, uncached paper message."
+    },
+    {
+      "id": "device-android-chrome-offline",
+      "kind": "real-device",
+      "platform": "Android, Chrome",
+      "assistiveTechnology": null,
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": "As for iPhone, plus full-corpus timing on a mid-range phone with its model recorded."
+    },
+    {
+      "id": "browser-firefox-desktop",
+      "kind": "browser",
+      "platform": "Desktop Firefox (current release)",
+      "assistiveTechnology": null,
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": "Keyboard journeys, MathML rendering, reader tab, backup restore."
+    },
+    {
+      "id": "browser-safari-desktop",
+      "kind": "browser",
+      "platform": "Desktop Safari (current release)",
+      "assistiveTechnology": null,
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": "Keyboard journeys (with 'Press Tab to highlight each item' enabled), MathML rendering, offline after install."
+    },
+    {
+      "id": "zoom-400-percent",
+      "kind": "visual",
+      "platform": "Any desktop browser at 1280px, 400% zoom",
+      "assistiveTechnology": null,
+      "status": "not-yet-run",
+      "date": null,
+      "tester": null,
+      "versions": null,
+      "notes": "Equations and figures stay readable; no two-dimensional scrolling outside tables, equations and the palette."
+    }
+  ],
+  "decision": {
+    "automatedGate": "pass",
+    "regressions": [],
+    "knownOpenFailures": [
+      "color-contrast: 195 view/pattern pairs (baseline)"
+    ],
+    "manualChecksNotRun": [
+      "sr-voiceover-macos-safari",
+      "sr-voiceover-ios-safari",
+      "sr-nvda-windows-firefox",
+      "sr-nvda-windows-chrome",
+      "sr-talkback-android-chrome",
+      "device-ios-safari-offline",
+      "device-android-chrome-offline",
+      "browser-firefox-desktop",
+      "browser-safari-desktop",
+      "zoom-400-percent"
+    ],
+    "releaseReady": false
+  }
+}
