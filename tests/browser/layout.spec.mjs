@@ -1,6 +1,6 @@
 // Narrow viewports, reduced motion, readable equations/diagrams, document
 // structure and explicit missing-content states.
-import { test, expect, openPYQ, startPaper, recordEvidence, APP_ROUTES } from './fixtures.mjs';
+import { test, expect, openPYQ, startPaper, recordEvidence, walkExamDay, APP_ROUTES } from './fixtures.mjs';
 
 const ROUTES = APP_ROUTES;
 const VIEWPORTS = [{width: 320, height: 640}, {width: 360, height: 740}, {width: 390, height: 844}];
@@ -61,6 +61,14 @@ for (const viewport of VIEWPORTS) {
     for (const [view, result] of Object.entries(results)) expect.soft(result.over, `${view} at ${viewport.width}px overflows: ${result.culprit}`).toBeLessThanOrEqual(0);
   });
 }
+
+test('two-paper exam screens reflow at 320px', async ({page, origin}, testInfo) => {
+  await page.setViewportSize(VIEWPORTS[0]);
+  const results = {};
+  await walkExamDay(page, origin, async name => { results[name] = await overflow(page); });
+  await recordEvidence(testInfo, 'overflow-exam-320', {viewport: VIEWPORTS[0], results});
+  for (const [screen, result] of Object.entries(results)) expect.soft(result.over, `${screen} at 320px overflows: ${result.culprit}`).toBeLessThanOrEqual(0);
+});
 
 test('mobile question screen keeps controls at a usable size', async ({page, origin}) => {
   await page.setViewportSize({width: 360, height: 740});

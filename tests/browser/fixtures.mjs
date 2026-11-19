@@ -82,6 +82,46 @@ export async function startPaper(page, year, paper) {
   await expect(page.getByRole('heading', {level: 1, name: `${year} · Paper ${paper}`})).toBeVisible();
 }
 
+const pyqAction = (name, value) => `[data-pyq-action="${name}"]${value ? `[data-value="${value}"]` : ''}`;
+async function answerFirst(page) {
+  const choice = page.locator('[data-pyq-choice]:not([disabled])').first();
+  if (await choice.count()) await choice.click(); else await page.getByLabel('Your numerical answer').fill('1');
+}
+
+/**
+ * Drive a two-paper exam day (#18) from the hub through Paper 1, the break and
+ * Paper 2 to the combined report, calling `at(name)` on each distinct screen.
+ */
+export async function walkExamDay(page, origin, at, {configId = 'jee-advanced-2023-two-paper-v1'} = {}) {
+  await openPYQ(page, origin);
+  await page.locator(pyqAction('prepare-exam', configId)).click();
+  await expect(page.locator(pyqAction('start-exam'))).toBeVisible();
+  await at('exam-instructions');
+  await page.locator(pyqAction('start-exam')).click();
+  await expect(page.locator('#main')).toContainText('PAPER 1 OF 2');
+  await answerFirst(page);
+  await at('exam-paper1');
+  await page.locator(pyqAction('submit')).click();
+  await page.locator(pyqAction('finish')).click();
+  await expect(page.locator('#main')).toContainText('Take your break');
+  await at('exam-break');
+  await page.locator(pyqAction('ask-cancel-exam')).click();
+  await expect(page.locator('#main')).toContainText('End this exam now?');
+  await at('exam-break-confirm-end');
+  await page.locator(pyqAction('keep-exam')).click();
+  await page.locator(pyqAction('start-paper2')).click();
+  await expect(page.locator('#main')).toContainText('PAPER 2 OF 2');
+  await answerFirst(page);
+  await page.locator(pyqAction('submit')).click();
+  await page.locator(pyqAction('finish')).click();
+  await expect(page.locator('#main')).toContainText('COMBINED MARKS');
+  await at('exam-report');
+  await page.locator(pyqAction('hub')).first().click();
+  await expect(page.getByRole('heading', {level: 1, name: 'The PYQ workspace.'})).toBeVisible();
+  await expect(page.locator(pyqAction('exam-history')).first()).toBeVisible();
+  await at('pyq-hub-with-exam');
+}
+
 /** The palette button for a 1-based question position. */
 export function paletteButton(page, position) {
   return page.locator('.pyq-palette button').nth(position - 1);
