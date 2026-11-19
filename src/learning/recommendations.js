@@ -19,7 +19,9 @@ import { emptyRevisionPlan, restoreRevisionPlan } from './revision-plan.js';
  * not reconstructed; unknown identities are counted as ignored instead.
  *
  * Output is ordering for study, not a mastery estimate, rank, percentile or
- * prediction. The learner decides what to practise; nothing starts here.
+ * prediction. Suggestions are ordered by the count of open incorrect or
+ * partial first attempts of both kinds, then by the most recent miss; the UI
+ * states this rule. The learner decides what to practise; nothing starts here.
  */
 export const MIN_CHAPTER_EVIDENCE = 3;
 export const MIN_TOTAL_EVIDENCE = 5;

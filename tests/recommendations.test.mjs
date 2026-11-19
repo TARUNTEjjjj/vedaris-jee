@@ -252,6 +252,7 @@ test('the revision route is wired with a visible unreviewed-draft notice', async
   assert.match(ui, /Unreviewed draft relationships\./);
   assert.match(ui, /UNREVIEWED DRAFT/);
   assert.match(ui, /never combined into one score/);
+  assert.match(ui, /ordered by how many open incorrect or partial first attempts a chapter has \(both kinds counted\)/, 'the UI states the ordering rule, which counts both kinds of open misses');
   assert.ok(MIN_CHAPTER_EVIDENCE >= 3);
 });
 

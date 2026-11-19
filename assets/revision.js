@@ -44,9 +44,9 @@ export function mountRevision(root, { result, plan, readOnly = false, onAddGoal,
     ${result.planError ? '<p class="analysis-warning" role="alert">Your saved revision plan could not be read. It has been preserved and is not used here.</p>' : ''}
     <section class="analysis-card" aria-labelledby="revision-goals-heading"><div class="analysis-card-heading"><div><span class="eyebrow">DECLARED GOALS</span><h2 id="revision-goals-heading">Add a chapter you want to revise</h2></div><span class="analysis-tag">${goals.size} / ${MAX_GOALS}</span></div>
       <form class="filters" data-revision-goal-form><div class="field"><label for="revision-goal">Chapter</label><select id="revision-goal" name="chapter"${readOnly ? ' disabled' : ''}>${SUBJECTS.map(subject => `<optgroup label="${esc(subject.title)}">${CHAPTERS.filter(c => c.subject === subject.id && !goals.has(c.id)).map(c => `<option value="${esc(c.id)}">${esc(c.title)}</option>`).join('')}</optgroup>`).join('')}</select></div><button class="button" type="submit"${readOnly || goals.size >= MAX_GOALS ? ' disabled' : ''}>Add goal →</button></form>
-      <p class="analysis-note" data-revision-status role="status" aria-live="polite"></p></section>
+      <p class="analysis-note" data-revision-status role="status" aria-live="polite" tabindex="-1"></p></section>
     <section class="analysis-card" aria-labelledby="revision-list-heading"><div class="analysis-card-heading"><div><span class="eyebrow">SUGGESTIONS</span><h2 id="revision-list-heading">What your evidence points to</h2></div><span class="analysis-tag">${result.recommendations.length} shown</span></div>
-      <p class="analysis-note">${esc(result.message)} Original practice: ${result.evidence.originalAttempts} retained first attempts. Historical PYQ: ${result.evidence.pyqLoaded ? `${result.evidence.pyqAttempts} retained first attempts from saved PYQ reports` : 'saved PYQ reports not loaded'}. The two kinds of evidence are listed separately and never combined into one score.</p>
+      <p class="analysis-note">${esc(result.message)} Original practice: ${result.evidence.originalAttempts} retained first attempts. Historical PYQ: ${result.evidence.pyqLoaded ? `${result.evidence.pyqAttempts} retained first attempts from saved PYQ reports` : 'saved PYQ reports not loaded'}. The two kinds of evidence are listed separately and never combined into one score. Suggestions are ordered by how many open incorrect or partial first attempts a chapter has (both kinds counted), then by the most recent miss.</p>
       ${result.evidence.pyqLoaded ? '' : `<p class="analysis-note"><button type="button" class="button small secondary" data-revision-load-pyq${pyqLoading ? ' disabled' : ''}>${pyqLoading ? 'Loading PYQ reports…' : 'Include saved PYQ reports ↓'}</button> Downloads the reviewed question bank to grade your saved PYQ reports on this device.</p>`}
       ${pyqError ? `<p class="analysis-warning" role="alert">${esc(pyqError)}</p>` : ''}
       ${ignoredCount ? `<p class="analysis-note">${ignoredCount} saved ${ignoredCount === 1 ? 'item refers' : 'items refer'} to questions, chapters or reports this version cannot resolve (for example after a content update). They are ignored here and left unchanged in storage.</p>` : ''}
@@ -55,10 +55,16 @@ export function mountRevision(root, { result, plan, readOnly = false, onAddGoal,
     ${result.limited.length ? `<section class="analysis-card" aria-labelledby="revision-limited-heading"><div class="analysis-card-heading"><div><span class="eyebrow">NOT ENOUGH EVIDENCE TO RANK</span><h2 id="revision-limited-heading">Observations from a few attempts</h2></div></div><p class="analysis-note">These chapters have open mistakes but too few retained attempts to suggest a priority. Review them if you wish.</p><div class="revision-list">${result.limited.map(item => card(item, readOnly)).join('')}</div></section>` : ''}
     ${result.dismissed.length ? `<details class="analysis-card"><summary>Hidden suggestions (${result.dismissed.length})</summary><p class="analysis-note">A hidden suggestion returns when its retained evidence changes.</p><div class="revision-list">${result.dismissed.map(item => card(item, readOnly)).join('')}</div></details>` : ''}
   </section>`;
-  const status = root.querySelector('[data-revision-status]');
   const attempt = (callback, value, message) => {
-    try { if (callback?.(...value) === false) throw new Error('The revision plan could not be saved. Nothing was changed.'); if (status) status.textContent = message; }
-    catch (error) { if (status) status.textContent = error.message; }
+    let text = message;
+    try { if (callback?.(...value) === false) throw new Error('The revision plan could not be saved. Nothing was changed.'); }
+    catch (error) { text = error.message; }
+    // A successful change re-renders this view, replacing the control that had
+    // focus and the old status region. Write to the current region and move
+    // focus to it, so the outcome is shown and announced and keyboard focus is
+    // not dropped to the document body.
+    const status = root.querySelector('[data-revision-status]');
+    if (status) { status.textContent = text; status.focus?.(); }
   };
   root.querySelector('[data-revision-goal-form]')?.addEventListener('submit', event => {
     event.preventDefault();
