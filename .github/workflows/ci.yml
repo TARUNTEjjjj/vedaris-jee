@@ -18,3 +18,27 @@ jobs:
           name: vedaris-static
           path: dist/
           retention-days: 7
+  browser-gate:
+    # Accessibility, offline, resilience and full-corpus timing checks against
+    # the built release. See docs/BROWSER-RELEASE-GATES.md.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - name: Compile dated evidence with the release identity
+        if: always()
+        run: node scripts/browser-gate-evidence.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-release-gate
+          path: test-results/browser-gate/
+          retention-days: 30

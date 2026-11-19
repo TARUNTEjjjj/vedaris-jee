@@ -44,5 +44,6 @@ Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, s
 - [x] Render mathematics and chemical structures accessibly with reviewed diagrams.
 - [ ] Add comprehensive workspace backups and optional cross-device sync with explicit account design.
 - [ ] Establish accessibility, mobile, offline and large-corpus performance release gates.
+  The automated gate, matrix, thresholds and evidence format are in [BROWSER-RELEASE-GATES.md](BROWSER-RELEASE-GATES.md). Colour contrast still fails, and the screen-reader, real-device and non-Chromium checks have not been run.
 
 A large line count or an unreviewed data dump is not a content-completeness milestone. Release metrics report what students can actually use.

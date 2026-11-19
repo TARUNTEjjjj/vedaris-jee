@@ -72,6 +72,6 @@ test('reader moves from active question to its report when another tab finishes'
 
 test('PYQ cleanup removes interval and document/window/root listeners exactly once',()=>{
  const h=harness(sessionEngine.emptyHistoricalWorkspace(BANK));
- assert.equal(h.timers.size,1);assert.equal(h.rootEvents.size,3);assert.equal(h.docEvents.size,1);assert.equal(h.windowEvents.size,1);
+ assert.equal(h.timers.size,1);assert.equal(h.rootEvents.size,4);assert.ok(h.rootEvents.has('error'),'figure load failures are observed');assert.equal(h.docEvents.size,1);assert.equal(h.windowEvents.size,1);
  h.cleanup();h.cleanup();assert.equal(h.timers.size,0);assert.equal(h.rootEvents.size,0);assert.equal(h.docEvents.size,0);assert.equal(h.windowEvents.size,0);
 });

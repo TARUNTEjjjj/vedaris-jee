@@ -12,6 +12,10 @@ Checked 11 November 2026. Production target: `https://vedaris-jee.pages.dev/`.
 - Exclusive writer ownership, reader behavior, release/reacquisition and unsupported-browser fallback.
 - Static-only output, hash integrity and compressed bundle size budget.
 
+## Repeatable browser release gate
+
+From November 2026, `npm run test:browser` runs the automated browser gate described in [BROWSER-RELEASE-GATES.md](BROWSER-RELEASE-GATES.md) against the built release. Each deployed release keeps a dated evidence file in `docs/releases/browser-gates/` with its release identity. Manual screen-reader and device rows stay "not yet run" until a person records them. The notes below are earlier one-off checks.
+
 ## Browser checks on Cloudflare preview
 
 - Overview, archive metadata and self-hosted fonts load without console errors.

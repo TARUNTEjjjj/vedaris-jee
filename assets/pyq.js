@@ -169,7 +169,7 @@ export function mountPYQ(root, {registry, markup = {}, workspace, onChange, read
       <div class="pyq-bank-list">${visible.length ? visible.map(q => `<article><div><span class="pyq-caption">${q.year} · Paper ${q.paper} · ${esc(names[q.subject])}</span><h3>Question ${esc(q.questionNumber)} <span>${esc(types[q.type])}</span></h3><p>${q.chapters.map(c => esc(chapters.get(c)?.title || c)).join(' · ')}</p></div>${button('prepare-one','Practise ↗',{secondary:true,small:true,disabled:readOnly,value:q.id})}</article>`).join('') : '<div class="pyq-empty"><h3>No questions in this selection.</h3><p>Try another chapter, subject or question type. Only questions loaded into this bank appear here.</p></div>'}</div>
       ${pages > 1 ? `<div class="pyq-pagination">${button('bank-prev','← Previous',{secondary:true,small:true,disabled:page === 1})}<span>Page ${page} of ${pages}</span>${button('bank-next','Next →',{secondary:true,small:true,disabled:page === pages})}</div>` : ''}</section>
       <aside class="pyq-hub-aside"><section class="pyq-paper-card"><span class="eyebrow">FULL HISTORICAL MOCKS</span><h2>The whole paper.<br>The original challenge.</h2><p>Complete papers keep their original question order, section rules and duration.</p>${papers.length ? papers.map(p => `<article class="pyq-paper-entry"><div><h3>${p.year} · Paper ${p.paper}</h3><span>${p.complete ? `${p.expectedQuestionCount} questions · ${p.maxMarks} marks · ${p.durationMinutes} minutes` : `${p.loadedQuestionCount} questions loaded · incomplete paper`}</span></div>${p.complete ? button('prepare-paper','Read instructions →',{value:p.paperId,disabled:readOnly}) : `<p class="pyq-caption">${esc(p.reasons.join(' '))}</p>`}</article>`).join('') : '<p>No complete historical mock is loaded yet.</p>'}</section>
-      <section class="pyq-card pyq-history"><span class="eyebrow">YOUR LOCAL TEST HISTORY</span><h2>Return to a report</h2><p class="pyq-caption">Latest 20 completed PYQ sessions on this browser.</p>${state.history.length ? state.history.map(s => {let r;try {r=gradeHistorical(s,registry);}catch{return '';}return `<button type="button" data-pyq-action="history" data-value="${esc(s.id)}"><span><b>${s.mode === 'paper' ? 'Full paper' : 'PYQ practice'}</b><small>${esc(date(s.finishedAt))} · ${s.questionIds.length} questions</small></span><strong>${format(r.score)}<small> / ${format(r.maxScore)}</small></strong></button>`;}).join('') : '<p class="pyq-empty-copy">Finish a paper or chapter set to keep its score and solutions here.</p>'}</section><section class="pyq-card"><h3>Your PYQ backup</h3><p class="pyq-caption">Export your active attempt and last 20 reports before switching devices or clearing browser data.</p><div class="pyq-start-row">${button('export','Export backup ↓',{secondary:true,small:true})}<label class="button secondary small">Restore backup ↑<input data-pyq-import type="file" accept="application/json,.json" hidden ${readOnly?'disabled':''}></label></div></section></aside></div>`;
+      <section class="pyq-card pyq-history"><span class="eyebrow">YOUR LOCAL TEST HISTORY</span><h2>Return to a report</h2><p class="pyq-caption">Latest 20 completed PYQ sessions on this browser.</p>${state.history.length ? state.history.map(s => {let r;try {r=gradeHistorical(s,registry);}catch{return '';}return `<button type="button" data-pyq-action="history" data-value="${esc(s.id)}"><span><b>${s.mode === 'paper' ? 'Full paper' : 'PYQ practice'}</b><small>${esc(date(s.finishedAt))} · ${s.questionIds.length} questions</small></span><strong>${format(r.score)}<small> / ${format(r.maxScore)}</small></strong></button>`;}).join('') : '<p class="pyq-empty-copy">Finish a paper or chapter set to keep its score and solutions here.</p>'}</section><section class="pyq-card"><h3>Your PYQ backup</h3><p class="pyq-caption">Export your active attempt and last 20 reports before switching devices or clearing browser data.</p><div class="pyq-start-row">${button('export','Export backup ↓',{secondary:true,small:true})}<label class="button secondary small">Restore backup ↑<input data-pyq-import class="pyq-file-input" type="file" accept="application/json,.json" ${readOnly?'disabled':''}></label></div></section></aside></div>`;
   }
   function instructionsHTML() {
     const chosen = pending.questionIds.map(id => registry.getQuestion(id));
@@ -182,7 +182,7 @@ export function mountPYQ(root, {registry, markup = {}, workspace, onChange, read
   function paletteHTML(session) {
     return `<div class="pyq-palette">${session.questionIds.map((id,index) => {
       const q = registry.getQuestion(id), done = answered(session.responses[index]), flag = session.flags[index], visit = session.visited[index];
-      return `<button type="button" data-pyq-action="question" data-value="${index}" class="${done ? 'is-answered' : visit ? 'is-visited' : ''} ${flag ? 'is-flagged' : ''} ${index===displayIndex ? 'is-current' : ''}" aria-label="${esc(`${names[q.subject]} Q${q.questionNumber}, ${done ? 'answered' : visit ? 'visited, unanswered' : 'not visited'}${flag ? ', flagged for review' : ''}`)}" ${index===displayIndex ? 'aria-current="true"' : ''}>${index+1}${flag ? '<span aria-hidden="true">★</span>' : ''}</button>`;
+      return `<button type="button" data-pyq-action="question" data-value="${index}" class="${done ? 'is-answered' : visit ? 'is-visited' : ''} ${flag ? 'is-flagged' : ''} ${index===displayIndex ? 'is-current' : ''}" aria-label="${esc(`Question ${index+1}: ${names[q.subject]} Q${q.questionNumber}, ${done ? 'answered' : visit ? 'visited, unanswered' : 'not visited'}${flag ? ', flagged for review' : ''}`)}" ${index===displayIndex ? 'aria-current="true"' : ''}>${index+1}${flag ? '<span aria-hidden="true">★</span>' : ''}</button>`;
     }).join('')}</div>`;
   }
   function sessionHTML() {
@@ -217,7 +217,7 @@ export function mountPYQ(root, {registry, markup = {}, workspace, onChange, read
     root.querySelectorAll('[data-pyq-clock]').forEach(el=>{el.textContent=s.deadline?clock(s.deadline-Date.now()):duration(s.timeSpentMs.reduce((sum,n)=>sum+(n||0),0));});
     root.querySelectorAll('[data-pyq-resume-clock]').forEach(el=>{el.textContent=clock(s.deadline-Date.now());});
     const count=root.querySelector('[data-pyq-answered]');if(count)count.textContent=`${s.responses.filter(answered).length} answered`;
-    root.querySelectorAll('.pyq-palette button').forEach(el=>{const i=Number(el.dataset.value),q=registry.getQuestion(s.questionIds[i]),done=answered(s.responses[i]);el.classList.toggle('is-answered',done);el.classList.toggle('is-visited',!!s.visited[i]&&!done);el.setAttribute('aria-label',`${names[q.subject]} Q${q.questionNumber}, ${done?'answered':s.visited[i]?'visited, unanswered':'not visited'}${s.flags[i]?', flagged for review':''}`);});
+    root.querySelectorAll('.pyq-palette button').forEach(el=>{const i=Number(el.dataset.value),q=registry.getQuestion(s.questionIds[i]),done=answered(s.responses[i]);el.classList.toggle('is-answered',done);el.classList.toggle('is-visited',!!s.visited[i]&&!done);el.setAttribute('aria-label',`Question ${i+1}: ${names[q.subject]} Q${q.questionNumber}, ${done?'answered':s.visited[i]?'visited, unanswered':'not visited'}${s.flags[i]?', flagged for review':''}`);});
     const clear=root.querySelector('[data-pyq-action="clear"]');if(clear)clear.disabled=readOnly||!answered(s.responses[displayIndex]);
     root.querySelectorAll('.pyq-option').forEach(el=>el.classList.toggle('is-selected',!!el.querySelector('input:checked')));
   }
@@ -306,15 +306,25 @@ export function mountPYQ(root, {registry, markup = {}, workspace, onChange, read
       if(root.contains(el)&&state.active)el.value=String(state.active.responses[displayIndex]??'');
     }else refreshSessionStatus();
   }
+  // A figure that cannot be fetched (for example, offline before it was ever
+  // cached) gets an explicit, announced state instead of a silent broken image.
+  function figureError(event){
+    const img=event.target;if(!img?.matches?.('.pyq-figure img'))return;
+    const figure=img.closest('.pyq-figure');if(!figure||figure.classList.contains('is-unavailable'))return;
+    figure.classList.add('is-unavailable');
+    const note=document.createElement('span');note.className='pyq-asset-missing';note.setAttribute('role','note');
+    note.textContent='This figure could not be loaded. Its description is shown below; reconnect and reopen the question to load the figure.';
+    figure.prepend(note);
+  }
   function visibility(){flushTime();visible=!document.hidden;clockAt=Date.now();refreshSessionStatus();}
   function pagehide(){flushTime();}
-  root.addEventListener('click',click);root.addEventListener('change',change);root.addEventListener('input',input);
+  root.addEventListener('click',click);root.addEventListener('change',change);root.addEventListener('input',input);root.addEventListener('error',figureError,true);
   document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',pagehide);
   render();
   // Expiry is checked on mount even when the visitor is browsing the bank.
   flushTime();
   const interval=setInterval(()=>{if(!failure)flushTime();refreshSessionStatus();},1000);
-  const cleanup=()=>{if(disposed)return;flushTime();disposed=true;clearInterval(interval);root.removeEventListener('click',click);root.removeEventListener('change',change);root.removeEventListener('input',input);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',pagehide);};
+  const cleanup=()=>{if(disposed)return;flushTime();disposed=true;clearInterval(interval);root.removeEventListener('click',click);root.removeEventListener('change',change);root.removeEventListener('input',input);root.removeEventListener('error',figureError,true);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',pagehide);};
   cleanup.updateWorkspace=next=>{
     if(!readOnly||disposed)return;
     const signature=s=>JSON.stringify(s?{id:s.id,responses:s.responses,flags:s.flags,visited:s.visited}:null);
