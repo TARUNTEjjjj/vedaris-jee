@@ -27,7 +27,7 @@ Acceptance: each playable PYQ resolves to an original paper, page and question n
 
 - [x] Original-practice single, multiple and exact numerical grading.
 - [x] Implement exact keys, ranges, disjoint ranges, alternative option sets, matching lists and passage groups.
-- [ ] Add historical written-answer review for legacy subjective papers.
+- [ ] Add historical written-answer review for legacy subjective papers. The [review contract and engine](WRITTEN-REVIEW.md) exist, but no repository legacy paper has recorded marking provenance, so none is reviewable yet.
 - [x] Encode section-specific partial/negative marks, instructions, duration and marks.
 - [ ] Add full two-paper sessions and intentional inter-paper breaks where supported by that year's instructions.
 - [x] Verify representative complete papers against independent official totals and answer fixtures.
@@ -38,9 +38,10 @@ Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, s
 
 - [x] Chapters, question studio, sessions, saved questions, review and browser-local progress.
 - [ ] Expand every chapter with independently audited multi-concept Advanced-level practice.
+  - [x] First expansion: 8 multi-concept families in previously uncovered chapters, with parameter constraints and an exact-arithmetic oracle audit; 38 of 54 chapters now have an audited original family ([coverage map](ORIGINAL-PRACTICE.md)). The oracle is machine checking by the same AI author; no human or subject-expert audit has occurred, and 16 chapters remain gaps.
 - [x] Add learner-labelled mistake causes, revision notebook and exact-question retries.
 - [x] Preserve 50 completed test reports with active question timing and subject analysis.
-- [ ] Connect topic relationships and reviewed Advanced-level content to revision recommendations.
+- [ ] Connect topic relationships and reviewed Advanced-level content to revision recommendations. Explainable suggestions now cite retained original-practice and PYQ attempts or learner goals, but the prerequisite map is an AI-assisted **unreviewed draft**; human subject review remains open.
 - [x] Render mathematics and chemical structures accessibly with reviewed diagrams.
 - [x] Add a complete, versioned local workspace backup with validated merge/replace restore and a pre-restore copy.
 - [ ] Add optional cross-device sync with explicit account design.

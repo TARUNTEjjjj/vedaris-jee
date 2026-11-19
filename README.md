@@ -11,7 +11,7 @@ Vedaris carries the chapter → practice → timed session → review → progre
 | Capability | Shipped scope |
 | --- | --- |
 | PCM chapter library | 54 chapter records, 18 per subject; chapters without practice families are labelled |
-| Original practice | 30 deterministic families, 10 per subject; finite seeded variants and worked solutions |
+| Original practice | 38 deterministic families (13 Physics, 12 Chemistry, 13 Mathematics), including 8 multi-concept families checked by a separate exact-arithmetic oracle; finite seeded variants and worked solutions. See [original practice coverage](docs/ORIGINAL-PRACTICE.md) |
 | Historical archive | 79 source records spanning every year **1978–2026** |
 | Official full papers | 40 English papers from **2007–2026**, with HTTP, content-type and PDF-signature checks |
 | Older source collections | 39 collections from **1978–2006**, explicitly labelled partial |

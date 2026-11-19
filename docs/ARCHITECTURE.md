@@ -40,6 +40,8 @@ Legacy staged imports → src/archive/questions.js → data/imports/validated/
 | `assets/pyq.js` | Chapter sets, historical paper instructions, test navigation, review, exact-question retries and backup controls. |
 | `scripts/build-content.mjs`, `scripts/render-math.mjs` | Validate explicit content inputs and compile escaped prose/LaTeX into native MathML. |
 | `src/learning/storage.js` | One browser-wide workspace writer using an exclusive Web Lock. |
+| `src/learning/topic-relations.js`, `src/learning/recommendations.js`, `src/learning/revision-plan.js` | Draft prerequisite map over canonical chapter IDs, explainable revision suggestions and the learner's local goals/dismissals. |
+| `src/content/written-review.js` | Source-backed written-answer contract, publication gate, self/expert/automated-assist review records and export. Not wired to the UI; no legacy paper passes its gate. |
 | `content/review-audit.json` | Source pages, key checks, dataset revision, normalization notes and source/asset hashes. |
 
 Pure engines have no DOM, network or storage dependency. Files use ES modules and run in Node or the browser. The current repository keeps these boundaries together; a future repository split must preserve stable identities.
@@ -78,9 +80,17 @@ Corrupt saved state is preserved rather than overwritten. A failed PYQ persisten
 
 ## Original practice and study analysis
 
-The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
+The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. Multi-concept families in `src/questions/multi-concept.js` separate a documented parameter domain and constraint check from question construction; the dev-only `scripts/original-oracle.mjs` re-derives their answers from question text with exact rational arithmetic, and `scripts/original-coverage.mjs` publishes the chapter coverage map in [ORIGINAL-PRACTICE.md](ORIGINAL-PRACTICE.md). New families are appended under new IDs so existing identities keep producing the same questions. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
 
 Original-practice completed history is limited to 50 validated sessions, with first-attempt grades protected from retries. Notebook annotations refer to original question identities and hold bounded cause labels, notes and resolution flags. Resolving an annotation or improving a retry does not rewrite the first attempt. Historical reports likewise distinguish a new exact-question retry from its source attempt.
+
+### Revision suggestions
+
+`src/learning/topic-relations.js` lists prerequisite edges between the 54 canonical chapter IDs, each with a rationale and review status. Validation rejects unknown chapters, self-links, duplicates and cycles, and accepts `reviewed` only with a named reviewer, real date and evidence. The current edges were drafted with AI assistance and no human subject expert has checked them, so the dataset and every edge are `unreviewed-draft`; the suggestions page states this wherever prerequisites appear.
+
+`src/learning/recommendations.js` reads only retained evidence: the earliest original-practice attempt per `templateId:seed` in progress (up to 1,000), notebook resolution decisions, and the earliest attempt per historical question ID across the saved PYQ reports (latest 20, graded only after the reviewed bank is loaded). Retries never replace a first attempt. Original-practice and historical-PYQ evidence are counted and explained separately, never merged into a score. Every reason cites counts, example question IDs and dates, or the date a learner declared a goal. Fewer than five retained attempts overall, or fewer than three in a chapter, are reported as insufficient evidence rather than ranked. Chapters with no original family or published PYQ say so. Unknown template IDs, PYQ IDs, bank versions and chapters are ignored, counted and left untouched in storage.
+
+The learner's `vedaris.revision-plan.v1` store holds up to 12 goal chapters and dismissals keyed to an evidence signature, so a hidden suggestion returns when its retained evidence changes. It follows the same writer/reader/memory rules and corrupt-data preservation as other local stores. Nothing starts automatically; links open the chosen chapter's practice setup.
 
 No rank, percentile, national comparison or difficulty calibration is derived from this local data. Browser-delivered answer keys are inspectable; this is a self-study workspace, not a proctored assessment system.
 
