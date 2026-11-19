@@ -17,6 +17,7 @@ The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/ii
 
 - Chapterwise PYQ sets and complete historical mocks, with source pages, matching lists, shared passages and 279 unique local figures.
 - Exact numerical keys, discrete alternatives, inclusive ranges, disjoint intervals and official alternative option sets. Partial marks and negative marks follow the original section, including the 2026 multiple-correct penalty of −1. Dropped questions receive their published bonus marks, including when blank.
+- Two-paper exam days for 2022–2026: Paper 1, an explicit inter-paper break from that year's official schedule, then Paper 2, each paper on its own clock and marking. Reports separate each paper's marks from the combined total. Years without a recorded schedule are unavailable.
 - Subject and section navigation, visited and answered states, review flags, saved responses, deadlines and submission confirmation.
 - Regraded reports with subject scores, negative marks, visible question time, elapsed time and filtered review. Exact missed-question retries create separate reports.
 - PYQ backup and restore for the active attempt and latest 20 completed historical reports. Saved scores are recalculated from canonical question identities.

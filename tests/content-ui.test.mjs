@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { CHAPTERS, SUBJECTS } from '../src/questions/catalog.js';
 import * as sessionEngine from '../src/content/session.js';
+import * as examEngine from '../src/content/exam.js';
 import { partialRuleText, historicalSectionNavigation } from '../assets/pyq.js';
 
 const source=(await readFile(new URL('../assets/pyq.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'').replaceAll('export function ','function ').replaceAll('import.meta.url',JSON.stringify('http://localhost/assets/pyq.js'));
@@ -36,7 +37,7 @@ function harness(workspace,{readOnly=true}={}){
  const root={_html:'',set innerHTML(value){this._html=value;writes++;},get innerHTML(){return this._html;},querySelector:()=>null,querySelectorAll:()=>[],contains:()=>true,addEventListener:(k,v)=>rootEvents.set(k,v),removeEventListener:(k,v)=>{if(rootEvents.get(k)===v)rootEvents.delete(k);}};
  const surface=events=>({hidden:false,addEventListener:(k,v)=>events.set(k,v),removeEventListener:(k,v)=>{if(events.get(k)===v)events.delete(k);}});
  const DateStub=class extends Date{static now(){return NOW+10000;}};
- const context=vm.createContext({...sessionEngine,CHAPTERS,SUBJECTS,root,registry,workspace,readOnly,Date:DateStub,URL,Intl,Math,Set,Map,JSON,document:surface(docEvents),window:surface(windowEvents),setInterval:fn=>{const id=timers.size+1;timers.set(id,fn);return id;},clearInterval:id=>timers.delete(id),onChange:()=>{commits++;return true;}});
+ const context=vm.createContext({...sessionEngine,...examEngine,CHAPTERS,SUBJECTS,root,registry,workspace,readOnly,Date:DateStub,URL,Intl,Math,Set,Map,JSON,document:surface(docEvents),window:surface(windowEvents),setInterval:fn=>{const id=timers.size+1;timers.set(id,fn);return id;},clearInterval:id=>timers.delete(id),onChange:()=>{commits++;return true;}});
  vm.runInContext(source,context);const cleanup=vm.runInContext('mountPYQ(root,{registry,workspace,readOnly,onChange})',context);
  return {root,cleanup,rootEvents,docEvents,windowEvents,timers,get writes(){return writes;},get commits(){return commits;},click(action,value=''){const button={dataset:{pyqAction:action,value},disabled:false};rootEvents.get('click')({target:{closest:()=>button}});}};
 }
