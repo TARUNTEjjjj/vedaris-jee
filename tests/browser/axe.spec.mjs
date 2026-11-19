@@ -3,7 +3,7 @@
 // screen-reader protocol in docs/BROWSER-RELEASE-GATES.md).
 import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, openPYQ, recordEvidence } from './fixtures.mjs';
+import { test, expect, openPYQ, recordEvidence, settle } from './fixtures.mjs';
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 // Violations that existed when this gate was introduced. They are recorded as
@@ -19,6 +19,7 @@ export function violationKey(view, rule, node) {
 }
 
 async function audit(page, testInfo, name) {
+  await settle(page);
   const result = await new AxeBuilder({page}).withTags(TAGS).analyze();
   const violations = result.violations.map(v => ({id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.map(n => ({target: n.target.join(' '), detail: n.any[0]?.data ?? null}))}));
   const counts = {};

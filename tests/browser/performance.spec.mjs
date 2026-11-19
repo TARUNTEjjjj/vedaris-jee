@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs';
 import os from 'node:os';
 import { join } from 'node:path';
-import { test, expect, DIST, recordEvidence } from './fixtures.mjs';
+import { test, expect, DIST, HOST, OPTIONAL_HOSTS, recordEvidence } from './fixtures.mjs';
 
 const BUILD = JSON.parse(readFileSync(join(DIST, 'build-info.json'), 'utf8'));
 const THRESHOLDS = JSON.parse(readFileSync(new URL('./performance-thresholds.json', import.meta.url), 'utf8'));
@@ -39,6 +39,9 @@ for (const [name, profile] of Object.entries(PROFILES)) {
     const limits = THRESHOLDS.profiles[name];
     const context = await browser.newContext({viewport: profile.viewport, deviceScaleFactor: profile.deviceScaleFactor, isMobile: profile.isMobile, hasTouch: profile.hasTouch, locale: 'en-IN', timezoneId: 'Asia/Kolkata'});
     await context.addInitScript(instrument);
+    // This context is created here, so it needs its own off-origin request record.
+    const offOrigin = new Set();
+    context.on('request', request => { const {hostname} = new URL(request.url()); if (/^https?:/.test(request.url()) && hostname !== HOST && !OPTIONAL_HOSTS.includes(hostname)) offOrigin.add(hostname); });
     const page = await context.newPage();
     const cdp = await context.newCDPSession(page);
     await cdp.send('Emulation.setCPUThrottlingRate', {rate: profile.cpuThrottle});
@@ -95,6 +98,7 @@ for (const [name, profile] of Object.entries(PROFILES)) {
     await recordEvidence(testInfo, `performance-${name}`, {device, corpus: {...corpus, longTaskBlockingMs: metrics.corpusLongTaskBlockingMs}, metrics, thresholds: limits, checks, samples: {navigations, interactions}});
     await context.close();
 
+    expect([...offOrigin], 'requests left the release origin').toEqual([]);
     expect(corpus.questions).toBe(BUILD.playableContent.questions);
     expect(corpus.papers).toBe(BUILD.playableContent.papers);
     for (const [metric, check] of Object.entries(checks)) expect.soft(check.value, `${name} ${metric} (limit ${check.limit} ms)`).toBeLessThanOrEqual(check.limit);

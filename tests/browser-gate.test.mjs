@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseHeaders } from './browser/static-server.mjs';
-import { collectResults, summarizeAccessibility } from '../scripts/browser-gate-evidence.mjs';
+import { collectResults, nextBaseline, summarizeAccessibility } from '../scripts/browser-gate-evidence.mjs';
 
 const read = async path => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 
@@ -50,4 +50,13 @@ test('evidence collection treats failures as regressions and keeps baseline fail
   const summary = summarizeAccessibility(evidence);
   assert.equal(summary.knownFailures.patterns, 1);
   assert.deepEqual(summary.knownFailures.byRule, {'color-contrast': 1});
+});
+
+test('the accessibility baseline only shrinks, including once it is empty, and only from a complete passing run', () => {
+  const pass = [{id: 'axe.spec.mjs › axe: #overview', status: 'pass'}];
+  const evidence = {'axe-overview': {counts: {'overview|color-contrast|#111111 on #222222': 1}}};
+  assert.deepEqual(nextBaseline({known: {'overview|color-contrast|#111111 on #222222': 1, 'overview|color-contrast|#333333 on #444444': 1}}, pass, evidence), {'overview|color-contrast|#111111 on #222222': 1});
+  assert.throws(() => nextBaseline({known: {}}, pass, evidence), /Refusing to enlarge/);
+  assert.deepEqual(nextBaseline({known: {}}, pass, evidence, {allowGrowth: true}), {'overview|color-contrast|#111111 on #222222': 1});
+  assert.throws(() => nextBaseline({known: {'overview|color-contrast|#111111 on #222222': 1}}, [...pass, {id: 'axe.spec.mjs › axe: #tests', status: 'fail'}], evidence), /failed or skipped checks/);
 });

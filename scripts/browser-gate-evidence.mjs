@@ -47,17 +47,28 @@ export function summarizeAccessibility(evidence) {
   return {axeVersion: views[0]?.axeVersion ?? null, tags: views[0]?.tags ?? [], viewsAudited: views.map(view => view.view), regressions, knownFailures: {byRule, patterns: Object.keys(known).length, keys: Object.keys(known).sort()}};
 }
 
+/**
+ * The shrunken baseline after a fixing run. It refuses to grow (an empty
+ * baseline included) and refuses a partial or failing run, whose missing views
+ * would otherwise silently drop keys that still fail.
+ */
+export function nextBaseline(previous, checks, evidence, {allowGrowth = false} = {}) {
+  const incomplete = checks.filter(check => check.status !== 'pass');
+  if (incomplete.length) throw new Error(`Refusing to rewrite the accessibility baseline from a run with failed or skipped checks:\n${incomplete.map(check => check.id).join('\n')}`);
+  const counts = {};
+  for (const [name, body] of Object.entries(evidence)) if (name.startsWith('axe-')) Object.assign(counts, body.counts);
+  const grew = Object.entries(counts).filter(([key, count]) => count > (previous.known[key] ?? 0));
+  if (grew.length && !allowGrowth) throw new Error(`Refusing to enlarge the accessibility baseline (fix these instead):\n${grew.map(([key, count]) => `${key}: ${count}`).join('\n')}`);
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b, 'en')));
+}
+
 async function main() {
   const report = await readJSON('test-results/browser-gate/results.json');
   const {checks, evidence} = collectResults(report);
   if (args.includes('--write-a11y-baseline')) {
-    const counts = {};
-    for (const [name, body] of Object.entries(evidence)) if (name.startsWith('axe-')) Object.assign(counts, body.counts);
     const path = join(root, 'tests/browser/a11y-baseline.json');
     const previous = JSON.parse(await readFile(path, 'utf8'));
-    const grew = Object.entries(counts).filter(([key, count]) => count > (previous.known[key] ?? 0) && Object.keys(previous.known).length);
-    if (grew.length && !args.includes('--allow-growth')) throw new Error(`Refusing to enlarge the accessibility baseline (fix these instead):\n${grew.map(([key, count]) => `${key}: ${count}`).join('\n')}`);
-    const known = Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b, 'en')));
+    const known = nextBaseline(previous, checks, evidence, {allowGrowth: args.includes('--allow-growth')});
     await writeFile(path, `${JSON.stringify({version: 1, recordedAt: new Date().toISOString().slice(0, 10), note: 'Known WCAG violations when recorded. Each key may only shrink; see docs/BROWSER-RELEASE-GATES.md.', known}, null, 2)}\n`);
     console.log(`Wrote ${Object.keys(known).length} baseline keys to tests/browser/a11y-baseline.json`);
     return;
