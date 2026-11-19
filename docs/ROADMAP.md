@@ -43,7 +43,8 @@ Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, s
 - [x] Preserve 50 completed test reports with active question timing and subject analysis.
 - [ ] Connect topic relationships and reviewed Advanced-level content to revision recommendations. Explainable suggestions now cite retained original-practice and PYQ attempts or learner goals, but the prerequisite map is an AI-assisted **unreviewed draft**; human subject review remains open.
 - [x] Render mathematics and chemical structures accessibly with reviewed diagrams.
-- [ ] Add comprehensive workspace backups and optional cross-device sync with explicit account design.
+- [x] Add a complete, versioned local workspace backup with validated merge/replace restore and a pre-restore copy.
+- [ ] Add optional cross-device sync with explicit account design.
 - [ ] Establish accessibility, mobile, offline and large-corpus performance release gates.
   The automated gate, matrix, thresholds and evidence format are in [BROWSER-RELEASE-GATES.md](BROWSER-RELEASE-GATES.md). Colour contrast still fails, and the screen-reader, real-device and non-Chromium checks have not been run.
 
