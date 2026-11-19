@@ -21,6 +21,11 @@ async function overflow(page) {
           if (!scrolls) { culprit = element.outerHTML.slice(0, 120); break; }
         }
       }
+      // Unbreakable text can overflow without any element box crossing the edge.
+      if (!culprit) for (const element of document.querySelectorAll('body *')) {
+        const style = getComputedStyle(element);
+        if (style.overflowX === 'visible' && element.scrollWidth > element.clientWidth + 1 && element.clientWidth > 0 && element.getBoundingClientRect().right + element.scrollWidth - element.clientWidth > width) { culprit = `text overflow in ${element.outerHTML.slice(0, 120)}`; break; }
+      }
     }
     return {over, culprit};
   });
