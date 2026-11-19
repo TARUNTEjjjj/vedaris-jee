@@ -14,6 +14,10 @@ import {isReviewDate, isWebUrl, validateArchive} from '../src/archive/index.js';
  * is faithful or that reuse is permitted.
  */
 export const PLAN_VERSION = 1;
+// First year of the reviewed bank. The plan may widen its historical scope but
+// never narrow it below this year: lowering the cut-off would silently move
+// unplanned papers out of every gate.
+export const HISTORICAL_CUTOFF = 2022;
 export const PERMISSION_COMPONENTS = ['questionText', 'figures', 'answerKey', 'explanations'];
 export const REVIEW_FIELDS = ['transcript', 'answer', 'marking'];
 const STAGES = ['planned', 'source-review', 'transcription', 'review', 'ready', 'blocked'];
@@ -253,7 +257,8 @@ export function validateImportPlan(plan, archive) {
   if (!object(plan.policy)) errors.push('plan.policy: required');
   else {
     keys(plan.policy, ['appliesBeforeYear', 'requireHumanCertificationForMock'], 'plan.policy', errors);
-    if (!Number.isInteger(plan.policy.appliesBeforeYear) || plan.policy.appliesBeforeYear < 1978 || plan.policy.appliesBeforeYear > 2100) errors.push('plan.policy.appliesBeforeYear: expected a year');
+    if (!Number.isInteger(plan.policy.appliesBeforeYear) || plan.policy.appliesBeforeYear > 2100) errors.push('plan.policy.appliesBeforeYear: expected a year');
+    else if (plan.policy.appliesBeforeYear < HISTORICAL_CUTOFF) errors.push(`plan.policy.appliesBeforeYear: cannot be below ${HISTORICAL_CUTOFF}; narrowing the historical scope would bypass the import gates`);
     if (typeof plan.policy.requireHumanCertificationForMock !== 'boolean') errors.push('plan.policy.requireHumanCertificationForMock: expected boolean');
   }
   const catalog = new Map((Array.isArray(archive?.papers) ? archive.papers : []).map(paper => [paper.id, paper]));
@@ -349,7 +354,7 @@ export function planReadiness(plan, archive, paperId) {
 /** Papers inside the plan's historical scope must be planned before staging or publication. */
 export function inHistoricalScope(plan, archive, paperId) {
   const paper = archive.papers.find(item => item.id === paperId);
-  return !!paper && paper.year < (plan?.policy?.appliesBeforeYear ?? 2022);
+  return !!paper && paper.year < Math.max(HISTORICAL_CUTOFF, Number.isInteger(plan?.policy?.appliesBeforeYear) ? plan.policy.appliesBeforeYear : HISTORICAL_CUTOFF);
 }
 
 /**
@@ -368,8 +373,39 @@ export function checkPlannedQuestions(plan, archive, questions, {stage = 'stagin
     const record = plan.papers.find(item => item.paperId === question.paperId);
     const number = String(question.questionNumber).replace(/^Q0*/i, '');
     const reference = record.questions.find(item => item.subject === question.subject && String(item.number).replace(/^0+/, '') === number);
-    if (!reference) errors.push(`${where}: ${question.subject} Q${question.questionNumber} is not referenced in the import plan`);
-    else if (['missing', 'withdrawn'].includes(reference.status)) errors.push(`${where}: the plan records ${question.subject} Q${question.questionNumber} as ${reference.status}`);
+    if (!reference) { errors.push(`${where}: ${question.subject} Q${question.questionNumber} is not referenced in the import plan`); continue; }
+    // An officially withdrawn question may only appear as an explicit bonus record.
+    if (reference.status === 'missing' || (reference.status === 'withdrawn' && question.answer?.type !== 'bonus')) errors.push(`${where}: the plan records ${question.subject} Q${question.questionNumber} as ${reference.status}`);
+    // Stable identity: the plan pins the content ID once a question is staged.
+    if (reference.contentId !== null && reference.contentId !== question.id) errors.push(`${where}: the plan records ${question.subject} Q${question.questionNumber} as ${reference.contentId}, not ${question.id}`);
+    if (stage === 'publication' && !['staged', 'published', 'withdrawn'].includes(reference.status)) errors.push(`${where}: the plan records ${question.subject} Q${question.questionNumber} as ${reference.status}; publish only staged questions`);
+    if (stage === 'publication' && reference.contentId === null) errors.push(`${where}: the plan does not pin a content ID for ${question.subject} Q${question.questionNumber}`);
+  }
+  return errors;
+}
+
+/**
+ * A historical full-mock configuration must reproduce the plan's recorded
+ * original format: duration, total marks, question count, every referenced
+ * question (by its pinned content ID) and each section's marking.
+ */
+export function checkMockConfiguration(plan, archive, config) {
+  if (!inHistoricalScope(plan, archive, config?.paperId)) return [];
+  const record = plan.papers.find(item => item.paperId === config.paperId);
+  if (!record) return [`Full mock ${config.paperId}: the paper is not selected in the reviewed import plan`];
+  const errors = [], at = `Full mock ${config.paperId}`, {format} = record;
+  if (config.durationMinutes !== format.durationMinutes) errors.push(`${at}: duration ${config.durationMinutes} differs from the recorded original ${format.durationMinutes}`);
+  if (config.maxMarks !== format.maxMarks) errors.push(`${at}: maximum marks ${config.maxMarks} differ from the recorded original ${format.maxMarks}`);
+  if (config.expectedQuestionCount !== format.questionCount) errors.push(`${at}: question count ${config.expectedQuestionCount} differs from the recorded original ${format.questionCount}`);
+  const configured = new Map();
+  for (const section of Array.isArray(config.sections) ? config.sections : []) for (const id of section?.questionIds ?? []) configured.set(id, section);
+  for (const question of record.questions) {
+    if (question.status === 'missing') continue;
+    const ref = `${question.subject} Q${question.number}`;
+    const section = question.contentId === null ? undefined : configured.get(question.contentId);
+    if (!section) { errors.push(`${at}: ${ref} is not in the configured question order`); continue; }
+    const planned = format.sections.find(item => item.id === question.section && item.subject === question.subject);
+    if (planned && (section.marking?.correct !== planned.marking.correct || section.marking?.incorrect !== planned.marking.incorrect)) errors.push(`${at}: ${ref} marking differs from the recorded section ${planned.id}`);
   }
   return errors;
 }

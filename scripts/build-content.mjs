@@ -3,7 +3,7 @@ import { lstat, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createContentRegistry } from '../src/content/catalog.js';
 import { renderStudyText } from './render-math.mjs';
-import { checkPlannedQuestions, emptyImportPlan, inHistoricalScope, planReadiness, validateImportPlan } from './import-plan.mjs';
+import { checkMockConfiguration, checkPlannedQuestions, emptyImportPlan, inHistoricalScope, planReadiness, validateImportPlan } from './import-plan.mjs';
 
 const MAX_BYTES = 1024 * 1024;
 const BANK_ID = 'vedaris-reviewed-jee-v1';
@@ -84,6 +84,7 @@ export async function prepareContent(root, archive, availableAssets = []) {
   for (const config of catalog.papers) if (inHistoricalScope(plan, archive, config?.paperId)) {
     const blockers = planReadiness(plan, archive, config.paperId).mock;
     if (blockers.length) historical.push(`Full mock ${config.paperId} stays locked: ${blockers.join(' ')}`);
+    else historical.push(...checkMockConfiguration(plan, archive, config));
   }
   if (historical.length) throw new Error(`Historical content refused by the import plan:\n${historical.join('\n')}`);
   const usedAssets = [...new Set(sources.flatMap(({bundle}) => bundle.questions.flatMap(question => (question.assets ?? []).map(asset => asset.url))))].sort();

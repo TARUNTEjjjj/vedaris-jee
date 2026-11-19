@@ -6,7 +6,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {checkPlannedQuestions, emptyImportPlan, planReadiness, validateImportPlan} from '../scripts/import-plan.mjs';
+import {checkMockConfiguration, checkPlannedQuestions, emptyImportPlan, planReadiness, validateImportPlan} from '../scripts/import-plan.mjs';
 import {renderStatus} from '../scripts/import-plan-status.mjs';
 
 const repo = fileURLToPath(new URL('../', import.meta.url));
@@ -43,7 +43,7 @@ function readyPlan({human = true} = {}) {
     {id: 'section-1', subject: 'mathematics', type: 'numerical', questionNumbers: ['1'], marking: {correct: 3, incorrect: 0, unanswered: 0}, instructionPage: 1},
   ]};
   const reviews = () => Object.fromEntries(['transcript', 'answer', 'marking'].map(field => [field, human ? [review('ai-assisted'), review('human')] : [review('ai-assisted')]]));
-  record.questions = ['physics', 'chemistry', 'mathematics'].map((subject, i) => ({subject, number: '1', section: 'section-1', pdfPage: 2 + i, status: 'staged', contentId: `2021_P1_${subject}_Q01-v1`, finalKey: {status: 'recorded', evidencePage: 1}, reviews: reviews()}));
+  record.questions = ['physics', 'chemistry', 'mathematics'].map((subject, i) => ({subject, number: '1', section: 'section-1', pdfPage: 2 + i, status: 'staged', contentId: `2021_P1_${subject[0].toUpperCase()}${subject.slice(1)}_Q01-v1`, finalKey: {status: 'recorded', evidencePage: 1}, reviews: reviews()}));
   record.provenance = {transcriptSource: 'https://example.org/transcripts', transcriptRevision: 'synthetic', notes: ''};
   record.permissions = {questionText: decided(), figures: decided('not-required'), answerKey: decided(), explanations: decided('not-required')};
   return plan;
@@ -145,6 +145,53 @@ test('staging refuses historical questions until the plan permits them', () => {
   assert.deepEqual(checkPlannedQuestions(emptyImportPlan(), archive, [{...question, paperId: 'official-2023-paper-1-en'}]), []);
 });
 
+test('the plan cannot narrow its historical scope to move papers out of the gates', () => {
+  const plan = structuredClone(committedPlan);
+  plan.policy.appliesBeforeYear = 2020;
+  plan.papers = []; plan.tranches = [];
+  assert.match(validateImportPlan(plan, archive).join('\n'), /appliesBeforeYear: cannot be below 2022/);
+  // Even an unvalidated narrowed plan keeps 2021 in scope.
+  assert.match(checkPlannedQuestions(plan, archive, [{id: '2021_P1_Physics_Q01-v1', paperId: PAPER, subject: 'physics', questionNumber: '1'}]).join('\n'), /not in the reviewed import plan/);
+});
+
+test('publication pins stable content IDs and staged status; withdrawn questions publish only as bonus records', () => {
+  const question = {id: '2021_P1_Physics_Q01-v1', paperId: PAPER, subject: 'physics', questionNumber: '1', answer: {type: 'single-choice', value: 'A'}};
+  const plan = readyPlan();
+  assert.deepEqual(checkPlannedQuestions(plan, testArchive(), [question], {stage: 'publication'}), []);
+  assert.match(checkPlannedQuestions(plan, testArchive(), [{...question, id: '2021_P1_Physics_Q01-v2'}], {stage: 'publication'}).join('\n'), /records physics Q1 as 2021_P1_Physics_Q01-v1, not 2021_P1_Physics_Q01-v2/);
+  const pending = readyPlan();
+  Object.assign(pending.papers[0].questions[0], {status: 'pending', contentId: null});
+  assert.deepEqual(checkPlannedQuestions(pending, testArchive(), [question], {stage: 'staging'}), []);
+  const refused = checkPlannedQuestions(pending, testArchive(), [question], {stage: 'publication'}).join('\n');
+  assert.match(refused, /physics Q1 as pending; publish only staged questions/);
+  assert.match(refused, /does not pin a content ID/);
+  const withdrawn = readyPlan();
+  withdrawn.papers[0].questions[0].status = 'withdrawn';
+  withdrawn.papers[0].revisions = [{kind: 'bonus', questionRef: 'physics:1', page: null, evidenceUrl: KEY, recordedAt: '2026-11-19', resolution: 'resolved', disposition: {marksAwarded: 4, includesBlank: true}}];
+  assert.deepEqual(validateImportPlan(withdrawn, testArchive()), []);
+  assert.match(checkPlannedQuestions(withdrawn, testArchive(), [question], {stage: 'publication'}).join('\n'), /records physics Q1 as withdrawn/);
+  assert.deepEqual(checkPlannedQuestions(withdrawn, testArchive(), [{...question, answer: {type: 'bonus'}}], {stage: 'publication'}), []);
+});
+
+test('a historical mock configuration must reproduce the recorded duration, marks, questions and marking', () => {
+  const plan = readyPlan();
+  const ids = plan.papers[0].questions.map(q => q.contentId);
+  const sections = plan.papers[0].format.sections.map((section, i) => ({id: section.id, subject: section.subject, type: section.type, questionIds: [ids[i]], marking: {...section.marking}}));
+  const config = {paperId: PAPER, durationMinutes: 180, maxMarks: 10, expectedQuestionCount: 3, sections};
+  assert.deepEqual(checkMockConfiguration(plan, testArchive(), config), []);
+  const altered = structuredClone(config);
+  Object.assign(altered, {durationMinutes: 200, maxMarks: 12, expectedQuestionCount: 2});
+  altered.sections[0].marking.incorrect = 0;
+  altered.sections[2].questionIds = [];
+  const errors = checkMockConfiguration(plan, testArchive(), altered).join('\n');
+  assert.match(errors, /duration 200 differs from the recorded original 180/);
+  assert.match(errors, /maximum marks 12 differ/);
+  assert.match(errors, /question count 2 differs/);
+  assert.match(errors, /physics Q1 marking differs/);
+  assert.match(errors, /mathematics Q1 is not in the configured question order/);
+  assert.deepEqual(checkMockConfiguration(plan, testArchive(), {...config, paperId: 'official-2023-paper-1-en', durationMinutes: 1}), [], 'reviewed 2022+ papers are outside the plan');
+});
+
 test('the content build refuses unplanned historical bundles and locks their full mocks', async () => {
   const root = await mkdtemp(join(tmpdir(), 'vedaris-plan-build-'));
   try {
@@ -160,6 +207,10 @@ test('the content build refuses unplanned historical bundles and locks their ful
     invalid.papers[0].source.questionPaper.url = 'https://example.org/other.pdf';
     await writeFile(join(root, 'content/historical-import-plan.json'), JSON.stringify(invalid));
     await assert.rejects(prepareContent(root, archive, []), /Historical import plan is invalid/);
+    // A plan whose mock gate passes still refuses a configuration that changes the original format.
+    await writeFile(join(root, 'content/historical-import-plan.json'), JSON.stringify(readyPlan()));
+    await writeFile(join(root, 'content/catalog.json'), JSON.stringify({version: 1, bankId: 'vedaris-reviewed-jee-v1', bundles: [{path: 'content/2021-p1.json'}], papers: [{paperId: PAPER, durationMinutes: 240, maxMarks: 10, expectedQuestionCount: 3, sections: []}], attributions: [], coverageNotes: []}));
+    await assert.rejects(prepareContent(root, testArchive(), []), /Full mock official-2021-paper-1-en: duration 240 differs from the recorded original 180/);
   } finally { await rm(root, {recursive: true, force: true}); }
 });
 
