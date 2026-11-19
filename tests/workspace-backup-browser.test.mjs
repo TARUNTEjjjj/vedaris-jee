@@ -57,6 +57,7 @@ function seedWorkspace() {
     [key('session')]: createSession({ seed: 42, count: 3, minutes: 300, now: now - 1000 }),
     [key('bookmarks')]: [identity],
     [key('notebook')]: updateNotebook(emptyNotebook(), identity, { cause: 'calculation', note: 'Check signs' }),
+    [key('revision-plan')]: { version: 1, goals: [{ chapter: 'phy-kinematics', addedAt: now - 1000 }], dismissed: [] },
     [key('goal')]: 20,
     [key('paper-notes')]: { [JSON.parse(server.content.get('data/content/catalog.json')).papers[0].paperId]: { text: 'Paper note' } },
     [key('pyq-workspace')]: pyq,
@@ -95,7 +96,7 @@ test('complete export → replace restore round trip reproduces every store, wit
   const original = await storage();
   const backup = await exportBackup();
   assert.equal(backup.format, 'vedaris-workspace-backup'); assert.equal(backup.version, 1);
-  assert.deepEqual(Object.keys(backup.stores), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paperNotes', 'pyq', 'unresolved']);
+  assert.deepEqual(Object.keys(backup.stores), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'revisionPlan', 'goal', 'paperNotes', 'pyq', 'unresolved']);
   assert.equal(backup.stores.pyq.history.length, 1); assert.ok(backup.stores.pyq.active);
   // A different workspace on this browser is then replaced by the backup.
   await open({ [key('goal')]: 5, [key('bookmarks')]: [{ templateId: 'phy-atwood-v1', seed: 7 }] });

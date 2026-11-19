@@ -244,7 +244,7 @@ function showProgress(backupMessage='') {
  showBackupPanel(backupMessage);
 }
 // Complete workspace backup. Validation and merge rules live in src/learning/backup.js.
-function workspaceStores(){return {progress,history,session,bookmarks,notebook,goal:dailyGoal,paperNotes,pyq:contentBank&&!historicalMemory?historicalWorkspace:null,unresolved};}
+function workspaceStores(){return {progress,history,session,bookmarks,notebook,revisionPlan,goal:dailyGoal,paperNotes,pyq:contentBank&&!historicalMemory?historicalWorkspace:null,unresolved};}
 function rawSlot(slot){try{return localStorage.getItem(key(slot));}catch{return null;}}
 async function verifiedPYQ(){
  // PYQ attempts can only be validated against the reviewed bank. Never export or replace them unverified.
@@ -291,6 +291,7 @@ async function applyWorkspaceBackup(plan,mode){
  if(names.includes('session'))session=next.session;
  if(names.includes('bookmarks'))bookmarks=next.bookmarks;
  if(names.includes('notebook'))notebook=next.notebook;
+ if(names.includes('revisionPlan'))revisionPlan=next.revisionPlan;
  if(names.includes('goal'))dailyGoal=next.goal;
  if(names.includes('paperNotes'))paperNotes=next.paperNotes;
  if(names.includes('unresolved'))unresolved=next.unresolved;
