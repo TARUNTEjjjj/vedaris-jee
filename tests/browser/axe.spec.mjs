@@ -3,7 +3,7 @@
 // screen-reader protocol in docs/BROWSER-RELEASE-GATES.md).
 import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, openPYQ, recordEvidence, settle } from './fixtures.mjs';
+import { test, expect, openPYQ, recordEvidence, settle, APP_ROUTES } from './fixtures.mjs';
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 // Violations that existed when this gate was introduced. They are recorded as
@@ -31,17 +31,16 @@ async function audit(page, testInfo, name) {
   expect.soft(regressions, `${name}: new accessibility violations (regressions)`).toEqual([]);
 }
 
-const ROUTES = [
-  ['overview', 'Show up. Solve. Improve.'],
-  ['chapters', null],
-  ['tests', 'Your test centre'],
-  ['analysis', null],
-  ['mistakes', null],
-  ['bank', 'Explore an idea, one variant at a time.'],
-  ['progress', 'See the work adding up.'],
-  ['archive', null],
-  ['sources', 'Good learning starts with clear sources.'],
-];
+// Known level-one headings; other routes are checked for any h1 in #main.
+const HEADINGS = {
+  overview: 'Show up. Solve. Improve.',
+  tests: 'Your test centre',
+  bank: 'Explore an idea, one variant at a time.',
+  progress: 'See the work adding up.',
+  sources: 'Good learning starts with clear sources.',
+};
+// #pyq is audited through its own journey below.
+const ROUTES = APP_ROUTES.filter(route => route !== 'pyq').map(route => [route, HEADINGS[route] ?? null]);
 
 for (const [route, heading] of ROUTES) {
   test(`axe: #${route}`, async ({page, origin}, testInfo) => {

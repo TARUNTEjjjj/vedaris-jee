@@ -1,8 +1,8 @@
 // Narrow viewports, reduced motion, readable equations/diagrams, document
 // structure and explicit missing-content states.
-import { test, expect, openPYQ, startPaper, recordEvidence } from './fixtures.mjs';
+import { test, expect, openPYQ, startPaper, recordEvidence, APP_ROUTES } from './fixtures.mjs';
 
-const ROUTES = ['overview', 'chapters', 'pyq', 'tests', 'analysis', 'mistakes', 'bank', 'progress', 'archive', 'sources'];
+const ROUTES = APP_ROUTES;
 const VIEWPORTS = [{width: 320, height: 640}, {width: 360, height: 740}, {width: 390, height: 844}];
 
 /** Horizontal overflow of the document, plus the widest offending element. */

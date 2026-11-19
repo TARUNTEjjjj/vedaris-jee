@@ -5,12 +5,24 @@
 // runtime services. Request interception is deliberately not used: Playwright
 // bypasses service workers whenever routing is enabled.
 import { test as base, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { startStaticServer } from './static-server.mjs';
 
 export { expect };
 export const DIST = fileURLToPath(new URL('../../dist/', import.meta.url));
 export const HOST = 'vedaris.localhost';
+/**
+ * Every hash route the shell links to (main navigation plus Sources & methods),
+ * read from the shell's index.html so a newly added view is audited without
+ * anyone remembering to list it here.
+ */
+export const APP_ROUTES = (() => {
+  const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+  const routes = [...html.matchAll(/data-route="([a-z-]+)"/g)].map(match => match[1]);
+  if (/href="#sources"/.test(html)) routes.push('sources');
+  return [...new Set(routes)];
+})();
 // The only off-origin request the app may make: the resource library's optional
 // live-catalog refresh, which the CSP's connect-src also names. It fails DNS here.
 export const OPTIONAL_HOSTS = ['raw.githubusercontent.com'];
