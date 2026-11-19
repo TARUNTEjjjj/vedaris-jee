@@ -22,7 +22,7 @@ The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/ii
 - PYQ backup and restore for the active attempt and latest 20 completed historical reports. Saved scores are recalculated from canonical question identities.
 - Build-time mathematics and chemistry rendering into native MathML. The shell is available offline after installation; paper content and figures become available offline after successful use and caching.
 
-The original-practice workspace remains separate: 30 reproducible concept families, a dashboard with daily goals and activity, a test centre, up to 50 original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Generated practice is explicitly labelled and never counted as PYQs.
+The original-practice workspace remains separate: 38 reproducible families (30 single-concept families and 8 multi-concept families whose answers are machine-checked by a separate exact-arithmetic oracle; no human audit has occurred, see [original practice coverage](ORIGINAL-PRACTICE.md)), a dashboard with daily goals and activity, a test centre, up to 50 original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Generated practice is explicitly labelled and never counted as PYQs.
 
 Multiple browser tabs share one writer. Reader tabs can inspect reports and current questions without altering saved work. Where coordinated storage is unavailable, practice remains in memory with an export reminder. There are no accounts or automatic cross-device synchronization.
 
