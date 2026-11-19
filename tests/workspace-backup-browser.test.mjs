@@ -217,3 +217,30 @@ test('older supported backups (progress-only and PYQ-only exports) restore only 
   assert.deepEqual(JSON.parse(after[key('pyq-workspace')]), seed[key('pyq-workspace')]);
   assert.deepEqual(JSON.parse(after[key('progress')]), seed[key('progress')]);
 });
+
+test('the restore flow is keyboard reachable, keeps focus across re-renders and announces through one persistent status region', { skip }, async () => {
+  await open(seedWorkspace());
+  const backup = await exportBackup();
+  await open({ [key('goal')]: 5 });
+  // The file chooser is visually styled as a button but must stay in the tab order.
+  assert.equal(await page.evaluate('(()=>{const i=document.querySelector("[data-backup-file]");i.focus();return document.activeElement===i&&getComputedStyle(i).display!=="none"})()'), true, 'the file chooser is focusable');
+  const status = await page.evaluate('(window.__status=document.querySelector(".backup-message"),window.__status.getAttribute("role")+"|"+window.__status.getAttribute("aria-live"))');
+  assert.equal(status, 'status|polite');
+  await choose('focus.json', backup);
+  await previewed();
+  assert.equal(await page.evaluate('document.activeElement.id'), 'backup-preview-title', 'the checked summary receives focus');
+  // Choosing a mode with the keyboard re-renders the preview; focus stays on the chosen radio.
+  await page.evaluate(`(()=>{const r=document.querySelector('input[name="backup-mode"][value="replace"]');r.focus();r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+  assert.equal(await page.evaluate(`document.activeElement.matches('input[name="backup-mode"][value="replace"]')`), true, 'focus stays on the selected mode');
+  assert.equal(await page.evaluate('window.__status===document.querySelector(".backup-message")'), true, 'the live region is not recreated');
+  await page.evaluate('document.querySelector("[data-backup-action=cancel]").focus()');
+  await page.click('[data-backup-action=cancel]');
+  assert.match(await message(), /Restore cancelled/);
+  assert.equal(await page.evaluate('document.activeElement.matches("[data-backup-file]")'), true, 'cancel returns focus to the restore control');
+  // After a restore the page remounts; focus lands on the announced result.
+  await choose('focus.json', backup);
+  await previewed();
+  await applyAndWait(/Backup merged/);
+  assert.equal(await page.evaluate('document.activeElement.classList.contains("backup-message")'), true);
+  assert.deepEqual(page.errors, []);
+});

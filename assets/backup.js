@@ -24,7 +24,7 @@ export function heldIdentity(item) {
  * the learner's explicit choice. Nothing changes until "Restore" is pressed.
  */
 export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = [], preRestore = null, onExport, onAnalyze, onApply, onDownloadPreRestore, onLoadPreRestore, onRestored = null, message: initialMessage = ''}) {
-  let state = 'idle', plan = null, message = initialMessage, error = false, busy = false, choice = 'merge';
+  let state = 'idle', plan = null, message = initialMessage, error = false, busy = false, choice = 'merge', focusNext = null;
   const readOnly = mode === 'reader';
 
   function inventory() {
@@ -47,7 +47,7 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
   }
   function previewHTML() {
     const partial = plan.source !== 'workspace';
-    return `<section class="backup-preview" aria-labelledby="backup-preview-title"><span class="eyebrow">CHECKED · NOTHING HAS CHANGED YET</span><h3 id="backup-preview-title">${esc(SOURCE[plan.source])}${plan.kind === 'pre-restore' ? ' (pre-restore copy)' : ''}</h3><p class="small-text muted">${plan.exportedAt ? `Exported ${esc(when(plan.exportedAt))}. ` : ''}${partial ? 'This older format holds only one store. Stores it does not include are left exactly as they are.' : 'Format version 1. Scores, keys and totals are recalculated from exact question identities; none are taken from the file.'}</p>${inventory()}${disclosures()}
+    return `<section class="backup-preview" aria-labelledby="backup-preview-title"><span class="eyebrow">CHECKED · NOTHING HAS CHANGED YET</span><h3 id="backup-preview-title" tabindex="-1">${esc(SOURCE[plan.source])}${plan.kind === 'pre-restore' ? ' (pre-restore copy)' : ''}</h3><p class="small-text muted">${plan.exportedAt ? `Exported ${esc(when(plan.exportedAt))}. ` : ''}${partial ? 'This older format holds only one store. Stores it does not include are left exactly as they are.' : 'Format version 1. Scores, keys and totals are recalculated from exact question identities; none are taken from the file.'}</p>${inventory()}${disclosures()}
       <fieldset class="backup-mode"><legend>How should this backup be applied?</legend>
       <label><input type="radio" name="backup-mode" value="merge" ${choice === 'merge' ? 'checked' : ''}> <span><strong>Merge</strong> — add records this browser does not have. Existing records are never edited: for the same question or report, this browser’s version is kept, and the earlier first attempt stays the first attempt. Your active sessions and daily goal are kept. Size limits keep the newest 50 concept reports and 20 PYQ reports.</span></label>
       <label><input type="radio" name="backup-mode" value="replace" ${choice === 'replace' ? 'checked' : ''}> <span><strong>Replace</strong> — make ${partial ? 'the included store' : 'every included store'} match the backup exactly. Current records in ${partial ? 'that store' : 'those stores'} that the backup lacks are removed from this browser.</span></label></fieldset>
@@ -57,16 +57,39 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
   }
   function render() {
     const held = current().unresolved.items.length;
-    root.innerHTML = `<section class="panel backup-panel" aria-labelledby="backup-title"><div class="panel-head"><h3 id="backup-title">Complete workspace backup</h3><span class="small-text muted">Format version 1</span></div>
+    if (!root.querySelector('[data-backup-body]')) {
+      // The heading, live region and body are created once. Only the body is
+      // re-rendered, so the status region persists and announces each change.
+      root.innerHTML = `<section class="panel backup-panel" aria-labelledby="backup-title"><div class="panel-head"><h3 id="backup-title">Complete workspace backup</h3><span class="small-text muted">Format version 1</span></div>
       <p class="small-text muted">One file for everything this browser keeps for you: concept-practice progress and reports, the active session, saved questions, revision notes, paper notes and timers, your daily goal, and PYQ attempts and reports. No account or cloud service is involved.</p>
+      <div class="backup-message" role="status" aria-live="polite" tabindex="-1"></div><div data-backup-body></div></section>`;
+    }
+    const status = root.querySelector('.backup-message');
+    status.innerHTML = message ? `<p class="${error ? 'error-text' : ''}">${esc(message)}</p>` : '';
+    // Re-rendering replaces controls; keep keyboard focus on the equivalent control.
+    const active = root.contains(document.activeElement) ? document.activeElement : null;
+    const focusKey = active ? controlSelector(active) : null;
+    root.querySelector('[data-backup-body]').innerHTML = `
       ${state === 'preview' ? '' : inventory()}
       ${held ? `<p class="small-text"><strong>${plural(held, 'held record')}</strong> from earlier restores ${held === 1 ? 'no longer resolves' : 'no longer resolve'} in this release. ${held === 1 ? 'It is' : 'They are'} kept and exported unchanged.</p>` : ''}
       ${blocked.length ? `<p class="small-text error-text">Some saved data could not be read. Its exact text is included in exports, but restoring into an unreadable store is blocked so it is never overwritten.</p>` : ''}
-      <div class="backup-message" role="status" aria-live="polite" ${message ? '' : 'hidden'}><p class="${error ? 'error-text' : ''}">${esc(message)}</p></div>
       ${state === 'preview' && plan ? previewHTML() : `<div class="progress-actions"><button class="button" data-backup-action="export" ${busy ? 'disabled' : ''}>Export workspace backup ↓</button><label class="button secondary upload-label ${readOnly || busy ? 'is-disabled' : ''}">Check a backup to restore ↑<input type="file" data-backup-file accept="application/json,.json" ${readOnly || busy ? 'disabled' : ''}></label></div>`}
       ${preRestore ? `<div class="backup-prerestore"><p class="small-text"><strong>Pre-restore copy</strong> saved ${esc(when(preRestore.exportedAt))}${mode === 'memory' ? ' in this tab only' : ' on this device'}.</p><div class="progress-actions"><button class="button small secondary" data-backup-action="download-pre">Download pre-restore copy ↓</button><button class="button small secondary" data-backup-action="load-pre" ${readOnly || busy ? 'disabled' : ''}>Return to this copy…</button></div></div>` : ''}
-      ${readOnly ? '<p class="small-text muted">This tab is read-only. Export is available; restore from the tab that is editing this workspace.</p>' : mode === 'memory' ? '<p class="small-text muted">This browser cannot save safely, so a restore stays in this tab. Export before closing it.</p>' : ''}
-    </section>`;
+      ${readOnly ? '<p class="small-text muted">This tab is read-only. Export is available; restore from the tab that is editing this workspace.</p>' : mode === 'memory' ? '<p class="small-text muted">This browser cannot save safely, so a restore stays in this tab. Export before closing it.</p>' : ''}`;
+    const target = focusNext ? root.querySelector(focusNext) : focusKey ? root.querySelector(focusKey) : null;
+    if (focusNext || focusKey) {
+      focusNext = null;
+      if (target && !target.disabled) target.focus();
+      else status.focus();
+    }
+  }
+  function controlSelector(el) {
+    if (el.dataset.backupAction) return `[data-backup-action="${el.dataset.backupAction}"]`;
+    if (el.name === 'backup-mode') return `input[name="backup-mode"][value="${el.value === 'replace' ? 'replace' : 'merge'}"]`;
+    if (el.matches('[data-backup-confirm]')) return '[data-backup-confirm]';
+    if (el.matches('[data-backup-file]')) return '[data-backup-file]';
+    if (el.matches('#backup-preview-title')) return '#backup-preview-title';
+    return el === root.querySelector('.backup-message') ? '.backup-message' : null;
   }
   function show(text, isError = false) { message = text; error = isError; }
   async function run(task) {
@@ -77,13 +100,15 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
   }
   async function check(raw) {
     plan = await onAnalyze(raw); choice = 'merge'; state = 'preview';
+    // Move keyboard and screen-reader users to the checked summary they must review.
+    focusNext = '#backup-preview-title';
     show('Backup checked. Review it, then choose merge or replace.');
   }
   root.onclick = event => {
     const action = event.target.closest?.('[data-backup-action]')?.dataset.backupAction;
     if (!action || busy) return;
     if (action === 'export') run(async () => { await onExport(); show('Workspace backup exported. Keep the file somewhere safe.'); });
-    if (action === 'cancel') { state = 'idle'; plan = null; show('Restore cancelled. Nothing was changed.'); render(); }
+    if (action === 'cancel') { state = 'idle'; plan = null; focusNext = '[data-backup-file]'; show('Restore cancelled. Nothing was changed.'); render(); }
     if (action === 'download-pre') run(async () => { await onDownloadPreRestore(); });
     if (action === 'load-pre') run(async () => check(await onLoadPreRestore()));
     if (action === 'apply' && plan) run(async () => {
@@ -108,5 +133,7 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
     if (el.matches('[data-backup-confirm]')) { const apply = root.querySelector('[data-backup-action="apply"]'); if (apply) apply.disabled = busy || readOnly || !el.checked; }
   };
   render();
+  // Remounted after a restore with its result: put focus on the result so it is read and keyboard position is kept.
+  if (initialMessage) root.querySelector('.backup-message')?.focus();
   return () => { root.onclick = root.onchange = null; };
 }
