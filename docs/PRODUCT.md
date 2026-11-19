@@ -24,6 +24,8 @@ The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/ii
 
 The original-practice workspace remains separate: 30 reproducible concept families, a dashboard with daily goals and activity, a test centre, up to 50 original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Generated practice is explicitly labelled and never counted as PYQs.
 
+Revision suggestions explain each chapter they list using the learner's retained original-practice first attempts, saved PYQ reports (kept separate) or declared goals, and show draft prerequisite chapters. The prerequisite map is an AI-assisted, unreviewed draft. Sparse evidence is reported as such; suggestions are not mastery estimates or predictions, and the learner chooses what to practise.
+
 Multiple browser tabs share one writer. Reader tabs can inspect reports and current questions without altering saved work. Where coordinated storage is unavailable, practice remains in memory with an export reminder. There are no accounts or automatic cross-device synchronization.
 
 ## Coverage and review limits
