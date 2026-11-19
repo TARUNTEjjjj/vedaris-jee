@@ -8,6 +8,7 @@ The ambition is a complete, reliable JEE Advanced learning platform. The current
 - [x] Observe source collections for every year 1978–2006 and label incompleteness.
 - [ ] Obtain complete, suitably reusable legacy papers, including separate subject papers and screening/main stages where applicable.
 - [ ] Track missing pages, versions, revised keys and withdrawn questions.
+  The [historical import plan](HISTORICAL-IMPORT-PLAN.md) now holds the tracking schema and gates. First tranche: 2021, Papers 1–2. Nothing has been recorded yet; source inspection, owner approval, reuse permission and human certification are pending.
 - [ ] Record answer keys and original marking instructions for every section.
 
 Acceptance: every claimed complete paper has all original pages and its format independently checked; external links alone do not meet this condition.

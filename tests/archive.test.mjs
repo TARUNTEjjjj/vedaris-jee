@@ -132,6 +132,7 @@ test('CLI performs no partial write and refuses duplicate staged content', async
     await mkdir(join(root, 'scripts'), {recursive: true});
     await cp(join(sourceRoot, 'src/archive'), join(root, 'src/archive'), {recursive: true});
     await cp(join(sourceRoot, 'scripts/import-pyq.mjs'), join(root, 'scripts/import-pyq.mjs'));
+    await cp(join(sourceRoot, 'scripts/import-plan.mjs'), join(root, 'scripts/import-plan.mjs'));
     await writeFile(join(root, 'package.json'), '{"type":"module"}');
     await mkdir(join(root, 'data'), {recursive: true});
     await writeFile(join(root, 'data/archive.json'), JSON.stringify(manifest()));

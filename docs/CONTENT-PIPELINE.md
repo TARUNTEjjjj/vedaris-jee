@@ -70,6 +70,10 @@ node scripts/import-pyq.mjs /path/to/reviewed-batch.json --catalog /path/to/arch
 
 It validates `{ "version": 1, "questions": [...] }` against the base schema in `src/archive/questions.js` and writes exclusively under `data/imports/validated/`, without overwriting existing files or publishing a partly valid batch. Run one importer at a time. `src/content/catalog.js` supplies the richer integrated contract; formats outside the staging schema must pass the runtime gate rather than being coerced into another type.
 
+## Historical import plan
+
+Papers before 2022 enter only through the reviewed [historical import plan](HISTORICAL-IMPORT-PLAN.md) in `content/historical-import-plan.json`. The first tranche is 2021 Papers 1 and 2. The plan records each paper's source hash and pages, completeness, original question references, final keys, section instructions, provenance and reuse decisions. It also records missing pages, revised versions, withdrawn questions, and AI-assisted and human reviews kept separate. It contains no question text. `scripts/import-pyq.mjs` and the content build both refuse a historical question until the plan selects its paper and the owner has settled reuse. The build also requires every historical figure to match the SHA-256 recorded in the plan, and keeps a historical full mock locked until the plan's completeness gate passes. Owner approval, reuse permission and human certification are pending.
+
 ## Exact answers and section marking
 
 Supported answer records include:

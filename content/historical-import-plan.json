@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-19",
+  "policy": {
+    "appliesBeforeYear": 2022,
+    "requireHumanCertificationForMock": true
+  },
+  "tranches": [
+    {
+      "id": "tranche-1",
+      "title": "JEE Advanced 2021, Papers 1 and 2 (English)",
+      "selectedAt": "2026-11-19",
+      "selectedBy": "Claude (AI-assisted proposal for the owner; not an owner decision)",
+      "rationale": "2021 is the most recent unplayable year and directly precedes the reviewed 2022–2026 bank. Both papers are official English PDFs already catalogued as pdf-verified full papers under the jee-advanced exam identity with a recorded 180-minute duration. As the nearest year, they are expected to be closest in format to papers the runtime already grades, but that is unverified: their sections, response types and marking must be recorded from the PDFs, and any response type the runtime cannot grade blocks the paper. Two papers keep review bounded and complete one year if they pass. Earlier years add formats (legacy subjective papers, screening and main stages) that the current grading contract does not support.",
+      "ownerApproval": {
+        "status": "pending-owner",
+        "basis": null,
+        "evidenceUrl": null,
+        "decidedBy": null,
+        "decidedAt": null
+      },
+      "paperIds": [
+        "official-2021-paper-1-en",
+        "official-2021-paper-2-en"
+      ],
+      "nextCandidates": [
+        "official-2020-paper-1-en",
+        "official-2020-paper-2-en",
+        "official-2019-paper-1-en",
+        "official-2019-paper-2-en"
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "paperId": "official-2021-paper-1-en",
+      "tranche": "tranche-1",
+      "stage": "planned",
+      "source": {
+        "questionPaper": {
+          "url": "https://jeeadv.ac.in/past_qps/2021_1_English.pdf",
+          "sha256": null,
+          "pageCount": null,
+          "language": "English",
+          "checkedBy": null,
+          "checkedAt": null
+        },
+        "finalKey": {
+          "status": "not-located",
+          "url": null,
+          "sha256": null,
+          "archivedOfficialOrigin": false
+        },
+        "instructions": {
+          "status": "not-recorded",
+          "pages": []
+        }
+      },
+      "completeness": {
+        "status": "not-assessed",
+        "missingPages": [],
+        "checkedBy": null,
+        "checkedAt": null
+      },
+      "format": {
+        "questionCount": null,
+        "maxMarks": null,
+        "durationMinutes": null,
+        "sections": []
+      },
+      "questions": [],
+      "revisions": [],
+      "assets": [],
+      "provenance": {
+        "transcriptSource": null,
+        "transcriptRevision": null,
+        "notes": "No transcript source has been chosen. Any candidate needs a recorded revision and a reuse decision before staging."
+      },
+      "permissions": {
+        "questionText": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "figures": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "answerKey": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "explanations": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        }
+      },
+      "notes": "Catalogued as a pdf-verified official full paper. That verification established PDF delivery only, not page completeness or question-level content."
+    },
+    {
+      "paperId": "official-2021-paper-2-en",
+      "tranche": "tranche-1",
+      "stage": "planned",
+      "source": {
+        "questionPaper": {
+          "url": "https://jeeadv.ac.in/past_qps/2021_2_English.pdf",
+          "sha256": null,
+          "pageCount": null,
+          "language": "English",
+          "checkedBy": null,
+          "checkedAt": null
+        },
+        "finalKey": {
+          "status": "not-located",
+          "url": null,
+          "sha256": null,
+          "archivedOfficialOrigin": false
+        },
+        "instructions": {
+          "status": "not-recorded",
+          "pages": []
+        }
+      },
+      "completeness": {
+        "status": "not-assessed",
+        "missingPages": [],
+        "checkedBy": null,
+        "checkedAt": null
+      },
+      "format": {
+        "questionCount": null,
+        "maxMarks": null,
+        "durationMinutes": null,
+        "sections": []
+      },
+      "questions": [],
+      "revisions": [],
+      "assets": [],
+      "provenance": {
+        "transcriptSource": null,
+        "transcriptRevision": null,
+        "notes": "No transcript source has been chosen. Any candidate needs a recorded revision and a reuse decision before staging."
+      },
+      "permissions": {
+        "questionText": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "figures": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "answerKey": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        },
+        "explanations": {
+          "status": "pending-owner",
+          "basis": null,
+          "evidenceUrl": null,
+          "decidedBy": null,
+          "decidedAt": null
+        }
+      },
+      "notes": "Catalogued as a pdf-verified official full paper. That verification established PDF delivery only, not page completeness or question-level content."
+    }
+  ]
+}

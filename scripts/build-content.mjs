@@ -3,6 +3,7 @@ import { lstat, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createContentRegistry } from '../src/content/catalog.js';
 import { renderStudyText } from './render-math.mjs';
+import { checkMockConfiguration, checkPlannedQuestions, emptyImportPlan, inHistoricalScope, planReadiness, validateImportPlan } from './import-plan.mjs';
 
 const MAX_BYTES = 1024 * 1024;
 const BANK_ID = 'vedaris-reviewed-jee-v1';
@@ -40,6 +41,11 @@ function compileQuestion(question) {
  */
 export async function prepareContent(root, archive, availableAssets = []) {
   root = resolve(root);
+  // The reviewed import plan gates every historical (pre-cut-off) paper. Without
+  // a plan, none can be published.
+  const plan = await readJSON(root, 'content/historical-import-plan.json', {optional: true}) ?? emptyImportPlan();
+  const planErrors = validateImportPlan(plan, archive);
+  if (planErrors.length) throw new Error(`Historical import plan is invalid:\n${planErrors.join('\n')}`);
   const catalog = await readJSON(root, 'content/catalog.json', {optional: true});
   if (catalog === null) return empty();
   if (catalog.version !== 1 || catalog.bankId !== BANK_ID || !Array.isArray(catalog.bundles) || !Array.isArray(catalog.papers) || !Array.isArray(catalog.attributions) || !Array.isArray(catalog.coverageNotes)) throw new Error('Invalid reviewed content source catalog');
@@ -59,6 +65,28 @@ export async function prepareContent(root, archive, availableAssets = []) {
     paperIds.add([...ids][0]);
     sources.push({path: entry.path.replace(/^content\//, 'data/content/'), bundle});
   }
+  const historical = [];
+  for (const {path, bundle} of sources) {
+    historical.push(...checkPlannedQuestions(plan, archive, bundle.questions, {stage: 'publication'}).map(error => `${path} ${error}`));
+    for (const question of bundle.questions) {
+      if (!inHistoricalScope(plan, archive, question.paperId)) continue;
+      const record = plan.papers.find(item => item.paperId === question.paperId);
+      for (const asset of question.assets ?? []) {
+        const listed = record?.assets.find(item => item.path === asset.url);
+        if (!listed) { historical.push(`${path} ${question.id}: figure ${asset.url} is not checksummed in the import plan`); continue; }
+        let bytes;
+        try { bytes = await readFile(join(root, asset.url)); } catch { historical.push(`${path} ${question.id}: figure ${asset.url} is missing`); continue; }
+        if (digest(bytes) !== listed.sha256) historical.push(`${path} ${question.id}: figure ${asset.url} does not match its recorded SHA-256`);
+      }
+    }
+  }
+  // A historical full mock unlocks only when the plan's completeness gate passes.
+  for (const config of catalog.papers) if (inHistoricalScope(plan, archive, config?.paperId)) {
+    const blockers = planReadiness(plan, archive, config.paperId).mock;
+    if (blockers.length) historical.push(`Full mock ${config.paperId} stays locked: ${blockers.join(' ')}`);
+    else historical.push(...checkMockConfiguration(plan, archive, config));
+  }
+  if (historical.length) throw new Error(`Historical content refused by the import plan:\n${historical.join('\n')}`);
   const usedAssets = [...new Set(sources.flatMap(({bundle}) => bundle.questions.flatMap(question => (question.assets ?? []).map(asset => asset.url))))].sort();
   const inventory = new Set(availableAssets);
   for (const path of usedAssets) if (!/^assets\/content\/[a-zA-Z0-9_/-]+\.(?:png|jpe?g|webp|gif|svg)$/i.test(path) || path.split('/').some(part => part === '.' || part === '..') || !inventory.has(path)) throw new Error(`Content image must be in the local build inventory: ${path}`);
