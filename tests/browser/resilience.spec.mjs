@@ -44,7 +44,7 @@ test('a used paper and its figures work offline after reload', async ({page, con
   // A figure that was never displayed online is explicitly unavailable, not broken.
   await page.locator('.pyq-palette button').nth(18).click();
   await expect(meta(page)).toContainText('19 / 51');
-  await expect(page.locator('.pyq-question .pyq-figure.is-unavailable [role="note"]').first()).toBeVisible();
+  await expect(page.locator('.pyq-question .pyq-figure.is-unavailable [role="status"]').first()).toBeVisible();
 
   // Answers keep saving offline.
   await page.locator('.pyq-palette button').nth(1).click();

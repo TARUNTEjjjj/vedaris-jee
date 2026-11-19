@@ -397,9 +397,11 @@ export function mountPYQ(root, {registry, markup = {}, workspace, onChange, read
     const img=event.target;if(!img?.matches?.('.pyq-figure img'))return;
     const figure=img.closest('.pyq-figure');if(!figure||figure.classList.contains('is-unavailable'))return;
     figure.classList.add('is-unavailable');
-    const note=document.createElement('span');note.className='pyq-asset-missing';note.setAttribute('role','note');
-    note.textContent='This figure could not be loaded. Its description is shown below; reconnect and reopen the question to load the figure.';
+    // A polite status region that is attached empty and then filled is announced by
+    // screen readers; one inserted with its text already present often is not.
+    const note=document.createElement('span');note.className='pyq-asset-missing';note.setAttribute('role','status');
     figure.prepend(note);
+    requestAnimationFrame(()=>{note.textContent='This figure could not be loaded. Its description is shown below; reconnect and reopen the question to load the figure.';});
   }
   root.addEventListener('click',click);root.addEventListener('change',change);root.addEventListener('input',input);root.addEventListener('error',figureError,true);
   document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',pagehide);
