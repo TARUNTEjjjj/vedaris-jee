@@ -156,3 +156,17 @@ test('storage failure rolls every store back to its previous bytes; no pre-resto
   assert.equal(JSON.parse(ok.getItem(storageKey('goal'))), 20);
   assert.equal(ok.getItem(storageKey('unresolved')), null, 'an empty held list is not stored');
 });
+
+test('a timed PYQ attempt that expires after export is restored as submitted at its deadline', () => {
+  const stores = workspace();
+  const file = JSON.stringify(createWorkspaceBackup({ stores, contentBankId: BANK }));
+  const deadline = stores.pyq.active.deadline;
+  const plan = analyzeBackup(parseBackup(file), { registry: registry(), bankId: BANK, now: deadline + 3_600_000 });
+  assert.equal(plan.stores.pyq.active, null);
+  const submitted = plan.stores.pyq.history.find(s => s.id === stores.pyq.active.id);
+  assert.equal(submitted.finishedAt, deadline, 'no extra time is granted');
+  assert.match(plan.report.notes.join(' '), /reached its deadline after this backup was made/);
+  // The same holds for a pre-restore copy returned to later.
+  const copy = JSON.stringify(createWorkspaceBackup({ stores, kind: 'pre-restore' }));
+  assert.equal(analyzeBackup(parseBackup(copy), { registry: registry(), bankId: BANK, now: deadline + 1 }).stores.pyq.history[0].finishedAt, deadline);
+});

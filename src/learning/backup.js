@@ -251,10 +251,15 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
       if (!resolves) { hold('pyq-session', 'A question or paper in this attempt is not in the installed reviewed bank', session); continue; }
       const clean = restoreHistoricalSession(session, registry, bankId, now);
       if (!clean) fail('A saved PYQ attempt failed validation (responses, timing or identity are inconsistent).');
+      // Keep the validated form: a timed attempt whose deadline passed after the
+      // export is submitted at its own deadline and becomes a report.
       if (clean.finishedAt === null) {
         if (active) { report.notes.push('Two unfinished PYQ attempts were found; the later one is held, not discarded.'); hold('pyq-session', 'A second unfinished attempt', session); }
-        else active = session;
-      } else history.push(session);
+        else active = clean;
+      } else {
+        if (session.finishedAt === null) report.notes.push('An unfinished timed PYQ attempt reached its deadline after this backup was made; it is restored as submitted at that deadline.');
+        history.push(clean);
+      }
     }
     history.sort((a, b) => b.finishedAt - a.finishedAt);
     if (history.length > 20) fail('PYQ reports exceed the 20-report limit.');
