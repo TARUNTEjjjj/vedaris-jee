@@ -18,7 +18,7 @@ Vedaris carries the chapter → practice → timed session → review → progre
 | Study dashboard | Daily first-attempt goal, seven-day activity, subject progress, resume and chapter recommendations |
 | Reviewed PYQ bank | 510 actual questions across 2022–2026, 170 per subject, original Vedaris explanations, 279 unique figures and chapter tags |
 | Full historical mocks | Both papers for every year from 2022–2026; ten complete papers, each 180 marks and 180 minutes, preserving order, section marking and final-key exceptions |
-| PYQ practice | Chapter, subject, year and response-type filters; custom sets; exact missed-question retry; last 20 reports and JSON backup/restore |
+| PYQ practice | Chapter, subject, year and response-type filters; custom sets; exact missed-question retry; source-backed two-paper exam days with an explicit inter-paper break (2022–2026); last 20 reports and JSON backup/restore |
 | Concept test centre | 6/12/30-question original PCM sets plus custom chapter sessions; separate from historical mocks |
 | Exam workspace | Subject navigation, five palette states, per-question active time, submission summary, autosave and reload resume |
 | Original-practice analysis | Last 50 completed concept reports, score trends, subject breakdown, weak-chapter priorities and exact missed-question retry |

@@ -56,7 +56,7 @@ for (const [name, profile] of Object.entries(PROFILES)) {
     const pyqStart = await page.evaluate(() => { const t = performance.now(); location.hash = 'pyq'; return t; });
     await page.waitForFunction(() => 'pyq' in window.__gate.marks, null, {timeout: 120_000});
     const pyqReady = await page.evaluate(start => window.__gate.marks.pyq - start, pyqStart);
-    const corpus = await page.evaluate(() => ({questions: Number(document.querySelector('.pyq-coverage strong')?.textContent.replace(/\D/g, '')), papers: document.querySelectorAll('.pyq-paper-entry').length, heapBytes: performance.memory?.usedJSHeapSize ?? null,
+    const corpus = await page.evaluate(() => ({questions: Number(document.querySelector('.pyq-coverage strong')?.textContent.replace(/\D/g, '')), papers: document.querySelectorAll('.pyq-paper-card .pyq-paper-entry').length, heapBytes: performance.memory?.usedJSHeapSize ?? null,
       contentBytes: performance.getEntriesByType('resource').filter(r => /data\/content\//.test(r.name)).reduce((sum, r) => sum + (r.encodedBodySize || 0), 0)}));
     const longTasksDuringLoad = await page.evaluate(start => window.__gate.longTasks.filter(task => task.start >= start).reduce((sum, task) => sum + Math.max(0, task.duration - 50), 0), pyqStart);
 

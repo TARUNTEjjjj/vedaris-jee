@@ -3,7 +3,7 @@
 // screen-reader protocol in docs/BROWSER-RELEASE-GATES.md).
 import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, openPYQ, recordEvidence, settle, APP_ROUTES } from './fixtures.mjs';
+import { test, expect, openPYQ, recordEvidence, settle, walkExamDay, APP_ROUTES } from './fixtures.mjs';
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 // Violations that existed when this gate was introduced. They are recorded as
@@ -67,6 +67,10 @@ test('axe: PYQ hub, instructions, question with figure, submit confirmation and 
   await page.getByRole('button', {name: 'Submit & see report'}).click();
   await page.locator('.pyq-review summary').first().click();
   await audit(page, testInfo, 'pyq-report');
+});
+
+test('axe: two-paper exam instructions, paper, break, end-exam confirmation and combined report', async ({page, origin}, testInfo) => {
+  await walkExamDay(page, origin, name => audit(page, testInfo, name));
 });
 
 test('axe: original-practice question and submit dialog', async ({page, origin}, testInfo) => {

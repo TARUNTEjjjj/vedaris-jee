@@ -29,7 +29,7 @@ Acceptance: each playable PYQ resolves to an original paper, page and question n
 - [x] Implement exact keys, ranges, disjoint ranges, alternative option sets, matching lists and passage groups.
 - [ ] Add historical written-answer review for legacy subjective papers. The [review contract and engine](WRITTEN-REVIEW.md) exist, but no repository legacy paper has recorded marking provenance, so none is reviewable yet.
 - [x] Encode section-specific partial/negative marks, instructions, duration and marks.
-- [ ] Add full two-paper sessions and intentional inter-paper breaks where supported by that year's instructions.
+- [x] Add full two-paper sessions and intentional inter-paper breaks where supported by that year's official schedule (2022–2026).
 - [x] Verify representative complete papers against independent official totals and answer fixtures.
 
 Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, source-backed configuration.
