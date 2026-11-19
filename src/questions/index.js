@@ -1,5 +1,6 @@
 import { CHAPTERS, SUBJECTS } from './catalog.js';
-export { CHAPTERS, SUBJECTS };
+import { MULTI_CONCEPT_FAMILIES, sampleAndBuild, checkFamilyParameters, buildFromParameters } from './multi-concept.js';
+export { CHAPTERS, SUBJECTS, checkFamilyParameters, buildFromParameters };
 
 export function createRng(seed) {
   let state = seed >>> 0;
@@ -8,7 +9,11 @@ export function createRng(seed) {
 const numerical = (stem, answer, solution) => ({ stem, answer: String(answer), solution });
 const choices = (stem, values, answer, solution) => ({ stem, options: values.map((text, i) => ({ id: 'ABCD'[i], text: String(text) })), answer, solution });
 const families = [];
-function family(id, subject, chapter, title, type, build) { families.push({ id, subject, chapter, title, type, build }); }
+// concepts lists every chapter a family exercises (its own chapter first);
+// kind separates the original single-concept families from multi-concept ones.
+function family(id, subject, chapter, title, type, build, { concepts = [chapter], skills = [], kind = 'concept' } = {}) {
+  families.push({ id, subject, chapter, title, type, kind, concepts: Object.freeze([...concepts]), skills: Object.freeze([...skills]), build });
+}
 
 family('phy-projectile-v1', 'physics', 'phy-kinematics', 'Projectile meets a height', 'numerical', r => {
   const a = r.int(2, 9), b = a + r.int(2, 6), u = 5 * (a + b), h = 5 * a * b;
@@ -133,9 +138,20 @@ family('math-vectors-v1', 'mathematics', 'math-vectors', 'Perpendicular vectors'
   return numerical(`Vectors a = (${a}, ${b}, 1) and b = (2, −${c}, λ) are perpendicular. Find λ.`, b*c-2*a, [`Perpendicular vectors have zero scalar product.`, `${a}×2 + ${b}×(−${c}) + λ = 0.`, `λ = ${b*c} − ${2*a} = ${b*c-2*a}.`]);
 });
 
+// Appended after the original 30 so existing identities and outputs are unchanged.
+for (const definition of MULTI_CONCEPT_FAMILIES) {
+  const { id, subject, chapter, title, type, concepts, skills } = definition;
+  family(id, subject, chapter, title, type, rng => sampleAndBuild(definition, rng), { concepts, skills, kind: 'multi-concept' });
+}
+
 const registry = new Map(families.map(f => [f.id, f]));
+/** Parameter domain and cross-parameter constraints; null for the original single-concept families. */
+export function familyDomain(templateId) {
+  const definition = MULTI_CONCEPT_FAMILIES.find(f => f.id === templateId);
+  return definition ? { parameters: { ...definition.parameters }, constraints: [...definition.constraints] } : null;
+}
 export function listTemplates({ subject = 'all', chapter = 'all', type = 'all' } = {}) {
-  return families.filter(f => (subject === 'all' || f.subject === subject) && (chapter === 'all' || f.chapter === chapter) && (type === 'all' || f.type === type)).map(({ build, ...metadata }) => ({ ...metadata }));
+  return families.filter(f => (subject === 'all' || f.subject === subject) && (chapter === 'all' || f.chapter === chapter) && (type === 'all' || f.type === type)).map(({ build, ...metadata }) => ({ ...metadata, concepts: [...metadata.concepts], skills: [...metadata.skills] }));
 }
 export function generate(templateId, seed) {
   if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be a 32-bit unsigned integer');
@@ -143,6 +159,7 @@ export function generate(templateId, seed) {
   if (!f) throw new Error('Unknown question family');
   const { build, ...metadata } = f;
   const question = build(createRng(seed));
+  metadata.concepts = [...metadata.concepts]; metadata.skills = [...metadata.skills];
   if (question.options) {
     const rng = createRng((seed ^ 0x9e3779b9) >>> 0);
     const oldOptions = [...question.options];
@@ -151,5 +168,5 @@ export function generate(templateId, seed) {
     question.options = oldOptions.map((o, i) => ({ id: 'ABCD'[i], text: o.text }));
     question.answer = Array.isArray(question.answer) ? question.answer.map(a => ids.get(a)).sort() : ids.get(question.answer);
   }
-  return { ...metadata, ...question, id: `${templateId}:${seed}`, templateId, seed, origin: 'original', difficulty: 'practice', marking: f.type === 'single' ? { correct: 3, incorrect: -1, unanswered: 0 } : f.type === 'multiple' ? { correct: 4, incorrect: -2, unanswered: 0, partial: { perCorrect: 1 } } : { correct: 4, incorrect: 0, unanswered: 0 } };
+  return { ...metadata, ...question, id: `${templateId}:${seed}`, templateId, seed, origin: 'original', label: 'Original practice', difficulty: 'practice', marking: f.type === 'single' ? { correct: 3, incorrect: -1, unanswered: 0 } : f.type === 'multiple' ? { correct: 4, incorrect: -2, unanswered: 0, partial: { perCorrect: 1 } } : { correct: 4, incorrect: 0, unanswered: 0 } };
 }

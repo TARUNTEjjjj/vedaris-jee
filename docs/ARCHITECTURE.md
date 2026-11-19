@@ -71,7 +71,7 @@ Corrupt saved state is preserved rather than overwritten. A failed PYQ persisten
 
 ## Original practice and study analysis
 
-The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
+The dashboard, test centre, analysis, report and notebook remain separate vanilla UI modules. Original practice uses deterministic template IDs and seeds. Multi-concept families in `src/questions/multi-concept.js` separate a documented parameter domain and constraint check from question construction; the dev-only `scripts/original-oracle.mjs` re-derives their answers from question text with exact rational arithmetic, and `scripts/original-coverage.mjs` publishes the chapter coverage map in [ORIGINAL-PRACTICE.md](ORIGINAL-PRACTICE.md). New families are appended under new IDs so existing identities keep producing the same questions. When a mixed set is grouped by subject, responses, flags, timing and visit arrays follow the same identity permutation.
 
 Original-practice completed history is limited to 50 validated sessions, with first-attempt grades protected from retries. Notebook annotations refer to original question identities and hold bounded cause labels, notes and resolution flags. Resolving an annotation or improving a retry does not rewrite the first attempt. Historical reports likewise distinguish a new exact-question retry from its source attempt.
 
