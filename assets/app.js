@@ -15,7 +15,8 @@ import { mountPYQ } from './pyq.js';
 import { mountWorkspaceBackup } from './backup.js';
 import { BACKUP_STORES, PRE_RESTORE_SLOT, createWorkspaceBackup, parseBackup, analyzeBackup, mergeWorkspace, replaceWorkspace, writeWorkspaceStores, emptyUnresolved, restoreUnresolved, validPaperNotes } from '../src/learning/backup.js';
 import { loadContentManifest, loadContentBank } from './content-loader.js';
-import { emptyHistoricalWorkspace, restoreHistoricalWorkspace } from '../src/content/session.js';
+import { emptyHistoricalWorkspace } from '../src/content/session.js';
+import { restoreExamWorkspace } from '../src/content/exam.js';
 import { acquireWorkspaceWriter } from '../src/learning/storage.js';
 import { archiveStats, filterPapers, validateArchive } from '../src/archive/index.js';
 import { canApplyAppUpdate } from './app-update-guard.js';
@@ -81,7 +82,7 @@ function showOverview() {
 }
 function loadHistoricalState(){
  const fallback=emptyHistoricalWorkspace(contentManifest.bankId);
- try{const raw=localStorage.getItem(key('pyq-workspace'));historicalBackupRaw=raw;historicalMemory=false;historicalWorkspace=raw?restoreHistoricalWorkspace(raw,contentBank.registry,contentManifest.bankId):fallback;if(!historicalWorkspace){blocked.add('pyq-workspace');historicalWorkspace=fallback;notify('Your saved PYQ workspace could not be validated. It has been preserved; export the saved data before replacing it.',true);}}
+ try{const raw=localStorage.getItem(key('pyq-workspace'));historicalBackupRaw=raw;historicalMemory=false;historicalWorkspace=raw?restoreExamWorkspace(raw,contentBank.registry,contentManifest.bankId):fallback;if(!historicalWorkspace){blocked.add('pyq-workspace');historicalWorkspace=fallback;notify('Your saved PYQ workspace could not be validated. It has been preserved; export the saved data before replacing it.',true);}}
  catch{historicalWorkspace??=fallback;historicalMemory=true;notify('This browser cannot access saved PYQ work. Practice is available in this tab; export a PYQ backup before closing it.',true);}
 }
 async function ensureContentBank(){
