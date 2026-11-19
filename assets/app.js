@@ -12,6 +12,8 @@ import { revisionRecommendations } from '../src/learning/recommendations.js';
 import { emptyRevisionPlan, restoreRevisionPlan, addRevisionGoal, removeRevisionGoal, dismissRecommendation, undismissRecommendation } from '../src/learning/revision-plan.js';
 import { mountReport } from './report.js';
 import { mountPYQ } from './pyq.js';
+import { mountWorkspaceBackup } from './backup.js';
+import { BACKUP_STORES, PRE_RESTORE_SLOT, createWorkspaceBackup, parseBackup, analyzeBackup, mergeWorkspace, replaceWorkspace, writeWorkspaceStores, emptyUnresolved, restoreUnresolved, validPaperNotes } from '../src/learning/backup.js';
 import { loadContentManifest, loadContentBank } from './content-loader.js';
 import { emptyHistoricalWorkspace, restoreHistoricalWorkspace } from '../src/content/session.js';
 import { acquireWorkspaceWriter } from '../src/learning/storage.js';
@@ -35,6 +37,8 @@ let progress = emptyProgress();
 let bookmarks = [];
 let history = emptyHistory();
 let notebook = emptyNotebook();
+let unresolved = emptyUnresolved();
+let memoryPreRestore = null;
 let revisionPlan = emptyRevisionPlan();
 let revisionPyqLoading = false, revisionPyqError = '';
 let dailyGoal = 10;
@@ -80,12 +84,16 @@ function loadHistoricalState(){
  try{const raw=localStorage.getItem(key('pyq-workspace'));historicalBackupRaw=raw;historicalMemory=false;historicalWorkspace=raw?restoreHistoricalWorkspace(raw,contentBank.registry,contentManifest.bankId):fallback;if(!historicalWorkspace){blocked.add('pyq-workspace');historicalWorkspace=fallback;notify('Your saved PYQ workspace could not be validated. It has been preserved; export the saved data before replacing it.',true);}}
  catch{historicalWorkspace??=fallback;historicalMemory=true;notify('This browser cannot access saved PYQ work. Practice is available in this tab; export a PYQ backup before closing it.',true);}
 }
+async function ensureContentBank(){
+ if(!contentManifest)contentManifest=await loadContentManifest();
+ if(!contentBank){contentLoading??=loadContentBank(contentManifest,archive).catch(error=>{contentLoading=null;throw error});const bank=await contentLoading;if(!contentBank){contentBank=bank;loadHistoricalState();}}
+ return contentBank;
+}
 async function showPYQ(){
  const generation=routeGeneration;
  main.innerHTML=intro('Real questions. Careful reasoning.','Loading reviewed papers, diagrams and worked solutions…');
  try{
-  if(!contentManifest)contentManifest=await loadContentManifest();
-  if(!contentBank){contentLoading??=loadContentBank(contentManifest,archive).catch(error=>{contentLoading=null;throw error});contentBank=await contentLoading;loadHistoricalState();}
+  await ensureContentBank();
   if(generation!==routeGeneration||route()!=='pyq')return;
   disposePYQ=mountPYQ(main,{...contentBank,workspace:historicalWorkspace,backupRaw:blocked.has('pyq-workspace')?historicalBackupRaw:null,memoryMode:writer.mode==='memory'||historicalMemory,filters:Object.fromEntries(params()),readOnly:writer.mode==='reader'||blocked.has('pyq-workspace'),onChange(next){if(writer.mode==='reader'||blocked.has('pyq-workspace'))return false;if(writer.mode==='writer'&&!historicalMemory&&!saveLocal('pyq-workspace',next))return false;historicalWorkspace=next;return true;}});
   updateWriterUI();
@@ -223,20 +231,88 @@ function renderStudio() {
  $('#next-variant').addEventListener('click',()=>{$('#studio-seed').value=newSeed();$('#studio-form').requestSubmit()});
  $('#bookmark-question').addEventListener('click',()=>{if(!studioResult)studioResponse=collectAnswer(q);bookmarks=saved?bookmarks.filter(b=>b.templateId!==q.templateId||b.seed!==q.seed):[...bookmarks,{templateId:q.templateId,seed:q.seed}].slice(-500);saveLocal('bookmarks',bookmarks);renderStudio()});
 }
-function showProgress() {
+function showProgress(backupMessage='') {
  const stats=getStats(progress);
  const records=Array.isArray(progress.records)?progress.records:Array.isArray(progress.attempts)?progress.attempts:[];
  const total=stats.attempted??stats.total??records.length;
  const correct=stats.correct??records.filter(r=>r.status==='correct').length;
  const accuracy=typeof stats.accuracy==='number'?stats.accuracy:(total?correct/total:0);
- main.innerHTML=intro('See the work adding up.','Original concept practice: first attempts stay first attempts. PYQ reports and backups live in PYQ practice.')+`<div class="stats-strip">${stat('DISTINCT ATTEMPTS',total)}${stat('CORRECT',correct)}${stat('FIRST-ATTEMPT ACCURACY',total?`${Math.round(accuracy)}%`:'—')}${stat('SAVED QUESTIONS',bookmarks.length)}</div><div class="progress-actions"><button id="export-progress" class="button">Export progress ↓</button><label class="button secondary upload-label">Restore progress ↑<input type="file" id="import-progress" accept="application/json,.json"></label><a class="button secondary" href="#practice">Keep practising →</a></div><div class="subtle-note">Saved on this browser only. Export before switching devices or clearing browser data. Backup restoration regrades question identities; browser storage is not a certified examination record.</div><div class="subject-grid">${SUBJECTS.map(s=>{const raw=stats.subjects?.find(row=>row.id===s.id)||{};const count=raw.attempted??raw.total??records.filter(r=>r.subject===s.id).length;const right=raw.correct??0;return `<section class="subject-card ${s.id}"><h3>${esc(s.title)}</h3><p>${count} distinct attempts · ${right} correct</p><div class="progress-bar"><span style="width:${count?Math.min(100,right/count*100):0}%"></span></div></section>`}).join('')}</div><div class="section-heading"><div><h2>Your saved questions</h2><p>Return to exactly the same family and seed.</p></div></div>${bookmarks.length?`<section class="panel table-wrap"><table><thead><tr><th>FAMILY</th><th>SUBJECT</th><th>SEED</th><th></th></tr></thead><tbody>${bookmarks.slice().reverse().map(b=>{const t=listTemplates().find(t=>t.id===b.templateId);return `<tr><td>${esc(t?.title||b.templateId)}</td><td>${esc(subjectTitle(t?.subject))}</td><td>${b.seed}</td><td><button class="button small secondary" data-bookmark="${esc(b.templateId)}" data-seed="${b.seed}">Open ↗</button></td></tr>`}).join('')}</tbody></table></section>`:empty('Leave a trail of good questions.','Save a question in the Question studio to find it here later.')}`;
+ main.innerHTML=intro('See the work adding up.','Original concept practice: first attempts stay first attempts. PYQ reports and backups live in PYQ practice.')+`<div class="stats-strip">${stat('DISTINCT ATTEMPTS',total)}${stat('CORRECT',correct)}${stat('FIRST-ATTEMPT ACCURACY',total?`${Math.round(accuracy)}%`:'—')}${stat('SAVED QUESTIONS',bookmarks.length)}</div><div class="progress-actions"><button id="export-progress" class="button">Export progress ↓</button><label class="button secondary upload-label">Restore progress ↑<input type="file" id="import-progress" accept="application/json,.json"></label><a class="button secondary" href="#practice">Keep practising →</a></div><div class="subtle-note">Saved on this browser only. Export before switching devices or clearing browser data. Backup restoration regrades question identities; browser storage is not a certified examination record. The progress-only export above covers first attempts; the complete workspace backup below covers everything.</div><div id="workspace-backup"></div><div class="subject-grid">${SUBJECTS.map(s=>{const raw=stats.subjects?.find(row=>row.id===s.id)||{};const count=raw.attempted??raw.total??records.filter(r=>r.subject===s.id).length;const right=raw.correct??0;return `<section class="subject-card ${s.id}"><h3>${esc(s.title)}</h3><p>${count} distinct attempts · ${right} correct</p><div class="progress-bar"><span style="width:${count?Math.min(100,right/count*100):0}%"></span></div></section>`}).join('')}</div><div class="section-heading"><div><h2>Your saved questions</h2><p>Return to exactly the same family and seed.</p></div></div>${bookmarks.length?`<section class="panel table-wrap"><table><thead><tr><th>FAMILY</th><th>SUBJECT</th><th>SEED</th><th></th></tr></thead><tbody>${bookmarks.slice().reverse().map(b=>{const t=listTemplates().find(t=>t.id===b.templateId);return `<tr><td>${esc(t?.title||b.templateId)}</td><td>${esc(subjectTitle(t?.subject))}</td><td>${b.seed}</td><td><button class="button small secondary" data-bookmark="${esc(b.templateId)}" data-seed="${b.seed}">Open ↗</button></td></tr>`}).join('')}</tbody></table></section>`:empty('Leave a trail of good questions.','Save a question in the Question studio to find it here later.')}`;
  $('#export-progress').addEventListener('click',()=>download('vedaris-progress.json',exportProgress(progress)));
  $('#import-progress').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2000000)throw new Error('Backup exceeds the 2 MB limit');const next=importProgress(await file.text(),progress);if(writer.mode==='memory'||saveLocal('progress',next)){progress=next;showProgress();notify(writer.mode==='memory'?'Progress restored and regraded in memory. Export before closing this tab.':'Progress restored and regraded.')}}catch(error){notify(`Could not restore backup: ${error.message}`,true)}});
  document.querySelectorAll('[data-bookmark]').forEach(b=>b.addEventListener('click',()=>{studioItem=generate(b.dataset.bookmark,Number(b.dataset.seed));studioResponse=studioItem.type==='multiple'?[]:'';studioResult=null;location.hash='bank'}));
+ showBackupPanel(backupMessage);
+}
+// Complete workspace backup. Validation and merge rules live in src/learning/backup.js.
+function workspaceStores(){return {progress,history,session,bookmarks,notebook,revisionPlan,goal:dailyGoal,paperNotes,pyq:contentBank&&!historicalMemory?historicalWorkspace:null,unresolved};}
+function rawSlot(slot){try{return localStorage.getItem(key(slot));}catch{return null;}}
+async function verifiedPYQ(){
+ // PYQ attempts can only be validated against the reviewed bank. Never export or replace them unverified.
+ try{await ensureContentBank();return true;}catch{return false;}
+}
+async function snapshotWorkspace(kind='export'){
+ const bankReady=await verifiedPYQ(),preserved={};
+ for(const store of BACKUP_STORES){
+  const raw=rawSlot(store.slot);
+  if(blocked.has(store.slot)&&raw!==null)preserved[store.name]={reason:'Could not be read on this browser; kept verbatim',raw};
+ }
+ if(!bankReady&&!preserved.pyq){const raw=rawSlot('pyq-workspace');if(raw!==null)preserved.pyq={reason:'The reviewed question bank was unavailable, so these PYQ attempts could not be verified when exporting',raw};}
+ return createWorkspaceBackup({stores:workspaceStores(),preserved,contentBankId:contentManifest?.bankId??null,kind});
+}
+function backupFilename(prefix){return `${prefix}-${new Date().toISOString().slice(0,10)}.json`;}
+function readPreRestore(){
+ if(memoryPreRestore)return memoryPreRestore;
+ try{const raw=localStorage.getItem(key(PRE_RESTORE_SLOT));return raw?JSON.parse(raw):null;}catch{return null;}
+}
+async function analyzeWorkspaceBackup(raw){
+ const parsed=parseBackup(raw);
+ const needsBank=parsed.included.includes('pyq')||parsed.included.includes('unresolved');
+ const bankReady=needsBank?await verifiedPYQ():!!contentBank;
+ const archivePaperIds=archiveError?null:new Set(archive.papers.map(p=>p.id));
+ return analyzeBackup(parsed,{registry:bankReady?contentBank.registry:null,bankId:bankReady?contentManifest.bankId:null,archivePaperIds});
+}
+async function applyWorkspaceBackup(plan,mode){
+ if(writer.mode==='reader')throw new Error('This tab is read-only. Restore from the tab that is editing this workspace.');
+ const names=plan.included.filter(name=>!plan.preserved[name]);
+ const unreadable=BACKUP_STORES.filter(store=>names.includes(store.name)&&blocked.has(store.slot));
+ if(unreadable.length)throw new Error(`${unreadable.map(s=>s.label).join(', ')} on this browser could not be read and is preserved, so it will not be overwritten. Export a backup (it carries that text), clear this site's data, then restore.`);
+ if(names.includes('pyq')&&rawSlot('pyq-workspace')!==null&&!await verifiedPYQ())throw new Error('Current PYQ attempts cannot be verified while the reviewed question bank is unavailable, so a safe pre-restore copy cannot be made. Reconnect and try again; nothing was changed.');
+ flushTime();
+ // The pre-restore copy and the merge both start from the same, just-flushed state.
+ const preRestore=await snapshotWorkspace('pre-restore');
+ const current=workspaceStores();
+ const incoming=Object.fromEntries(names.map(name=>[name,plan.stores[name]]));
+ const result=mode==='replace'?replaceWorkspace(current,incoming):mergeWorkspace(current,incoming,{registry:contentBank?.registry,bankId:contentManifest?.bankId});
+ if(writer.mode==='writer')writeWorkspaceStores(localStorage,result.stores,{names,preRestore});
+ else memoryPreRestore=preRestore;
+ const next=result.stores;
+ if(names.includes('progress'))progress=next.progress;
+ if(names.includes('history'))history=next.history;
+ if(names.includes('session'))session=next.session;
+ if(names.includes('bookmarks'))bookmarks=next.bookmarks;
+ if(names.includes('notebook'))notebook=next.notebook;
+ if(names.includes('revisionPlan'))revisionPlan=next.revisionPlan;
+ if(names.includes('goal'))dailyGoal=next.goal;
+ if(names.includes('paperNotes'))paperNotes=next.paperNotes;
+ if(names.includes('unresolved'))unresolved=next.unresolved;
+ if(names.includes('pyq')&&contentBank){historicalWorkspace=next.pyq??emptyHistoricalWorkspace(contentManifest.bankId);}
+ if(session?.finishedAt)recordCompleted();
+ return {notes:result.notes,preRestore};
+}
+function showBackupPanel(message=''){
+ const root=$('#workspace-backup');if(!root)return;
+ mountWorkspaceBackup(root,{mode:writer.mode,current:workspaceStores,blocked:[...blocked],preRestore:readPreRestore(),message,
+  onRestored(text){if(route()==='progress'){showProgress(text);updateWriterUI();}},
+  async onExport(){download(backupFilename('vedaris-workspace'),JSON.stringify(await snapshotWorkspace(),null,2));},
+  onAnalyze:analyzeWorkspaceBackup,
+  async onApply(plan,mode){const result=await applyWorkspaceBackup(plan,mode);updateWriterUI();return result;},
+  async onDownloadPreRestore(){const copy=readPreRestore();if(!copy)throw new Error('No pre-restore copy is available.');download(backupFilename('vedaris-pre-restore'),JSON.stringify(copy,null,2));},
+  async onLoadPreRestore(){const copy=readPreRestore();if(!copy)throw new Error('No pre-restore copy is available.');return JSON.stringify(copy);},
+ });
 }
 function showSources() {
  const a=archiveStats(archive);
- main.innerHTML=intro('Good learning starts with clear sources.','What is in Vedaris, where it comes from, and what is still being built.')+`<div class="note-grid"><section class="panel prose"><span class="eyebrow">THE ARCHIVE TODAY</span><h3>${a.yearCount} years with linked sources</h3><p>${a.officialPaperCount} official paper records, ${a.partialCollectionCount} partial collections, and ${a.unknownCoverageCount} records whose completeness has not been established. Source metadata was checked on ${esc(archive.checkedAt)}.</p><p><strong>${contentManifest?.questionCount||0} actual PYQs are playable with worked solutions</strong>, covering ${(contentManifest?.years||[]).join(", ")||"no reviewed years yet"}. The wider 40+ year source archive is still being transcribed and reviewed.</p><p>Reviewed papers preserve diagrams, final answer keys, numerical acceptance rules and section-specific marking. Worked explanations are independently authored for Vedaris; they are not official IIT worked solutions.</p><a class="button secondary" href="#pyq">Open PYQ practice ↗</a></section><section class="panel prose"><span class="eyebrow">ORIGINAL PRACTICE</span><h3>${listTemplates().length} reproducible question families</h3><p>Authored practice covers selected concepts in Physics, Chemistry and Mathematics. Every generated question is labelled original. The ${CHAPTERS.length}-chapter map does not imply every chapter already has a practice family.</p><p>Session results are practice feedback. They do not predict rank, admission or official performance. Timings in custom practice are chosen by the learner.</p></section></div>${contentManifest?`<section class="panel prose spaced"><h3>Reviewed question bank attribution</h3><p>Question transcriptions and structure use the MIT-licensed propar2750/jee-advanced dataset, pinned to revision 2580e96f1e74343e1d478509187f16fe58dbab85. The dataset states that exam questions, keys and figures remain the work of the organising IITs. Vedaris independently checks source papers and final keys and authors its own explanations and chapter tags.</p><p>Reviews are performed with Codex and recorded question by question; they are not a claim of independent human editorial certification. Use the linked official paper and final key to investigate any discrepancy.</p>${link('https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85','Pinned dataset & MIT attribution ↗')} · ${link('https://jeeadv.ac.in/archive.html','Official paper archive ↗')}</section>`:''}<div class="source-list">${archive.sources.map(s=>`<article><span class="badge ${s.authority==='official'?'':'third'}">${esc(s.authority.toUpperCase())}</span><h3 class="spaced">${esc(s.title)}</h3><p>${esc(s.notes)}</p>${link(s.url,'Visit original source ↗')}</article>`).join('')}</div><section class="panel prose spaced"><h3>Privacy and persistence</h3><p>Answers, active sessions, saved questions, and paper notes stay in this browser's local storage. There is no account sync, model grading, or remote tracking. Practice analysis is computed on your device. Fonts are served with this site; external papers have their own privacy policies. The concept-practice export backs up first-attempt answers. PYQ practice has its own backup for its active session and last 20 reports. Other concept test history, revision notes, revision goals, paper notes, goals and bookmarks remain on this device.</p><h3>How content becomes practice-ready</h3><p>Each historical question needs a stable paper identity and original question number, source page, reviewed statement and diagrams, verified answer key, and explicit marking scheme. The repository includes a validation and staging workflow; staged imports are not silently added to practice.</p><h3>Independent by design</h3><p>Vedaris is an independent learning project by Tarun Tej. It is not affiliated with or endorsed by the IITs, JEE Advanced, or the external archive providers.</p></section>`;
+ main.innerHTML=intro('Good learning starts with clear sources.','What is in Vedaris, where it comes from, and what is still being built.')+`<div class="note-grid"><section class="panel prose"><span class="eyebrow">THE ARCHIVE TODAY</span><h3>${a.yearCount} years with linked sources</h3><p>${a.officialPaperCount} official paper records, ${a.partialCollectionCount} partial collections, and ${a.unknownCoverageCount} records whose completeness has not been established. Source metadata was checked on ${esc(archive.checkedAt)}.</p><p><strong>${contentManifest?.questionCount||0} actual PYQs are playable with worked solutions</strong>, covering ${(contentManifest?.years||[]).join(", ")||"no reviewed years yet"}. The wider 40+ year source archive is still being transcribed and reviewed.</p><p>Reviewed papers preserve diagrams, final answer keys, numerical acceptance rules and section-specific marking. Worked explanations are independently authored for Vedaris; they are not official IIT worked solutions.</p><a class="button secondary" href="#pyq">Open PYQ practice ↗</a></section><section class="panel prose"><span class="eyebrow">ORIGINAL PRACTICE</span><h3>${listTemplates().length} reproducible question families</h3><p>Authored practice covers selected concepts in Physics, Chemistry and Mathematics. Every generated question is labelled original. The ${CHAPTERS.length}-chapter map does not imply every chapter already has a practice family.</p><p>Session results are practice feedback. They do not predict rank, admission or official performance. Timings in custom practice are chosen by the learner.</p></section></div>${contentManifest?`<section class="panel prose spaced"><h3>Reviewed question bank attribution</h3><p>Question transcriptions and structure use the MIT-licensed propar2750/jee-advanced dataset, pinned to revision 2580e96f1e74343e1d478509187f16fe58dbab85. The dataset states that exam questions, keys and figures remain the work of the organising IITs. Vedaris independently checks source papers and final keys and authors its own explanations and chapter tags.</p><p>Reviews are performed with Codex and recorded question by question; they are not a claim of independent human editorial certification. Use the linked official paper and final key to investigate any discrepancy.</p>${link('https://huggingface.co/datasets/propar2750/jee-advanced/tree/2580e96f1e74343e1d478509187f16fe58dbab85','Pinned dataset & MIT attribution ↗')} · ${link('https://jeeadv.ac.in/archive.html','Official paper archive ↗')}</section>`:''}<div class="source-list">${archive.sources.map(s=>`<article><span class="badge ${s.authority==='official'?'':'third'}">${esc(s.authority.toUpperCase())}</span><h3 class="spaced">${esc(s.title)}</h3><p>${esc(s.notes)}</p>${link(s.url,'Visit original source ↗')}</article>`).join('')}</div><section class="panel prose spaced"><h3>Privacy and persistence</h3><p>Answers, active sessions, saved questions, and paper notes stay in this browser's local storage. There is no account sync, model grading, or remote tracking. Practice analysis is computed on your device. Fonts are served with this site; external papers have their own privacy policies. The complete workspace backup on Saved & backups exports every one of these stores in one versioned file and restores it only after checking it in full. The older concept-practice and PYQ exports cover only their own stores.</p><h3>How content becomes practice-ready</h3><p>Each historical question needs a stable paper identity and original question number, source page, reviewed statement and diagrams, verified answer key, and explicit marking scheme. The repository includes a validation and staging workflow; staged imports are not silently added to practice.</p><h3>Independent by design</h3><p>Vedaris is an independent learning project by Tarun Tej. It is not affiliated with or endorsed by the IITs, JEE Advanced, or the external archive providers.</p></section>`;
 }
 function showPaper() {
  const id=decodeURIComponent(location.hash.split('?')[0].slice('#paper/'.length));const paper=archive.papers.find(p=>p.id===id);if(!paper){main.innerHTML=empty('Paper not found.','Return to the archive and choose an available source.');return}
@@ -252,7 +328,7 @@ function updateWriterUI(){
  const bar=$('#storage-mode');
  if(writer.mode==='writer'){bar.innerHTML='';return;}
  bar.innerHTML=`<div class="notice ${writer.mode==='memory'?'error':''}">${writer.mode==='reader'?'Another Vedaris tab is editing this workspace. This tab is read-only. Close the other tab, then reload this one to continue.':'This browser cannot coordinate saved work safely. You can practise in this tab, but changes will stay in memory. Export progress before closing.'}</div>`;
- if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next],[data-revision-load-pyq]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
+ if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-backup-action=export],[data-backup-action=download-pre],[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next],[data-revision-load-pyq]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
 }
 function render() {
  disposePYQ?.();disposePYQ=null;routeGeneration++;flushTime();trackingActive=false;main.onclick=main.oninput=main.onchange=main.onsubmit=null;
@@ -266,6 +342,7 @@ function loadLearningState(){
  history=restoreHistory(JSON.stringify(readLocal('history',emptyHistory(),v=>!!restoreHistory(JSON.stringify(v)))))||emptyHistory();
  notebook=restoreNotebook(readLocal('notebook',emptyNotebook(),v=>!!restoreNotebook(v)))||emptyNotebook();
  dailyGoal=readLocal('goal',10,v=>[5,10,20,30].includes(v));
+ unresolved=readLocal('unresolved',emptyUnresolved(),v=>!!restoreUnresolved(v));
  revisionPlan=restoreRevisionPlan(readLocal('revision-plan',emptyRevisionPlan(),v=>!!restoreRevisionPlan(v)))||emptyRevisionPlan();
 }
 async function init() {
@@ -277,7 +354,7 @@ async function init() {
     try{const raw=localStorage.getItem(key('session'));session=raw?restoreSession(raw):null;const saved=localStorage.getItem(key('progress'));progress=saved?importProgress(saved,emptyProgress()):emptyProgress();}catch{notify('Saved work changed in another tab but could not be read. Reload to retry.',true);}
     loadLearningState();
     bookmarks=readLocal('bookmarks',[],v=>Array.isArray(v)&&v.length<=500);
-    paperNotes=readLocal('paper-notes',{},v=>v&&typeof v==='object'&&!Array.isArray(v));
+    paperNotes=readLocal('paper-notes',{},validPaperNotes);
     if(route()!=='pyq')render();
   },100);
  });
@@ -291,7 +368,7 @@ async function init() {
  try {const raw=localStorage.getItem(key('progress'));if(raw)progress=importProgress(raw,emptyProgress());}catch{blocked.add('progress');notify('Saved progress could not be validated and has been preserved. New records will not overwrite it.',true)}
  loadLearningState();
  bookmarks=readLocal('bookmarks',[],value=>Array.isArray(value)&&value.length<=500&&value.every(b=>{try{generate(b.templateId,b.seed);return true}catch{return false}}));
- paperNotes=readLocal('paper-notes',{},v=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(n=>n&&typeof n==='object'&&(n.text===undefined||typeof n.text==='string'&&n.text.length<=50000)&&(n.deadline==null||Number.isFinite(n.deadline))));
+ paperNotes=readLocal('paper-notes',{},validPaperNotes);
  if(session?.finishedAt&&writer.mode!=='reader'){persistSession();recordCompleted();}
  render();window.addEventListener('hashchange',()=>{archiveLimit=30;render();window.scrollTo(0,0)});
  window.appUpdateCanReload=()=>canApplyAppUpdate({ready:true,writerMode:writer.mode,blockedCount:blocked.size,saveFailed,session,historicalWorkspace,historicalMemory,route:route()});
