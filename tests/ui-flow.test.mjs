@@ -10,13 +10,14 @@ import * as history from '../src/learning/history.js';
 import * as notebook from '../src/learning/notebook.js';
 import * as historical from '../src/content/session.js';
 import * as exam from '../src/content/exam.js';
+import * as backup from '../src/learning/backup.js';
 
 // Exercise the real route/session controller with a minimal page adapter.
 // Detailed DOM layout and interaction are covered by the browser release check.
 const source=(await readFile(new URL('../assets/app.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'').replaceAll('import.meta.url',JSON.stringify('http://localhost/assets/app.js')).replace(/\$\('\.skip-link'\)[\s\S]*$/,'');
 function controller(hash='') {
  const stored=new Map();
- const context=vm.createContext({...questions,...sessions,...progress,...history,...notebook,...historical,...exam,Date,Math,JSON,URLSearchParams,Intl,performance,crypto:webcrypto,console,
+ const context=vm.createContext({...questions,...sessions,...progress,...history,...notebook,...historical,...exam,...backup,Date,Math,JSON,URLSearchParams,Intl,performance,crypto:webcrypto,console,
   location:{hash},confirm:()=>true,window:{},
   document:{querySelector:()=>({innerHTML:'',querySelectorAll:()=>[]}),querySelectorAll:()=>[],hidden:false},
   localStorage:{setItem:(key,value)=>stored.set(key,value),removeItem:key=>stored.delete(key)},

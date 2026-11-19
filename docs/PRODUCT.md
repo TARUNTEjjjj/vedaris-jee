@@ -21,6 +21,7 @@ The study-flow references are [MathonGo MARKS](https://www.mathongo.com/marks/ii
 - Subject and section navigation, visited and answered states, review flags, saved responses, deadlines and submission confirmation.
 - Regraded reports with subject scores, negative marks, visible question time, elapsed time and filtered review. Exact missed-question retries create separate reports.
 - PYQ backup and restore for the active attempt and latest 20 completed historical reports. Saved scores are recalculated from canonical question identities.
+- A complete workspace backup on Saved & backups: one versioned file for every local store. Restore checks the whole file first, shows what it contains, discloses duplicates and references that no longer resolve, and lets the learner merge or replace. A pre-restore copy of the previous workspace is kept and can be downloaded or restored. No account or cloud service is used.
 - Build-time mathematics and chemistry rendering into native MathML. The shell is available offline after installation; paper content and figures become available offline after successful use and caching.
 
 The original-practice workspace remains separate: 30 reproducible concept families, a dashboard with daily goals and activity, a test centre, up to 50 original-practice reports, and a revision notebook with bookmarks, cause labels, bounded notes and exact-question retries. Generated practice is explicitly labelled and never counted as PYQs.
