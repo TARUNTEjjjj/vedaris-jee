@@ -41,6 +41,7 @@ Legacy staged imports → src/archive/questions.js → data/imports/validated/
 | `scripts/build-content.mjs`, `scripts/render-math.mjs` | Validate explicit content inputs and compile escaped prose/LaTeX into native MathML. |
 | `src/learning/storage.js` | One browser-wide workspace writer using an exclusive Web Lock. |
 | `src/learning/topic-relations.js`, `src/learning/recommendations.js`, `src/learning/revision-plan.js` | Draft prerequisite map over canonical chapter IDs, explainable revision suggestions and the learner's local goals/dismissals. |
+| `src/content/written-review.js` | Source-backed written-answer contract, publication gate, self/expert/automated-assist review records and export. Not wired to the UI; no legacy paper passes its gate. |
 | `content/review-audit.json` | Source pages, key checks, dataset revision, normalization notes and source/asset hashes. |
 
 Pure engines have no DOM, network or storage dependency. Files use ES modules and run in Node or the browser. The current repository keeps these boundaries together; a future repository split must preserve stable identities.
