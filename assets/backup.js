@@ -63,7 +63,7 @@ export function mountWorkspaceBackup(root, {mode = 'writer', current, blocked = 
       // The heading, live region and body are created once. Only the body is
       // re-rendered, so the status region persists and announces each change.
       root.innerHTML = `<section class="panel backup-panel" aria-labelledby="backup-title"><div class="panel-head"><h3 id="backup-title">Complete workspace backup</h3><span class="small-text muted">Format version ${BACKUP_VERSION}</span></div>
-      <p class="small-text muted">One file for everything this browser keeps for you: concept-practice progress and reports, the active session, saved questions, revision notes, paper notes and timers, your daily goal, and PYQ attempts and reports. No account or cloud service is involved.</p>
+      <p class="small-text muted">One file for everything this browser keeps for you: concept-practice progress and reports, the active session, saved questions, revision notes, revision goals, paper notes and timers, your daily goal, and PYQ attempts and reports. No account or cloud service is involved.</p>
       <div class="backup-message" role="status" aria-live="polite" tabindex="-1"></div><div data-backup-body></div></section>`;
     }
     const status = root.querySelector('.backup-message');

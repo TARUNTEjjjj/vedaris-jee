@@ -5,6 +5,7 @@ import { restoreHistory, emptyHistory, MAX_HISTORY_SESSIONS } from './history.js
 import { restoreNotebook, emptyNotebook, MAX_NOTEBOOK_ENTRIES, MAX_NOTE_LENGTH } from './notebook.js';
 import { restoreHistoricalSession } from '../content/session.js';
 import { restoreExamWorkspace, getExamConfig, resolveExamConfig, MAX_EXAM_HISTORY } from '../content/exam.js';
+import { restoreRevisionPlan, emptyRevisionPlan, MAX_GOALS, MAX_DISMISSED } from './revision-plan.js';
 
 /**
  * Complete browser-workspace backups.
@@ -32,6 +33,7 @@ export const BACKUP_STORES = Object.freeze([
   { name: 'session', slot: 'session', label: 'Active original-practice session' },
   { name: 'bookmarks', slot: 'bookmarks', label: 'Saved questions' },
   { name: 'notebook', slot: 'notebook', label: 'Revision notebook' },
+  { name: 'revisionPlan', slot: 'revision-plan', label: 'Revision goals and dismissed suggestions' },
   { name: 'goal', slot: 'goal', label: 'Daily goal preference' },
   { name: 'paperNotes', slot: 'paper-notes', label: 'Paper notes and paper timers' },
   { name: 'pyq', slot: 'pyq-workspace', label: 'PYQ active attempt, reports (latest 20) and two-paper exams (latest 10)' },
@@ -48,7 +50,7 @@ const fail = message => { throw new Error(message); };
 
 export function emptyUnresolved() { return { version: 1, items: [] }; }
 export function emptyWorkspaceStores() {
-  return { progress: emptyProgress(), history: emptyHistory(), session: null, bookmarks: [], notebook: emptyNotebook(), goal: 10, paperNotes: {}, pyq: null, unresolved: emptyUnresolved() };
+  return { progress: emptyProgress(), history: emptyHistory(), session: null, bookmarks: [], notebook: emptyNotebook(), revisionPlan: emptyRevisionPlan(), goal: 10, paperNotes: {}, pyq: null, unresolved: emptyUnresolved() };
 }
 
 /** Sanity bounds for held records; their content is otherwise preserved byte-for-byte as JSON. */
@@ -218,6 +220,12 @@ export function analyzeBackup(parsed, { registry = null, bankId = null, archiveP
     if (!clean) fail(`The revision notebook failed validation (causes, notes up to ${MAX_NOTE_LENGTH} characters and resolution flags are checked).`);
     stores.notebook = clean;
   }
+  if (included.has('revisionPlan')) {
+    // Chapter IDs this release does not know are kept, as the revision plan itself does.
+    const clean = restoreRevisionPlan(incoming.revisionPlan, now);
+    if (!clean) fail(`Revision goals in this backup are malformed (up to ${MAX_GOALS} goals and ${MAX_DISMISSED} dismissed suggestions are checked).`);
+    stores.revisionPlan = clean;
+  }
   if (included.has('goal')) {
     if (!DAILY_GOALS.includes(incoming.goal)) fail('The daily goal preference in this backup is invalid.');
     stores.goal = incoming.goal;
@@ -333,6 +341,7 @@ export function countRecords(name, value) {
   if (name === 'session') return 1;
   if (name === 'bookmarks') return value.length;
   if (name === 'notebook') return value.entries.length;
+  if (name === 'revisionPlan') return value.goals.length + value.dismissed.length;
   if (name === 'goal') return 1;
   if (name === 'paperNotes') return Object.keys(value).length;
   if (name === 'pyq') return value.history.length + (value.active ? 1 : 0) + (value.exams?.length ?? 0) + (value.exam && !value.active ? 1 : 0);
@@ -382,6 +391,14 @@ export function mergeWorkspace(current, incoming, { registry = null, bankId = nu
     out.notebook = { version: 1, entries: [...current.notebook.entries, ...added.slice(0, room)] };
     if (conflicts) notes.push(`${conflicts} revision note${conflicts === 1 ? '' : 's'} differ between this browser and the backup; this browser’s notes are kept.`);
     if (added.length > room) notes.push(`${added.length - room} backup revision notes exceed the 1,000-entry limit and are not kept.`);
+  }
+  if (incoming.revisionPlan) {
+    const goalIds = new Set(current.revisionPlan.goals.map(g => g.chapter)), dismissedIds = new Set(current.revisionPlan.dismissed.map(d => d.chapter));
+    const addedGoals = incoming.revisionPlan.goals.filter(g => !goalIds.has(g.chapter));
+    const room = Math.max(0, MAX_GOALS - current.revisionPlan.goals.length);
+    const dismissed = [...current.revisionPlan.dismissed, ...incoming.revisionPlan.dismissed.filter(d => !dismissedIds.has(d.chapter))].sort((a, b) => a.dismissedAt - b.dismissedAt).slice(-MAX_DISMISSED);
+    out.revisionPlan = { version: 1, goals: [...current.revisionPlan.goals, ...addedGoals.slice(0, room)], dismissed };
+    if (addedGoals.length > room) notes.push(`${addedGoals.length - room} revision goal${addedGoals.length - room === 1 ? '' : 's'} from the backup exceed the ${MAX_GOALS}-goal limit and are not kept.`);
   }
   if (own(incoming, 'goal') && incoming.goal !== current.goal) notes.push('This browser’s daily goal is kept.');
   if (incoming.paperNotes) {
@@ -443,7 +460,7 @@ export function writeWorkspaceStores(storage, stores, { names = STORE_NAMES, pre
   try {
     names.forEach((name, index) => {
       const key = keys[index], value = stores[name];
-      const empty = value === null || (name === 'unresolved' && !value.items.length);
+      const empty = value === null || (name === 'unresolved' && !value.items.length) || (name === 'revisionPlan' && !value.goals.length && !value.dismissed.length);
       written.push(key);
       if (empty) storage.removeItem(key); else storage.setItem(key, JSON.stringify(value));
     });

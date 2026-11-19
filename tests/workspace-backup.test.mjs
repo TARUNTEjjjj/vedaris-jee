@@ -30,17 +30,17 @@ function workspace() {
   p = finishHistorical(answerHistorical(p, 0, 'B', registry(), START + 10), START + 20);
   let pyq = saveHistoricalSession(emptyHistoricalWorkspace(BANK), p);
   pyq = saveHistoricalSession(pyq, createHistoricalSession(registry(), { questionIds: ['q3'], bankId: BANK, seed: 6, timed: true, minutes: 600, now: START + 30 }));
-  return { ...emptyWorkspaceStores(), progress, history, session: active, bookmarks: [identity], notebook, goal: 20, paperNotes: { 'jee-2023-p1': { text: 'Q4 approach', deadline: null } }, pyq };
+  return { ...emptyWorkspaceStores(), progress, history, session: active, bookmarks: [identity], notebook, revisionPlan: { version: 1, goals: [{ chapter: 'phy-kinematics', addedAt: START }, { chapter: 'retired-chapter', addedAt: START }], dismissed: [{ chapter: 'phy-electrostatics', signature: 'sig-1', dismissedAt: START + 5 }] }, goal: 20, paperNotes: { 'jee-2023-p1': { text: 'Q4 approach', deadline: null } }, pyq };
 }
 const analyze = (raw, ids) => analyzeBackup(parseBackup(typeof raw === 'string' ? raw : JSON.stringify(raw)), { registry: registry(ids), bankId: BANK, archivePaperIds: new Set(['jee-2023-p1']) });
 
 test('inventory covers every persistent store and a full export round-trips exactly', () => {
-  assert.deepEqual(BACKUP_STORES.map(s => s.slot), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paper-notes', 'pyq-workspace', 'unresolved']);
+  assert.deepEqual(BACKUP_STORES.map(s => s.slot), ['progress', 'history', 'session', 'bookmarks', 'notebook', 'revision-plan', 'goal', 'paper-notes', 'pyq-workspace', 'unresolved']);
   const stores = workspace();
   const file = createWorkspaceBackup({ stores, contentBankId: BANK });
   assert.equal(file.format, 'vedaris-workspace-backup'); assert.equal(file.version, 2);
   const plan = analyze(file);
-  for (const name of ['progress', 'history', 'session', 'bookmarks', 'notebook', 'goal', 'paperNotes', 'pyq']) assert.deepEqual(plan.stores[name], JSON.parse(JSON.stringify(stores[name])), name);
+  for (const name of ['progress', 'history', 'session', 'bookmarks', 'notebook', 'revisionPlan', 'goal', 'paperNotes', 'pyq']) assert.deepEqual(plan.stores[name], JSON.parse(JSON.stringify(stores[name])), name);
   assert.equal(plan.report.unresolved.length, 0);
   assert.equal(plan.stores.pyq.active.questionIds[0], 'q3');
 });
@@ -170,4 +170,17 @@ test('a timed PYQ attempt that expires after export is restored as submitted at 
   // The same holds for a pre-restore copy returned to later.
   const copy = JSON.stringify(createWorkspaceBackup({ stores, kind: 'pre-restore' }));
   assert.equal(analyzeBackup(parseBackup(copy), { registry: registry(), bankId: BANK, now: deadline + 1 }).stores.pyq.history[0].finishedAt, deadline);
+});
+
+test('revision goals are backed up, validated, merged without overwriting and replaced exactly', () => {
+  const stores = workspace();
+  const bad = createWorkspaceBackup({ stores, contentBankId: BANK }); bad.stores.revisionPlan.goals.push({ chapter: 'Not An Id', addedAt: START });
+  assert.throws(() => analyze(bad), /Revision goals in this backup are malformed/);
+  const plan = analyze(createWorkspaceBackup({ stores, contentBankId: BANK }));
+  assert.deepEqual(plan.stores.revisionPlan, stores.revisionPlan, 'unknown chapter IDs are preserved, not dropped');
+  const current = { ...emptyWorkspaceStores(), revisionPlan: { version: 1, goals: [{ chapter: 'phy-kinematics', addedAt: START + 99 }], dismissed: [] } };
+  const merged = mergeWorkspace(current, { revisionPlan: plan.stores.revisionPlan }).stores.revisionPlan;
+  assert.deepEqual(merged.goals.map(g => [g.chapter, g.addedAt]), [['phy-kinematics', START + 99], ['retired-chapter', START]]);
+  assert.equal(merged.dismissed.length, 1);
+  assert.deepEqual(replaceWorkspace(current, { revisionPlan: plan.stores.revisionPlan }).stores.revisionPlan, stores.revisionPlan);
 });

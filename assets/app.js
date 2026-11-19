@@ -7,6 +7,9 @@ import { emptyNotebook, restoreNotebook, updateNotebook } from '../src/learning/
 import { mountDashboard, mountTestCenter } from './dashboard.js';
 import { mountAnalysis } from './analysis.js';
 import { mountNotebook } from './notebook.js';
+import { mountRevision } from './revision.js';
+import { revisionRecommendations } from '../src/learning/recommendations.js';
+import { emptyRevisionPlan, restoreRevisionPlan, addRevisionGoal, removeRevisionGoal, dismissRecommendation, undismissRecommendation } from '../src/learning/revision-plan.js';
 import { mountReport } from './report.js';
 import { mountPYQ } from './pyq.js';
 import { mountWorkspaceBackup } from './backup.js';
@@ -37,6 +40,8 @@ let history = emptyHistory();
 let notebook = emptyNotebook();
 let unresolved = emptyUnresolved();
 let memoryPreRestore = null;
+let revisionPlan = emptyRevisionPlan();
+let revisionPyqLoading = false, revisionPyqError = '';
 let dailyGoal = 10;
 let timingCursor = performance.now();
 let trackingActive = false;
@@ -52,7 +57,7 @@ const subjectTitle = id => SUBJECTS.find(s => s.id === id)?.title || (id === 'al
 const chapterTitle = id => CHAPTERS.find(c => c.id === id)?.title || id;
 const newSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
 const link = (url, label, cls='') => `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-const routeName = {overview:'Study dashboard',tests:'Test centre',analysis:'Performance analysis',mistakes:'Revision notebook',report:'Session analysis',chapters:'Chapter library',pyq:'PYQ practice',archive:'Paper sources',practice:'Practice session',bank:'Question studio',progress:'Your progress',sources:'Sources & methods',paper:'Paper workspace'};
+const routeName = {overview:'Study dashboard',tests:'Test centre',analysis:'Performance analysis',mistakes:'Revision notebook',revise:'Revision suggestions',report:'Session analysis',chapters:'Chapter library',pyq:'PYQ practice',archive:'Paper sources',practice:'Practice session',bank:'Question studio',progress:'Your progress',sources:'Sources & methods',paper:'Paper workspace'};
 const params = () => new URLSearchParams(location.hash.split('?')[1] || '');
 const route = () => location.hash.replace(/^#/, '').split('?')[0].split('/')[0] || 'overview';
 function notify(message, error=false) { $('#notice').innerHTML = message ? `<div class="notice${error?' error':''}">${esc(message)}</div>` : ''; }
@@ -106,6 +111,29 @@ function startSession(options){
 function showTests(){mountTestCenter(main,{session,history,content:contentManifest,onStart:startSession});}
 function showAnalysis(){mountAnalysis(main,{progress,history,onOpenReport:id=>{location.hash=`report?attempt=${encodeURIComponent(id)}`}});}
 function showNotebook(){mountNotebook(main,{progress,bookmarks,notebook,readOnly:writer.mode==='reader',onChange(next){if(writer.mode==='reader')return false;if(writer.mode==='writer'&&!saveLocal('notebook',next))return false;notebook=next;return true;},onRetry(identities){if(writer.mode==='reader'||!canReplaceSession())return;try{flushTime();session=createRevisionSession(identities);persistSession();location.hash='practice';showQuestion();}catch(error){notify(error.message,true)}}});}
+function changeRevisionPlan(update){
+ if(writer.mode==='reader'||blocked.has('revision-plan'))return false;
+ const next=update(revisionPlan);
+ if(writer.mode==='writer'&&!saveLocal('revision-plan',next))return false;
+ revisionPlan=next;showRevision();updateWriterUI();return true;
+}
+function showRevision(){
+ const generation=routeGeneration;
+ let result;
+ try{result=revisionRecommendations({progress,notebook,plan:blocked.has('revision-plan')?{}:revisionPlan,pyqSessions:contentBank&&historicalWorkspace?historicalWorkspace.history:[],registry:contentBank?.registry??null,bankId:contentManifest?.bankId??null,chapterCounts:contentManifest?.chapterCounts??null});}
+ catch(error){main.innerHTML=empty('Suggestions could not be prepared.','Your saved work has not been changed.');notify(error.message,true);return;}
+ mountRevision(main,{result,plan:revisionPlan,readOnly:writer.mode==='reader'||blocked.has('revision-plan'),pyqLoading:revisionPyqLoading,pyqError:revisionPyqError,
+  onAddGoal:chapter=>changeRevisionPlan(plan=>addRevisionGoal(plan,chapter)),
+  onRemoveGoal:chapter=>changeRevisionPlan(plan=>removeRevisionGoal(plan,chapter)),
+  onDismiss:(chapter,signature)=>changeRevisionPlan(plan=>dismissRecommendation(plan,chapter,signature)),
+  onUndismiss:chapter=>changeRevisionPlan(plan=>undismissRecommendation(plan,chapter)),
+  async onLoadPyq(){
+   if(revisionPyqLoading)return;revisionPyqLoading=true;revisionPyqError='';showRevision();updateWriterUI();
+   try{if(!contentManifest)contentManifest=await loadContentManifest();if(!contentBank){contentLoading??=loadContentBank(contentManifest,archive).catch(error=>{contentLoading=null;throw error});contentBank=await contentLoading;loadHistoricalState();}}
+   catch(error){revisionPyqError=`Saved PYQ reports could not be included: ${error.message}`;}
+   revisionPyqLoading=false;if(generation===routeGeneration&&route()==='revise'){showRevision();updateWriterUI();}
+  }});
+}
 function flushTime(){
  const now=performance.now(), elapsed=Math.max(0,Math.min(60000,Math.floor(now-timingCursor)));timingCursor=now;
  if(trackingActive&&writer.mode!=='reader'&&session&&!session.finishedAt){session=trackTime(session,elapsed);persistSession();if(session.finishedAt){trackingActive=false;recordCompleted();}}
@@ -199,7 +227,7 @@ function showBank() {
 }
 function renderStudio() {
  const q=studioItem;const saved=bookmarks.some(b=>b.templateId===q.templateId&&b.seed===q.seed);
- $('#studio-question').innerHTML=`<section class="panel question-panel"><div class="question-top"><span class="badge original">ORIGINAL · ${esc(q.type.toUpperCase())}</span><button id="bookmark-question" class="button small secondary">${saved?'★ Saved':'☆ Save question'}</button></div><div class="marking-note">${esc(markingText(q))}</div><h2 class="question-stem">${esc(q.stem)}</h2>${answerInputs(q,studioResponse,!!studioResult)}<div class="question-controls"><button class="button" id="check-studio" ${studioResult?'disabled':''}>Check answer →</button><button class="button secondary" id="next-variant">New variant ↻</button></div>${studioResult?`<div class="subtle-note">${esc(studioResult.status)} · ${studioResult.score} / ${studioResult.maxScore}. Question studio attempts do not enter timed-session progress.</div>${solutionHTML(q)}`:''}</section>`;
+ $('#studio-question').innerHTML=`<section class="panel question-panel"><div class="question-top"><span class="badge original">ORIGINAL · ${esc(q.type.toUpperCase())}</span><button id="bookmark-question" class="button small secondary">${saved?'★ Saved':'☆ Save question'}</button></div><div class="marking-note">${esc(markingText(q))}</div>${q.concepts?.length>1?`<p class="small-text muted">Multi-concept original practice · combines ${q.concepts.map(id=>esc(chapterTitle(id))).join(' · ')}</p>`:''}<h2 class="question-stem">${esc(q.stem)}</h2>${answerInputs(q,studioResponse,!!studioResult)}<div class="question-controls"><button class="button" id="check-studio" ${studioResult?'disabled':''}>Check answer →</button><button class="button secondary" id="next-variant">New variant ↻</button></div>${studioResult?`<div class="subtle-note">${esc(studioResult.status)} · ${studioResult.score} / ${studioResult.maxScore}. Question studio attempts do not enter timed-session progress.</div>${solutionHTML(q)}`:''}</section>`;
  $('#check-studio').addEventListener('click',()=>{try{studioResponse=collectAnswer(q);studioResult=gradeQuestion(q,studioResponse);renderStudio()}catch(error){notify(error.message,true)}});
  $('#next-variant').addEventListener('click',()=>{$('#studio-seed').value=newSeed();$('#studio-form').requestSubmit()});
  $('#bookmark-question').addEventListener('click',()=>{if(!studioResult)studioResponse=collectAnswer(q);bookmarks=saved?bookmarks.filter(b=>b.templateId!==q.templateId||b.seed!==q.seed):[...bookmarks,{templateId:q.templateId,seed:q.seed}].slice(-500);saveLocal('bookmarks',bookmarks);renderStudio()});
@@ -217,7 +245,7 @@ function showProgress(backupMessage='') {
  showBackupPanel(backupMessage);
 }
 // Complete workspace backup. Validation and merge rules live in src/learning/backup.js.
-function workspaceStores(){return {progress,history,session,bookmarks,notebook,goal:dailyGoal,paperNotes,pyq:contentBank&&!historicalMemory?historicalWorkspace:null,unresolved};}
+function workspaceStores(){return {progress,history,session,bookmarks,notebook,revisionPlan,goal:dailyGoal,paperNotes,pyq:contentBank&&!historicalMemory?historicalWorkspace:null,unresolved};}
 function rawSlot(slot){try{return localStorage.getItem(key(slot));}catch{return null;}}
 async function verifiedPYQ(){
  // PYQ attempts can only be validated against the reviewed bank. Never export or replace them unverified.
@@ -264,6 +292,7 @@ async function applyWorkspaceBackup(plan,mode){
  if(names.includes('session'))session=next.session;
  if(names.includes('bookmarks'))bookmarks=next.bookmarks;
  if(names.includes('notebook'))notebook=next.notebook;
+ if(names.includes('revisionPlan'))revisionPlan=next.revisionPlan;
  if(names.includes('goal'))dailyGoal=next.goal;
  if(names.includes('paperNotes'))paperNotes=next.paperNotes;
  if(names.includes('unresolved'))unresolved=next.unresolved;
@@ -300,13 +329,13 @@ function updateWriterUI(){
  const bar=$('#storage-mode');
  if(writer.mode==='writer'){bar.innerHTML='';return;}
  bar.innerHTML=`<div class="notice ${writer.mode==='memory'?'error':''}">${writer.mode==='reader'?'Another Vedaris tab is editing this workspace. This tab is read-only. Close the other tab, then reload this one to continue.':'This browser cannot coordinate saved work safely. You can practise in this tab, but changes will stay in memory. Export progress before closing.'}</div>`;
- if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-backup-action=export],[data-backup-action=download-pre],[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
+ if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-backup-action=export],[data-backup-action=download-pre],[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next],[data-revision-load-pyq]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
 }
 function render() {
  disposePYQ?.();disposePYQ=null;routeGeneration++;flushTime();trackingActive=false;main.onclick=main.oninput=main.onchange=main.onsubmit=null;
  const r=route();document.title=`${routeName[r]||'Workspace'} · Vedaris`;
  $('#route-title').textContent=routeName[r]||'Overview';document.querySelectorAll('[data-route]').forEach(a=>{const active=a.dataset.route===r||(r==='paper'&&a.dataset.route==='archive')||(r==='report'&&a.dataset.route==='analysis')||(r==='practice'&&a.dataset.route==='tests');a.classList.toggle('active',active);active?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
- try { ({pyq:showPYQ,overview:showOverview,tests:showTests,analysis:showAnalysis,mistakes:showNotebook,report:showReport,chapters:showChapters,archive:showArchive,practice:showPractice,bank:showBank,progress:showProgress,sources:showSources,paper:showPaper}[r]||showOverview)(); }
+ try { ({pyq:showPYQ,overview:showOverview,tests:showTests,analysis:showAnalysis,mistakes:showNotebook,revise:showRevision,report:showReport,chapters:showChapters,archive:showArchive,practice:showPractice,bank:showBank,progress:showProgress,sources:showSources,paper:showPaper}[r]||showOverview)(); }
  catch(error){main.innerHTML=empty('This view could not be loaded.','Your browser data has been preserved. Reload to retry, or choose another workspace section.');notify(error.message,true);console.error(error)}
  updateWriterUI();
 }
@@ -315,6 +344,7 @@ function loadLearningState(){
  notebook=restoreNotebook(readLocal('notebook',emptyNotebook(),v=>!!restoreNotebook(v)))||emptyNotebook();
  dailyGoal=readLocal('goal',10,v=>[5,10,20,30].includes(v));
  unresolved=readLocal('unresolved',emptyUnresolved(),v=>!!restoreUnresolved(v));
+ revisionPlan=restoreRevisionPlan(readLocal('revision-plan',emptyRevisionPlan(),v=>!!restoreRevisionPlan(v)))||emptyRevisionPlan();
 }
 async function init() {
  window.addEventListener('storage',event=>{
