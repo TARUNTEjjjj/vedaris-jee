@@ -2,17 +2,33 @@ import {readFile, mkdir, writeFile, stat, readdir} from 'node:fs/promises';
 import {basename, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateQuestionCatalog} from '../src/archive/questions.js';
+import {checkPlannedQuestions, emptyImportPlan, validateImportPlan} from './import-plan.mjs';
 
+const USAGE = 'Usage: node scripts/import-pyq.mjs reviewed-questions.json [--catalog archive.json] [--plan historical-import-plan.json]';
 try {
-  if (!(process.argv.length === 3 || (process.argv.length === 5 && process.argv[3] === '--catalog'))) throw new Error('Usage: node scripts/import-pyq.mjs reviewed-questions.json [--catalog archive.json]');
-  const input = process.argv[2];
-  const catalogPath = process.argv[4] ?? fileURLToPath(new URL('../data/archive.json', import.meta.url));
+  const [input, ...rest] = process.argv.slice(2);
+  const options = {};
+  if (!input || rest.length % 2) throw new Error(USAGE);
+  for (let i = 0; i < rest.length; i += 2) {
+    if (!['--catalog', '--plan'].includes(rest[i]) || options[rest[i]]) throw new Error(USAGE);
+    options[rest[i]] = rest[i + 1];
+  }
+  const catalogPath = options['--catalog'] ?? fileURLToPath(new URL('../data/archive.json', import.meta.url));
+  const planPath = options['--plan'] ?? fileURLToPath(new URL('../content/historical-import-plan.json', import.meta.url));
   if ((await stat(input)).size > 20 * 1024 * 1024) throw new Error('Import exceeds 20 MiB');
   if ((await stat(catalogPath)).size > 20 * 1024 * 1024) throw new Error('Source catalog exceeds 20 MiB');
   const bundle = JSON.parse(await readFile(input, 'utf8'));
   const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
   const errors = validateQuestionCatalog(bundle, catalog);
   if (errors.length) throw new Error(errors.join('\n'));
+  // Historical papers (before the plan's cut-off year) are staged only when the
+  // reviewed import plan selects them and records owner permission. Without a
+  // plan file every historical question is refused.
+  let plan = emptyImportPlan();
+  try { plan = JSON.parse(await readFile(planPath, 'utf8')); }
+  catch (error) { if (error.code !== 'ENOENT' || options['--plan']) throw error; }
+  const planErrors = [...validateImportPlan(plan, catalog).map(error => `import plan: ${error}`), ...checkPlannedQuestions(plan, catalog, bundle.questions, {stage: 'staging'})];
+  if (planErrors.length) throw new Error(planErrors.join('\n'));
   const directory = fileURLToPath(new URL('../data/imports/validated/', import.meta.url));
   const filename = basename(input);
   if (!/^[a-zA-Z0-9][a-zA-Z0-9._-]*\.json$/.test(filename)) throw new Error('Input filename must be a simple .json filename');
