@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "note": "Checks that need a person, a real device or assistive technology. Automation never fills these in. A tester records status (pass/fail), date, tester, device/browser/assistive-technology versions and notes, following docs/BROWSER-RELEASE-GATES.md. Rows stay 'not-yet-run' until that happens.",
+  "journeys": ["setup", "answering", "dialogs", "finish-review", "backup-restore"],
+  "rows": [
+    {"id": "sr-voiceover-macos-safari", "kind": "screen-reader", "platform": "macOS, Safari", "assistiveTechnology": "VoiceOver", "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": null},
+    {"id": "sr-voiceover-ios-safari", "kind": "screen-reader", "platform": "iPhone, Safari", "assistiveTechnology": "VoiceOver", "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": null},
+    {"id": "sr-nvda-windows-firefox", "kind": "screen-reader", "platform": "Windows, Firefox", "assistiveTechnology": "NVDA", "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": null},
+    {"id": "sr-nvda-windows-chrome", "kind": "screen-reader", "platform": "Windows, Chrome", "assistiveTechnology": "NVDA", "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": null},
+    {"id": "sr-talkback-android-chrome", "kind": "screen-reader", "platform": "Android, Chrome", "assistiveTechnology": "TalkBack", "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": null},
+    {"id": "device-ios-safari-offline", "kind": "real-device", "platform": "iPhone, Safari", "assistiveTechnology": null, "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": "Install, open one paper online, then airplane mode: reload, resume, figures, uncached paper message."},
+    {"id": "device-android-chrome-offline", "kind": "real-device", "platform": "Android, Chrome", "assistiveTechnology": null, "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": "As for iPhone, plus full-corpus timing on a mid-range phone with its model recorded."},
+    {"id": "browser-firefox-desktop", "kind": "browser", "platform": "Desktop Firefox (current release)", "assistiveTechnology": null, "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": "Keyboard journeys, MathML rendering, reader tab, backup restore."},
+    {"id": "browser-safari-desktop", "kind": "browser", "platform": "Desktop Safari (current release)", "assistiveTechnology": null, "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": "Keyboard journeys (with 'Press Tab to highlight each item' enabled), MathML rendering, offline after install."},
+    {"id": "zoom-400-percent", "kind": "visual", "platform": "Any desktop browser at 1280px, 400% zoom", "assistiveTechnology": null, "status": "not-yet-run", "date": null, "tester": null, "versions": null, "notes": "Equations and figures stay readable; no two-dimensional scrolling outside tables, equations and the palette."}
+  ]
+}

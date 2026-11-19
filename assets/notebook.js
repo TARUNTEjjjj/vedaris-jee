@@ -25,7 +25,7 @@ export function mountNotebook(root, { progress, bookmarks = [], notebook = empty
   function render() {
     try { entries = notebookEntries(progress, bookmarks, current); }
     catch (problem) {
-      root.innerHTML = `<section class="notebook notebook-empty"><h2>Notebook unavailable</h2><p role="alert">${esc(problem.message)}</p></section>`;
+      root.innerHTML = `<section class="notebook notebook-empty"><h1>Notebook unavailable</h1><p role="alert">${esc(problem.message)}</p></section>`;
       return;
     }
     const filtered = entries.filter(entry => (filters.subject === 'all' || entry.item.subject === filters.subject)
@@ -36,7 +36,7 @@ export function mountNotebook(root, { progress, bookmarks = [], notebook = empty
     shown = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
     const openCount = entries.filter(entry => !entry.resolved).length;
     root.innerHTML = `<section class="notebook" aria-label="Mistake notebook">
-      <div class="notebook-overview"><div><span class="eyebrow">REVIEW WITH INTENTION</span><h2>Make the next attempt count.</h2><p>First-attempt errors and saved questions, in one place. These are original concept-practice questions, not JEE PYQs.</p></div><div class="notebook-count"><strong>${esc(openCount)}</strong><span>open for review</span><small>${esc(entries.length - openCount)} marked resolved</small></div></div>
+      <div class="notebook-overview"><div><span class="eyebrow">REVIEW WITH INTENTION</span><h1>Make the next attempt count.</h1><p>First-attempt errors and saved questions, in one place. These are original concept-practice questions, not JEE PYQs.</p></div><div class="notebook-count"><strong>${esc(openCount)}</strong><span>open for review</span><small>${esc(entries.length - openCount)} marked resolved</small></div></div>
       <div class="notebook-filters">
         <label>Subject<select data-notebook-filter="subject">${options([['all', 'All subjects'], ...SUBJECTS.map(subject => [subject.id, subject.title])], filters.subject)}</select></label>
         <label>Status<select data-notebook-filter="status">${options([['open', 'Open for review'], ['resolved', 'Marked resolved'], ['incorrect', 'Incorrect first attempt'], ['partial', 'Partial first attempt'], ['saved', 'Saved questions'], ['all', 'All questions']], filters.status)}</select></label>

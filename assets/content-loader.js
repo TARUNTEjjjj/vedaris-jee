@@ -1,7 +1,8 @@
 import { createContentRegistry } from '../src/content/catalog.js';
 
 export async function loadContentManifest() {
-  const response=await fetch(new URL('../data/content/catalog.json',import.meta.url),{signal:AbortSignal.timeout(10000)});
+  // Network failures and timeouts surface as an explicit, recoverable message.
+  const response=await fetch(new URL('../data/content/catalog.json',import.meta.url),{signal:AbortSignal.timeout(10000)}).catch(()=>{throw new Error('The reviewed question catalog could not be downloaded. Reconnect and try again.');});
   if(!response.ok)throw new Error('The reviewed question catalog could not be downloaded.');
   const manifest=await response.json();
   if(manifest.version!==1||typeof manifest.bankId!=='string'||!Array.isArray(manifest.bundles)||manifest.bundles.length>200||!Array.isArray(manifest.papers)||!Array.isArray(manifest.availableAssets)||!Number.isInteger(manifest.questionCount)||manifest.questionCount<0)throw new Error('The reviewed question catalog is invalid.');
@@ -13,8 +14,9 @@ export async function loadContentBank(manifest,archive) {
   // Content is split by paper; verified bytes belong to this immutable release.
   const documents=[];
   async function load(descriptor){
-    const response=await fetch(new URL(`../${descriptor.path}`,import.meta.url),{signal:AbortSignal.timeout(20000),redirect:'error'});
-    if(!response.ok)throw new Error('A reviewed paper could not be downloaded. Reconnect and try again.');
+    const unavailable='A reviewed paper could not be downloaded. Papers you have not opened before are not saved for offline use yet. Reconnect and try again.';
+    const response=await fetch(new URL(`../${descriptor.path}`,import.meta.url),{signal:AbortSignal.timeout(20000),redirect:'error'}).catch(()=>{throw new Error(unavailable);});
+    if(!response.ok)throw new Error(unavailable);
     const bytes=await response.arrayBuffer();
     if(bytes.byteLength>1024*1024)throw new Error('A question bundle exceeded its size limit.');
     const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),byte=>byte.toString(16).padStart(2,'0')).join('');

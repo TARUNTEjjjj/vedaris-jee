@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "status": "proposed",
+  "basis": "Proposed with the release gate on 2026-11-19 from public Core Web Vitals and Lighthouse boundaries, not calibrated to one machine: 2.5 s 'good' LCP for first useful screen; 200 ms 'good' and 500 ms 'poor' INP for interactions; 200 ms 'good' and 600 ms 'poor' total blocking time. The emulated-mobile profile applies 4x CPU throttling and is held to the 'poor' boundary, so it fails only when the experience would be classed poor. Loopback networking means transfer time is not represented. Changing a limit requires the owner's agreement and a dated note in docs/BROWSER-RELEASE-GATES.md.",
+  "profiles": {
+    "desktop": {
+      "dashboardReadyMs": 2500,
+      "corpusReadyMs": 3000,
+      "corpusLongTaskBlockingMs": 200,
+      "fullPaperRenderMs": 500,
+      "questionNavigationMedianMs": 200,
+      "interactionLatencyMaxMs": 200
+    },
+    "mobile-emulated": {
+      "dashboardReadyMs": 2500,
+      "corpusReadyMs": 6000,
+      "corpusLongTaskBlockingMs": 600,
+      "fullPaperRenderMs": 1000,
+      "questionNavigationMedianMs": 500,
+      "interactionLatencyMaxMs": 500
+    }
+  }
+}
