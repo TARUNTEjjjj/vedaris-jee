@@ -47,6 +47,6 @@ Acceptance: no generic universal JEE scoring rule; each exam uses a versioned, s
 - [x] Add a complete, versioned local workspace backup with validated merge/replace restore and a pre-restore copy.
 - [ ] Add optional cross-device sync with explicit account design.
 - [ ] Establish accessibility, mobile, offline and large-corpus performance release gates.
-  The automated gate, matrix, thresholds and evidence format are in [BROWSER-RELEASE-GATES.md](BROWSER-RELEASE-GATES.md). Colour contrast still fails, and the screen-reader, real-device and non-Chromium checks have not been run.
+  The automated gate, matrix, thresholds and evidence format are in [BROWSER-RELEASE-GATES.md](BROWSER-RELEASE-GATES.md). Colour contrast meets WCAG AA in every audited view (the accessibility baseline is empty). The screen-reader, real-device and non-Chromium checks have not been run.
 
 A large line count or an unreviewed data dump is not a content-completeness milestone. Release metrics report what students can actually use.

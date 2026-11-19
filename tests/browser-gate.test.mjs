@@ -35,6 +35,7 @@ test('performance thresholds cover both profiles with explicit limits', async ()
 
 test('accessibility baseline is only colour contrast and keys are well formed', async () => {
   const baseline = await read('./browser/a11y-baseline.json');
+  assert.deepEqual(baseline.known, {}, 'the accessibility baseline is empty: fix new violations rather than recording them');
   for (const key of Object.keys(baseline.known)) assert.match(key, /^[a-z0-9-]+\|color-contrast\|#[0-9a-f]{6} on #[0-9a-f]{6}$/, key);
 });
 

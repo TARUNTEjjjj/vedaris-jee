@@ -1,18 +1,18 @@
 .notebook { min-width: 0; }
 .notebook-overview { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 26px 28px; border: 1px solid #d9e1d0; border-radius: 14px; background: #eaf0e3; }
-.notebook-overview .eyebrow { color: #617557; }
+.notebook-overview .eyebrow { color: #5c7053; }
 .notebook-overview h1 { margin: 10px 0 9px; font-size: 24px; line-height: 1.3; letter-spacing: 0; font-weight: 700; }
 .notebook-overview p { max-width: 610px; font-size: 12px; color: #52634e; }
 .notebook-count { display: grid; gap: 5px; text-align: right; flex-shrink: 0; }
 .notebook-count strong { font-size: 34px; font-family: Manrope, Arial, sans-serif; line-height: 1.1; }
 .notebook-count span { font-size: 11px; font-weight: 600; }
-.notebook-count small { font-size: 10px; color: #65775a; }
+.notebook-count small { font-size: 10px; color: #5e7054; }
 .notebook-filters { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; padding: 21px 0 10px; }
 .notebook-filters label, .notebook-annotation label { display: grid; gap: 7px; font-size: 11px; font-weight: 600; color: #50644f; }
 .notebook-filters label { flex: 1; min-width: 140px; }
 .notebook-filters select { width: 100%; }
 .notebook-filters .button { min-height: 40px; }
-.notebook-help, .notebook-message { font-size: 11px; line-height: 1.7; color: #687663; }
+.notebook-help, .notebook-message { font-size: 11px; line-height: 1.7; color: #64725f; }
 .notebook-message { min-height: 22px; margin: 8px 0; color: #326844; }
 .notebook-message.notebook-error { color: #9c3c2c; }
 .notebook-list { display: grid; gap: 18px; }
@@ -43,14 +43,14 @@
 .notebook-annotation { display: grid; grid-template-columns: minmax(140px, .65fr) minmax(0, 2fr); gap: 15px; margin-top: 20px; padding-top: 19px; border-top: 1px solid var(--line, #e0e3d9); }
 .notebook-annotation label { align-content: start; }
 .notebook-annotation textarea { width: 100%; min-height: 83px; resize: vertical; line-height: 1.6; font-weight: 400; }
-.notebook-note small { font-size: 10px; font-weight: 400; color: #728069; }
+.notebook-note small { font-size: 10px; font-weight: 400; color: #6b7962; }
 .notebook-card-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 9px; }
 .notebook-card-actions .button:last-child { margin-left: auto; }
-.notebook-identity { margin-top: 16px; font-size: 9px; color: #738269; overflow-wrap: anywhere; }
+.notebook-identity { margin-top: 16px; font-size: 9px; color: #6b7961; overflow-wrap: anywhere; }
 .notebook-empty { padding: 40px 25px; border: 1px dashed #c6d2bc; border-radius: 12px; background: var(--white, #fffefa); text-align: center; }
 .notebook-empty h3, .notebook-empty h1 { font-size: 17px; margin-bottom: 10px; letter-spacing: 0; font-weight: 700; }
-.notebook-empty p { max-width: 550px; margin: auto; font-size: 12px; color: #67785c; }
-.notebook-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-top: 20px; font-size: 11px; color: #67785c; }
+.notebook-empty p { max-width: 550px; margin: auto; font-size: 12px; color: #627358; }
+.notebook-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-top: 20px; font-size: 11px; color: #627358; }
 .notebook-pagination > div { display: flex; gap: 8px; }
 @media (max-width: 720px) {
   .notebook-overview { padding: 22px; gap: 18px; align-items: start; }

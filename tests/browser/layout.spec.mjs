@@ -190,7 +190,7 @@ test('missing content states are explicit', async ({page, origin}) => {
   await page.getByRole('combobox', {name: 'Subject'}).selectOption('all');
   await startPaper(page, 2023, 1);
   await page.getByRole('navigation', {name: 'Jump to subject'}).getByRole('button', {name: 'Physics'}).click();
-  const note = page.locator('.pyq-question .pyq-figure.is-unavailable [role="note"]').first();
+  const note = page.locator('.pyq-question .pyq-figure.is-unavailable [role="status"]').first();
   await expect(note).toHaveText(/This figure could not be loaded\./);
   await expect(page.locator('.pyq-question .pyq-figure.is-unavailable .pyq-figure-caption').first()).toBeVisible();
 

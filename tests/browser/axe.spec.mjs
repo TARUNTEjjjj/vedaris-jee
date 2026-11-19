@@ -93,3 +93,31 @@ test('axe: not-found page and open-source library', async ({page, origin}, testI
   await expect(page.locator('h1').first()).toBeVisible();
   await audit(page, testInfo, 'resources');
 });
+
+test('axe: practice report and every route once work is saved', async ({page, origin}, testInfo) => {
+  // Empty routes show only their empty states; saved work fills in history,
+  // charts, notebook entries, suggestions and backups, which need auditing too.
+  await page.addInitScript(() => { let seed = 7; crypto.getRandomValues = array => { for (let i = 0; i < array.length; i++) array[i] = (seed = (seed * 1103515245 + 12345) >>> 0); return array; }; });
+  await page.goto(`${origin}/#tests`);
+  await page.getByRole('button', {name: 'Start set →'}).first().click();
+  await expect(page.locator('#finish-session')).toBeVisible();
+  const choice = page.locator('#response-area input[type="radio"], #response-area input[type="checkbox"]').first();
+  if (await choice.count()) await choice.check(); else await page.locator('#response-area input').first().fill('1');
+  await page.locator('#finish-session').click();
+  await page.locator('#confirm-submit').click();
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await audit(page, testInfo, 'practice-report');
+  await openPYQ(page, origin);
+  await page.locator('.pyq-paper-entry').filter({hasText: '2023 · Paper 1'}).getByRole('button', {name: 'Read instructions →'}).click();
+  await page.getByRole('button', {name: 'Begin full paper →'}).click();
+  const pyqChoice = page.locator('[data-pyq-choice]').first();
+  if (await pyqChoice.count()) await pyqChoice.click(); else await page.getByLabel('Your numerical answer').fill('2');
+  await page.getByRole('button', {name: 'Submit attempt →'}).click();
+  await page.getByRole('button', {name: 'Submit & see report'}).click();
+  await expect(page.locator('.pyq-review').first()).toBeVisible();
+  for (const route of APP_ROUTES.filter(route => !['pyq', 'sources', 'bank'].includes(route))) {
+    await page.goto(`${origin}/#${route}`);
+    await expect(page.locator('#main h1').first()).toBeVisible();
+    await audit(page, testInfo, `${route}-with-work`);
+  }
+});
