@@ -91,7 +91,7 @@ Marking is never inferred from a global response-type default. The 2022–2025 m
 
 Officially dropped questions award their published marks to every response, including blank, and use report status `bonus`. Examples are 2023 Paper 2 Physics Q16/Q17 (+3 each) and 2024 Paper 2 Chemistry Q11 (+4). Bonuses count toward the score but not attempted-question accuracy; their explanations disclose the official disposition instead of supplying an invented conventional key.
 
-Objective matching-list questions retain `matchingLists` and their option key. Written proofs, arbitrary symbolic responses and unsupported historical matrix-response formats remain outside the current grading contract.
+Objective matching-list questions retain `matchingLists` and their option key. Written proofs, arbitrary symbolic responses and unsupported historical matrix-response formats remain outside the current grading contract. Legacy written answers follow a separate, non-grading [review design](WRITTEN-REVIEW.md): marks come only from recorded self or expert review against a source-backed rubric, and its gate currently rejects every archive legacy record because none records marking instructions.
 
 ## Full-paper completeness gate
 

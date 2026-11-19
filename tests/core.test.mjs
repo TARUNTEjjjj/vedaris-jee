@@ -36,11 +36,11 @@ test('question grading honours explicit negative, partial, skipped and exact num
   assert.throws(()=>gradeQuestion({...num, answer:'broken'},'12'),/answer key/);
 });
 
-test('catalog exposes 54 chapter routes and 30 reproducible original families', () => {
+test('catalog exposes 54 chapter routes and 38 reproducible original families', () => {
   assert.equal(CHAPTERS.length,54);
-  assert.equal(listTemplates().length,30);
+  assert.equal(listTemplates().length,38);
   assert.equal(new Set(CHAPTERS.map(c=>c.id)).size,54);
-  for(const subject of SUBJECTS) assert.equal(listTemplates({subject:subject.id}).length,10);
+  assert.deepEqual(SUBJECTS.map(subject=>listTemplates({subject:subject.id}).length),[13,12,13]);
   for(const f of listTemplates()) {
     assert.ok(CHAPTERS.some(c=>c.id===f.chapter && c.subject===f.subject));
     for(let i=0;i<400;i++) {
