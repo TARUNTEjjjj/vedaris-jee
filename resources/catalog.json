@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "project": "vedaris-jee",
   "title": "Vedaris PCM resource library",
-  "fetchedAt": "2026-11-21T11:50:25.726Z",
-  "attemptedAt": "2026-11-21T11:50:07.097Z",
+  "fetchedAt": "2026-11-22T12:01:51.406Z",
+  "attemptedAt": "2026-11-22T12:01:32.433Z",
   "status": "live",
   "errors": [],
   "excludedSeeds": [],
@@ -43,20 +43,20 @@
         "statistics",
         "visualization"
       ],
-      "stars": 3351,
-      "forks": 1610,
-      "pushedAt": "2026-11-21T11:14:47.000Z",
+      "stars": 3353,
+      "forks": 1611,
+      "pushedAt": "2026-11-22T11:07:03.000Z",
       "license": null,
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
       "score": 87.63,
-      "reason": "Mathematics and visualization resource; 3351 GitHub stars."
+      "reason": "Mathematics and visualization resource; 3353 GitHub stars."
     },
     {
       "id": 4528770,
@@ -71,20 +71,20 @@
         "jsxgraph",
         "mathematics"
       ],
-      "stars": 1500,
+      "stars": 1501,
       "forks": 218,
-      "pushedAt": "2026-11-21T10:54:02.000Z",
+      "pushedAt": "2026-11-22T08:57:58.000Z",
       "license": "LGPL-3.0",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
       "score": 85.88,
-      "reason": "Mathematics and visualization resource; 1500 GitHub stars."
+      "reason": "Mathematics and visualization resource; 1501 GitHub stars."
     },
     {
       "id": 100203010,
@@ -106,13 +106,13 @@
       "license": "MIT",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 84.22,
+      "score": 84.21,
       "reason": "Mathematics and visualization resource; 1855 GitHub stars."
     },
     {
@@ -135,13 +135,13 @@
       "license": "Unlicense",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 80.72,
+      "score": 80.7,
       "reason": "Mathematics and visualization resource; 504 GitHub stars."
     },
     {
@@ -177,7 +177,7 @@
       "license": "MIT",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
@@ -209,20 +209,20 @@
         "search",
         "sort"
       ],
-      "stars": 34899,
-      "forks": 7901,
+      "stars": 34903,
+      "forks": 7904,
       "pushedAt": "2026-10-03T10:34:43.000Z",
       "license": "MIT",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 71.53,
-      "reason": "Mathematics and visualization resource; 34899 GitHub stars."
+      "score": 71.51,
+      "reason": "Mathematics and visualization resource; 34903 GitHub stars."
     },
     {
       "id": 85371262,
@@ -251,20 +251,20 @@
         "traveling-salesman",
         "tree-algorithms"
       ],
-      "stars": 18914,
+      "stars": 18917,
       "forks": 4521,
       "pushedAt": "2026-11-09T15:46:08.000Z",
       "license": "MIT",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 71.07,
-      "reason": "Mathematics and visualization resource; 18914 GitHub stars."
+      "score": 71.04,
+      "reason": "Mathematics and visualization resource; 18917 GitHub stars."
     },
     {
       "id": 68885535,
@@ -284,13 +284,13 @@
       "license": "MIT",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 69.12,
+      "score": 69.1,
       "reason": "Mathematics and visualization resource; 8016 GitHub stars."
     },
     {
@@ -320,20 +320,20 @@
         "utilities",
         "utils"
       ],
-      "stars": 6033,
-      "forks": 1355,
-      "pushedAt": "2026-11-21T08:37:19.000Z",
+      "stars": 6032,
+      "forks": 1359,
+      "pushedAt": "2026-11-22T02:15:45.000Z",
       "license": "Apache-2.0",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 68.9,
-      "reason": "Mathematics and visualization resource; 6033 GitHub stars."
+      "score": 68.89,
+      "reason": "Mathematics and visualization resource; 6032 GitHub stars."
     },
     {
       "id": 97086543,
@@ -356,20 +356,20 @@
         "sort",
         "sorting-algorithms"
       ],
-      "stars": 34268,
-      "forks": 5818,
+      "stars": 34269,
+      "forks": 5820,
       "pushedAt": "2026-03-07T14:45:13.000Z",
       "license": "GPL-3.0",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 68.53,
-      "reason": "Mathematics and visualization resource; 34268 GitHub stars."
+      "score": 68.52,
+      "reason": "Mathematics and visualization resource; 34269 GitHub stars."
     },
     {
       "id": 847885,
@@ -389,20 +389,20 @@
         "svg",
         "typography"
       ],
-      "stars": 10954,
+      "stars": 10955,
       "forks": 1189,
       "pushedAt": "2026-07-03T13:37:32.000Z",
       "license": "Apache-2.0",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 67.41,
-      "reason": "Mathematics and visualization resource; 10954 GitHub stars."
+      "score": 67.4,
+      "reason": "Mathematics and visualization resource; 10955 GitHub stars."
     },
     {
       "id": 1149023093,
@@ -430,20 +430,20 @@
         "speech-processing",
         "statistics"
       ],
-      "stars": 7729,
+      "stars": 7732,
       "forks": 952,
       "pushedAt": "2026-07-18T22:19:35.000Z",
       "license": "Apache-2.0",
       "category": "mathematics",
       "sourceQuery": "topic:mathematics",
-      "fetchedAt": "2026-11-21T11:50:09.693Z",
+      "fetchedAt": "2026-11-22T12:01:35.222Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:mathematics"
       ],
-      "score": 66.88,
-      "reason": "Mathematics and visualization resource; 7729 GitHub stars."
+      "score": 66.87,
+      "reason": "Mathematics and visualization resource; 7732 GitHub stars."
     },
     {
       "id": 1079456184,
@@ -469,20 +469,20 @@
         "scientific-computing",
         "scientific-visualization"
       ],
-      "stars": 57984,
-      "forks": 5084,
+      "stars": 58082,
+      "forks": 5086,
       "pushedAt": "2026-11-16T09:19:25.000Z",
       "license": "MIT",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 73.68,
-      "reason": "Scientific exploration resource; 57984 GitHub stars."
+      "score": 73.66,
+      "reason": "Scientific exploration resource; 58082 GitHub stars."
     },
     {
       "id": 47859258,
@@ -507,13 +507,13 @@
       "license": "Apache-2.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 69.88,
+      "score": 69.86,
       "reason": "Scientific exploration resource; 9492 GitHub stars."
     },
     {
@@ -543,20 +543,20 @@
         "utilities",
         "utils"
       ],
-      "stars": 6033,
-      "forks": 1355,
-      "pushedAt": "2026-11-21T08:37:19.000Z",
+      "stars": 6032,
+      "forks": 1359,
+      "pushedAt": "2026-11-22T02:15:45.000Z",
       "license": "Apache-2.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 68.9,
-      "reason": "Scientific exploration resource; 6033 GitHub stars."
+      "score": 68.89,
+      "reason": "Scientific exploration resource; 6032 GitHub stars."
     },
     {
       "id": 1287804060,
@@ -585,20 +585,20 @@
         "scientific-computing",
         "scientific-research"
       ],
-      "stars": 5557,
+      "stars": 5559,
       "forks": 561,
-      "pushedAt": "2026-11-21T11:47:26.000Z",
+      "pushedAt": "2026-11-22T11:46:46.000Z",
       "license": "Apache-2.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 68.72,
-      "reason": "Scientific exploration resource; 5557 GitHub stars."
+      "score": 68.73,
+      "reason": "Scientific exploration resource; 5559 GitHub stars."
     },
     {
       "id": 521191759,
@@ -627,20 +627,20 @@
         "scientific-computing",
         "simulation"
       ],
-      "stars": 5379,
+      "stars": 5380,
       "forks": 480,
       "pushedAt": "2026-11-15T11:13:47.000Z",
       "license": null,
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 68.49,
-      "reason": "Scientific exploration resource; 5379 GitHub stars."
+      "score": 68.47,
+      "reason": "Scientific exploration resource; 5380 GitHub stars."
     },
     {
       "id": 1288402762,
@@ -666,20 +666,20 @@
         "science",
         "scientific-computing"
       ],
-      "stars": 4406,
-      "forks": 554,
-      "pushedAt": "2026-11-20T04:15:25.000Z",
+      "stars": 4411,
+      "forks": 555,
+      "pushedAt": "2026-11-21T20:18:35.000Z",
       "license": "Apache-2.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 68.18,
-      "reason": "Scientific exploration resource; 4406 GitHub stars."
+      "score": 68.21,
+      "reason": "Scientific exploration resource; 4411 GitHub stars."
     },
     {
       "id": 30260406,
@@ -703,20 +703,20 @@
         "scientific-computing",
         "volunteer-computing"
       ],
-      "stars": 2514,
+      "stars": 2515,
       "forks": 530,
-      "pushedAt": "2026-11-21T11:15:05.000Z",
+      "pushedAt": "2026-11-22T08:10:17.000Z",
       "license": "LGPL-3.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
       "score": 67,
-      "reason": "Scientific exploration resource; 2514 GitHub stars."
+      "reason": "Scientific exploration resource; 2515 GitHub stars."
     },
     {
       "id": 37287688,
@@ -738,11 +738,11 @@
       ],
       "stars": 2299,
       "forks": 671,
-      "pushedAt": "2026-11-21T06:17:10.000Z",
+      "pushedAt": "2026-11-22T05:12:49.000Z",
       "license": "BSD-3-Clause",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
@@ -774,13 +774,13 @@
       "license": null,
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 66.14,
+      "score": 66.11,
       "reason": "Scientific exploration resource; 1747 GitHub stars."
     },
     {
@@ -804,11 +804,11 @@
       ],
       "stars": 1676,
       "forks": 762,
-      "pushedAt": "2026-11-21T01:03:09.000Z",
+      "pushedAt": "2026-11-22T01:30:49.000Z",
       "license": "Apache-2.0",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
@@ -816,6 +816,36 @@
       ],
       "score": 66.11,
       "reason": "Scientific exploration resource; 1676 GitHub stars."
+    },
+    {
+      "id": 46297649,
+      "fullName": "trilinos/Trilinos",
+      "url": "https://github.com/trilinos/Trilinos",
+      "description": "Primary repository for the Trilinos Project",
+      "topics": [
+        "c-plus-plus",
+        "high-performance-computing",
+        "hpc",
+        "hpsf",
+        "sandia-national-laboratories",
+        "scientific-computing",
+        "snl-science-libs",
+        "trilinos"
+      ],
+      "stars": 1446,
+      "forks": 637,
+      "pushedAt": "2026-11-22T05:46:10.000Z",
+      "license": null,
+      "category": "science",
+      "sourceQuery": "topic:scientific-computing",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
+      "provenance": "github",
+      "stale": false,
+      "sourceQueries": [
+        "topic:scientific-computing"
+      ],
+      "score": 65.8,
+      "reason": "Scientific exploration resource; 1446 GitHub stars."
     },
     {
       "id": 86868560,
@@ -843,44 +873,14 @@
       "license": "MIT",
       "category": "science",
       "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
+      "fetchedAt": "2026-11-22T12:01:44.266Z",
       "provenance": "github",
       "stale": false,
       "sourceQueries": [
         "topic:scientific-computing"
       ],
-      "score": 65.8,
+      "score": 65.78,
       "reason": "Scientific exploration resource; 2093 GitHub stars."
-    },
-    {
-      "id": 46297649,
-      "fullName": "trilinos/Trilinos",
-      "url": "https://github.com/trilinos/Trilinos",
-      "description": "Primary repository for the Trilinos Project",
-      "topics": [
-        "c-plus-plus",
-        "high-performance-computing",
-        "hpc",
-        "hpsf",
-        "sandia-national-laboratories",
-        "scientific-computing",
-        "snl-science-libs",
-        "trilinos"
-      ],
-      "stars": 1446,
-      "forks": 637,
-      "pushedAt": "2026-11-21T09:24:58.000Z",
-      "license": null,
-      "category": "science",
-      "sourceQuery": "topic:scientific-computing",
-      "fetchedAt": "2026-11-21T11:50:18.711Z",
-      "provenance": "github",
-      "stale": false,
-      "sourceQueries": [
-        "topic:scientific-computing"
-      ],
-      "score": 65.8,
-      "reason": "Scientific exploration resource; 1446 GitHub stars."
     }
   ]
 }
