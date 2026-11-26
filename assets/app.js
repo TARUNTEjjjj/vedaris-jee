@@ -32,7 +32,7 @@ const main = $('#main');
 let archive = {version:1,checkedAt:'2026-11-11',sources:[],papers:[]};
 let archiveError = '';
 let contentManifest = null, contentError = '', contentBank = null, contentLoading = null;
-let historicalWorkspace = null, historicalBackupRaw = null, historicalMemory = false, disposePYQ = null, routeGeneration = 0;
+let historicalWorkspace = null, historicalBackupRaw = null, historicalMemory = false, disposePYQ = null, disposeDashboard = null, routeGeneration = 0;
 let session = null;
 let progress = emptyProgress();
 let bookmarks = [];
@@ -78,7 +78,8 @@ function empty(title, text) { return `<div class="empty"><h3>${title}</h3><p>${t
 function subjectOptions(selected='all', includeAll=true) { return `${includeAll?'<option value="all">All three subjects</option>':''}${SUBJECTS.map(s=>`<option value="${s.id}" ${selected===s.id?'selected':''}>${esc(s.title)}</option>`).join('')}`; }
 function chapterOptions(subject='all', selected='all', supportedOnly=false) { return `<option value="all">All available chapters</option>${CHAPTERS.filter(c=>subject==='all'||c.subject===subject).filter(c=>!supportedOnly||listTemplates({chapter:c.id}).length).map(c=>`<option value="${c.id}" ${selected===c.id?'selected':''}>${esc(c.title)}</option>`).join('')}`; }
 function showOverview() {
- mountDashboard(main,{progress,history,session,content:contentManifest,goal:dailyGoal,onGoalChange(value){if(writer.mode==='reader')return;dailyGoal=value;saveLocal('goal',value);showOverview();updateWriterUI();}});
+ disposeDashboard?.();
+ disposeDashboard = mountDashboard(main,{progress,history,session,content:contentManifest,goal:dailyGoal,onGoalChange(value){if(writer.mode==='reader')return;dailyGoal=value;saveLocal('goal',value);showOverview();updateWriterUI();}});
 }
 function loadHistoricalState(){
  const fallback=emptyHistoricalWorkspace(contentManifest.bankId);
@@ -329,14 +330,19 @@ function updateWriterUI(){
  const bar=$('#storage-mode');
  if(writer.mode==='writer'){bar.innerHTML='';return;}
  bar.innerHTML=`<div class="notice ${writer.mode==='memory'?'error':''}">${writer.mode==='reader'?'Another Vedaris tab is editing this workspace. This tab is read-only. Close the other tab, then reload this one to continue.':'This browser cannot coordinate saved work safely. You can practise in this tab, but changes will stay in memory. Export progress before closing.'}</div>`;
- if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-backup-action=export],[data-backup-action=download-pre],[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next],[data-revision-load-pyq]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
+ if(writer.mode==='reader'&&route()!=='pyq')main.querySelectorAll('button,input,textarea,select').forEach(control=>{if(!control.matches('[data-backup-action=export],[data-backup-action=download-pre],[data-analysis-report],[data-report-filter],[data-notebook-filter],[data-notebook-action=previous],[data-notebook-action=next],[data-revision-load-pyq],[data-pcm-mode],[data-pcm-variant],[data-pcm-action]')&&!['export-progress','export-notes','archive-query','archive-year','archive-subject','archive-source','load-papers'].includes(control.id))control.disabled=true;});
 }
 function render() {
- disposePYQ?.();disposePYQ=null;routeGeneration++;flushTime();trackingActive=false;main.onclick=main.oninput=main.onchange=main.onsubmit=null;
+ disposePYQ?.();disposePYQ=null;disposeDashboard?.();disposeDashboard=null;routeGeneration++;flushTime();trackingActive=false;main.onclick=main.oninput=main.onchange=main.onsubmit=null;
  const r=route();document.title=`${routeName[r]||'Workspace'} · Vedaris`;
  $('#route-title').textContent=routeName[r]||'Overview';document.querySelectorAll('[data-route]').forEach(a=>{const active=a.dataset.route===r||(r==='paper'&&a.dataset.route==='archive')||(r==='report'&&a.dataset.route==='analysis')||(r==='practice'&&a.dataset.route==='tests');a.classList.toggle('active',active);active?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
  try { ({pyq:showPYQ,overview:showOverview,tests:showTests,analysis:showAnalysis,mistakes:showNotebook,revise:showRevision,report:showReport,chapters:showChapters,archive:showArchive,practice:showPractice,bank:showBank,progress:showProgress,sources:showSources,paper:showPaper}[r]||showOverview)(); }
  catch(error){main.innerHTML=empty('This view could not be loaded.','Your browser data has been preserved. Reload to retry, or choose another workspace section.');notify(error.message,true);console.error(error)}
+ if (main.classList && typeof window.matchMedia === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  main.classList.remove('route-enter');
+  void main.offsetWidth;
+  main.classList.add('route-enter');
+ }
  updateWriterUI();
 }
 function loadLearningState(){
@@ -360,7 +366,7 @@ async function init() {
   },100);
  });
  writer=await acquireWorkspaceWriter({onModeChange:()=>{if(document.readyState!=='loading')queueMicrotask(updateWriterUI)}});
- window.addEventListener('pagehide',()=>{disposePYQ?.();disposePYQ=null;flushTime();trackingActive=false;writer.release();});
+ window.addEventListener('pagehide',()=>{disposePYQ?.();disposePYQ=null;disposeDashboard?.();disposeDashboard=null;flushTime();trackingActive=false;writer.release();});
  document.addEventListener('visibilitychange',()=>{flushTime();trackingActive=!document.hidden&&route()==='practice'&&!!$('#response-area')&&!!session&&!session.finishedAt&&writer.mode!=='reader';timingCursor=performance.now();});
  window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
  try {const response=await fetch(new URL('../data/archive.json',import.meta.url),{signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error('Archive download failed');const data=await response.json();const errors=validateArchive(data);if(errors.length)throw new Error('Archive metadata failed validation');archive=data;}catch(error){archiveError='The paper catalog could not load. Original practice is still available; reconnect and reload to try the archive again.';notify(archiveError,true)}
